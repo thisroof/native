@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using MvvmCross.Platform.Platform;
 using Newtonsoft.Json;
 
-namespace ThisRoofN
+namespace ThisRoofN.RestService
 {
 	public enum HTTP_METHOD
 	{
@@ -45,10 +45,10 @@ namespace ThisRoofN
 			};
 		}
 
-		public async Task<string> CallRestAPI(string url, string body, HTTP_METHOD httpMethod = HTTP_METHOD.POST)
+		private async Task<string> CallRestAPI(string url, string body, HTTP_METHOD httpMethod = HTTP_METHOD.POST)
 		{
 			string result = string.Empty;
-			HttpRequestMessage response = null;
+			HttpResponseMessage response = null;
 			using (var httpClient = new HttpClient (new NativeMessageHandler())) {
 				try
 				{
@@ -99,7 +99,7 @@ namespace ThisRoofN
 			var request = new {
 				email = email,
 				password = password,
-				provider = TRConstant.TROAuthProvider
+				provider = TRConstant.TRDefaultOAuthProvider
 			};
 
 			try
@@ -125,7 +125,10 @@ namespace ThisRoofN
 			TRUser result = null;
 			string response = String.Empty;
 			MvxTrace.Trace ("Facebook Loing with email:{0}", fbUserInfo.UserEmail); 
+			fbUserInfo.Provider = TRConstant.TRFBOAuthProvider;
 
+
+			string serialized = JsonConvert.SerializeObject (fbUserInfo);
 			try
 			{
 				response = await CallRestAPI (loginMethod, JsonConvert.SerializeObject (fbUserInfo));
@@ -139,6 +142,35 @@ namespace ThisRoofN
 				}, Xamarin.Insights.Severity.Error);
 
 				MvxTrace.Trace ("Parse Failed during Loing API Target:{0}", response);
+			}
+
+			return result;
+		}
+
+		public async Task<TRUser> Signup(string email, string password)
+		{
+			TRUser result = null;
+			string response = String.Empty;
+			MvxTrace.Trace ("Signup with email:{0}, password:{1}", email, password); 
+			var request = new {
+				email = email,
+				password = password,
+				provider = TRConstant.TRDefaultOAuthProvider
+			};
+
+			try
+			{
+				response = await CallRestAPI (signupMethod, JsonConvert.SerializeObject (request));
+				result = JsonConvert.DeserializeObject<TRUser>(response, jsonSerializeSetting);
+			}
+			catch (Exception ex) {
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during signup"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during Signup API Target:{0}", response);
 			}
 
 			return result;

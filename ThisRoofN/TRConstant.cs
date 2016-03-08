@@ -11,7 +11,8 @@ namespace ThisRoofN
 
 		// ThisRoof Service BaseURL
 		public static readonly string TRServiceBaseURL 			= "http://api.thisroof.com/"; 
-		public static readonly string TROAuthProvider			= "thisroof";
+		public static readonly string TRDefaultOAuthProvider	= "thisroof";
+		public static readonly string TRFBOAuthProvider			= "facebook";
 	}
 }
 

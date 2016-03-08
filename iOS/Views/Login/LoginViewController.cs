@@ -39,6 +39,8 @@ namespace ThisRoofN.iOS
 			InitVideoView ();
 
 			var set = this.CreateBindingSet<LoginViewController, LoginViewModel> ();
+			set.Bind (txt_email).To (vm => vm.Email);
+			set.Bind (txt_password).To (vm => vm.Password);
 			set.Bind (btn_login).To (vm => vm.LoginCommand);
 			set.Apply ();
 

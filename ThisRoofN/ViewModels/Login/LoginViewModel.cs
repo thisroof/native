@@ -2,6 +2,8 @@
 using MvvmCross.Core.ViewModels;
 using System.Windows.Input;
 using MvvmCross.Platform.Platform;
+using ThisRoofN.RestService;
+using Acr.UserDialogs;
 
 namespace ThisRoofN.ViewModels
 {
@@ -57,13 +59,45 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void DoLogin()
+		private async void DoLogin()
 		{
+			UserDialogs.Instance.ShowLoading ();
+			TRUser user = await m_TRService.Login (Email, Password);
+			UserDialogs.Instance.HideLoading ();
+
+			if (user != null && user.Success) {
+				TRService.Token = user.AccessToken;
+
+				// Goto Home screen
+				MvxTrace.Trace("Login success:{0}", user.AccessToken);
+			} else {
+				bool isForgot = await UserDialogs.Instance.ConfirmAsync(
+					"The username or password you entered did not match with our records. Please double-check and try again.",
+					"Please try again...", 
+					"Forgot Password?",
+					"OK");
+
+				if (isForgot)
+				{
+					UserDialogs.Instance.Alert("Please proceed to your email to receive your password.", "Password Sent");
+				}
+			}
 		}
 
-		private void DoFacebookLogin(FBUserInfo fbUserInfo)
+		private async void DoFacebookLogin(FBUserInfo fbUserInfo)
 		{
-			MvxTrace.Trace (fbUserInfo.UserEmail);
+			UserDialogs.Instance.ShowLoading ();
+			TRUser user = await m_TRService.FacebookLogin (fbUserInfo);
+			UserDialogs.Instance.HideLoading ();
+
+			if (user != null && user.Success) {
+				TRService.Token = user.AccessToken;
+
+				// Goto Home screen
+				MvxTrace.Trace("Facebook Login success:{0}", user.AccessToken);
+			} else {
+				UserDialogs.Instance.Alert ("Failed to login using Facebook. Please contact administrator", "ThisRoof", "OK");
+			}
 		}
 	}
 }

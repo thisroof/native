@@ -8,6 +8,7 @@ using ThisRoofN.ViewModels;
 using Facebook.LoginKit;
 using Acr.UserDialogs;
 using Facebook.CoreKit;
+using System.Collections.Generic;
 
 namespace ThisRoofN.iOS
 {
@@ -37,6 +38,8 @@ namespace ThisRoofN.iOS
 			InitVideoView ();
 
 			var set = this.CreateBindingSet<SignupViewController, SignupViewModel> ();
+			set.Bind (txt_email).To (vm => vm.Email);
+			set.Bind (txt_password).To (vm => vm.Password);
 			set.Bind (btn_signup).To (vm => vm.SignupCommand);
 			set.Apply ();
 

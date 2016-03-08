@@ -125,7 +125,7 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i59-p2-g8W">
-                                <rect key="frame" x="48" y="140" width="279" height="21"/>
+                                <rect key="frame" x="32" y="140" width="311" height="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -138,7 +138,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfg-T8-eAr">
-                                <rect key="frame" x="48" y="171" width="279" height="1"/>
+                                <rect key="frame" x="32" y="171" width="311" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="S1O-vI-AeW"/>
@@ -148,13 +148,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t6t-FU-rhm">
-                                <rect key="frame" x="48" y="188" width="279" height="21"/>
+                                <rect key="frame" x="32" y="188" width="311" height="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1S-bq-OX6">
-                                <rect key="frame" x="48" y="219" width="279" height="1"/>
+                                <rect key="frame" x="32" y="219" width="311" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="EJl-Pb-y2G"/>
@@ -203,7 +203,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ZFc-he-VvE" secondAttribute="trailing" id="Bwj-Lt-QfA"/>
                             <constraint firstItem="t6t-FU-rhm" firstAttribute="trailing" secondItem="Gfg-T8-eAr" secondAttribute="trailing" id="CCt-N4-8d6"/>
                             <constraint firstItem="O3c-In-BEr" firstAttribute="centerY" secondItem="ZFc-he-VvE" secondAttribute="centerY" id="Fot-am-lZ7"/>
-                            <constraint firstItem="i59-p2-g8W" firstAttribute="leading" secondItem="21" secondAttribute="leadingMargin" constant="32" id="LTg-5g-AcI"/>
+                            <constraint firstItem="i59-p2-g8W" firstAttribute="leading" secondItem="21" secondAttribute="leadingMargin" constant="16" id="LTg-5g-AcI"/>
                             <constraint firstItem="ZFc-he-VvE" firstAttribute="top" secondItem="35" secondAttribute="bottom" constant="8" id="Zsu-gK-lSr"/>
                             <constraint firstItem="n1S-bq-OX6" firstAttribute="top" secondItem="t6t-FU-rhm" secondAttribute="bottom" constant="10" id="dEv-Jh-GF5"/>
                             <constraint firstAttribute="trailing" secondItem="a9m-df-MHX" secondAttribute="trailing" id="dKc-db-GKy"/>
@@ -215,7 +215,7 @@
                             <constraint firstItem="t6t-FU-rhm" firstAttribute="top" secondItem="Gfg-T8-eAr" secondAttribute="bottom" constant="16" id="pku-bU-OkC"/>
                             <constraint firstItem="n1S-bq-OX6" firstAttribute="trailing" secondItem="t6t-FU-rhm" secondAttribute="trailing" id="qP8-TN-NwP"/>
                             <constraint firstItem="O3c-In-BEr" firstAttribute="leading" secondItem="21" secondAttribute="leadingMargin" id="svf-F1-2sF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="i59-p2-g8W" secondAttribute="trailing" constant="32" id="u0u-ER-izO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="i59-p2-g8W" secondAttribute="trailing" constant="16" id="u0u-ER-izO"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -275,13 +275,13 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P0d-TF-pvi">
-                                <rect key="frame" x="44" y="140" width="287" height="21"/>
+                                <rect key="frame" x="32" y="140" width="311" height="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIc-JP-Dex">
-                                <rect key="frame" x="44" y="219" width="287" height="1"/>
+                                <rect key="frame" x="32" y="219" width="311" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="5Fm-HA-VuM"/>
@@ -291,7 +291,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOf-Oe-fv1">
-                                <rect key="frame" x="44" y="171" width="287" height="1"/>
+                                <rect key="frame" x="32" y="171" width="311" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="3EB-nS-JDj"/>
@@ -301,7 +301,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLU-HS-vPT">
-                                <rect key="frame" x="44" y="188" width="287" height="21"/>
+                                <rect key="frame" x="32" y="188" width="311" height="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -328,7 +328,7 @@
                             <constraint firstItem="jNk-xC-D7k" firstAttribute="leading" secondItem="46" secondAttribute="leadingMargin" id="Hho-KW-Fbj"/>
                             <constraint firstItem="mLU-HS-vPT" firstAttribute="top" secondItem="uOf-Oe-fv1" secondAttribute="bottom" constant="16" id="Lgw-Ep-FMm"/>
                             <constraint firstItem="R0i-Eh-PVV" firstAttribute="top" secondItem="43" secondAttribute="bottom" id="MLA-vh-TuY"/>
-                            <constraint firstItem="P0d-TF-pvi" firstAttribute="leading" secondItem="46" secondAttribute="leadingMargin" constant="28" id="N1j-PN-aWJ"/>
+                            <constraint firstItem="P0d-TF-pvi" firstAttribute="leading" secondItem="46" secondAttribute="leadingMargin" constant="16" id="N1j-PN-aWJ"/>
                             <constraint firstAttribute="trailing" secondItem="R0i-Eh-PVV" secondAttribute="trailing" id="NRP-Vw-NfV"/>
                             <constraint firstItem="uOf-Oe-fv1" firstAttribute="trailing" secondItem="P0d-TF-pvi" secondAttribute="trailing" id="SiL-yN-qRB"/>
                             <constraint firstItem="P0d-TF-pvi" firstAttribute="top" secondItem="60" secondAttribute="bottom" constant="120" id="Xc2-xy-HFW"/>
@@ -340,7 +340,7 @@
                             <constraint firstItem="jNk-xC-D7k" firstAttribute="centerY" secondItem="KNW-kn-x4y" secondAttribute="centerY" id="swR-Fn-K9W"/>
                             <constraint firstItem="mLU-HS-vPT" firstAttribute="leading" secondItem="uOf-Oe-fv1" secondAttribute="leading" id="xsV-y3-sWC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KNW-kn-x4y" secondAttribute="trailing" id="y2R-GT-ZoJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="P0d-TF-pvi" secondAttribute="trailing" constant="28" id="zDJ-cN-Fz5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="P0d-TF-pvi" secondAttribute="trailing" constant="16" id="zDJ-cN-Fz5"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>

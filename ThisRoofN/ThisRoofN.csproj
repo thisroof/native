@@ -42,6 +42,7 @@
     <Compile Include="Models\TRUser.cs" />
     <Compile Include="ViewModels\Search\SearchTypeViewModel.cs" />
     <Compile Include="Interfaces\IUserPreference.cs" />
+    <Compile Include="Interfaces\IDevice.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

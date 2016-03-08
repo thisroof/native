@@ -9,15 +9,15 @@ namespace ThisRoofN.ViewModels
 {
 	public class BaseViewModel : MvxViewModel
 	{
-		protected TRService m_TRService;
-		protected IUserPreference userPref;
+		protected TRService mTRService;
+		protected IUserPreference mUserPref;
 		private MvxCommand _closeCommand;
 
 
 		public BaseViewModel ()
 		{
-			m_TRService = new TRService ();
-			userPref = Mvx.Resolve<IUserPreference> ();
+			mTRService = new TRService ();
+			mUserPref = Mvx.Resolve<IUserPreference> ();
 		}
 
 		public ICommand CloseCommand

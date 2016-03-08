@@ -35,6 +35,7 @@ namespace ThisRoofN.iOS
 		protected override void InitializeFirstChance ()
 		{
 			Mvx.RegisterSingleton<IUserPreference>( new UserPreferenceHelper() );
+			Mvx.RegisterSingleton<IDevice>( new DeviceHelper() );
 			base.InitializeFirstChance ();
 		}
 

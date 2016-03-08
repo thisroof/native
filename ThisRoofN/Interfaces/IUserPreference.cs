@@ -6,9 +6,9 @@ namespace ThisRoofN.Interfaces
 	{
 		string GetValue (string key, string defaultValue = "");
 
-		int GetValue(string key, int defaultValue = 0);
+		int GetValue(string key, int defaultValue);
 
-		bool GetValue (string key, bool defaultValue = false);
+		bool GetValue (string key, bool defaultValue);
 
 		void SetValue (string key, string value);
 

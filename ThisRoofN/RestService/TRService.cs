@@ -22,6 +22,7 @@ namespace ThisRoofN.RestService
 		public static string Token;
 
 		private string baseURL;
+		private const string testTokenMethod = "api/v5/test_api";
 		private const string loginMethod = "api/v5/login";
 		private const string signupMethod = "api/v5/signup";
 		private const string searchMethod = "api/v5/search";
@@ -31,7 +32,6 @@ namespace ThisRoofN.RestService
 		private const string clearLikeDislikeMethod = "api/v5/clear";
 		private const string morgageAffordability = "api/v5/mortgage_afford";
 		private const string getPolygonMethod = "api/v5/commute_polygon";
-		private const string testTokenMethod = "api/v5/test_api";
 		private const string getUserAppPreferences = "api/v5/userapp";
 
 		private JsonSerializerSettings jsonSerializeSetting;
@@ -94,6 +94,27 @@ namespace ThisRoofN.RestService
 		public async Task<bool> IsTokenValid()
 		{
 			bool res = false;
+			string response = string.Empty;
+			string testTokenURL = string.Format ("{0}?api_key={1}", testTokenMethod, TRConstant.TRServiceKey);
+
+			try
+			{
+				response = await CallRestAPI (testTokenURL, null, HTTP_METHOD.GET);
+				var definition = new {Success = false};
+				var formattedResponse = JsonConvert.DeserializeAnonymousType(response, definition, jsonSerializeSetting);
+				if(formattedResponse != null) {
+					res = formattedResponse.Success;
+				}
+			}
+			catch (Exception ex) {
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during login"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during Loing API Target:{0}", response);
+			}
 
 			return res;
 		}

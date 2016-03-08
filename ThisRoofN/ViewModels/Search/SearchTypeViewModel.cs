@@ -2,6 +2,8 @@
 using ThisRoofN.ViewModels;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
+using ThisRoofN.Interfaces;
+using System.Collections.Generic;
 
 namespace ThisRoofN.ViewModels
 {
@@ -10,8 +12,12 @@ namespace ThisRoofN.ViewModels
 		private MvxCommand _normalSearchCommand;
 		private MvxCommand _affordSearchCommand;
 
-		public SearchTypeViewModel ()
+		public SearchTypeViewModel (IDevice deviceInfo)
 		{
+			// Identify the Xamarin Insights, here because this will be first screen after login.
+			Xamarin.Insights.Identify (deviceInfo.GetUniqueIdentifier (), new Dictionary<string, string> {
+				{Xamarin.Insights.Traits.Email, mUserPref.GetValue(TRConstant.UserPrefUserEmailKey)}
+			});
 		}
 
 		public ICommand NormalSearchCommand

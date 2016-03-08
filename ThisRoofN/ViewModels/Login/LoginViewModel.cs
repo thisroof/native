@@ -62,7 +62,7 @@ namespace ThisRoofN.ViewModels
 		private async void DoLogin()
 		{
 			UserDialogs.Instance.ShowLoading ();
-			TRUser user = await m_TRService.Login (Email, Password);
+			TRUser user = await mTRService.Login (Email, Password);
 			UserDialogs.Instance.HideLoading ();
 
 			if (user != null && user.Success) {
@@ -70,10 +70,10 @@ namespace ThisRoofN.ViewModels
 				MvxTrace.Trace("Login success:{0}", user.AccessToken);
 
 				// Save user data to user preference
-				userPref.SetValue(TRConstant.UserPrefUserEmailKey, Email);
-				userPref.SetValue(TRConstant.UserPrefUserPasswordKey, Password);
-				userPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
-				userPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
+				mUserPref.SetValue(TRConstant.UserPrefUserEmailKey, Email);
+				mUserPref.SetValue(TRConstant.UserPrefUserPasswordKey, Password);
+				mUserPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
+				mUserPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
 
 				ShowViewModel<SearchTypeViewModel> ();
 			} else {
@@ -93,7 +93,7 @@ namespace ThisRoofN.ViewModels
 		private async void DoFacebookLogin(FBUserInfo fbUserInfo)
 		{
 			UserDialogs.Instance.ShowLoading ();
-			TRUser user = await m_TRService.FacebookLogin (fbUserInfo);
+			TRUser user = await mTRService.FacebookLogin (fbUserInfo);
 			UserDialogs.Instance.HideLoading ();
 
 			if (user != null && user.Success) {
@@ -101,10 +101,10 @@ namespace ThisRoofN.ViewModels
 				MvxTrace.Trace("Facebook Login success:{0}", user.AccessToken);
 
 				// Save user data to user preference
-				userPref.SetValue(TRConstant.UserPrefUserEmailKey, fbUserInfo.UserEmail);
-				userPref.SetValue(TRConstant.UserPrefAccessTokenKey, Password);
-				userPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
-				userPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
+				mUserPref.SetValue(TRConstant.UserPrefUserEmailKey, fbUserInfo.UserEmail);
+				mUserPref.SetValue(TRConstant.UserPrefAccessTokenKey, Password);
+				mUserPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
+				mUserPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
 
 				ShowViewModel<SearchTypeViewModel> ();
 			} else {

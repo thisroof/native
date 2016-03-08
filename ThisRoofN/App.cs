@@ -16,8 +16,8 @@ namespace ThisRoofN
 				.AsInterfaces()
 				.RegisterAsLazySingleton();
 
-//			RegisterAppStart<HomeViewModel> ();
-			RegisterAppStart<SearchTypeViewModel> ();
+			RegisterAppStart<HomeViewModel> ();
+//			RegisterAppStart<SearchTypeViewModel> ();
 
 			Mvx.RegisterSingleton<IUserDialogs> (() => UserDialogs.Instance);
 		}

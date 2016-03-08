@@ -1,6 +1,8 @@
 ﻿using System;
 using MvvmCross.Core.ViewModels;
 using System.Windows.Input;
+using Acr.UserDialogs;
+using ThisRoofN.RestService;
 
 namespace ThisRoofN.ViewModels
 {
@@ -11,11 +13,7 @@ namespace ThisRoofN.ViewModels
 
 		public HomeViewModel ()
 		{
-			// Trying to auto login
-			if(!string.IsNullOrEmpty(userPref.GetValue(TRConstant.UserPrefUserEmailKey)) && 
-				!string.IsNullOrEmpty(userPref.GetValue(TRConstant.UserPrefAccessTokenKey))) {
-
-			}
+			CheckAutoLogin ();
 		}
 
 		public ICommand LoginCommand
@@ -42,6 +40,24 @@ namespace ThisRoofN.ViewModels
 		private void DoSignup()
 		{
 			ShowViewModel<SignupViewModel> ();
+		}
+
+		private async void CheckAutoLogin()
+		{
+			// Trying to auto login
+			if(!string.IsNullOrEmpty(mUserPref.GetValue(TRConstant.UserPrefUserEmailKey)) && 
+				!string.IsNullOrEmpty(mUserPref.GetValue(TRConstant.UserPrefAccessTokenKey))) {
+				UserDialogs.Instance.ShowLoading ();
+
+				// Set the service token
+				TRService.Token = mUserPref.GetValue(TRConstant.UserPrefAccessTokenKey);
+				bool tokenValid = await mTRService.IsTokenValid ();
+				UserDialogs.Instance.HideLoading ();
+
+				if (tokenValid) {
+					ShowViewModel<SearchTypeViewModel> ();
+				}
+			}
 		}
 	}
 }

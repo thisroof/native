@@ -1,0 +1,14 @@
+*.vspscc
+/TestResults/
+*.user
+/*.vssscc
+/packages/
+!packages/repositories.config
+/components/
+**/FakesAssemblies/
+*.userprefs
+*.suo
+*.bak
+/.DS_Store
+bin
+obj

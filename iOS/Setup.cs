@@ -1,6 +1,8 @@
 ﻿using System;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
+using ThisRoofN.Interfaces;
 
 namespace ThisRoofN.iOS
 {
@@ -28,6 +30,12 @@ namespace ThisRoofN.iOS
 		protected override MvvmCross.iOS.Views.IMvxIosViewsContainer CreateIosViewsContainer ()
 		{
 			return new TRMvxIosViewsContainer ();
+		}
+
+		protected override void InitializeFirstChance ()
+		{
+			Mvx.RegisterSingleton<IUserPreference>( new UserPreferenceHelper() );
+			base.InitializeFirstChance ();
 		}
 
 		protected override void InitializeLastChance ()

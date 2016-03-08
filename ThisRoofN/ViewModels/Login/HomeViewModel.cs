@@ -11,6 +11,11 @@ namespace ThisRoofN.ViewModels
 
 		public HomeViewModel ()
 		{
+			// Trying to auto login
+			if(!string.IsNullOrEmpty(userPref.GetValue(TRConstant.UserPrefUserEmailKey)) && 
+				!string.IsNullOrEmpty(userPref.GetValue(TRConstant.UserPrefAccessTokenKey))) {
+
+			}
 		}
 
 		public ICommand LoginCommand

@@ -67,9 +67,15 @@ namespace ThisRoofN.ViewModels
 
 			if (user != null && user.Success) {
 				TRService.Token = user.AccessToken;
-
-				// Goto Home screen
 				MvxTrace.Trace("Signup success:{0}", user.AccessToken);
+
+				// Save user data to user preference
+				userPref.SetValue(TRConstant.UserPrefUserEmailKey, Email);
+				userPref.SetValue(TRConstant.UserPrefUserPasswordKey, Password);
+				userPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
+				userPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
+
+				ShowViewModel<SearchTypeViewModel> ();
 			} else {
 				bool isForgot = await UserDialogs.Instance.ConfirmAsync(
 					"The username or password you entered did not match with our records. Please double-check and try again.",
@@ -92,9 +98,15 @@ namespace ThisRoofN.ViewModels
 
 			if (user != null && user.Success) {
 				TRService.Token = user.AccessToken;
-
-				// Goto Home screen
 				MvxTrace.Trace("Facebook Signup success:{0}", user.AccessToken);
+
+				// Save user data to user preference
+				userPref.SetValue(TRConstant.UserPrefUserEmailKey, fbUserInfo.UserEmail);
+				userPref.SetValue(TRConstant.UserPrefUserPasswordKey, Password);
+				userPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
+				userPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
+
+				ShowViewModel<SearchTypeViewModel> ();
 			} else {
 				UserDialogs.Instance.Alert ("Failed to signup using Facebook. Please contact administrator", "ThisRoof", "OK");
 			}

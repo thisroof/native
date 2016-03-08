@@ -151,11 +151,16 @@
     <ImageAsset Include="Resources\Images.xcassets\img_fb_signup.imageset\img_fb_signup%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_arrow_back.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_arrow_back.imageset\icon_arrow_white.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_splash_back.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_splash_back.imageset\background.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_splash_back.imageset\background%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_splash_back.imageset\background%40x3.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Storyboards\LoginFlow.storyboard" />
+    <InterfaceDefinition Include="Storyboards\SearchFlow.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -186,6 +191,11 @@
     <Compile Include="Views\Login\SignupViewController.designer.cs">
       <DependentUpon>SignupViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Search\SearchTypeViewController.cs" />
+    <Compile Include="Views\Search\SearchTypeViewController.designer.cs">
+      <DependentUpon>SearchTypeViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\UserPreferenceHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -197,6 +207,7 @@
     <Folder Include="Videos\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Bootstrap\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

@@ -91,6 +91,13 @@ namespace ThisRoofN.RestService
 			return result;
 		}
 
+		public async Task<bool> IsTokenValid()
+		{
+			bool res = false;
+
+			return res;
+		}
+
 		public async Task<TRUser> Login(string email, string password)
 		{
 			TRUser result = null;
@@ -127,8 +134,6 @@ namespace ThisRoofN.RestService
 			MvxTrace.Trace ("Facebook Loing with email:{0}", fbUserInfo.UserEmail); 
 			fbUserInfo.Provider = TRConstant.TRFBOAuthProvider;
 
-
-			string serialized = JsonConvert.SerializeObject (fbUserInfo);
 			try
 			{
 				response = await CallRestAPI (loginMethod, JsonConvert.SerializeObject (fbUserInfo));
@@ -175,6 +180,8 @@ namespace ThisRoofN.RestService
 
 			return result;
 		}
+
+
 	}
 }
 

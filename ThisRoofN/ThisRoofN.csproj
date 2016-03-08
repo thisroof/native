@@ -40,6 +40,8 @@
     <Compile Include="Models\FBUserInfo.cs" />
     <Compile Include="RestService\TRService.cs" />
     <Compile Include="Models\TRUser.cs" />
+    <Compile Include="ViewModels\Search\SearchTypeViewModel.cs" />
+    <Compile Include="Interfaces\IUserPreference.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -100,5 +102,7 @@
     <Folder Include="ViewModels\Login\" />
     <Folder Include="Models\" />
     <Folder Include="RestService\" />
+    <Folder Include="ViewModels\Search\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 </Project>

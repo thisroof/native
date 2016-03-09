@@ -155,6 +155,18 @@
     <ImageAsset Include="Resources\Images.xcassets\img_splash_back.imageset\background.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_splash_back.imageset\background%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_splash_back.imageset\background%40x3.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_blue_right.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_blue_bottom.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_blue_bottom.imageset\icon_expanded.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_blue_right.imageset\icon_collapsed.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_tick.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_emp.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_emp.imageset\icon_checkbox_emp%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_tick.imageset\icon_checkbox_tick%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_navigator.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_slider_marker.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_navigator.imageset\current_location.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_slider_marker.imageset\popover.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -198,6 +210,55 @@
     <Compile Include="Helpers\UserPreferenceHelper.cs" />
     <Compile Include="Helpers\DeviceHelper.cs" />
     <Compile Include="Helpers\Reachability.cs" />
+    <Compile Include="Views\Search\NormalSearchViewController.cs" />
+    <Compile Include="Views\Search\NormalSearchViewController.designer.cs">
+      <DependentUpon>NormalSearchViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCell.designer.cs">
+      <DependentUpon>SearchAreaCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchBathsCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchBathsCell.designer.cs">
+      <DependentUpon>SearchBathsCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchBudgetCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchBudgetCell.designer.cs">
+      <DependentUpon>SearchBudgetCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchButtonCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchButtonCell.designer.cs">
+      <DependentUpon>SearchButtonCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchFilterCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchFilterCell.designer.cs">
+      <DependentUpon>SearchFilterCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchSoryByCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchSoryByCell.designer.cs">
+      <DependentUpon>SearchSoryByCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchBedsCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchBedsCell.designer.cs">
+      <DependentUpon>SearchBedsCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchExcludedAreaCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchExcludedAreaCell.designer.cs">
+      <DependentUpon>SearchExcludedAreaCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchForeclosureCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchForeclosureCell.designer.cs">
+      <DependentUpon>SearchForeclosureCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchPropertyTypeCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchPropertyTypeCell.designer.cs">
+      <DependentUpon>SearchPropertyTypeCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\ISearchCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\CheckboxCVCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\CheckboxCVCell.designer.cs">
+      <DependentUpon>CheckboxCVCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -210,6 +271,7 @@
     <Folder Include="Views\Login\" />
     <Folder Include="Bootstrap\" />
     <Folder Include="Views\Search\" />
+    <Folder Include="Views\Search\NormalSearchCells\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

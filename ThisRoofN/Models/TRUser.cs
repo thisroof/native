@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ThisRoofN
+namespace ThisRoofN.Models
 {
 	[DataContract]
 	public class TRUser
 	{
 		[DataMember(Name="success")]
-		public bool Success { get;set; }
+		public bool Success { get; set; }
 
 		[DataMember(Name="user_id")]
 		public string UserID { get; set; }

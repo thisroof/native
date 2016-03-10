@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ThisRoofN
+namespace ThisRoofN.Models
 {
 	[DataContract]
 	public class FBUserInfo

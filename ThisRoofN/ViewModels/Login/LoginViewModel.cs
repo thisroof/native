@@ -4,6 +4,7 @@ using System.Windows.Input;
 using MvvmCross.Platform.Platform;
 using ThisRoofN.RestService;
 using Acr.UserDialogs;
+using ThisRoofN.Models;
 
 namespace ThisRoofN.ViewModels
 {

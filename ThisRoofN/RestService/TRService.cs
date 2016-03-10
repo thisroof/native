@@ -6,6 +6,7 @@ using ModernHttpClient;
 using System.Collections.Generic;
 using MvvmCross.Platform.Platform;
 using Newtonsoft.Json;
+using ThisRoofN.Models;
 
 namespace ThisRoofN.RestService
 {

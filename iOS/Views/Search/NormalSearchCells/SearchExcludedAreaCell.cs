@@ -11,6 +11,8 @@ namespace ThisRoofN.iOS
 	{
 		public static string Identifier = "SearchExcludedAreaCell";
 		private nfloat cellHeight;
+		private bool expanded;
+		private NormalSearchViewController masterView;
 
 		public SearchExcludedAreaCell (IntPtr handle) : base (handle)
 		{
@@ -24,8 +26,33 @@ namespace ThisRoofN.iOS
 			}
 		}
 
+		public void BindData(NormalSearchViewController _masterView)
+		{
+			this.masterView = _masterView;
+			InitUI ();
+		}
+
 		public void HandleExpandTap()
 		{
+			expanded = !expanded;
+
+			masterView.MasterTableView.BeginUpdates ();
+			if (expanded) {
+				img_expandMarker.Image = UIImage.FromBundle ("icon_arrow_blue_down");
+				cellHeight = view_cellTitle.Frame.Bottom;
+			} else {
+				img_expandMarker.Image = UIImage.FromBundle ("icon_arrow_blue_right");
+				cellHeight = view_cellTitle.Frame.Bottom;
+			}
+			masterView.MasterTableView.EndUpdates ();
+		}
+
+		private void InitUI() {
+			cellHeight = view_cellTitle.Frame.Bottom;
+			UITapGestureRecognizer expandTap = new UITapGestureRecognizer (HandleExpandTap);
+			view_cellTitle.UserInteractionEnabled = true;
+			view_cellTitle.RemoveGestureRecognizer (expandTap);
+			view_cellTitle.AddGestureRecognizer (expandTap);
 		}
 	}
 }

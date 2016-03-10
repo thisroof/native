@@ -11,6 +11,7 @@ namespace ThisRoofN.iOS
 	{
 		public static string Identifier = "SearchButtonCell";
 		private nfloat cellHeight;
+		private NormalSearchViewController masterView;
 
 		public SearchButtonCell (IntPtr handle) : base (handle)
 		{
@@ -22,6 +23,13 @@ namespace ThisRoofN.iOS
 			{
 				return cellHeight;
 			}
+		}
+
+		public void BindData(NormalSearchViewController _masterView)
+		{
+			this.masterView = _masterView;
+
+			cellHeight = btn_saveSearch.Frame.Bottom;
 		}
 
 		public void HandleExpandTap()

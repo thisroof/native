@@ -11,6 +11,7 @@ namespace ThisRoofN.iOS
 	{
 		public static string Identifier = "SearchSoryByCell";
 		private nfloat cellHeight;
+		private NormalSearchViewController masterView;
 
 		public SearchSoryByCell (IntPtr handle) : base (handle)
 		{
@@ -24,8 +25,25 @@ namespace ThisRoofN.iOS
 			}
 		}
 
+		public void BindData(NormalSearchViewController _masterView)
+		{
+			this.masterView = _masterView;
+
+			UIComboBox soryByComboBox = new UIComboBox (masterView.ViewModelInstance.SortTypes, 0, txt_sortBy, 
+				                            (indexe, text) => {
+					masterView.ViewModelInstance.SelectedSortType = text;
+				});
+
+			InitUI ();
+		}
+
 		public void HandleExpandTap()
 		{
+		}
+
+		public void InitUI()
+		{
+			cellHeight = txt_sortBy.Frame.Bottom + 8;
 		}
 	}
 }

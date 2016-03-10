@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Facebook.LoginKit;
 using Facebook.CoreKit;
 using Acr.UserDialogs;
+using ThisRoofN.Models;
 
 namespace ThisRoofN.iOS
 {

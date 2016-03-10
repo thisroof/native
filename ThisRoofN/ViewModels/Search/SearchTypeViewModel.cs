@@ -38,6 +38,7 @@ namespace ThisRoofN.ViewModels
 
 		private void DoNormalSearch()
 		{
+			ShowViewModel<NormalSearchViewModel> ();
 		}
 
 		private void DoAffordSearch()

@@ -10,7 +10,9 @@ namespace ThisRoofN.iOS
 	public partial class SearchPropertyTypeCell : UITableViewCell, ISearchCell
 	{
 		public static string Identifier = "SearchPropertyTypeCell";
+		private NormalSearchViewController masterView;
 		private nfloat cellHeight;
+		private bool expanded;
 
 		public SearchPropertyTypeCell (IntPtr handle) : base (handle)
 		{
@@ -24,8 +26,34 @@ namespace ThisRoofN.iOS
 			}
 		}
 
+		public void BindData(NormalSearchViewController _masterView)
+		{
+			this.masterView = _masterView;
+
+			InitUI ();
+		}
+
 		public void HandleExpandTap()
 		{
+			expanded = !expanded;
+
+			masterView.MasterTableView.BeginUpdates ();
+			if (expanded) {
+				img_expandMarker.Image = UIImage.FromBundle ("icon_arrow_blue_down");
+				cellHeight = cv_propertyTypes.Frame.Bottom + 8;
+			} else {
+				img_expandMarker.Image = UIImage.FromBundle ("icon_arrow_blue_right");
+				cellHeight = cell_viewTitle.Frame.Bottom;
+			}
+			masterView.MasterTableView.EndUpdates ();
+		}
+
+		private void InitUI() {
+			cellHeight = cell_viewTitle.Frame.Bottom;
+			UITapGestureRecognizer expandTap = new UITapGestureRecognizer (HandleExpandTap);
+			cell_viewTitle.UserInteractionEnabled = true;
+			cell_viewTitle.RemoveGestureRecognizer (expandTap);
+			cell_viewTitle.AddGestureRecognizer (expandTap);
 		}
 	}
 }

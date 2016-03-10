@@ -11,6 +11,7 @@ namespace ThisRoofN.iOS
 	{
 		public static string Identifier = "SearchBudgetCell";
 		private nfloat cellHeight;
+		private NormalSearchViewController masterView;
 
 		public SearchBudgetCell (IntPtr handle) : base (handle)
 		{
@@ -24,8 +25,22 @@ namespace ThisRoofN.iOS
 			}
 		}
 
+		public void BindData(NormalSearchViewController _masterView)
+		{
+			this.masterView = _masterView;
+
+			masterView.BindingSet.Bind (txt_budget).To (vm => vm.MaxBudget);
+
+			InitUI ();
+		}
+
 		public void HandleExpandTap()
 		{
+		}
+
+		public void InitUI()
+		{
+			cellHeight = view_budgetBack.Frame.Bottom;
 		}
 	}
 }

@@ -9,8 +9,10 @@ namespace ThisRoofN.iOS
 {
 	public partial class SearchAreaCell : UITableViewCell, ISearchCell
 	{
+		private bool expanded;
 		public static string Identifier = "SearchAreaCell";
 		private nfloat cellHeight;
+		private NormalSearchViewController masterView;
 
 
 		public SearchAreaCell (IntPtr handle) : base (handle)
@@ -25,10 +27,75 @@ namespace ThisRoofN.iOS
 			}
 		}
 
-		public void HandleExpandTap()
+		public void BindData(NormalSearchViewController _masterView)
 		{
+			this.masterView = _masterView;
+
+			InitUI ();
 		}
 
-//		public void BindData(NormalSearchViewController masterView, DiscountsA
+		public void HandleExpandTap()
+		{
+			expanded = !expanded;
+
+			masterView.MasterTableView.BeginUpdates ();
+			if (expanded) {
+				img_expandMark.Image = UIImage.FromBundle ("icon_arrow_blue_down");
+				if (seg_areaType.SelectedSegment == 0 || seg_areaType.SelectedSegment == 1) {
+					cellHeight = view_distance.Frame.Bottom + 8;
+				} else {
+					cellHeight = view_nation.Frame.Bottom + 8;
+				}
+			} else {
+				img_expandMark.Image = UIImage.FromBundle ("icon_arrow_blue_right");
+				cellHeight = view_cellTitle.Frame.Bottom;
+			}
+			masterView.MasterTableView.EndUpdates ();
+		}
+
+		private void InitUI()
+		{
+			UITapGestureRecognizer expandTap = new UITapGestureRecognizer (HandleExpandTap);
+			view_cellTitle.UserInteractionEnabled = true;
+			view_cellTitle.RemoveGestureRecognizer(expandTap);
+			view_cellTitle.AddGestureRecognizer (expandTap);
+
+			cellHeight = view_cellTitle.Frame.Bottom;
+			seg_areaType.ValueChanged += (object sender, EventArgs e) => {
+				masterView.MasterTableView.BeginUpdates();
+				masterView.ViewModelInstance.DistanceType = (int)seg_areaType.SelectedSegment;
+				switch(seg_areaType.SelectedSegment) {
+				case 0:
+					view_distance.Hidden = false;
+					view_nation.Hidden = true;
+					cellHeight = view_distance.Frame.Bottom + 8;
+					break;
+				case 1:
+					view_distance.Hidden = false;
+					view_nation.Hidden = true;
+					cellHeight = view_distance.Frame.Bottom + 8;
+					break;
+				case 2:
+					view_distance.Hidden = true;
+					view_nation.Hidden = false;
+					cellHeight = view_nation.Frame.Bottom + 8;
+					break;
+				}
+				masterView.MasterTableView.EndUpdates();
+			};
+
+			slider_distance.ValueChanged += (object sender, EventArgs e) => {
+				masterView.ViewModelInstance.SearchMileDistance = (int)slider_distance.Value;
+				masterView.ViewModelInstance.SearchTimeDisatnce = (int)slider_distance.Value;
+			};
+
+			seg_driving.ValueChanged += (object sender, EventArgs e) => {
+				masterView.ViewModelInstance.TravelMode = (int)seg_driving.SelectedSegment;
+			};
+
+			seg_traffic.ValueChanged += (object sender, EventArgs e) => {
+				masterView.ViewModelInstance.TrafficType = (int)seg_driving.SelectedSegment;
+			};
+		}
 	}
 }

@@ -10,7 +10,10 @@ namespace ThisRoofN.iOS
 	public partial class SearchForeclosureCell : UITableViewCell, ISearchCell
 	{
 		public static string Identifier = "SearchForeclosureCell";
+
+		private NormalSearchViewController masterView;
 		private nfloat cellHeight;
+		private bool expanded;
 
 		public SearchForeclosureCell (IntPtr handle) : base (handle)
 		{
@@ -24,8 +27,33 @@ namespace ThisRoofN.iOS
 			}
 		}
 
+		public void BindData(NormalSearchViewController _masterView)
+		{
+			this.masterView = _masterView;
+			InitUI ();
+		}
+
 		public void HandleExpandTap()
 		{
+			expanded = !expanded;
+
+			masterView.MasterTableView.BeginUpdates ();
+			if (expanded) {
+				img_expandMarker.Image = UIImage.FromBundle ("icon_arrow_blue_down");
+				cellHeight = seg_type.Frame.Bottom + 8;
+			} else {
+				cellHeight = view_cellTitle.Frame.Bottom;
+				img_expandMarker.Image = UIImage.FromBundle ("icon_arrow_blue_right");
+			}
+			masterView.MasterTableView.EndUpdates ();
+		}
+
+		private void InitUI() {
+			cellHeight = view_cellTitle.Frame.Bottom;
+			UITapGestureRecognizer expandTap = new UITapGestureRecognizer (HandleExpandTap);
+			view_cellTitle.UserInteractionEnabled = true;
+			view_cellTitle.RemoveGestureRecognizer (expandTap);
+			view_cellTitle.AddGestureRecognizer (expandTap);
 		}
 	}
 }

@@ -3,20 +3,58 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 using MvvmCross.Binding.iOS.Views;
+using ThisRoofN.ViewModels;
+using MvvmCross.Binding.BindingContext;
+using CoreGraphics;
 
 namespace ThisRoofN.iOS
 {
-	partial class NormalSearchViewController : BaseViewController
+	public partial class NormalSearchViewController : BaseViewController
 	{
+		public MvxFluentBindingDescriptionSet<NormalSearchViewController, NormalSearchViewModel> BindingSet;
+
 		public NormalSearchViewController (IntPtr handle) : base (handle)
 		{
+		}
+
+		public NormalSearchViewModel ViewModelInstance
+		{
+			get {
+				return (NormalSearchViewModel)this.ViewModel;
+			}
+		}
+
+		public UITableView MasterTableView
+		{
+			get {
+				return this.tbl_search;
+			}
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 
-			
+			BindingSet = this.CreateBindingSet<NormalSearchViewController, NormalSearchViewModel> ();
+			BindingSet.Apply ();
+
+			this.NavigationItem.SetHidesBackButton (true, false);
+
+			var source = new SearchTableViewSource (tbl_search, this);
+			tbl_search.Source = source;
+			tbl_search.ReloadData ();
+			tbl_search.RowHeight = UITableView.AutomaticDimension;
+			tbl_search.AllowsSelection = false;
+			tbl_search.TableFooterView = new UITableView (CGRect.Empty);
+
+			UITapGestureRecognizer tapper = new UITapGestureRecognizer (HandleTableViewTap);
+			tapper.CancelsTouchesInView = false;
+			tbl_search.AddGestureRecognizer (tapper);
+		}
+
+		private void HandleTableViewTap()
+		{
+			this.tbl_search.EndEditing (true);
 		}
 
 		public class SearchTableViewSource : MvxTableViewSource
@@ -48,6 +86,19 @@ namespace ThisRoofN.iOS
 				forclosureCell = (SearchForeclosureCell)tableView.DequeueReusableCell(SearchForeclosureCell.Identifier);
 				excludedAreaCell = (SearchExcludedAreaCell)tableView.DequeueReusableCell(SearchExcludedAreaCell.Identifier);
 				buttonCell = (SearchButtonCell)tableView.DequeueReusableCell(SearchButtonCell.Identifier);
+
+				budgetCell.BindData(masterView);
+				sortbyCell.BindData(masterView);
+				areaCell.BindData(masterView);
+				bedCell.BindData(masterView);
+				bathsCell.BindData(masterView);
+				propertyTypeCell.BindData(masterView);
+				filterCell.BindData(masterView);
+				forclosureCell.BindData(masterView);
+				excludedAreaCell.BindData(masterView);
+				buttonCell.BindData(masterView);
+
+				masterView.BindingSet.Apply();
 			}
 
 			public override nint RowsInSection (UITableView tableview, nint section)

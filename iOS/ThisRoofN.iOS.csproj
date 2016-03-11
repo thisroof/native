@@ -154,6 +154,10 @@
       <Project>{41C8CE64-8DA5-4123-88BC-499E0FB906BC}</Project>
       <Name>ThisRoofN</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MLPAutoComplete\MLPAutoComplete.csproj">
+      <Project>{94AB9CAE-0A2E-4D39-8729-596807DBB602}</Project>
+      <Name>MLPAutoComplete</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
@@ -182,6 +186,11 @@
     <ImageAsset Include="Resources\Images.xcassets\img_slider_marker.imageset\popover.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_arrow_blue_down.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_arrow_blue_down.imageset\icon_expanded.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_nav_title.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_nav_title.imageset\img_nav_title.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_nav_title.imageset\img_nav_title1.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_setting.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_setting.imageset\icon_setting_white.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -277,6 +286,22 @@
     <Compile Include="Bootstrap\SqlitePluginBootstrap.cs" />
     <Compile Include="CustomControls\UIComboBox.cs" />
     <Compile Include="CustomControls\UIComboBoxViewModel.cs" />
+    <Compile Include="Helpers\TRColorHelper.cs" />
+    <Compile Include="ValueConverters\CheckmarkConverter.cs" />
+    <Compile Include="Add.cs" />
+    <Compile Include="Add.designer.cs">
+      <DependentUpon>Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\UIAutoCompleteTextField.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\FilterCheckboxCVCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\FilterCheckboxCVCell.designer.cs">
+      <DependentUpon>FilterCheckboxCVCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCheckboxCVCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCheckboxCVCell.designer.cs">
+      <DependentUpon>SearchAreaCheckboxCVCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\UIAutoCompleteTextCell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -292,6 +317,7 @@
     <Folder Include="Views\Search\" />
     <Folder Include="Views\Search\NormalSearchCells\" />
     <Folder Include="CustomControls\" />
+    <Folder Include="ValueConverters\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

@@ -4,6 +4,7 @@ using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
 using Facebook.CoreKit;
+using ThisRoofN.iOS.Helpers;
 
 namespace ThisRoofN.iOS
 {
@@ -32,6 +33,11 @@ namespace ThisRoofN.iOS
 			setup.Initialize ();
 			var startup = Mvx.Resolve<IMvxAppStart> ();
 			startup.Start ();
+
+			// Set Naivgation bar colors
+			UINavigationBar.Appearance.BarTintColor = TRColorHelper.NavBarBlue;
+			UINavigationBar.Appearance.SetTitleTextAttributes (new UITextAttributes () { TextColor = UIColor.White });
+
 
 			// Init the Facebook
 			Profile.EnableUpdatesOnAccessTokenChange(true);

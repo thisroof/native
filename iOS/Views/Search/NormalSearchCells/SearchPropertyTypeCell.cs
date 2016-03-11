@@ -4,10 +4,12 @@ using System;
 
 using Foundation;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using CoreGraphics;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchPropertyTypeCell : UITableViewCell, ISearchCell
+	public partial class SearchPropertyTypeCell : UITableViewCell, ISearchCell, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
 		public static string Identifier = "SearchPropertyTypeCell";
 		private NormalSearchViewController masterView;
@@ -31,6 +33,14 @@ namespace ThisRoofN.iOS
 			this.masterView = _masterView;
 
 			InitUI ();
+
+			var propertyTypeSource = new MvxCollectionViewSource (cv_propertyTypes, new NSString("CheckboxCVCell"));
+
+			cv_propertyTypes.AllowsSelection = true;
+			cv_propertyTypes.Source = propertyTypeSource;
+			cv_propertyTypes.Delegate = this;
+
+			_masterView.BindingSet.Bind (propertyTypeSource).To (vm => vm.PropertyTypes);
 		}
 
 		public void HandleExpandTap()
@@ -54,6 +64,25 @@ namespace ThisRoofN.iOS
 			cell_viewTitle.UserInteractionEnabled = true;
 			cell_viewTitle.RemoveGestureRecognizer (expandTap);
 			cell_viewTitle.AddGestureRecognizer (expandTap);
+		}
+
+		// UICollectionView Delegate
+		[Export ("collectionView:layout:sizeForItemAtIndexPath:")]
+		public CoreGraphics.CGSize GetSizeForItem (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, Foundation.NSIndexPath indexPath)
+		{
+			return new CGSize ((collectionView.Frame.Width - 24)/2, 20);
+		}
+
+		[Export ("collectionView:layout:minimumInteritemSpacingForSectionAtIndex:")]
+		public System.nfloat GetMinimumInteritemSpacingForSection (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, System.nint section)
+		{
+			return 8.0f;
+		}
+
+		[Export ("collectionView:didSelectItemAtIndexPath:")]
+		public void ItemSelected (UIKit.UICollectionView collectionView, Foundation.NSIndexPath indexPath)
+		{
+			masterView.ViewModelInstance.PropertyTypes [indexPath.Row].Selected = !masterView.ViewModelInstance.PropertyTypes [indexPath.Row].Selected;
 		}
 	}
 }

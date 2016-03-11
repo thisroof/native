@@ -68,6 +68,12 @@ namespace ThisRoofN.iOS
 			}
 		}
 
+		public override void ViewWillLayoutSubviews ()
+		{
+			base.ViewWillLayoutSubviews ();
+			moviePlayer.View.Frame = this.view_video.Frame;
+		}
+
 		public override void ViewWillDisappear (bool animated)
 		{ 
 			base.ViewWillDisappear (animated);

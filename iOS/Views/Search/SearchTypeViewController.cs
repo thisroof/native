@@ -16,7 +16,7 @@ namespace ThisRoofN.iOS
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			this.NavigationController.SetNavigationBarHidden (true, true);
+
 
 			btn_affordSearch.TitleLabel.Lines = 0;
 			btn_affordSearch.TitleLabel.TextAlignment = UITextAlignment.Center;
@@ -27,6 +27,12 @@ namespace ThisRoofN.iOS
 			set.Bind (btn_normalSearch).To (vm => vm.NormalSearchCommand);
 			set.Bind (btn_affordSearch).To (vm => vm.AffordSearchCommand);
 			set.Apply ();
+		}
+
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+			this.NavigationController.SetNavigationBarHidden (true, true);
 		}
 	}
 }

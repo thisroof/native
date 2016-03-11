@@ -43,7 +43,7 @@ namespace ThisRoofN.iOS
 		UIKit.UISlider slider_distance { get; set; }
 
 		[Outlet]
-		UIKit.UITextField txt_address { get; set; }
+		UIKit.UIView view_autocomplete { get; set; }
 
 		[Outlet]
 		UIKit.UIView view_cellTitle { get; set; }
@@ -56,9 +56,19 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (view_cellTitle != null) {
-				view_cellTitle.Dispose ();
-				view_cellTitle = null;
+			if (btn_nationClearAll != null) {
+				btn_nationClearAll.Dispose ();
+				btn_nationClearAll = null;
+			}
+
+			if (btn_nationSelectAll != null) {
+				btn_nationSelectAll.Dispose ();
+				btn_nationSelectAll = null;
+			}
+
+			if (cv_nations != null) {
+				cv_nations.Dispose ();
+				cv_nations = null;
 			}
 
 			if (img_expandMark != null) {
@@ -66,24 +76,9 @@ namespace ThisRoofN.iOS
 				img_expandMark = null;
 			}
 
-			if (seg_areaType != null) {
-				seg_areaType.Dispose ();
-				seg_areaType = null;
-			}
-
-			if (view_distance != null) {
-				view_distance.Dispose ();
-				view_distance = null;
-			}
-
-			if (view_nation != null) {
-				view_nation.Dispose ();
-				view_nation = null;
-			}
-
-			if (txt_address != null) {
-				txt_address.Dispose ();
-				txt_address = null;
+			if (view_autocomplete != null) {
+				view_autocomplete.Dispose ();
+				view_autocomplete = null;
 			}
 
 			if (img_navigator != null) {
@@ -96,9 +91,9 @@ namespace ThisRoofN.iOS
 				lbl_distance = null;
 			}
 
-			if (slider_distance != null) {
-				slider_distance.Dispose ();
-				slider_distance = null;
+			if (seg_areaType != null) {
+				seg_areaType.Dispose ();
+				seg_areaType = null;
 			}
 
 			if (seg_driving != null) {
@@ -111,19 +106,24 @@ namespace ThisRoofN.iOS
 				seg_traffic = null;
 			}
 
-			if (btn_nationSelectAll != null) {
-				btn_nationSelectAll.Dispose ();
-				btn_nationSelectAll = null;
+			if (slider_distance != null) {
+				slider_distance.Dispose ();
+				slider_distance = null;
 			}
 
-			if (btn_nationClearAll != null) {
-				btn_nationClearAll.Dispose ();
-				btn_nationClearAll = null;
+			if (view_cellTitle != null) {
+				view_cellTitle.Dispose ();
+				view_cellTitle = null;
 			}
 
-			if (cv_nations != null) {
-				cv_nations.Dispose ();
-				cv_nations = null;
+			if (view_distance != null) {
+				view_distance.Dispose ();
+				view_distance = null;
+			}
+
+			if (view_nation != null) {
+				view_nation.Dispose ();
+				view_nation = null;
 			}
 		}
 	}

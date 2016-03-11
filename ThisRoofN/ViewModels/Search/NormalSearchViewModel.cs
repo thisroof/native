@@ -13,9 +13,25 @@ namespace ThisRoofN.ViewModels
 		{
 			searchProperty = TRUserSearchProperty.FetchLatestFromDatabase ();
 
-
+			InitStates ();
 			InitPropertyTypes ();
 			InitializeViewTypes ();
+
+			AddressSuggestionItems = new List<TRGoogleMapPlace> {
+				new TRGoogleMapPlace() {
+					FullAddress = "Washington"
+				},
+				new TRGoogleMapPlace() {
+					FullAddress = "California"
+				},
+				new TRGoogleMapPlace() {
+					FullAddress = "St.Louis"
+				},
+				new TRGoogleMapPlace() {
+					FullAddress = "San Jose"
+				}
+
+			};
 		}
 
 		public string MaxBudget {
@@ -61,7 +77,6 @@ namespace ThisRoofN.ViewModels
 		#endregion
 
 		#region SEARCH_AREA
-
 		// 0 = distance, 1 = commute, 2 = state
 		public int DistanceType {
 			get {
@@ -73,9 +88,31 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		//
-		// HINT: should be addedAutcomplete Address VIEW HERE
-		//
+		private List<TRGoogleMapPlace> _addressSuggestionItems;
+		public List<TRGoogleMapPlace> AddressSuggestionItems
+		{
+			get
+			{
+				return _addressSuggestionItems;
+			}
+			set
+			{
+				_addressSuggestionItems = value;
+				RaisePropertyChanged (() => AddressSuggestionItems);
+			}
+		}
+
+		private TRGoogleMapPlace _selectedAddress;
+		public TRGoogleMapPlace SelectedAddress
+		{
+			get {
+				return _selectedAddress;
+			}
+			set {
+				_selectedAddress = value;
+				RaisePropertyChanged (() => SelectedAddress);
+			}
+		}
 
 		private int _searchTimeDistance;
 
@@ -123,6 +160,39 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+
+		private List<CheckboxItemModel> _states;
+
+		public List<CheckboxItemModel> States {
+			get {
+				return _states;
+			}
+			set {
+				_states = value;
+			}
+		}
+
+		private void InitStates()
+		{
+			_states = new List<CheckboxItemModel> ();
+
+			// Init Property types
+			List<string> statesList = new List<string> ();
+			if (!string.IsNullOrEmpty(searchProperty.StateFilters)) {
+				if (searchProperty.StateFilters.Contains (",")) {
+					statesList.AddRange (searchProperty.StateFilters.Split (','));
+				} else {
+					statesList.Add (searchProperty.StateFilters);
+				}
+			}
+				
+			foreach (var item in TRConstant.StateFilters) {
+				_states.Add (new CheckboxItemModel {
+					Title = item,
+					Selected = (statesList.Contains(item))
+				});
+			}
+		}
 		#endregion
 
 		#region BEDS
@@ -385,20 +455,16 @@ namespace ThisRoofN.ViewModels
 		private List<CheckboxItemModel> _viewTypes;
 		public  List<CheckboxItemModel> ViewTypes  {
 			get {
-				if (_viewTypes == null) {
-					_viewTypes = new List<CheckboxItemModel> ();
-
-				}
 				return _viewTypes;
 			}
 			set {
 				_viewTypes = value;
-				RaisePropertyChanged (() => ViewTypes);
 			}
 		}
 
 		private void InitializeViewTypes ()
 		{
+			_viewTypes = new List<CheckboxItemModel> ();
 			List<string> viewTypesList = new List<string>();
 
 			if (searchProperty.ViewTypes != null) {

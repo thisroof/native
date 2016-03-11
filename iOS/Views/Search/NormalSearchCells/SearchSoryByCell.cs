@@ -30,7 +30,7 @@ namespace ThisRoofN.iOS
 			this.masterView = _masterView;
 
 			UIComboBox soryByComboBox = new UIComboBox (masterView.ViewModelInstance.SortTypes, 0, txt_sortBy, 
-				                            (indexe, text) => {
+				                            (index, text) => {
 					masterView.ViewModelInstance.SelectedSortType = text;
 				});
 

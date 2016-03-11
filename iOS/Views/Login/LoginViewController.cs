@@ -13,7 +13,7 @@ using ThisRoofN.Models;
 
 namespace ThisRoofN.iOS
 {
-	partial class LoginViewController : BaseViewController
+	partial class LoginViewController : BaseViewController, IUIGestureRecognizerDelegate
 	{
 		private MPMoviePlayerController moviePlayer;
 
@@ -53,10 +53,15 @@ namespace ThisRoofN.iOS
 				ProcessFacebookLogin();
 			});
 
+			var resignGesture = new UITapGestureRecognizer (HideKeyboard);
+			resignGesture.Delegate = this;
+
 			img_btnFbLogin.UserInteractionEnabled = true;
 			img_btnBack.UserInteractionEnabled = true;
 			img_btnFbLogin.AddGestureRecognizer (facebookGesture);
 			img_btnBack.AddGestureRecognizer (backGesture);
+
+			view_video.AddGestureRecognizer (resignGesture);
 
 			loginManager = new LoginManager ();
 			loginManager.LoginBehavior = LoginBehavior.SystemAccount;
@@ -70,6 +75,12 @@ namespace ThisRoofN.iOS
 				moviePlayer.PrepareToPlay ();
 				moviePlayer.Play();
 			}
+		}
+
+		public override void ViewWillLayoutSubviews ()
+		{
+			base.ViewWillLayoutSubviews ();
+			moviePlayer.View.Frame = this.view_video.Frame;
 		}
 
 		public override void ViewWillDisappear (bool animated)
@@ -90,7 +101,25 @@ namespace ThisRoofN.iOS
 			moviePlayer.MovieControlMode = MPMovieControlMode.Hidden;
 			moviePlayer.RepeatMode = MPMovieRepeatMode.One;
 
+
 			this.view_video.Add (moviePlayer.View);
+		}
+
+		private void HideKeyboard()
+		{
+			this.View.EndEditing (true);
+		}
+
+		[Export ("gestureRecognizer:shouldReceiveTouch:")]
+		public bool ShouldReceiveTouch (UIKit.UIGestureRecognizer recognizer, UIKit.UITouch touch)
+		{
+			return true;
+		}
+
+		[Export ("gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:")]
+		public bool ShouldRecognizeSimultaneously (UIKit.UIGestureRecognizer gestureRecognizer, UIKit.UIGestureRecognizer otherGestureRecognizer)
+		{
+			return true;
 		}
 
 		private async void ProcessFacebookLogin()

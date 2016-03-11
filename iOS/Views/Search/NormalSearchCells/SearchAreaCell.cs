@@ -4,10 +4,13 @@ using System;
 
 using Foundation;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using CoreGraphics;
+using ThisRoofN.iOS.CustomControls;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchAreaCell : UITableViewCell, ISearchCell
+	public partial class SearchAreaCell : UITableViewCell, ISearchCell, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
 		private bool expanded;
 		public static string Identifier = "SearchAreaCell";
@@ -31,7 +34,45 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
+			switch (_masterView.ViewModelInstance.DistanceType) {
+			case 0: // Distance
+				seg_areaType.SelectedSegment = 1;
+				view_distance.Hidden = false;
+				view_nation.Hidden = true;
+				break;
+			case 1: // Commute
+				seg_areaType.SelectedSegment = 0;
+				view_distance.Hidden = false;
+				view_nation.Hidden = true;
+				break;
+			case 2: // States
+				seg_areaType.SelectedSegment = 2;
+				view_distance.Hidden = true;
+				view_nation.Hidden = false;
+				break;
+			default:
+				break;
+			}
+
 			InitUI ();
+
+			// Init the State Collection View
+			var propertyTypeSource = new MvxCollectionViewSource (cv_nations, new NSString("SearchAreaCheckboxCVCell"));
+			cv_nations.AllowsSelection = true;
+			cv_nations.Source = propertyTypeSource;
+			cv_nations.Delegate = this;
+			_masterView.BindingSet.Bind (propertyTypeSource).To (vm => vm.States);
+
+			// Init Auto Location
+			UIAutoCompleteTextField autoLocation = new UIAutoCompleteTextField ();
+			autoLocation.Placeholder = "City, State or Zip";
+			autoLocation.Frame = new CGRect (8, 4, view_autocomplete.Frame.Width - img_navigator.Frame.Width - 16, view_autocomplete.Frame.Height - 8.0f);
+			autoLocation.ElementToTextDelegate = o => ((TRGoogleMapPlace)o).FullAddress;
+//			_masterView.BindingSet.Bind(autoLocation).For(t => t.Placeholder).To(vm => vm.).OneTime();
+			_masterView.BindingSet.Bind(autoLocation).For(t => t.Elements).To(vm => vm.AddressSuggestionItems);
+			_masterView.BindingSet.Bind(autoLocation).For(t => t.SelectedElement).To(vm => vm.SelectedAddress);
+
+			view_autocomplete.Add (autoLocation);
 		}
 
 		public void HandleExpandTap()
@@ -41,10 +82,17 @@ namespace ThisRoofN.iOS
 			masterView.MasterTableView.BeginUpdates ();
 			if (expanded) {
 				img_expandMark.Image = UIImage.FromBundle ("icon_arrow_blue_down");
-				if (seg_areaType.SelectedSegment == 0 || seg_areaType.SelectedSegment == 1) {
-					cellHeight = view_distance.Frame.Bottom + 8;
-				} else {
-					cellHeight = view_nation.Frame.Bottom + 8;
+
+				switch (seg_areaType.SelectedSegment) {
+				case 0: // Distance
+					cellHeight = view_distance.Frame.Bottom;
+					break;
+				case 1:
+					cellHeight = view_distance.Frame.Bottom - 16 - seg_driving.Frame.Height * 2;
+					break;
+				case 2:
+					cellHeight = view_nation.Frame.Bottom;
+					break;
 				}
 			} else {
 				img_expandMark.Image = UIImage.FromBundle ("icon_arrow_blue_right");
@@ -60,25 +108,32 @@ namespace ThisRoofN.iOS
 			view_cellTitle.RemoveGestureRecognizer(expandTap);
 			view_cellTitle.AddGestureRecognizer (expandTap);
 
+			view_autocomplete.Layer.BorderColor = UIColor.Gray.CGColor;
+			view_autocomplete.Layer.BorderWidth = 1;
+
 			cellHeight = view_cellTitle.Frame.Bottom;
+
 			seg_areaType.ValueChanged += (object sender, EventArgs e) => {
 				masterView.MasterTableView.BeginUpdates();
-				masterView.ViewModelInstance.DistanceType = (int)seg_areaType.SelectedSegment;
+
 				switch(seg_areaType.SelectedSegment) {
-				case 0:
+				case 0: // Distance
 					view_distance.Hidden = false;
 					view_nation.Hidden = true;
-					cellHeight = view_distance.Frame.Bottom + 8;
+					cellHeight = view_distance.Frame.Bottom;
+					masterView.ViewModelInstance.DistanceType = 1;
 					break;
-				case 1:
+				case 1: // Commute
 					view_distance.Hidden = false;
 					view_nation.Hidden = true;
-					cellHeight = view_distance.Frame.Bottom + 8;
+					cellHeight = view_distance.Frame.Bottom - 16 - seg_driving.Frame.Height * 2;
+					masterView.ViewModelInstance.DistanceType = 0;
 					break;
-				case 2:
+				case 2: // Nation Wide
 					view_distance.Hidden = true;
 					view_nation.Hidden = false;
 					cellHeight = view_nation.Frame.Bottom + 8;
+					masterView.ViewModelInstance.DistanceType = 2;
 					break;
 				}
 				masterView.MasterTableView.EndUpdates();
@@ -96,6 +151,25 @@ namespace ThisRoofN.iOS
 			seg_traffic.ValueChanged += (object sender, EventArgs e) => {
 				masterView.ViewModelInstance.TrafficType = (int)seg_driving.SelectedSegment;
 			};
+		}
+
+		// UICollectionView Delegate
+		[Export ("collectionView:layout:sizeForItemAtIndexPath:")]
+		public CoreGraphics.CGSize GetSizeForItem (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, Foundation.NSIndexPath indexPath)
+		{
+			return new CGSize ((collectionView.Frame.Width - 40) / 4 , 20);
+		}
+
+		[Export ("collectionView:layout:minimumInteritemSpacingForSectionAtIndex:")]
+		public System.nfloat GetMinimumInteritemSpacingForSection (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, System.nint section)
+		{
+			return 8.0f;
+		}
+
+		[Export ("collectionView:didSelectItemAtIndexPath:")]
+		public void ItemSelected (UIKit.UICollectionView collectionView, Foundation.NSIndexPath indexPath)
+		{
+			masterView.ViewModelInstance.States [indexPath.Row].Selected = !masterView.ViewModelInstance.States [indexPath.Row].Selected;
 		}
 	}
 }

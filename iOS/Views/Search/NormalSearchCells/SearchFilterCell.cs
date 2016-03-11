@@ -4,10 +4,12 @@ using System;
 
 using Foundation;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using CoreGraphics;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchFilterCell : UITableViewCell, ISearchCell
+	public partial class SearchFilterCell : UITableViewCell, ISearchCell, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
 		public static string Identifier = "SearchFilterCell";
 		private NormalSearchViewController masterView;
@@ -31,6 +33,14 @@ namespace ThisRoofN.iOS
 			this.masterView = _masterView;
 
 			InitUI ();
+
+			var propertyTypeSource = new MvxCollectionViewSource (cv_viewTypes, new NSString("FilterCheckboxCVCell"));
+
+			cv_viewTypes.AllowsSelection = true;
+			cv_viewTypes.Source = propertyTypeSource;
+			cv_viewTypes.Delegate = this;
+
+			_masterView.BindingSet.Bind (propertyTypeSource).To (vm => vm.ViewTypes);
 		}
 
 		public void HandleExpandTap()
@@ -54,6 +64,25 @@ namespace ThisRoofN.iOS
 			view_cellTitle.UserInteractionEnabled = true;
 			view_cellTitle.RemoveGestureRecognizer (expandTap);
 			view_cellTitle.AddGestureRecognizer (expandTap);
+		}
+
+		// UICollectionView Delegate
+		[Export ("collectionView:layout:sizeForItemAtIndexPath:")]
+		public CoreGraphics.CGSize GetSizeForItem (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, Foundation.NSIndexPath indexPath)
+		{
+			return new CGSize ((collectionView.Frame.Width - 32) / 3, 20);
+		}
+
+		[Export ("collectionView:layout:minimumInteritemSpacingForSectionAtIndex:")]
+		public System.nfloat GetMinimumInteritemSpacingForSection (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, System.nint section)
+		{
+			return 8.0f;
+		}
+
+		[Export ("collectionView:didSelectItemAtIndexPath:")]
+		public void ItemSelected (UIKit.UICollectionView collectionView, Foundation.NSIndexPath indexPath)
+		{
+			masterView.ViewModelInstance.ViewTypes [indexPath.Row].Selected = !masterView.ViewModelInstance.ViewTypes [indexPath.Row].Selected;
 		}
 	}
 }

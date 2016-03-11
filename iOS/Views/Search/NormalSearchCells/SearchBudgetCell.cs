@@ -4,6 +4,7 @@ using System;
 
 using Foundation;
 using UIKit;
+using ThisRoofN.iOS.Helpers;
 
 namespace ThisRoofN.iOS
 {
@@ -40,7 +41,11 @@ namespace ThisRoofN.iOS
 
 		public void InitUI()
 		{
-			cellHeight = view_budgetBack.Frame.Bottom;
+			view_budgetBack.Layer.BorderColor = TRColorHelper.LightBlue.CGColor;
+			view_budgetBack.Layer.BorderWidth = 1;
+			view_budgetBack.Layer.CornerRadius = 5;
+
+			cellHeight = view_budgetBack.Frame.Bottom + 16;
 		}
 	}
 }

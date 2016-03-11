@@ -20,14 +20,14 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (tbl_search != null) {
-				tbl_search.Dispose ();
-				tbl_search = null;
-			}
-
 			if (btn_viewResult != null) {
 				btn_viewResult.Dispose ();
 				btn_viewResult = null;
+			}
+
+			if (tbl_search != null) {
+				tbl_search.Dispose ();
+				tbl_search = null;
 			}
 		}
 	}

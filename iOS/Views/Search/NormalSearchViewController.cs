@@ -35,10 +35,30 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewDidLoad ();
 
-			BindingSet = this.CreateBindingSet<NormalSearchViewController, NormalSearchViewModel> ();
-			BindingSet.Apply ();
+			this.NavigationController.SetNavigationBarHidden (false, true);
+			this.NavigationItem.SetHidesBackButton (true, true);
+			UIImage logoImage = UIImage.FromBundle ("img_nav_title");
+			UIImageView titleImageView = new UIImageView (new CGRect (0, 0, 0, 35.0f));
+			titleImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+			titleImageView.Image = logoImage;
+			this.NavigationItem.TitleView = titleImageView;
 
-			this.NavigationItem.SetHidesBackButton (true, false);
+			UIButton backButton = new UIButton (new CGRect (0, 0, 20, 20));
+			backButton.SetImage (UIImage.FromBundle ("icon_arrow_back"), UIControlState.Normal);
+			UIBarButtonItem barButtonItem = new UIBarButtonItem (backButton);
+			this.NavigationItem.SetLeftBarButtonItem (barButtonItem, true);
+
+			UIButton settingButton = new UIButton (new CGRect (0, 0, 20, 20));
+			settingButton.SetImage (UIImage.FromBundle ("icon_setting"), UIControlState.Normal);
+			UIBarButtonItem rightButtonItem = new UIBarButtonItem (settingButton);
+			this.NavigationItem.SetRightBarButtonItem (rightButtonItem, true);
+
+			UITapGestureRecognizer tapper = new UITapGestureRecognizer (HandleTableViewTap);
+			tapper.CancelsTouchesInView = false;
+			tbl_search.AddGestureRecognizer (tapper);
+
+			BindingSet = this.CreateBindingSet<NormalSearchViewController, NormalSearchViewModel> ();
+			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 
 			var source = new SearchTableViewSource (tbl_search, this);
 			tbl_search.Source = source;
@@ -46,10 +66,6 @@ namespace ThisRoofN.iOS
 			tbl_search.RowHeight = UITableView.AutomaticDimension;
 			tbl_search.AllowsSelection = false;
 			tbl_search.TableFooterView = new UITableView (CGRect.Empty);
-
-			UITapGestureRecognizer tapper = new UITapGestureRecognizer (HandleTableViewTap);
-			tapper.CancelsTouchesInView = false;
-			tbl_search.AddGestureRecognizer (tapper);
 		}
 
 		private void HandleTableViewTap()

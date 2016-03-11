@@ -10,13 +10,13 @@ using ThisRoofN.iOS.ValueConverters;
 
 namespace ThisRoofN.iOS
 {
-	public partial class CheckboxCVCell : MvxCollectionViewCell
+	public partial class FilterCheckboxCVCell : MvxCollectionViewCell
 	{
-		public CheckboxCVCell (IntPtr handle) : base (handle)
+		public FilterCheckboxCVCell (IntPtr handle) : base (handle)
 		{
 			this.DelayBind (() => {
-				var set = this.CreateBindingSet<CheckboxCVCell, CheckboxItemModel>();
-				set.Bind(iv_checkMark).To(vm => vm.Selected).WithConversion(new CheckmarkConverter());
+				var set = this.CreateBindingSet<FilterCheckboxCVCell, CheckboxItemModel>();
+				set.Bind(iv_check).To(vm => vm.Selected).WithConversion(new CheckmarkConverter());
 				set.Bind(lbl_title).To(vm => vm.Title);
 				set.Apply();
 			});

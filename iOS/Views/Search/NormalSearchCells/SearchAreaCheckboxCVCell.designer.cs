@@ -9,25 +9,25 @@ using System.CodeDom.Compiler;
 
 namespace ThisRoofN.iOS
 {
-	[Register ("CheckboxCVCell")]
-	partial class CheckboxCVCell
+	[Register ("SearchAreaCheckboxCVCell")]
+	partial class SearchAreaCheckboxCVCell
 	{
 		[Outlet]
-		UIKit.UIImageView iv_checkMark { get; set; }
+		UIKit.UIImageView iv_check { get; set; }
 
 		[Outlet]
 		UIKit.UILabel lbl_title { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (iv_checkMark != null) {
-				iv_checkMark.Dispose ();
-				iv_checkMark = null;
-			}
-
 			if (lbl_title != null) {
 				lbl_title.Dispose ();
 				lbl_title = null;
+			}
+
+			if (iv_check != null) {
+				iv_check.Dispose ();
+				iv_check = null;
 			}
 		}
 	}

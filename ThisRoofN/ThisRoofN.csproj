@@ -51,6 +51,7 @@
     <Compile Include="Models\TRLikedProperty.cs" />
     <Compile Include="ViewModels\Other\CheckboxItemModel.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Models\TRGoogleMapPlace.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

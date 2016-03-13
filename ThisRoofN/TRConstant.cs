@@ -33,6 +33,9 @@ namespace ThisRoofN
 
 
 		// Normal Search Property Values
+		public static readonly int MinValidBudget = 10000;
+		public static readonly int MaxValidBudget = 200000000;
+
 		public static readonly int OneAcreToSquareFoot = 43560;
 
 		public static readonly Dictionary<string, string> SortTypes = new Dictionary<string, string>{
@@ -225,6 +228,37 @@ namespace ThisRoofN
 			"WV",
 			"WI",
 			"WY"
+		};
+
+		public static readonly List<int> SearchDistances = new List<int>{
+			5,
+			10,
+			15,
+			20,
+			25,
+			50,
+			75,
+			100,
+			150,
+			200,
+			250,
+			300,
+			350,
+			400,
+			450,
+			500
+		};
+
+		public static readonly List<int> SearchMinutesInt = new List<int>{
+			5,
+			15,
+			30,
+			45,
+			60,
+			75,
+			90,
+			105,
+			120
 		};
 	}
 }

@@ -38,6 +38,8 @@ namespace ThisRoofN.iOS
 			UINavigationBar.Appearance.BarTintColor = TRColorHelper.NavBarBlue;
 			UINavigationBar.Appearance.SetTitleTextAttributes (new UITextAttributes () { TextColor = UIColor.White });
 
+			UIToolbar.Appearance.BarTintColor = TRColorHelper.LightBlue;
+			UIToolbar.Appearance.SetShadowImage (new UIImage (), UIToolbarPosition.Any);
 
 			// Init the Facebook
 			Profile.EnableUpdatesOnAccessTokenChange(true);

@@ -52,6 +52,12 @@
     <Compile Include="ViewModels\Other\CheckboxItemModel.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Models\TRGoogleMapPlace.cs" />
+    <Compile Include="Models\TRSearchResult.cs" />
+    <Compile Include="ViewModels\SearchResult\SearchResultHomeViewModel.cs" />
+    <Compile Include="ViewModels\SearchResult\SearchResultTileViewModel.cs" />
+    <Compile Include="ViewModels\SearchResult\SearchResultMapViewModel.cs" />
+    <Compile Include="Models\TileItemModel.cs" />
+    <Compile Include="Helpers\DataHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -106,6 +112,15 @@
     <Reference Include="MvvmCross.Plugins.Sqlite">
       <HintPath>..\packages\MvvmCross.Plugin.SQLitePCL.4.0.0\lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.dll</HintPath>
     </Reference>
+    <Reference Include="GeoJSON.Net">
+      <HintPath>..\packages\GeoJSON.Net.0.1.45\lib\portable-net40+sl5+wp80+win8+wpa81\GeoJSON.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.DownloadCache">
+      <HintPath>..\packages\MvvmCross.Plugin.DownloadCache.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.DownloadCache.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.File">
+      <HintPath>..\packages\MvvmCross.Plugin.File.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.File.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -121,5 +136,6 @@
     <Folder Include="Database\" />
     <Folder Include="ViewModels\Other\" />
     <Folder Include="Extensions\" />
+    <Folder Include="ViewModels\SearchResult\" />
   </ItemGroup>
 </Project>

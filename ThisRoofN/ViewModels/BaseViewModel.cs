@@ -4,6 +4,7 @@ using System.Windows.Input;
 using ThisRoofN.RestService;
 using ThisRoofN.Interfaces;
 using MvvmCross.Platform;
+using System.Collections.Generic;
 
 namespace ThisRoofN.ViewModels
 {
@@ -12,7 +13,6 @@ namespace ThisRoofN.ViewModels
 		protected TRService mTRService;
 		protected IUserPreference mUserPref;
 		private MvxCommand _closeCommand;
-
 
 		public BaseViewModel ()
 		{

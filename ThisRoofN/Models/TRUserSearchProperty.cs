@@ -10,6 +10,9 @@ namespace ThisRoofN.Models
 		[DataMember(Name = "id")]
 		public int UserID { get; set; }
 
+		[DataMember(Name = "mobile_num")]
+		public string MobileNum{ get; set; }
+
 		[DataMember(Name = "first_name")]
 		public string FirstName{ get; set; }
 
@@ -18,6 +21,9 @@ namespace ThisRoofN.Models
 
 		[DataMember(Name = "email")]
 		public string Email{ get; set; }
+
+		[DataMember(Name = "altitude")]
+		public double Altitude {get;set;}
 
 		[DataMember(Name = "latitude")]
 		public double GeoLat{ get; set; }

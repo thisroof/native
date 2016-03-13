@@ -2,17 +2,29 @@
 using ThisRoofN.Models;
 using System.Linq;
 using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+using System.Windows.Input;
+using Acr.UserDialogs;
+using System.Text.RegularExpressions;
+using ThisRoofN.Interfaces;
+using Newtonsoft.Json;
 
 namespace ThisRoofN.ViewModels
 {
 	public class NormalSearchViewModel : BaseViewModel
 	{
+		private IDevice deviceInfo;
 		private TRUserSearchProperty searchProperty;
 
-		public NormalSearchViewModel ()
+		public NormalSearchViewModel (IDevice device)
 		{
+			deviceInfo = device;
 			searchProperty = TRUserSearchProperty.FetchLatestFromDatabase ();
 
+			MaxLotSize = MaxLotSizeOptions [0];
+			HasPool = HasPoolOptions [0];
+			SelectedSortType = SortTypes [0];
+			SelectedMaxSquareFeet = MaxSquareFeetOptions [0];
 			InitStates ();
 			InitPropertyTypes ();
 			InitializeViewTypes ();
@@ -32,6 +44,124 @@ namespace ThisRoofN.ViewModels
 				}
 
 			};
+		}
+
+		private MvxCommand _saveCommand;
+		private MvxCommand _searchCommand;
+
+		public ICommand SaveCommand {
+			get {
+				_saveCommand = _saveCommand ?? new MvxCommand (DoSave);
+				return _saveCommand;
+			}
+		}
+
+		public ICommand SearchCommand {
+			get {
+				_searchCommand = _searchCommand ?? new MvxCommand (DoSearch);
+				return _searchCommand;
+			}
+		}
+
+		private void DoSave() {
+			DoSaveOrSearch (false);
+		}
+
+		private void DoSearch() {
+			DoSaveOrSearch (true);
+		}
+
+		private async void DoSaveOrSearch(bool isSearch) {
+			if (!Invalidate ()) {
+				return;
+			}
+
+			if (SelectedAddress == null) {
+				searchProperty.Address = string.Empty;
+				searchProperty.City = string.Empty;
+				searchProperty.State = string.Empty;
+				searchProperty.Zip = string.Empty;
+				searchProperty.StartZip = string.Empty;
+				searchProperty.Country = string.Empty;
+			} else {
+				if (!UpdateZipcode ()) {
+					
+					// Should be added
+				}
+			}
+
+			switch (searchProperty.SearchType) {
+			case 0:
+				searchProperty.SearchDistance = TRConstant.SearchDistances[SearchMileDistance];
+				searchProperty.StateFilters = "";
+				break;
+			case 1:
+				searchProperty.SearchDistance = TRConstant.SearchMinutesInt[SearchTimeDisatnce];
+				searchProperty.StateFilters = "";
+				break;
+			case 2:
+				searchProperty.SearchDistance = 0;
+				searchProperty.StateFilters = GetStateFiltersSelected ();
+				break;
+			}
+
+			// When user didn't input the address.
+			if (SelectedAddress == null && searchProperty.SearchType != 2) {
+				searchProperty.SearchDistance = 0;
+				searchProperty.StateFilters = string.Join(",", States.Select(x => x.Title).ToArray ());
+			}
+
+			searchProperty.PropertyTypes = GetPropertyTypesSelected ();
+			searchProperty.ViewTypes = GetViewTypesSelected ();
+
+			UserDialogs.Instance.ShowLoading (isSearch ? "Searching Results" : "Saving your Search");
+			searchProperty.MobileNum = deviceInfo.GetUniqueIdentifier ();
+			var res = await mTRService.UpdateUserSearchProperty(searchProperty);
+
+			if (!isSearch) {
+				
+				// Save Search Case
+				UserDialogs.Instance.HideLoading ();
+				if (res != null) {
+					UserDialogs.Instance.Alert ("Updated Successfully", "Success");
+				} else {
+					UserDialogs.Instance.Alert ("Failed to save, try again lager.", "Failure");
+				}
+			} else {
+				
+				// Search Case
+				if (searchProperty.SearchType == 1) {
+					var positions = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier());
+					UserDialogs.Instance.HideLoading ();
+				} else {
+					DataHelper.SearchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier());
+					UserDialogs.Instance.HideLoading ();
+					ShowViewModel<SearchResultHomeViewModel> ();
+				}
+			}
+		}
+
+		private bool Invalidate()
+		{
+			if (searchProperty.MaxBudget > TRConstant.MaxValidBudget || 
+				searchProperty.MaxBudget < TRConstant.MinValidBudget) {
+				UserDialogs.Instance.Alert (string.Format ("Budget value shoudl be {0} to {1}", TRConstant.MinValidBudget, TRConstant.MaxValidBudget), "Validation");
+				return false;
+			}
+
+			if (searchProperty.MinSquareFootageStructure > 0 &&
+				searchProperty.MaxLotSquareFootage > 0 &&
+				searchProperty.MinSquareFootageStructure > searchProperty.MaxLotSquareFootage) {
+				UserDialogs.Instance.Alert ("The minimum suqare footage should be less than maxmum square footage", "Validation");
+				return false;
+			}
+
+			if (searchProperty.SearchType == 1 && SelectedAddress == null) {
+				UserDialogs.Instance.Alert ("Location Field is Required for Commute Time Search.", "Validation");
+				return false;
+			}
+
+			return true;
 		}
 
 		public string MaxBudget {
@@ -532,6 +662,38 @@ namespace ThisRoofN.ViewModels
 				return (int)(acreVal * TRConstant.OneAcreToSquareFoot);
 			}
 			return int.Parse (val.ExtractNumber());
+		}
+
+		private bool UpdateZipcode(){
+			if (Regex.IsMatch (SelectedAddress.FullAddress, @"^\s*[\d]{5,}\s*$")) {
+				searchProperty.Zip = Regex.Match (SelectedAddress.FullAddress, @"[\d]{5,}").Value;
+				searchProperty.StartZip = searchProperty.Zip;
+				return true;
+			} else if (Regex.IsMatch (SelectedAddress.FullAddress, @"([A-Z]{2})\s([\d]{5,})")) {
+				Match match = Regex.Match (SelectedAddress.FullAddress, @"([A-Z]{2})\s([\d]{5,})");
+				string[] sub_comps = SelectedAddress.FullAddress.Substring(0, match.Index).Split (new String[]{", "}, StringSplitOptions.RemoveEmptyEntries);
+				searchProperty.Address = sub_comps [0];
+				if (sub_comps.Length > 1) {
+					searchProperty.City = sub_comps [1];
+				}
+				searchProperty.State = match.Groups [1].Value;
+				searchProperty.Country = "US";
+				searchProperty.Zip = match.Groups[2].Value;
+				searchProperty.StartZip = searchProperty.Zip;
+				return true;
+			}
+			return false;
+		}
+
+		private string GetStateFiltersSelected(){
+			return string.Join(",", States.Where (x => x.Selected).Select(x => x.Title).ToArray ());
+		}
+
+		private string GetPropertyTypesSelected(){
+			return string.Join(",", PropertyTypes.Where (x => x.Selected).Select(x => x.Title).ToArray ());
+		}
+		private string GetViewTypesSelected(){
+			return string.Join(",", ViewTypes.Where (x => x.Selected).Select(x => x.Title).ToArray ());
 		}
 		#endregion
 	}

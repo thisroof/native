@@ -6,16 +6,19 @@ namespace ThisRoofN.iOS
 	{
 		private static string LoginFlowStoryboard = "LoginFlow";
 		private static string SearchFlowStoryboard = "SearchFlow";
+		private static string SearchResultStoryboard = "SearchResult";
 
 		public static string GetStoryboardName(Type viewType)
 		{
-			if (viewType.Name == "WelcomeView") {
+			if (viewType.Name == "HomeViewController" || 
+				viewType.Name == "LoginViewController" || 
+				viewType.Name == "SignupViewController" ) {
 				return LoginFlowStoryboard;
 			} else if (viewType.Name == "SearchTypeViewController" || 
 				viewType.Name == "NormalSearchViewController") {
 				return SearchFlowStoryboard;
 			} else {
-				return LoginFlowStoryboard;
+				return SearchResultStoryboard;
 			}
 		}
 	}

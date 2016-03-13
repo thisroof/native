@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using MvvmCross.Platform.Platform;
 using Newtonsoft.Json;
 using ThisRoofN.Models;
+using ThisRoofN.Interfaces;
+using GeoJSON.Net.Feature;
+using GeoJSON.Net.Geometry;
 
 namespace ThisRoofN.RestService
 {
@@ -26,8 +29,8 @@ namespace ThisRoofN.RestService
 		private const string testTokenMethod = "api/v5/test_api";
 		private const string loginMethod = "api/v5/login";
 		private const string signupMethod = "api/v5/signup";
-		private const string searchMethod = "api/v5/search";
 		private const string createMethod = "api/v5/userapp/create";
+		private const string searchMethod = "api/v5/search";
 		private const string likeDislikeMethod = "api/v5/like";
 		private const string getLikedPropertiesMethod = "api/v5/get_likes";
 		private const string clearLikeDislikeMethod = "api/v5/clear";
@@ -203,7 +206,135 @@ namespace ThisRoofN.RestService
 			return result;
 		}
 
+		public async Task<TRUserSearchProperty> UpdateUserSearchProperty(TRUserSearchProperty searchProperty)
+		{
+			TRUserSearchProperty result = null;
+			string response = String.Empty;
 
+			var json = new {
+				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
+//				mobile_num = searchProperty.MobileNum,
+				first_name = "",
+				last_name = "",
+				latitude = searchProperty.GeoLat.ToString(),
+				longitude = searchProperty.GeoLng.ToString(),
+				email = "",
+				altitude = "0",
+				address = searchProperty.Address ?? "",
+				city = searchProperty.City ?? "",
+				state = searchProperty.State ?? "",
+				zip_code = searchProperty.Zip ?? "0",
+				country = "US",//usersAppPreferences.Country ?? "",
+				value = searchProperty.Value.ToString () ,
+				bedrooms = searchProperty.Bedrooms.ToString (),
+				baths_full = searchProperty.BathsFull.ToString (),
+				min_square_footage_structure = searchProperty.MinSquareFootageStructure.ToString (),
+				max_square_footage_structure = searchProperty.MaxSquareFootageStructure.ToString (),
+				min_lot_square_footage = searchProperty.MinLotSquareFootage.ToString (),
+				max_lot_square_footage = searchProperty.MaxLotSquareFootage.ToString (),
+				max_budget = searchProperty.MaxBudget,
+				min_beds = searchProperty.MinBeds.ToString(),
+				min_baths = searchProperty.MinBaths.ToString(),
+				start_zip = searchProperty.StartZip ?? "0",
+				search_type = searchProperty.SearchType.ToString (),
+				// search_dist = Utils.GetSearchDistanceValue(usersAppPreferences.SearchDistance),
+				search_dist = searchProperty.SearchDistance.ToString(),
+				metricus = searchProperty.MetricUS ?? "0",
+				proptypes = searchProperty.PropertyTypes.GetPropertyTypeValue(),
+				dislike_zipcodes = searchProperty.DislikeZipcodes,
+				traffic_type = searchProperty.TrafficType.ToString (),
+				travel_mode = searchProperty.TravelMode.ToString (),
+				state_filters = searchProperty.StateFilters,
+				year_built = searchProperty.YearBuilt.ToString(),
+				days_on_market = searchProperty.DaysOnMarket.ToString(),
+				has_pool = searchProperty.HasPool,
+				view_types = searchProperty.ViewTypes,
+				foreclosure_status = searchProperty.ForeclosureStatus,
+				sort_by = searchProperty.SortBy,
+				keywords = searchProperty.Keywords
+			};
+
+			try
+			{
+				string serialized = JsonConvert.SerializeObject (json);
+				response = await CallRestAPI (createMethod, serialized);
+				result = JsonConvert.DeserializeObject<TRUserSearchProperty>(response, jsonSerializeSetting);
+				result.UserID = result.ID;
+				result.ID = searchProperty.ID;
+				searchProperty.UserID = result.ID;
+			}
+			catch (Exception ex) {
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during createMethod"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during Signup API Target:{0}", response);
+			}
+				
+			return result;
+		}
+
+		public async Task<List<TRSearchResult>> GetSearchResults(string deviceID, int resultsPerRequest = 10, int page = 1, bool isAutoSearch =false){
+			string response = string.Empty;
+			List<TRSearchResult> result = new List<TRSearchResult>();
+
+			var json = new {
+				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
+//				mobile_num = deviceID,
+				page = page.ToString (),
+				query_count = resultsPerRequest.ToString (),
+				mode = isAutoSearch ? "1" : "0" };
+			
+			try {
+				string serialized = JsonConvert.SerializeObject (json);
+				response = await CallRestAPI(searchMethod, serialized);
+				result = JsonConvert.DeserializeObject<List<TRSearchResult>> (response, jsonSerializeSetting);
+			} catch (Exception ex) {
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during searchResult"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during Signup API Target:{0}", response);
+			}
+
+			return result;
+		}
+
+		public async Task<List<IPosition>> GetPolygon(string deviceID)
+		{
+			string response = string.Empty;
+			List<IPosition> positions = new List<IPosition>();
+
+			var json = new {
+				mobile_num = deviceID,
+			};
+
+			var serialized = JsonConvert.SerializeObject(deviceID);
+
+			try
+			{
+				response = await CallRestAPI(getPolygonMethod, serialized);
+				var feature = JsonConvert.DeserializeObject<Feature>(serialized);
+				Polygon polygon = feature.Geometry as Polygon;
+				positions = polygon.Coordinates[0].Coordinates;
+			}
+			catch (Exception ex)
+			{
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during GetPolygon"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during Signup API Target:{0}", response);
+			}
+
+			return positions;
+		}
 	}
 }
 

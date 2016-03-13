@@ -148,6 +148,18 @@
     <Reference Include="MvvmCross.Plugins.Sqlite.iOS">
       <HintPath>..\packages\MvvmCross.Plugin.SQLitePCL.4.0.0\lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="MvvmCross.Plugins.File">
+      <HintPath>..\packages\MvvmCross.Plugin.File.4.0.0\lib\Xamarin.iOS10\MvvmCross.Plugins.File.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.File.iOS">
+      <HintPath>..\packages\MvvmCross.Plugin.File.4.0.0\lib\Xamarin.iOS10\MvvmCross.Plugins.File.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.DownloadCache">
+      <HintPath>..\packages\MvvmCross.Plugin.DownloadCache.4.0.0\lib\Xamarin.iOS10\MvvmCross.Plugins.DownloadCache.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.DownloadCache.iOS">
+      <HintPath>..\packages\MvvmCross.Plugin.DownloadCache.4.0.0\lib\Xamarin.iOS10\MvvmCross.Plugins.DownloadCache.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThisRoofN\ThisRoofN.csproj">
@@ -191,12 +203,30 @@
     <ImageAsset Include="Resources\Images.xcassets\img_nav_title.imageset\img_nav_title1.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_setting.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_setting.imageset\icon_setting_white.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_down_more.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_down_more.imageset\dn_arrow_1242x2208.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_down_more.imageset\dn_arrow_1600x2560.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_home.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_home.imageset\house_icon.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_map_locked.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_map_unlocked.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_map_locked.imageset\map_control_locked.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_map_allow.imageset\map_control_unlocked.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_like.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_like_did.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_dislike.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_dislike_did.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_like.imageset\thumbs_up_white.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_like_did.imageset\thumbs_up_green.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_dislike.imageset\thumbs_dwn_white.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_dislike_did.imageset\thumbs_dwn_red.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Storyboards\LoginFlow.storyboard" />
     <InterfaceDefinition Include="Storyboards\SearchFlow.storyboard" />
+    <InterfaceDefinition Include="Storyboards\SearchResult.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -302,6 +332,48 @@
       <DependentUpon>SearchAreaCheckboxCVCell.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\UIAutoCompleteTextCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultDetailView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultDetailView.designer.cs">
+      <DependentUpon>SearchResultDetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultHomeView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultHomeView.designer.cs">
+      <DependentUpon>SearchResultHomeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultMapView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultMapView.designer.cs">
+      <DependentUpon>SearchResultMapView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultTileView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultTileView.designer.cs">
+      <DependentUpon>SearchResultTileView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailDescCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailDescCell.designer.cs">
+      <DependentUpon>SRDetailDescCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailImageCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailImageCell.designer.cs">
+      <DependentUpon>SRDetailImageCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailMapCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailMapCell.designer.cs">
+      <DependentUpon>SRDetailMapCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailTitleCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailTitleCell.designer.cs">
+      <DependentUpon>SRDetailTitleCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailValueCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultCells\SRDetailValueCell.designer.cs">
+      <DependentUpon>SRDetailValueCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultCells\SRTileImageCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultCells\SRTileImageCell.designer.cs">
+      <DependentUpon>SRTileImageCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
+    <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -318,6 +390,11 @@
     <Folder Include="Views\Search\NormalSearchCells\" />
     <Folder Include="CustomControls\" />
     <Folder Include="ValueConverters\" />
+    <Folder Include="Views\SearchResult\" />
+    <Folder Include="Views\SearchResult\SearchResultCells\" />
+    <Folder Include="Resources\Images.xcassets\icon_like_did.imageset\" />
+    <Folder Include="Resources\Images.xcassets\icon_dislike.imageset\" />
+    <Folder Include="Resources\Images.xcassets\icon_dislike_did.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

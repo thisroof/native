@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ThisRoofN
 {
@@ -59,6 +60,44 @@ namespace ThisRoofN
 		public static string ExtractNumber(this string original)
 		{
 			return new string(original.ToCharArray().Where(c => Char.IsDigit(c)).ToArray());
+		}
+
+		public static string GetPropertyTypeValue(this string selectedValue)
+		{
+			selectedValue = selectedValue ?? TRConstant.SearchPropertyTypes [0];
+
+			var array = selectedValue.Split (',');
+			List<string> newList = new List<string>();
+
+			foreach (var text in array) {
+				switch (text) {
+				case "Single Family":
+					newList.Add ("Single Family Detached");
+					break;
+				case "Townhouse":
+					newList.Add ("Single Family Attached");
+					newList.Add ("Townhouse");
+					break;
+				case "Condo":
+					newList.Add ("Condominium");
+					break;
+				case "Duplex":
+					newList.Add ("Duplex");
+					newList.Add ("Quadruplex");
+					break;
+				case "Manufactured":
+					newList.Add ("Manufactured Home");
+					newList.Add ("Mobile Home");
+					break;
+				case "Lots/Land":
+					newList.Add ("Farm");
+					break;
+				case "Timeshare":
+					newList.Add ("Timeshare");
+					break;
+				}
+			}
+			return string.Join (",", newList);
 		}
 	}
 }

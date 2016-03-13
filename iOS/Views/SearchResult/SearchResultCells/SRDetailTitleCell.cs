@@ -9,8 +9,40 @@ namespace ThisRoofN.iOS
 {
 	public partial class SRDetailTitleCell : UITableViewCell
 	{
+		public static string Identifier = "SRDetailTitleCell";
+
+		private SearchResultDetailView masterView;
+		private nfloat cellHeight;
+
 		public SRDetailTitleCell (IntPtr handle) : base (handle)
 		{
+		}
+
+		public nfloat CellHeight 
+		{
+			get
+			{
+				return cellHeight;
+			}
+		}
+
+		public void BindData(SearchResultDetailView _masterView)
+		{
+			this.masterView = _masterView;
+
+			masterView.BindingSet.Bind (img_major).For (i => i.ImageUrl).To (vm => vm.ItemDetail.PrimaryPhoto);
+			masterView.BindingSet.Bind (lbl_budget).To (vm => vm.ItemDetail.FormattedValue);
+			masterView.BindingSet.Bind (lbl_address).To (vm => vm.ItemDetail.FormattedCityStateZip);
+			masterView.BindingSet.Bind (lbl_bedBath).To (vm => vm.ItemDetail.FormattedBedBath);
+			masterView.BindingSet.Bind (lbl_sqft).To (vm => vm.ItemDetail.FormattedSquareFootageStructure);
+			masterView.BindingSet.Bind (lbl_acre).To (vm => vm.ItemDetail.FormattedAcreValue).WithConversion(new StringFormatConverter(), "LOT: {0} Acres");
+
+			InitUI ();
+		}
+
+		private void InitUI()
+		{
+			cellHeight = masterView.MasterTableView.Frame.Height / 2;
 		}
 	}
 }

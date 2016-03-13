@@ -11,6 +11,8 @@ namespace ThisRoofN.iOS
 {
 	public partial class SRTileImageCell : MvxCollectionViewCell
 	{
+		public static string Identifier = "SRDetailValueCell";
+
 		public SRTileImageCell (IntPtr handle) : base (handle)
 		{
 			this.DelayBind (() => {

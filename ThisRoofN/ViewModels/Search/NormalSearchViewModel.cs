@@ -134,7 +134,7 @@ namespace ThisRoofN.ViewModels
 					var positions = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier());
 					UserDialogs.Instance.HideLoading ();
 				} else {
-					DataHelper.SearchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier());
+					DataHelper.SearchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier(), 24);
 					UserDialogs.Instance.HideLoading ();
 					ShowViewModel<SearchResultHomeViewModel> ();
 				}

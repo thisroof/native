@@ -13,13 +13,13 @@ namespace ThisRoofN.iOS
 	partial class SRDetailImageCell
 	{
 		[Outlet]
-		UIKit.UIImageView img_item { get; set; }
+		MvvmCross.Binding.iOS.Views.MvxImageView img_detailItem { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (img_item != null) {
-				img_item.Dispose ();
-				img_item = null;
+			if (img_detailItem != null) {
+				img_detailItem.Dispose ();
+				img_detailItem = null;
 			}
 		}
 	}

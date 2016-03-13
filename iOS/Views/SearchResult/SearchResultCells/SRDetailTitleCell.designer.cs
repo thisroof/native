@@ -16,7 +16,7 @@ namespace ThisRoofN.iOS
 		UIKit.UIImageView img_arrowMore { get; set; }
 
 		[Outlet]
-		UIKit.UIImageView img_result { get; set; }
+		MvvmCross.Binding.iOS.Views.MvxImageView img_major { get; set; }
 
 		[Outlet]
 		UIKit.UILabel lbl_acre { get; set; }
@@ -35,14 +35,19 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (img_result != null) {
-				img_result.Dispose ();
-				img_result = null;
+			if (img_arrowMore != null) {
+				img_arrowMore.Dispose ();
+				img_arrowMore = null;
 			}
 
-			if (lbl_budget != null) {
-				lbl_budget.Dispose ();
-				lbl_budget = null;
+			if (img_major != null) {
+				img_major.Dispose ();
+				img_major = null;
+			}
+
+			if (lbl_acre != null) {
+				lbl_acre.Dispose ();
+				lbl_acre = null;
 			}
 
 			if (lbl_address != null) {
@@ -55,19 +60,14 @@ namespace ThisRoofN.iOS
 				lbl_bedBath = null;
 			}
 
+			if (lbl_budget != null) {
+				lbl_budget.Dispose ();
+				lbl_budget = null;
+			}
+
 			if (lbl_sqft != null) {
 				lbl_sqft.Dispose ();
 				lbl_sqft = null;
-			}
-
-			if (lbl_acre != null) {
-				lbl_acre.Dispose ();
-				lbl_acre = null;
-			}
-
-			if (img_arrowMore != null) {
-				img_arrowMore.Dispose ();
-				img_arrowMore = null;
 			}
 		}
 	}

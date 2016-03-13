@@ -4,13 +4,84 @@ using System;
 
 using Foundation;
 using UIKit;
+using ThisRoofN.ViewModels;
+using CoreLocation;
+using MapKit;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchResultMapView : BaseViewController
+	public partial class SearchResultMapView : BaseViewController, IMKMapViewDelegate
 	{
+		public SearchResultMapViewModel ViewModelInstance
+		{
+			get {
+				return this.ViewModel as SearchResultMapViewModel;
+			}
+		}
+
 		public SearchResultMapView (IntPtr handle) : base (handle)
 		{
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			foreach (MapItemModel item in ViewModelInstance.MapItems) {
+				TRMapAnnotation annotation = new TRMapAnnotation (item);
+				map_results.AddAnnotation (annotation);
+			}
+
+			map_results.Delegate = this;
+		}
+
+		[Export ("mapView:viewForAnnotation:")]
+		public MapKit.MKAnnotationView GetViewForAnnotation (MapKit.MKMapView mapView, MapKit.IMKAnnotation annotation)
+		{
+			MKAnnotationView annotationView = mapView.DequeueReusableAnnotation (TRMapAnnotation.Identifier);
+
+			if (annotationView == null) {
+				annotationView = new MKPinAnnotationView (annotation, TRMapAnnotation.Identifier);
+			} else {
+				annotationView.Annotation = annotation;
+			}
+
+			annotationView.CanShowCallout = true;
+			((MKPinAnnotationView)annotationView).AnimatesDrop = true;
+			((MKPinAnnotationView)annotationView).PinColor = MKPinAnnotationColor.Green;
+			annotationView.Selected = true;
+
+			UIButton detailButton = UIButton.FromType (UIButtonType.DetailDisclosure);
+			detailButton.TouchUpInside += (object sender, EventArgs e) => {
+				Console.WriteLine("Detail Button Clicked");
+			};
+
+			annotationView.RightCalloutAccessoryView = detailButton;
+
+
+			return annotationView;
+		}
+
+		public class TRMapAnnotation : MKAnnotation
+		{
+			public static string Identifier = "TRMapAnnotation";
+			private MapItemModel item;
+			public TRMapAnnotation(MapItemModel itemData)
+			{
+				item = itemData;
+			}
+
+			public override CLLocationCoordinate2D Coordinate {
+				get {
+					return new CLLocationCoordinate2D (item.Latitude, item.Longitude);
+				}
+			}
+
+			public override string Title {
+				get {
+					return item.PropertyID;
+				}
+			}
 		}
 	}
 }

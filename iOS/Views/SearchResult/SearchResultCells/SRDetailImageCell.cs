@@ -4,13 +4,22 @@ using System;
 
 using Foundation;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using MvvmCross.Binding.BindingContext;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SRDetailImageCell : UITableViewCell
+	public partial class SRDetailImageCell : MvxTableViewCell
 	{
+		public static string Identifier = "SRDetailImageCell";
+
 		public SRDetailImageCell (IntPtr handle) : base (handle)
 		{
+			this.DelayBind (() => {
+				var set = this.CreateBindingSet<SRDetailImageCell, TileItemModel>();
+				set.Bind(img_detailItem).For(i => i.ImageUrl).To(vm => vm.ImageUrl);
+				set.Apply();
+			});
 		}
 	}
 }

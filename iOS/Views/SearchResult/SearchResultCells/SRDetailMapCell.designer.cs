@@ -16,9 +16,6 @@ namespace ThisRoofN.iOS
 		UIKit.UIImageView img_dislike { get; set; }
 
 		[Outlet]
-		UIKit.UIImageView img_home { get; set; }
-
-		[Outlet]
 		UIKit.UIImageView img_like { get; set; }
 
 		[Outlet]
@@ -29,14 +26,9 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (map_result != null) {
-				map_result.Dispose ();
-				map_result = null;
-			}
-
-			if (img_home != null) {
-				img_home.Dispose ();
-				img_home = null;
+			if (img_dislike != null) {
+				img_dislike.Dispose ();
+				img_dislike = null;
 			}
 
 			if (img_like != null) {
@@ -44,14 +36,14 @@ namespace ThisRoofN.iOS
 				img_like = null;
 			}
 
-			if (img_dislike != null) {
-				img_dislike.Dispose ();
-				img_dislike = null;
-			}
-
 			if (img_mapLock != null) {
 				img_mapLock.Dispose ();
 				img_mapLock = null;
+			}
+
+			if (map_result != null) {
+				map_result.Dispose ();
+				map_result = null;
 			}
 		}
 	}

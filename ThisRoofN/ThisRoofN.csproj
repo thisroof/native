@@ -58,6 +58,11 @@
     <Compile Include="ViewModels\SearchResult\SearchResultMapViewModel.cs" />
     <Compile Include="Models\TileItemModel.cs" />
     <Compile Include="Helpers\DataHelper.cs" />
+    <Compile Include="Models\MapItemModel.cs" />
+    <Compile Include="Models\TRItemDetail.cs" />
+    <Compile Include="ViewModels\SearchResult\SearchResultDetailViewModel.cs" />
+    <Compile Include="Extensions\EnumerableExtension.cs" />
+    <Compile Include="Helpers\LocationHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

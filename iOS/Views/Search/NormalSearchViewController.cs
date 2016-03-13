@@ -53,6 +53,14 @@ namespace ThisRoofN.iOS
 			tbl_search.TableFooterView = new UITableView (CGRect.Empty);
 		}
 
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+
+			this.NavigationController.SetNavigationBarHidden (false, true);
+			this.NavigationController.SetToolbarHidden (true, true);
+		}
+
 		private void HandleTableViewTap()
 		{
 			this.tbl_search.EndEditing (true);

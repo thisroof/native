@@ -70,6 +70,14 @@ namespace ThisRoofN.iOS.Views
 			bindingSet.Apply ();
 		}
 
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+
+			this.NavigationController.SetNavigationBarHidden (false, true);
+			this.NavigationController.SetToolbarHidden (false, true);
+		}
+
 		public override void ViewDidLayoutSubviews ()
 		{
 			base.ViewDidLayoutSubviews ();

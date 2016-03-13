@@ -4,13 +4,83 @@ using System;
 
 using Foundation;
 using UIKit;
+using MapKit;
+using CoreLocation;
 
 namespace ThisRoofN.iOS
 {
 	public partial class SRDetailMapCell : UITableViewCell
 	{
+		public static string Identifier = "SRDetailMapCell";
+		private SearchResultDetailView masterView;
+		private nfloat cellHeight;
+
 		public SRDetailMapCell (IntPtr handle) : base (handle)
 		{
+		}
+
+		public nfloat CellHeight 
+		{
+			get
+			{
+				return cellHeight;
+			}
+		}
+
+		public void BindData(SearchResultDetailView _masterView)
+		{
+			this.masterView = _masterView;
+
+			InitUI ();
+		}
+
+		private void InitUI()
+		{
+			cellHeight = masterView.MasterTableView.Frame.Height / 2;
+
+			TRDetailItemAnnotation annotation = new TRDetailItemAnnotation (
+				masterView.ViewModelInstace.ItemDetail.GeoLat, 
+				masterView.ViewModelInstace.ItemDetail.GeoLng, 
+				masterView.ViewModelInstace.ItemDetail.Address);
+			map_result.AddAnnotation (annotation);
+
+			map_result.ZoomEnabled = true;
+
+			map_result.SetRegion(new MKCoordinateRegion(
+				new CLLocationCoordinate2D(
+					masterView.ViewModelInstace.ItemDetail.GeoLat, 
+					masterView.ViewModelInstace.ItemDetail.GeoLng),
+				new MKCoordinateSpan(
+					LocationHelper.KilometersToLatitudeDegrees(2),
+					LocationHelper.KilometersToLongitudeDegrees(2, masterView.ViewModelInstace.ItemDetail.GeoLat)
+				)), true);
+		}
+
+		public class TRDetailItemAnnotation : MKAnnotation
+		{
+			public static string Identifier = "TRMapAnnotation";
+			double latitude;
+			double longitude;
+			string title;
+
+			public TRDetailItemAnnotation(double _latitude, double _longitude, string _title)
+			{
+				this.latitude = _latitude;
+				this.longitude = _longitude;
+				this.title = _title;
+			}
+
+			public override CLLocationCoordinate2D Coordinate {
+				get {
+					return new CLLocationCoordinate2D (latitude, longitude);
+				}
+			}
+
+			public override string Title {
+				get {
+					return title;
+				}
+			}
 		}
 	}
 }

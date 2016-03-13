@@ -9,8 +9,34 @@ namespace ThisRoofN.iOS
 {
 	public partial class SRDetailValueCell : UITableViewCell
 	{
+		public static string Identifier = "SRDetailValueCell";
+
+		private SearchResultDetailView masterView;
+		private nfloat cellHeight;
+
 		public SRDetailValueCell (IntPtr handle) : base (handle)
 		{
+		}
+
+		public nfloat CellHeight 
+		{
+			get
+			{
+				return cellHeight;
+			}
+		}
+
+		public void BindData(SearchResultDetailView _masterView)
+		{
+			this.masterView = _masterView;
+
+			InitUI ();
+		}
+
+		private void InitUI()
+		{
+			cellHeight = view_contact.Frame.Bottom;
+
 		}
 	}
 }

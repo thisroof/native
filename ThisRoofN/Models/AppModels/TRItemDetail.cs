@@ -80,6 +80,12 @@ namespace ThisRoofN.Models
 				}
 			}
 		}
+
+		public string FormattedAddress {
+			get {
+				return this.Address.ToUpper ();
+			}
+		}
 		#endregion
 
 

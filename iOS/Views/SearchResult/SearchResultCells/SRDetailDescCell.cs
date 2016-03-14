@@ -29,13 +29,15 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
+			_masterView.BindingSet.Bind (lbl_desc).To (vm => vm.ItemDetail.ShortenedDescription);
+			_masterView.BindingSet.Bind (btn_more).To (vm => vm.DescMoreCommand);
+
 			InitUI ();
 		}
 
 		private void InitUI()
 		{
 			cellHeight = view_descBack.Frame.Bottom;
-
 		}
 	}
 }

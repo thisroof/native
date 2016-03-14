@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
+using Acr.UserDialogs;
+using ThisRoofN.Interfaces;
+using MvvmCross.Platform;
 
 namespace ThisRoofN.ViewModels
 {
@@ -10,14 +13,17 @@ namespace ThisRoofN.ViewModels
 	{
 		private MvxCommand<int> _detailCommand;
 		private List<TileItemModel> _tileItems;
+		private IDevice deviceInfo;
 
 		public SearchResultTileViewModel ()
 		{
+			deviceInfo = Mvx.Resolve<IDevice> ();
+		
 			if (DataHelper.SearchResults != null) {
 				_tileItems = DataHelper.SearchResults.Select (i =>
 					new TileItemModel() {
-						propertyID = i.Listing.MatrixUniqueID,
-						ImageUrl = i.PrimaryPhotoUrl
+						propertyID = i.ID,
+						ImageUrl = i.Photos.FirstOrDefault().MediaURL
 					}).ToList ();
 			}
 		}
@@ -41,10 +47,15 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void GotoDetail(int index)
+		private async void GotoDetail(int index)
 		{
 			string propertyID = _tileItems [index].propertyID;
-			ShowViewModel<SearchResultDetailViewModel> (new {selectedPropertyID = propertyID});
+
+			UserDialogs.Instance.ShowLoading ();
+			DataHelper.SelectedDetail = await mTRService.GetCottageDetail(deviceInfo.GetUniqueIdentifier(), propertyID);
+			UserDialogs.Instance.HideLoading();
+
+			ShowViewModel<SearchResultDetailViewModel> ();
 		}
 	}
 }

@@ -20,15 +20,13 @@ namespace ThisRoofN.iOS
 		{
 		}
 
-		public SearchResultDetailViewModel ViewModelInstace
-		{
+		public SearchResultDetailViewModel ViewModelInstace {
 			get {
 				return this.ViewModel as SearchResultDetailViewModel;
 			}
 		}
 
-		public UITableView MasterTableView
-		{
+		public UITableView MasterTableView {
 			get {
 				return tbl_detail;
 			}
@@ -42,6 +40,43 @@ namespace ThisRoofN.iOS
 
 			BindingSet = this.CreateBindingSet<SearchResultDetailView, SearchResultDetailViewModel> ();
 			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
+
+			BindingSet.Bind (view_dislikeSetting).For (i => i.Hidden).To (vm => vm.IsDislikeHidden);
+			BindingSet.Bind (btn_commit).To (vm => vm.DisLikeCommand);
+			BindingSet.Bind (btn_cancel).To (vm => vm.ShowDislikeViewCommand).CommandParameter (false);
+
+			BindingSet.Bind (icon_tooFar).To (vm => vm.TooFar);
+			BindingSet.Bind (icon_tooClose).To (vm => vm.TooClose);
+			BindingSet.Bind (icon_tooSmall).To (vm => vm.TooSmall);
+			BindingSet.Bind (icon_lotTooSmall).To (vm => vm.LotTooSmall);
+			BindingSet.Bind (icon_tooBig).To (vm => vm.HouseTooBig);
+			BindingSet.Bind (icon_ugly).To (vm => vm.Ugly);
+
+			icon_tooFar.UserInteractionEnabled = true;
+			icon_tooClose.UserInteractionEnabled = true;
+			icon_tooSmall.UserInteractionEnabled = true;
+			icon_lotTooSmall.UserInteractionEnabled = true;
+			icon_tooBig.UserInteractionEnabled = true;
+			icon_ugly.UserInteractionEnabled = true;
+
+			icon_tooFar.AddGestureRecognizer (new UIGestureRecognizer (() => {
+				ViewModelInstace.TooFar = !ViewModelInstace.TooFar;
+			}));
+			icon_tooClose.AddGestureRecognizer (new UIGestureRecognizer (() => {
+				ViewModelInstace.TooClose = !ViewModelInstace.TooClose;
+			}));
+			icon_tooSmall.AddGestureRecognizer (new UIGestureRecognizer (() => {
+				ViewModelInstace.TooSmall = !ViewModelInstace.TooSmall;
+			}));
+			icon_lotTooSmall.AddGestureRecognizer (new UIGestureRecognizer (() => {
+				ViewModelInstace.LotTooSmall = !ViewModelInstace.LotTooSmall;
+			}));
+			icon_tooBig.AddGestureRecognizer (new UIGestureRecognizer (() => {
+				ViewModelInstace.LotTooBig = !ViewModelInstace.LotTooBig;
+			}));
+			icon_ugly.AddGestureRecognizer (new UIGestureRecognizer (() => {
+				ViewModelInstace.Ugly = !ViewModelInstace.Ugly;
+			}));
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -75,20 +110,21 @@ namespace ThisRoofN.iOS
 			SRDetailValueCell valueCell;
 			SRDetailDescCell descCell;
 
-			public SearchResultDetailTableViewSource(UITableView tableView, SearchResultDetailView vc):base(tableView) {
+			public SearchResultDetailTableViewSource (UITableView tableView, SearchResultDetailView vc) : base (tableView)
+			{
 				this.masterView = vc;
 
-				mapCell = (SRDetailMapCell)tableView.DequeueReusableCell(SRDetailMapCell.Identifier);
-				titleCell = (SRDetailTitleCell)tableView.DequeueReusableCell(SRDetailTitleCell.Identifier);
-				valueCell = (SRDetailValueCell)tableView.DequeueReusableCell(SRDetailValueCell.Identifier);
-				descCell = (SRDetailDescCell)tableView.DequeueReusableCell(SRDetailDescCell.Identifier);
+				mapCell = (SRDetailMapCell)tableView.DequeueReusableCell (SRDetailMapCell.Identifier);
+				titleCell = (SRDetailTitleCell)tableView.DequeueReusableCell (SRDetailTitleCell.Identifier);
+				valueCell = (SRDetailValueCell)tableView.DequeueReusableCell (SRDetailValueCell.Identifier);
+				descCell = (SRDetailDescCell)tableView.DequeueReusableCell (SRDetailDescCell.Identifier);
 
-				mapCell.BindData(masterView);
-				titleCell.BindData(masterView);
-				valueCell.BindData(masterView);
-				descCell.BindData(masterView);
+				mapCell.BindData (masterView);
+				titleCell.BindData (masterView);
+				valueCell.BindData (masterView);
+				descCell.BindData (masterView);
 
-				masterView.BindingSet.Apply();
+				masterView.BindingSet.Apply ();
 			}
 
 			public override nint RowsInSection (UITableView tableview, nint section)
@@ -96,7 +132,7 @@ namespace ThisRoofN.iOS
 				if (ItemsSource == null) {
 					return 4;
 				} else {
-					return ItemsSource.Cast<TileItemModel>().Count () + 4;
+					return ItemsSource.Cast<TileItemModel> ().Count () + 4;
 				}
 			}
 
@@ -117,14 +153,18 @@ namespace ThisRoofN.iOS
 				case 3:
 					return descCell;
 				default:
-					return (SRDetailImageCell)tableView.DequeueReusableCell (SRDetailImageCell.Identifier);
+					SRDetailImageCell cell = (SRDetailImageCell)tableView.DequeueReusableCell (SRDetailImageCell.Identifier);
+					cell.IVItem.ClipsToBounds = true;
+					cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
+					return cell;
+
 				}
 			}
 
 			protected override object GetItemAt (NSIndexPath indexPath)
 			{
 				if (indexPath.Row > 3) {
-					return ItemsSource.Cast<TileItemModel>().ToList()[indexPath.Row - 4];
+					return ItemsSource.Cast<TileItemModel> ().ToList () [indexPath.Row - 4];
 				} else {
 					return null;
 				}

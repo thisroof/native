@@ -12,9 +12,9 @@ namespace ThisRoofN.ViewModels
 			if (DataHelper.SearchResults != null) {
 				_mapItems = DataHelper.SearchResults.Select (i =>
 					new MapItemModel() {
-						PropertyID = i.Listing.MatrixUniqueID,
-						Latitude = i.Listing.Location.Latitude,
-						Longitude = i.Listing.Location.Longitude,
+						PropertyID = i.ID,
+						Latitude = i.Latitude,
+						Longitude = i.Longitude,
 					}).ToList ();
 			}
 		}

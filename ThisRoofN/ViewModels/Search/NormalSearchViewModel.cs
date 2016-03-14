@@ -118,8 +118,11 @@ namespace ThisRoofN.ViewModels
 			searchProperty.MobileNum = deviceInfo.GetUniqueIdentifier ();
 			var res = await mTRService.UpdateUserSearchProperty(searchProperty);
 
+			if (res != null) {
+				mUserPref.SetValue (TRConstant.UserPrefUserIDKey, res.UserID);
+			}
+
 			if (!isSearch) {
-				
 				// Save Search Case
 				UserDialogs.Instance.HideLoading ();
 				if (res != null) {

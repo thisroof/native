@@ -21,5 +21,11 @@ namespace ThisRoofN.iOS
 				set.Apply();
 			});
 		}
+
+		public MvxImageView IVItem {
+			get {
+				return img_detailItem;
+			}
+		}
 	}
 }

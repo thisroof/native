@@ -1,8 +1,10 @@
 ﻿using System;
 using MvvmCross.Core.ViewModels;
+using System.Runtime.Serialization;
 
 namespace ThisRoofN
 {
+	
 	public class TileItemModel
 	{
 		public int Index {get;set;}

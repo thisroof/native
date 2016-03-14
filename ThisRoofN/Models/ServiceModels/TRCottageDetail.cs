@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace ThisRoofN
 {
 	[DataContract]
-	public class TRSearchResult
+	public class TRCottageDetail
 	{
-		public TRSearchResult ()
+		public TRCottageDetail ()
 		{
 		}
 

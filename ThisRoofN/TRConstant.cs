@@ -26,6 +26,7 @@ namespace ThisRoofN
 	
 
 		// User Preference Keys
+		public static readonly string UserPrefUserIDKey				= "user_id_key";
 		public static readonly string UserPrefUserEmailKey			= "user_email_key";
 		public static readonly string UserPrefUserPasswordKey		= "user_pwd_key";
 		public static readonly string UserPrefAccessTokenKey		= "access_token_key";

@@ -30,13 +30,20 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
+			_masterView.BindingSet.Bind (lbl_street).To (vm => vm.ItemDetail.FormattedAddress);
+			_masterView.BindingSet.Bind (lbl_address).To (vm => vm.ItemDetail.FormattedCityStateZip);
+			_masterView.BindingSet.Bind (lbl_price).To (vm => vm.ItemDetail.Value);
+			_masterView.BindingSet.Bind (lbl_sqft).To (vm => vm.ItemDetail.SquareFootageStructure);
+			_masterView.BindingSet.Bind (lbl_lotSqft).To (vm => vm.ItemDetail.LotSquareFootage);
+			_masterView.BindingSet.Bind (lbl_bd).To (vm => vm.ItemDetail.Bedrooms);
+			_masterView.BindingSet.Bind (lbl_ba).To (vm => vm.ItemDetail.BathsFull);
+
 			InitUI ();
 		}
 
 		private void InitUI()
 		{
 			cellHeight = view_contact.Frame.Bottom;
-
 		}
 	}
 }

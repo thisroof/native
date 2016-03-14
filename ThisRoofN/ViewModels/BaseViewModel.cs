@@ -12,12 +12,15 @@ namespace ThisRoofN.ViewModels
 	{
 		protected TRService mTRService;
 		protected IUserPreference mUserPref;
+		protected IDevice mDeviceInfo;
+
 		private MvxCommand _closeCommand;
 
 		public BaseViewModel ()
 		{
 			mTRService = new TRService ();
 			mUserPref = Mvx.Resolve<IUserPreference> ();
+			mDeviceInfo = Mvx.Resolve<IDevice> ();
 		}
 
 		public ICommand CloseCommand

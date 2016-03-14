@@ -116,6 +116,13 @@ namespace ThisRoofN.iOS
 				footerview.Add (masterViewInstance.spinner);
 				return footerview;
 			}
+
+			protected override UICollectionViewCell GetOrCreateCellFor (UICollectionView collectionView, NSIndexPath indexPath, object item)
+			{
+				SRTileImageCell cell = (SRTileImageCell)base.GetOrCreateCellFor (collectionView, indexPath, item);
+				cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
+				return cell;
+			}
 		}
 	}
 }

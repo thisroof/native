@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using ThisRoofN.Interfaces;
 
 namespace ThisRoofN.ViewModels
 {
@@ -9,8 +10,6 @@ namespace ThisRoofN.ViewModels
 		private int defaultPosition;
 		private SearchResultTileViewModel tileViewModel;
 		private SearchResultMapViewModel mapViewModel;
-
-
 
 		public SearchResultHomeViewModel ()
 		{

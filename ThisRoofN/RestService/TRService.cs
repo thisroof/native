@@ -113,11 +113,11 @@ namespace ThisRoofN.RestService
 			catch (Exception ex) {
 				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
 					{"Exception Time", DateTime.Now.ToString() },
-					{"Description", "Parse Failed during login"},
+					{"Description", "Parse Failed during IsTokenValid"},
 					{"Target String", response},
 				}, Xamarin.Insights.Severity.Error);
 
-				MvxTrace.Trace ("Parse Failed during Loing API Target:{0}", response);
+				MvxTrace.Trace ("Parse Failed during IsTokenValid API Target:{0}", response);
 			}
 
 			return res;
@@ -167,11 +167,11 @@ namespace ThisRoofN.RestService
 			catch (Exception ex) {
 				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
 					{"Exception Time", DateTime.Now.ToString() },
-					{"Description", "Parse Failed during login"},
+					{"Description", "Parse Failed during fblogin"},
 					{"Target String", response},
 				}, Xamarin.Insights.Severity.Error);
 
-				MvxTrace.Trace ("Parse Failed during Loing API Target:{0}", response);
+				MvxTrace.Trace ("Parse Failed during FBLogin API Target:{0}", response);
 			}
 
 			return result;
@@ -212,8 +212,8 @@ namespace ThisRoofN.RestService
 			string response = String.Empty;
 
 			var json = new {
-				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
-//				mobile_num = searchProperty.MobileNum,
+//				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
+				mobile_num = searchProperty.MobileNum,
 				first_name = "",
 				last_name = "",
 				latitude = searchProperty.GeoLat.ToString(),
@@ -266,23 +266,23 @@ namespace ThisRoofN.RestService
 			catch (Exception ex) {
 				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
 					{"Exception Time", DateTime.Now.ToString() },
-					{"Description", "Parse Failed during createMethod"},
+					{"Description", "Parse Failed during UpdateUserSearchProperty"},
 					{"Target String", response},
 				}, Xamarin.Insights.Severity.Error);
 
-				MvxTrace.Trace ("Parse Failed during Signup API Target:{0}", response);
+				MvxTrace.Trace ("Parse Failed during UpdateUserSearchProperty Target:{0}", response);
 			}
 				
 			return result;
 		}
 
-		public async Task<List<TRSearchResult>> GetSearchResults(string deviceID, int resultsPerRequest = 10, int page = 1, bool isAutoSearch =false){
+		public async Task<List<TRCottage>> GetSearchResults(string deviceID, int resultsPerRequest = 10, int page = 1, bool isAutoSearch =false){
 			string response = string.Empty;
-			List<TRSearchResult> result = new List<TRSearchResult>();
+			List<TRCottage> result = new List<TRCottage>();
 
 			var json = new {
-				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
-//				mobile_num = deviceID,
+//				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
+				mobile_num = deviceID,
 				page = page.ToString (),
 				query_count = resultsPerRequest.ToString (),
 				mode = isAutoSearch ? "1" : "0" };
@@ -290,18 +290,133 @@ namespace ThisRoofN.RestService
 			try {
 				string serialized = JsonConvert.SerializeObject (json);
 				response = await CallRestAPI(searchMethod, serialized);
-				result = JsonConvert.DeserializeObject<List<TRSearchResult>> (response, jsonSerializeSetting);
+				result = JsonConvert.DeserializeObject<List<TRCottage>> (response, jsonSerializeSetting);
 			} catch (Exception ex) {
 				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
 					{"Exception Time", DateTime.Now.ToString() },
-					{"Description", "Parse Failed during searchResult"},
+					{"Description", "Parse Failed during GetSearchResults"},
 					{"Target String", response},
 				}, Xamarin.Insights.Severity.Error);
 
-				MvxTrace.Trace ("Parse Failed during Signup API Target:{0}", response);
+				MvxTrace.Trace ("Parse Failed during GetSearchResults, Target:{0}", response);
 			}
 
 			return result;
+		}
+
+		public async Task<TRCottageDetail> GetCottageDetail(string deviceID, string propertyID) {
+			TRCottageDetail detail = new TRCottageDetail();
+
+			string response = string.Empty;
+			string searchDetailURL = string.Format ("{0}/{1}", searchMethod, propertyID);
+
+			try
+			{
+				response = await CallRestAPI (searchDetailURL, null, HTTP_METHOD.GET);
+				detail = JsonConvert.DeserializeObject<TRCottageDetail>(response);
+			}
+			catch (Exception ex) {
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during GetCottageDetail"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during GetCottageDetail, Target:{0}", response);
+			}
+
+			return detail;
+		}
+
+		public async Task<bool> LikeProperty(TRSetLikeRequest request)
+		{
+			TRLikeStatus res = null;
+			string response = string.Empty;
+			try
+			{
+				var serialized = JsonConvert.SerializeObject(request);
+				response = await CallRestAPI(likeDislikeMethod, serialized);
+				res = JsonConvert.DeserializeObject<TRLikeStatus>(response, jsonSerializeSetting);
+			}
+			catch (Exception ex)
+			{
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during SetLikeProperty"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during SetLikeProperty, Target:{0}", response);
+			}
+
+
+			if (res != null && res.PropertyID != null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public async Task<bool> DislikeProperty(TRSetDisLikeRequest request)
+		{
+			TRLikeStatus res = null;
+			string response = string.Empty;
+
+			try {
+				var serialized = JsonConvert.SerializeObject(request);
+				response = await CallRestAPI(likeDislikeMethod, serialized);
+				res = JsonConvert.DeserializeObject<TRLikeStatus>(response, jsonSerializeSetting);
+			}
+			catch (Exception ex) {
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during SetLikeProperty"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during SetLikeProperty, Target:{0}", response);
+			}
+
+			if (res != null && res.PropertyID != null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public async Task<bool> ClearLikeDislike(string deviceID, int userID, bool likeDislike, string propertyID) {
+			bool res = false;
+			string response = string.Empty;
+
+			try {
+				var json = new {
+					user_id = userID.ToString(),
+					mobile_num = deviceID,
+					property_id = propertyID,
+					like_dislike = likeDislike
+				};
+
+				var serialized = JsonConvert.SerializeObject(json);
+				response = await CallRestAPI(clearLikeDislikeMethod, serialized);
+
+				var definition = new {status = string.Empty, data = string.Empty};
+				var formatRes = JsonConvert.DeserializeAnonymousType(response, definition, jsonSerializeSetting);
+				if(formatRes.status.Equals("success"))
+				{
+					res = true;
+				}
+			}
+			catch(Exception ex) {
+				Xamarin.Insights.Report (ex, new Dictionary<string, string> {
+					{"Exception Time", DateTime.Now.ToString() },
+					{"Description", "Parse Failed during ClearLikeDislike"},
+					{"Target String", response},
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace ("Parse Failed during ClearLikeDislike, Target:{0}", response);
+			}
+
+			return res;
 		}
 
 		public async Task<List<IPosition>> GetPolygon(string deviceID)
@@ -330,7 +445,7 @@ namespace ThisRoofN.RestService
 					{"Target String", response},
 				}, Xamarin.Insights.Severity.Error);
 
-				MvxTrace.Trace ("Parse Failed during Signup API Target:{0}", response);
+				MvxTrace.Trace ("Parse Failed during GetPolygon, Target:{0}", response);
 			}
 
 			return positions;

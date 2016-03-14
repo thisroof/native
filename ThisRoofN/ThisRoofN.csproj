@@ -37,32 +37,36 @@
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
     <Compile Include="ViewModels\Login\SignupViewModel.cs" />
     <Compile Include="TRConstant.cs" />
-    <Compile Include="Models\FBUserInfo.cs" />
     <Compile Include="RestService\TRService.cs" />
-    <Compile Include="Models\TRUser.cs" />
     <Compile Include="ViewModels\Search\SearchTypeViewModel.cs" />
     <Compile Include="Interfaces\IUserPreference.cs" />
     <Compile Include="Interfaces\IDevice.cs" />
     <Compile Include="ViewModels\Search\NormalSearchViewModel.cs" />
-    <Compile Include="Models\TREntityBase.cs" />
     <Compile Include="Helpers\DeviceHelper.cs" />
     <Compile Include="Database\TRDatabase.cs" />
-    <Compile Include="Models\TRUserSearchProperty.cs" />
-    <Compile Include="Models\TRLikedProperty.cs" />
     <Compile Include="ViewModels\Other\CheckboxItemModel.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="Models\TRGoogleMapPlace.cs" />
-    <Compile Include="Models\TRSearchResult.cs" />
     <Compile Include="ViewModels\SearchResult\SearchResultHomeViewModel.cs" />
     <Compile Include="ViewModels\SearchResult\SearchResultTileViewModel.cs" />
     <Compile Include="ViewModels\SearchResult\SearchResultMapViewModel.cs" />
-    <Compile Include="Models\TileItemModel.cs" />
     <Compile Include="Helpers\DataHelper.cs" />
-    <Compile Include="Models\MapItemModel.cs" />
-    <Compile Include="Models\TRItemDetail.cs" />
     <Compile Include="ViewModels\SearchResult\SearchResultDetailViewModel.cs" />
     <Compile Include="Extensions\EnumerableExtension.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
+    <Compile Include="Models\ServiceModels\TRCottage.cs" />
+    <Compile Include="Models\ServiceModels\TRCottagePhoto.cs" />
+    <Compile Include="Models\AppModels\MapItemModel.cs" />
+    <Compile Include="Models\AppModels\TileItemModel.cs" />
+    <Compile Include="Models\AppModels\TRItemDetail.cs" />
+    <Compile Include="Models\ServiceModels\TRCottageDetail.cs" />
+    <Compile Include="Models\ServiceModels\FBUserInfo.cs" />
+    <Compile Include="Models\AppModels\TREntityBase.cs" />
+    <Compile Include="Models\AppModels\TRGoogleMapPlace.cs" />
+    <Compile Include="Models\ServiceModels\TRLikedProperty.cs" />
+    <Compile Include="Models\ServiceModels\TRUser.cs" />
+    <Compile Include="Models\ServiceModels\TRUserSearchProperty.cs" />
+    <Compile Include="Models\ServiceModels\TRLikeStatus.cs" />
+    <Compile Include="Models\ServiceModels\TRSetLikeRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -142,5 +146,7 @@
     <Folder Include="ViewModels\Other\" />
     <Folder Include="Extensions\" />
     <Folder Include="ViewModels\SearchResult\" />
+    <Folder Include="Models\AppModels\" />
+    <Folder Include="Models\ServiceModels\" />
   </ItemGroup>
 </Project>

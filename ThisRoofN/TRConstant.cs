@@ -34,6 +34,7 @@ namespace ThisRoofN
 
 
 		// Normal Search Property Values
+		public static readonly int BudgetStep = 10000;
 		public static readonly int MinValidBudget = 10000;
 		public static readonly int MaxValidBudget = 200000000;
 

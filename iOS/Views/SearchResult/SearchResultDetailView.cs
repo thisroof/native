@@ -38,6 +38,8 @@ namespace ThisRoofN.iOS
 
 			SetupNavigationBar ();
 
+			view_dislikeSetting.Layer.CornerRadius = 5.0f;
+
 			BindingSet = this.CreateBindingSet<SearchResultDetailView, SearchResultDetailViewModel> ();
 			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 

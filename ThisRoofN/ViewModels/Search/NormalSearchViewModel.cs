@@ -167,19 +167,31 @@ namespace ThisRoofN.ViewModels
 			return true;
 		}
 
-		public string MaxBudget {
+		public double MaxBudget {
 			get {
-				if (searchProperty.MaxBudget == 0) {
-					return string.Empty;
-				}
-
-				return searchProperty.MaxBudget.ToString ("#,##0");
-			}
+				return searchProperty.MaxBudget;
+			} 
 			set {
-				double dvalue;
-				double.TryParse (value, out dvalue);
-				searchProperty.MaxBudget = dvalue;
+				searchProperty.MaxBudget = ((int)value / TRConstant.BudgetStep) * TRConstant.BudgetStep;
 				RaisePropertyChanged (() => MaxBudget);
+				RaisePropertyChanged (() => BudgetString);
+			}
+		}
+
+		public double MinBudget {
+			get {
+				return searchProperty.MinBudget;
+			} 
+			set {
+				searchProperty.MinBudget = ((int)value / TRConstant.BudgetStep) * TRConstant.BudgetStep;
+				RaisePropertyChanged (() => MinBudget);
+				RaisePropertyChanged (() => BudgetString);
+			}
+		}
+
+		public string BudgetString {
+			get {
+				return string.Format("${0} - ${1}", searchProperty.MinBudget.ToString ("#,##0"), searchProperty.MaxBudget.ToString ("#,##0"));
 			}
 		}
 

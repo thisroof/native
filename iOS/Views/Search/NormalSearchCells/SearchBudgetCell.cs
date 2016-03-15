@@ -5,6 +5,7 @@ using System;
 using Foundation;
 using UIKit;
 using ThisRoofN.iOS.Helpers;
+using RangeSlider;
 
 namespace ThisRoofN.iOS
 {
@@ -13,6 +14,7 @@ namespace ThisRoofN.iOS
 		public static string Identifier = "SearchBudgetCell";
 		private nfloat cellHeight;
 		private NormalSearchViewController masterView;
+		private RangeSliderView rangeSlider;
 
 		public SearchBudgetCell (IntPtr handle) : base (handle)
 		{
@@ -30,7 +32,7 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
-			masterView.BindingSet.Bind (txt_budget).To (vm => vm.MaxBudget);
+			masterView.BindingSet.Bind (lbl_budget).To (vm => vm.BudgetString);
 
 			InitUI ();
 		}
@@ -41,11 +43,34 @@ namespace ThisRoofN.iOS
 
 		public void InitUI()
 		{
-			view_budgetBack.Layer.BorderColor = TRColorHelper.LightBlue.CGColor;
-			view_budgetBack.Layer.BorderWidth = 1;
-			view_budgetBack.Layer.CornerRadius = 5;
+			rangeSlider = new RangeSliderView (new CoreGraphics.CGRect (16, img_valueMark.Frame.Bottom + 8, UIScreen.MainScreen.Bounds.Width - 32, 40));
 
-			cellHeight = view_budgetBack.Frame.Bottom + 16;
+			rangeSlider.MinValue = TRConstant.MinValidBudget;
+			rangeSlider.MaxValue = TRConstant.MaxValidBudget;
+
+			if (masterView.ViewModelInstance.MinBudget < TRConstant.MinValidBudget || masterView.ViewModelInstance.MinBudget > TRConstant.MaxValidBudget) {
+				rangeSlider.LeftValue = TRConstant.MinValidBudget;
+			} else {
+				rangeSlider.LeftValue = (nfloat)masterView.ViewModelInstance.MinBudget;
+			}
+
+			if (masterView.ViewModelInstance.MaxBudget > TRConstant.MaxValidBudget || masterView.ViewModelInstance.MaxBudget < TRConstant.MinValidBudget) {
+				rangeSlider.RightValue = TRConstant.MaxValidBudget;
+			} else {
+				rangeSlider.RightValue = (nfloat)masterView.ViewModelInstance.MaxBudget;
+			}
+				
+			rangeSlider.LeftValueChanged += (nfloat value) => {
+				masterView.ViewModelInstance.MinBudget = rangeSlider.LeftValue;
+			};
+
+			rangeSlider.RightValueChanged += (nfloat value) => {
+				masterView.ViewModelInstance.MaxBudget = rangeSlider.RightValue;
+			};
+
+			this.AddSubview (rangeSlider);
+
+			cellHeight = rangeSlider.Frame.Bottom + 16;
 		}
 	}
 }

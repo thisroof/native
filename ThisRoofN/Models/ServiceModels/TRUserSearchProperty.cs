@@ -81,6 +81,9 @@ namespace ThisRoofN.Models
 		[DataMember(Name = "max_budget")]
 		public double MaxBudget{ get; set; }
 
+		[DataMember(Name = "min_budget")]
+		public double MinBudget { get; set; }
+
 		[DataMember(Name = "min_beds")]
 		public double MinBeds{ get; set; }
 

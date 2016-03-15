@@ -13,21 +13,21 @@ namespace ThisRoofN.iOS
 	partial class SearchBudgetCell
 	{
 		[Outlet]
-		UIKit.UITextField txt_budget { get; set; }
+		UIKit.UIImageView img_valueMark { get; set; }
 
 		[Outlet]
-		UIKit.UIView view_budgetBack { get; set; }
+		UIKit.UILabel lbl_budget { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (txt_budget != null) {
-				txt_budget.Dispose ();
-				txt_budget = null;
+			if (lbl_budget != null) {
+				lbl_budget.Dispose ();
+				lbl_budget = null;
 			}
 
-			if (view_budgetBack != null) {
-				view_budgetBack.Dispose ();
-				view_budgetBack = null;
+			if (img_valueMark != null) {
+				img_valueMark.Dispose ();
+				img_valueMark = null;
 			}
 		}
 	}

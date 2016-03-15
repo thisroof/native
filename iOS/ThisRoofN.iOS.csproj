@@ -160,6 +160,9 @@
     <Reference Include="MvvmCross.Plugins.DownloadCache.iOS">
       <HintPath>..\packages\MvvmCross.Plugin.DownloadCache.4.0.0\lib\Xamarin.iOS10\MvvmCross.Plugins.DownloadCache.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Controls.RangeSlider.iOS">
+      <HintPath>..\Components\rangeslider-1.1.0.3\lib\ios-unified\Xamarin.Controls.RangeSlider.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThisRoofN\ThisRoofN.csproj">
@@ -410,6 +413,10 @@
   <ItemGroup>
     <XamarinComponentReference Include="facebookios">
       <Version>4.10.0.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="rangeslider">
+      <Version>1.1.0.3</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

@@ -262,6 +262,18 @@ namespace ThisRoofN
 			105,
 			120
 		};
+
+		public static readonly List<string> SearchMinutes = new List<string>{
+			"5 min",
+			"15 min",
+			"30 min",
+			"45 min",
+			"1 hr",
+			"1 hr 15 min",
+			"1 hr 30 min",
+			"1 hr 45 min",
+			"2 hours"
+		};
 	}
 }
 

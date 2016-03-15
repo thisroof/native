@@ -158,7 +158,7 @@ namespace ThisRoofN.Models
 						else
 							_colorSqFt = Color.Red;
 
-						if (App.ShowComparisons)
+						if (ThisRoofN.App.ShowComparisons)
 							_showSqFt = true;
 
 						result = String.Format ("{0:+#,###;-#,###;0}", calculatedValue);
@@ -201,7 +201,7 @@ namespace ThisRoofN.Models
 						else
 							_colorBedroom = Color.Red;
 
-						if(App.ShowComparisons && calculatedValue != 0)
+						if(ThisRoofN.App.ShowComparisons && calculatedValue != 0)
 							_showBed = true;
 
 						result = String.Format ("{0:+#;-#;0}", calculatedValue);
@@ -231,7 +231,7 @@ namespace ThisRoofN.Models
 						else
 							_colorBathroom = Color.Red;
 
-						if (App.ShowComparisons && calculatedValue != 0)
+						if (ThisRoofN.App.ShowComparisons && calculatedValue != 0)
 							_showBath = true;
 
 						result = String.Format ("{0:+0.0#;-0.0#;0}", calculatedValue);
@@ -263,7 +263,7 @@ namespace ThisRoofN.Models
 						else
 							_colorLotDiff = Color.Red;
 
-						if (App.ShowComparisons)
+						if (ThisRoofN.App.ShowComparisons)
 							_showLot = true;
 
 						result = String.Format ("{0:+#,###;-#,###;0}", calculatedValue);

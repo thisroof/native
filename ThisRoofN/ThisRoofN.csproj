@@ -67,6 +67,10 @@
     <Compile Include="Models\ServiceModels\TRUserSearchProperty.cs" />
     <Compile Include="Models\ServiceModels\TRLikeStatus.cs" />
     <Compile Include="Models\ServiceModels\TRSetLikeRequest.cs" />
+    <Compile Include="RestService\GeocodeService.cs" />
+    <Compile Include="RestService\TRBaseService.cs" />
+    <Compile Include="Models\ServiceModels\AutoCompletePredictions.cs" />
+    <Compile Include="Models\AppModels\TRGoogleMapPlaceDetail.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

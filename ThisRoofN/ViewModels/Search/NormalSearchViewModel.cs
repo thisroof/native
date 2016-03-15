@@ -15,11 +15,13 @@ namespace ThisRoofN.ViewModels
 	{
 		private IDevice deviceInfo;
 		private TRUserSearchProperty searchProperty;
+		private GeocodeService mGeocodeService;
 
 		public NormalSearchViewModel (IDevice device)
 		{
 			deviceInfo = device;
 			searchProperty = TRUserSearchProperty.FetchLatestFromDatabase ();
+			mGeocodeService = new GeocodeService ();
 
 			MaxLotSize = MaxLotSizeOptions [0];
 			HasPool = HasPoolOptions [0];
@@ -28,26 +30,11 @@ namespace ThisRoofN.ViewModels
 			InitStates ();
 			InitPropertyTypes ();
 			InitializeViewTypes ();
-
-			AddressSuggestionItems = new List<TRGoogleMapPlace> {
-				new TRGoogleMapPlace() {
-					FullAddress = "Washington"
-				},
-				new TRGoogleMapPlace() {
-					FullAddress = "California"
-				},
-				new TRGoogleMapPlace() {
-					FullAddress = "St.Louis"
-				},
-				new TRGoogleMapPlace() {
-					FullAddress = "San Jose"
-				}
-
-			};
 		}
 
 		private MvxCommand _saveCommand;
 		private MvxCommand _searchCommand;
+		private MvxCommand<string> _updateLocationsCommand;
 
 		public ICommand SaveCommand {
 			get {
@@ -63,15 +50,25 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void DoSave() {
+		public ICommand UpdateLocationsCommand {
+			get {
+				_updateLocationsCommand = _updateLocationsCommand ?? new MvxCommand<string> (DoUpdateLocations);
+				return _updateLocationsCommand;
+			}
+		}
+
+		private void DoSave ()
+		{
 			DoSaveOrSearch (false);
 		}
 
-		private void DoSearch() {
+		private void DoSearch ()
+		{
 			DoSaveOrSearch (true);
 		}
 
-		private async void DoSaveOrSearch(bool isSearch) {
+		private async void DoSaveOrSearch (bool isSearch)
+		{
 			if (!Invalidate ()) {
 				return;
 			}
@@ -92,11 +89,11 @@ namespace ThisRoofN.ViewModels
 
 			switch (searchProperty.SearchType) {
 			case 0:
-				searchProperty.SearchDistance = TRConstant.SearchDistances[SearchMileDistance];
+				searchProperty.SearchDistance = TRConstant.SearchDistances [SearchMileDistance];
 				searchProperty.StateFilters = "";
 				break;
 			case 1:
-				searchProperty.SearchDistance = TRConstant.SearchMinutesInt[SearchTimeDisatnce];
+				searchProperty.SearchDistance = TRConstant.SearchMinutesInt [SearchTimeDisatnce];
 				searchProperty.StateFilters = "";
 				break;
 			case 2:
@@ -108,7 +105,7 @@ namespace ThisRoofN.ViewModels
 			// When user didn't input the address.
 			if (SelectedAddress == null && searchProperty.SearchType != 2) {
 				searchProperty.SearchDistance = 0;
-				searchProperty.StateFilters = string.Join(",", States.Select(x => x.Title).ToArray ());
+				searchProperty.StateFilters = string.Join (",", States.Select (x => x.Title).ToArray ());
 			}
 
 			searchProperty.PropertyTypes = GetPropertyTypesSelected ();
@@ -116,7 +113,7 @@ namespace ThisRoofN.ViewModels
 
 			UserDialogs.Instance.ShowLoading (isSearch ? "Searching Results" : "Saving your Search");
 			searchProperty.MobileNum = deviceInfo.GetUniqueIdentifier ();
-			var res = await mTRService.UpdateUserSearchProperty(searchProperty);
+			var res = await mTRService.UpdateUserSearchProperty (searchProperty);
 
 			if (res != null) {
 				mUserPref.SetValue (TRConstant.UserPrefUserIDKey, res.UserID);
@@ -134,27 +131,27 @@ namespace ThisRoofN.ViewModels
 				
 				// Search Case
 				if (searchProperty.SearchType == 1) {
-					var positions = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier());
+					var positions = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
 					UserDialogs.Instance.HideLoading ();
 				} else {
-					DataHelper.SearchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier(), 24);
+					DataHelper.SearchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
 					UserDialogs.Instance.HideLoading ();
 					ShowViewModel<SearchResultHomeViewModel> ();
 				}
 			}
 		}
 
-		private bool Invalidate()
+		private bool Invalidate ()
 		{
-			if (searchProperty.MaxBudget > TRConstant.MaxValidBudget || 
-				searchProperty.MaxBudget < TRConstant.MinValidBudget) {
+			if (searchProperty.MaxBudget > TRConstant.MaxValidBudget ||
+			    searchProperty.MaxBudget < TRConstant.MinValidBudget) {
 				UserDialogs.Instance.Alert (string.Format ("Budget value shoudl be {0} to {1}", TRConstant.MinValidBudget, TRConstant.MaxValidBudget), "Validation");
 				return false;
 			}
 
 			if (searchProperty.MinSquareFootageStructure > 0 &&
-				searchProperty.MaxLotSquareFootage > 0 &&
-				searchProperty.MinSquareFootageStructure > searchProperty.MaxLotSquareFootage) {
+			    searchProperty.MaxLotSquareFootage > 0 &&
+			    searchProperty.MinSquareFootageStructure > searchProperty.MaxLotSquareFootage) {
 				UserDialogs.Instance.Alert ("The minimum suqare footage should be less than maxmum square footage", "Validation");
 				return false;
 			}
@@ -166,6 +163,13 @@ namespace ThisRoofN.ViewModels
 
 			return true;
 		}
+
+		public async void DoUpdateLocations (string hint)
+		{
+			AddressSuggestionItems = await mGeocodeService.GetAutoCompleteSuggestionsAsync (hint);
+		}
+
+		#region BUDGET
 
 		public double MaxBudget {
 			get {
@@ -191,9 +195,11 @@ namespace ThisRoofN.ViewModels
 
 		public string BudgetString {
 			get {
-				return string.Format("${0} - ${1}", searchProperty.MinBudget.ToString ("#,##0"), searchProperty.MaxBudget.ToString ("#,##0"));
+				return string.Format ("${0} - ${1}", searchProperty.MinBudget.ToString ("#,##0"), searchProperty.MaxBudget.ToString ("#,##0"));
 			}
 		}
+
+		#endregion
 
 		#region SORT_BY
 
@@ -222,6 +228,7 @@ namespace ThisRoofN.ViewModels
 		#endregion
 
 		#region SEARCH_AREA
+
 		// 0 = distance, 1 = commute, 2 = state
 		public int DistanceType {
 			get {
@@ -234,22 +241,20 @@ namespace ThisRoofN.ViewModels
 		}
 
 		private List<TRGoogleMapPlace> _addressSuggestionItems;
-		public List<TRGoogleMapPlace> AddressSuggestionItems
-		{
-			get
-			{
+
+		public List<TRGoogleMapPlace> AddressSuggestionItems {
+			get {
 				return _addressSuggestionItems;
 			}
-			set
-			{
+			set {
 				_addressSuggestionItems = value;
 				RaisePropertyChanged (() => AddressSuggestionItems);
 			}
 		}
 
 		private TRGoogleMapPlace _selectedAddress;
-		public TRGoogleMapPlace SelectedAddress
-		{
+
+		public TRGoogleMapPlace SelectedAddress {
 			get {
 				return _selectedAddress;
 			}
@@ -268,6 +273,7 @@ namespace ThisRoofN.ViewModels
 			set {
 				_searchTimeDistance = value;
 				RaisePropertyChanged (() => SearchTimeDisatnce);
+				RaisePropertyChanged (() => DistanceLabelText);
 			}
 		}
 
@@ -280,8 +286,36 @@ namespace ThisRoofN.ViewModels
 			set {
 				_searchMileDistance = value;
 				RaisePropertyChanged (() => SearchMileDistance);
+				RaisePropertyChanged (() => DistanceLabelText);
 			}
 		}
+
+		private string _distanceLabelText;
+
+		public string DistanceLabelText {
+			get {
+				string retString = string.Empty;
+				switch (DistanceType) {
+				case 0: //Distance
+					if (SearchMileDistance == 0) {
+						retString = "Any";
+					} else {
+						retString = string.Format ("{0} mile", TRConstant.SearchDistances [SearchMileDistance - 1]);
+					}
+					break;
+				case 1: // Commute
+					if (SearchTimeDisatnce == 0) {
+						retString = "Any";
+					} else {
+						retString = TRConstant.SearchMinutes [SearchTimeDisatnce - 1];
+					}
+
+					break;
+				}
+				return retString;
+			}
+		}
+
 
 		// 0 = driving, 1 = carpool
 		public int TravelMode {
@@ -317,13 +351,13 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void InitStates()
+		private void InitStates ()
 		{
 			_states = new List<CheckboxItemModel> ();
 
 			// Init Property types
 			List<string> statesList = new List<string> ();
-			if (!string.IsNullOrEmpty(searchProperty.StateFilters)) {
+			if (!string.IsNullOrEmpty (searchProperty.StateFilters)) {
 				if (searchProperty.StateFilters.Contains (",")) {
 					statesList.AddRange (searchProperty.StateFilters.Split (','));
 				} else {
@@ -334,10 +368,11 @@ namespace ThisRoofN.ViewModels
 			foreach (var item in TRConstant.StateFilters) {
 				_states.Add (new CheckboxItemModel {
 					Title = item,
-					Selected = (statesList.Contains(item))
+					Selected = (statesList.Contains (item))
 				});
 			}
 		}
+
 		#endregion
 
 		#region BEDS
@@ -383,12 +418,12 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void InitPropertyTypes()
+		private void InitPropertyTypes ()
 		{
 			_propertyTypes = new List<CheckboxItemModel> ();
 			// Init Property types
 			List<string> propertyTypesList = new List<string> ();
-			if (!string.IsNullOrEmpty(searchProperty.PropertyTypes)) {
+			if (!string.IsNullOrEmpty (searchProperty.PropertyTypes)) {
 				if (searchProperty.PropertyTypes.Contains (",")) {
 					propertyTypesList.AddRange (searchProperty.PropertyTypes.Split (','));
 				} else {
@@ -400,85 +435,79 @@ namespace ThisRoofN.ViewModels
 			foreach (var item in TRConstant.SearchPropertyTypes) {
 				_propertyTypes.Add (new CheckboxItemModel {
 					Title = item,
-					Selected = (propertyTypesList.Contains(item) || index == 0 || index == 1 || index == 2)
+					Selected = (propertyTypesList.Contains (item) || index == 0 || index == 1 || index == 2)
 				});
 
 				index++;
 			}
 		}
+
 		#endregion
 
 		#region Additional Filters
-		public List<string> MinSquareFeetOptions
-		{
+
+		public List<string> MinSquareFeetOptions {
 			get {
 				return TRConstant.MinSquareFeetOptions;
 			}
 		}
 
-		public string SelectedMinSquareFeet{ 
-			set
-			{
+		public string SelectedMinSquareFeet { 
+			set {
 				int _parsed = 0;
-				int.TryParse (value.ExtractNumber(), out _parsed);
+				int.TryParse (value.ExtractNumber (), out _parsed);
 				if (searchProperty.MinSquareFootageStructure != _parsed) {
 					searchProperty.MinSquareFootageStructure = _parsed;
 					RaisePropertyChanged (() => SelectedMinSquareFeet);
 				}
 			}
-			get
-			{
-				return searchProperty.MinSquareFootageStructure.ToString();
+			get {
+				return searchProperty.MinSquareFootageStructure.ToString ();
 			}
 		}
 
-		public List<string> MaxSquareFeetOptions{ 
-			get
-			{
+		public List<string> MaxSquareFeetOptions { 
+			get {
 				return TRConstant.MaxSquareFeetOptions;
 			}
 		}
 
 		private string _selectedMaxSquareFeet;
-		public string SelectedMaxSquareFeet{ 
-			get
-			{
+
+		public string SelectedMaxSquareFeet { 
+			get {
 				if (searchProperty.MaxSquareFootageStructure == 0) {
 					return MaxSquareFeetOptions [MaxSquareFeetOptions.Count - 1];
 				}
-				return searchProperty.MaxSquareFootageStructure.ToString();
+				return searchProperty.MaxSquareFootageStructure.ToString ();
 			}
-			set
-			{
+			set {
 				int _parsed = 0;
-				int.TryParse (value.ExtractNumber(), out _parsed);
+				int.TryParse (value.ExtractNumber (), out _parsed);
 				if (searchProperty.MaxSquareFootageStructure != _parsed) {
 					searchProperty.MaxSquareFootageStructure = _parsed;
 					RaisePropertyChanged (() => SelectedMaxSquareFeet);
 				}
 			}
 		}
-			
-		public List<string> YearBuiltOptions{ 
-			get
-			{
+
+		public List<string> YearBuiltOptions { 
+			get {
 				return TRConstant.YearBuiltOptions;
 			}
 		}
 
-		public string YearBuilt{ 
-			get
-			{
+		public string YearBuilt { 
+			get {
 				if (searchProperty.YearBuilt == 0) {
 					return YearBuiltOptions [0];
 				}
 				int newVal = DateTime.Now.Year - searchProperty.YearBuilt;
-				return string.Format("{0} {1}", newVal, newVal > 1 ? "Years" : "Year");
+				return string.Format ("{0} {1}", newVal, newVal > 1 ? "Years" : "Year");
 			}
-			set
-			{
+			set {
 				int _parsed = 0;
-				int.TryParse (value.ExtractNumber(), out _parsed);
+				int.TryParse (value.ExtractNumber (), out _parsed);
 				if (_parsed != 0) {
 					_parsed = DateTime.Now.Year - _parsed;
 				}
@@ -489,65 +518,57 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		public List<string> MinLotSizeOptions{ 
-			get
-			{
+		public List<string> MinLotSizeOptions { 
+			get {
 				return TRConstant.MinLotSizeOptions;
 			}
 		}
 
-		public string MinLotSize{ 
-			set
-			{
-				int _parsed = ConvertStringToLotSize(value);
+		public string MinLotSize { 
+			set {
+				int _parsed = ConvertStringToLotSize (value);
 				if (searchProperty.MinLotSquareFootage != _parsed) {
 					searchProperty.MinLotSquareFootage = _parsed;
 					RaisePropertyChanged (() => MinLotSize);
 				}
 			}
-			get
-			{
+			get {
 				if (searchProperty.MinLotSquareFootage == 0) {
 					return MinLotSizeOptions [0];
 				}
-				return ConvertLotSizeToString(searchProperty.MinLotSquareFootage);
+				return ConvertLotSizeToString (searchProperty.MinLotSquareFootage);
 			}
 		}
 
-		public List<string> MaxLotSizeOptions{ 
-			get
-			{
+		public List<string> MaxLotSizeOptions { 
+			get {
 				return TRConstant.MaxLotSizeOptions;
 			}
 		}
 
-		public string MaxLotSize{ 
-			set
-			{
-				int _parsed = ConvertStringToLotSize(value);
+		public string MaxLotSize { 
+			set {
+				int _parsed = ConvertStringToLotSize (value);
 				if (searchProperty.MaxLotSquareFootage != _parsed) {
 					searchProperty.MaxLotSquareFootage = _parsed;
 					RaisePropertyChanged (() => MaxLotSize);
 				}
 			}
-			get
-			{
-				return ConvertLotSizeToString(searchProperty.MaxLotSquareFootage);
+			get {
+				return ConvertLotSizeToString (searchProperty.MaxLotSquareFootage);
 			}
 		}
-			
-		public List<string> DaysOnMarketOptions{ 
-			get
-			{
+
+		public List<string> DaysOnMarketOptions { 
+			get {
 				return TRConstant.DaysOnMarketOptions;
 			}
 		}
 
-		public string DaysOnMarket{ 
-			set
-			{
+		public string DaysOnMarket { 
+			set {
 				int _parsed = 0;
-				int.TryParse (value.ExtractNumber(), out _parsed);
+				int.TryParse (value.ExtractNumber (), out _parsed);
 
 				if (value.Contains ("Month")) {
 					_parsed = _parsed * 30;
@@ -560,25 +581,22 @@ namespace ThisRoofN.ViewModels
 					RaisePropertyChanged (() => DaysOnMarket);
 				}
 			}
-			get
-			{
+			get {
 				if (searchProperty.DaysOnMarket == 0) {
 					return DaysOnMarketOptions [0];
 				}
-				return ParseDaysToReadable(searchProperty.DaysOnMarket);
+				return ParseDaysToReadable (searchProperty.DaysOnMarket);
 			}
 		}
 
-		public List<string> HasPoolOptions{ 
-			get
-			{
+		public List<string> HasPoolOptions { 
+			get {
 				return TRConstant.PoolOptions;
 			}
 		}
-			
-		public string HasPool{ 
-			set
-			{
+
+		public string HasPool { 
+			set {
 				string _parsed = "";
 				if (value.Contains ("Pool")) {
 					_parsed = value.ToLower ().Replace (" ", "_");
@@ -588,17 +606,17 @@ namespace ThisRoofN.ViewModels
 					RaisePropertyChanged (() => HasPool);
 				}
 			}
-			get
-			{
+			get {
 				if (string.IsNullOrEmpty (searchProperty.HasPool)) {
 					return HasPoolOptions [0];
 				}
-				return searchProperty.HasPool.Contains("has") ? "Has Pool" : "No Pool";
+				return searchProperty.HasPool.Contains ("has") ? "Has Pool" : "No Pool";
 			}
 		}
 
 		private List<CheckboxItemModel> _viewTypes;
-		public  List<CheckboxItemModel> ViewTypes  {
+
+		public  List<CheckboxItemModel> ViewTypes {
 			get {
 				return _viewTypes;
 			}
@@ -610,7 +628,7 @@ namespace ThisRoofN.ViewModels
 		private void InitializeViewTypes ()
 		{
 			_viewTypes = new List<CheckboxItemModel> ();
-			List<string> viewTypesList = new List<string>();
+			List<string> viewTypesList = new List<string> ();
 
 			if (searchProperty.ViewTypes != null) {
 				if (searchProperty.ViewTypes.Contains (",")) {
@@ -621,17 +639,18 @@ namespace ThisRoofN.ViewModels
 			}
 
 			foreach (var item in TRConstant.SearchViewTypes) {
-				ViewTypes.Add(new CheckboxItemModel{
+				ViewTypes.Add (new CheckboxItemModel {
 					Title = item,
-					Selected = viewTypesList.Contains(item)
+					Selected = viewTypesList.Contains (item)
 				});
 			}
 		}
+
 		#endregion
 
 		#region FORECLOSURE
-		public string ForeClosureStatus
-		{
+
+		public string ForeClosureStatus {
 			get {
 				return searchProperty.ForeclosureStatus;
 			} 
@@ -639,10 +658,13 @@ namespace ThisRoofN.ViewModels
 				searchProperty.ForeclosureStatus = value;
 			}
 		}
+
 		#endregion
 
 		#region INTERNAL METHODS
-		private string ParseDaysToReadable(int days) {
+
+		private string ParseDaysToReadable (int days)
+		{
 			int val = days;
 			string res = "Any";
 			if (days > 180) {
@@ -651,65 +673,73 @@ namespace ThisRoofN.ViewModels
 			} else if (days > 90) {
 				val = val / 30;
 				res = string.Format ("{0} {1}", val, val > 1 ? "Months" : "Month");
-			} else if(days > 0) {
+			} else if (days > 0) {
 				res = string.Format ("{0} {1}", val, val > 1 ? "Days" : "Day");
 			}
 			return res;
 		}
 
-		private string ConvertLotSizeToString(int val) {
-			if(val == 0) {
+		private string ConvertLotSizeToString (int val)
+		{
+			if (val == 0) {
 				return "No Limit";
 			}
-			if( val <= 10000) {
+			if (val <= 10000) {
 				return val.ToString ();
 			}
 			double acreVal = (double)val / (double)TRConstant.OneAcreToSquareFoot;
-			return string.Format("{0} {1}", acreVal, acreVal <= 1 ? "Acre" : "Acres");
+			return string.Format ("{0} {1}", acreVal, acreVal <= 1 ? "Acre" : "Acres");
 		}
 
-		private int ConvertStringToLotSize(string val) {
+		private int ConvertStringToLotSize (string val)
+		{
 			if (val == "No Limit") {
 				return 0;
 			}
-			if(val.Contains("Acre")){
+			if (val.Contains ("Acre")) {
 				double acreVal = double.Parse (val.Split (' ') [0]);
 				return (int)(acreVal * TRConstant.OneAcreToSquareFoot);
 			}
-			return int.Parse (val.ExtractNumber());
+			return int.Parse (val.ExtractNumber ());
 		}
 
-		private bool UpdateZipcode(){
+		private bool UpdateZipcode ()
+		{
 			if (Regex.IsMatch (SelectedAddress.FullAddress, @"^\s*[\d]{5,}\s*$")) {
 				searchProperty.Zip = Regex.Match (SelectedAddress.FullAddress, @"[\d]{5,}").Value;
 				searchProperty.StartZip = searchProperty.Zip;
 				return true;
 			} else if (Regex.IsMatch (SelectedAddress.FullAddress, @"([A-Z]{2})\s([\d]{5,})")) {
 				Match match = Regex.Match (SelectedAddress.FullAddress, @"([A-Z]{2})\s([\d]{5,})");
-				string[] sub_comps = SelectedAddress.FullAddress.Substring(0, match.Index).Split (new String[]{", "}, StringSplitOptions.RemoveEmptyEntries);
+				string[] sub_comps = SelectedAddress.FullAddress.Substring (0, match.Index).Split (new String[]{ ", " }, StringSplitOptions.RemoveEmptyEntries);
 				searchProperty.Address = sub_comps [0];
 				if (sub_comps.Length > 1) {
 					searchProperty.City = sub_comps [1];
 				}
 				searchProperty.State = match.Groups [1].Value;
 				searchProperty.Country = "US";
-				searchProperty.Zip = match.Groups[2].Value;
+				searchProperty.Zip = match.Groups [2].Value;
 				searchProperty.StartZip = searchProperty.Zip;
 				return true;
 			}
 			return false;
 		}
 
-		private string GetStateFiltersSelected(){
-			return string.Join(",", States.Where (x => x.Selected).Select(x => x.Title).ToArray ());
+		private string GetStateFiltersSelected ()
+		{
+			return string.Join (",", States.Where (x => x.Selected).Select (x => x.Title).ToArray ());
 		}
 
-		private string GetPropertyTypesSelected(){
-			return string.Join(",", PropertyTypes.Where (x => x.Selected).Select(x => x.Title).ToArray ());
+		private string GetPropertyTypesSelected ()
+		{
+			return string.Join (",", PropertyTypes.Where (x => x.Selected).Select (x => x.Title).ToArray ());
 		}
-		private string GetViewTypesSelected(){
-			return string.Join(",", ViewTypes.Where (x => x.Selected).Select(x => x.Title).ToArray ());
+
+		private string GetViewTypesSelected ()
+		{
+			return string.Join (",", ViewTypes.Where (x => x.Selected).Select (x => x.Title).ToArray ());
 		}
+
 		#endregion
 	}
 }

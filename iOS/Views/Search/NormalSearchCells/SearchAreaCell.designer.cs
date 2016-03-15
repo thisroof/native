@@ -25,6 +25,9 @@ namespace ThisRoofN.iOS
 		UIKit.UIImageView img_expandMark { get; set; }
 
 		[Outlet]
+		UIKit.UIImageView img_locationLogo { get; set; }
+
+		[Outlet]
 		UIKit.UIImageView img_navigator { get; set; }
 
 		[Outlet]
@@ -43,6 +46,12 @@ namespace ThisRoofN.iOS
 		UIKit.UISlider slider_distance { get; set; }
 
 		[Outlet]
+		UIKit.UITableView tbl_locations { get; set; }
+
+		[Outlet]
+		UIKit.UITextField txt_address { get; set; }
+
+		[Outlet]
 		UIKit.UIView view_autocomplete { get; set; }
 
 		[Outlet]
@@ -50,6 +59,9 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIView view_distance { get; set; }
+
+		[Outlet]
+		UIKit.UIView view_locations { get; set; }
 
 		[Outlet]
 		UIKit.UIView view_nation { get; set; }
@@ -74,11 +86,6 @@ namespace ThisRoofN.iOS
 			if (img_expandMark != null) {
 				img_expandMark.Dispose ();
 				img_expandMark = null;
-			}
-
-			if (view_autocomplete != null) {
-				view_autocomplete.Dispose ();
-				view_autocomplete = null;
 			}
 
 			if (img_navigator != null) {
@@ -111,6 +118,16 @@ namespace ThisRoofN.iOS
 				slider_distance = null;
 			}
 
+			if (txt_address != null) {
+				txt_address.Dispose ();
+				txt_address = null;
+			}
+
+			if (view_autocomplete != null) {
+				view_autocomplete.Dispose ();
+				view_autocomplete = null;
+			}
+
 			if (view_cellTitle != null) {
 				view_cellTitle.Dispose ();
 				view_cellTitle = null;
@@ -124,6 +141,21 @@ namespace ThisRoofN.iOS
 			if (view_nation != null) {
 				view_nation.Dispose ();
 				view_nation = null;
+			}
+
+			if (view_locations != null) {
+				view_locations.Dispose ();
+				view_locations = null;
+			}
+
+			if (tbl_locations != null) {
+				tbl_locations.Dispose ();
+				tbl_locations = null;
+			}
+
+			if (img_locationLogo != null) {
+				img_locationLogo.Dispose ();
+				img_locationLogo = null;
 			}
 		}
 	}

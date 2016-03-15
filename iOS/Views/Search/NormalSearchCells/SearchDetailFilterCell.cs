@@ -7,13 +7,13 @@ using UIKit;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchButtonCell : UITableViewCell, ISearchCell
+	public partial class SearchDetailFilterCell : UITableViewCell
 	{
-		public static string Identifier = "SearchButtonCell";
+		public static string Identifier = "SearchDetailFilterCell";
 		private nfloat cellHeight;
 		private NormalSearchViewController masterView;
 
-		public SearchButtonCell (IntPtr handle) : base (handle)
+		public SearchDetailFilterCell (IntPtr handle) : base (handle)
 		{
 		}
 
@@ -29,11 +29,18 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
-			cellHeight = btn_saveSearch.Frame.Bottom + 8;
+//			masterView.BindingSet.Bind (lbl_budget).To (vm => vm.BudgetString);
+
+			InitUI ();
 		}
 
 		public void HandleExpandTap()
 		{
+		}
+
+		public void InitUI()
+		{
+			cellHeight = view_filter4.Frame.Bottom + 16;
 		}
 	}
 }

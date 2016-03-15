@@ -51,6 +51,7 @@ namespace ThisRoofN.iOS
 			tbl_search.RowHeight = UITableView.AutomaticDimension;
 			tbl_search.AllowsSelection = false;
 			tbl_search.TableFooterView = new UITableView (CGRect.Empty);
+			tbl_search.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -76,10 +77,7 @@ namespace ThisRoofN.iOS
 			SearchAreaCell areaCell;
 			SearchBedsCell bedCell;
 			SearchBathsCell bathsCell;
-			SearchPropertyTypeCell propertyTypeCell;
-			SearchFilterCell filterCell;
-			SearchForeclosureCell forclosureCell;
-			SearchExcludedAreaCell excludedAreaCell;
+			SearchDetailFilterCell detailFilterCell;
 			SearchButtonCell buttonCell;
 
 			public SearchTableViewSource(UITableView tableView, NormalSearchViewController vc):base(tableView) {
@@ -90,10 +88,7 @@ namespace ThisRoofN.iOS
 				areaCell = (SearchAreaCell)tableView.DequeueReusableCell(SearchAreaCell.Identifier);
 				bedCell = (SearchBedsCell)tableView.DequeueReusableCell(SearchBedsCell.Identifier);
 				bathsCell = (SearchBathsCell)tableView.DequeueReusableCell(SearchBathsCell.Identifier);
-				propertyTypeCell = (SearchPropertyTypeCell)tableView.DequeueReusableCell(SearchPropertyTypeCell.Identifier);
-				filterCell = (SearchFilterCell)tableView.DequeueReusableCell(SearchFilterCell.Identifier);
-				forclosureCell = (SearchForeclosureCell)tableView.DequeueReusableCell(SearchForeclosureCell.Identifier);
-				excludedAreaCell = (SearchExcludedAreaCell)tableView.DequeueReusableCell(SearchExcludedAreaCell.Identifier);
+				detailFilterCell = (SearchDetailFilterCell)tableView.DequeueReusableCell(SearchDetailFilterCell.Identifier);
 				buttonCell = (SearchButtonCell)tableView.DequeueReusableCell(SearchButtonCell.Identifier);
 
 				budgetCell.BindData(masterView);
@@ -101,10 +96,7 @@ namespace ThisRoofN.iOS
 				areaCell.BindData(masterView);
 				bedCell.BindData(masterView);
 				bathsCell.BindData(masterView);
-				propertyTypeCell.BindData(masterView);
-				filterCell.BindData(masterView);
-				forclosureCell.BindData(masterView);
-				excludedAreaCell.BindData(masterView);
+				detailFilterCell.BindData(masterView);
 				buttonCell.BindData(masterView);
 
 				masterView.BindingSet.Apply();
@@ -112,7 +104,7 @@ namespace ThisRoofN.iOS
 
 			public override nint RowsInSection (UITableView tableview, nint section)
 			{
-				return 10;
+				return 7;
 			}
 
 			public override nint NumberOfSections (UITableView tableView)
@@ -134,14 +126,8 @@ namespace ThisRoofN.iOS
 				case 4:
 					return bathsCell;
 				case 5:
-					return propertyTypeCell;
+					return detailFilterCell;
 				case 6:
-					return filterCell;
-				case 7:
-					return forclosureCell;
-				case 8:
-					return excludedAreaCell;
-				case 9:
 					return buttonCell;
 				}
 
@@ -162,14 +148,8 @@ namespace ThisRoofN.iOS
 				case 4:
 					return bathsCell.CellHeight;
 				case 5:
-					return propertyTypeCell.CellHeight;
+					return detailFilterCell.CellHeight;
 				case 6:
-					return filterCell.CellHeight;
-				case 7:
-					return forclosureCell.CellHeight;
-				case 8:
-					return excludedAreaCell.CellHeight;
-				case 9:
 					return buttonCell.CellHeight;
 				}
 

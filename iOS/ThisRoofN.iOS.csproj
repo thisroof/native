@@ -169,10 +169,6 @@
       <Project>{41C8CE64-8DA5-4123-88BC-499E0FB906BC}</Project>
       <Name>ThisRoofN</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MLPAutoComplete\MLPAutoComplete.csproj">
-      <Project>{94AB9CAE-0A2E-4D39-8729-596807DBB602}</Project>
-      <Name>MLPAutoComplete</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
@@ -226,6 +222,8 @@
     <ImageAsset Include="Resources\Images.xcassets\icon_map_unlocked.imageset\map_control_unlocked.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_commit.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_commit.imageset\air_plane.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_google_logo.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_google_logo.imageset\powered_by_google_on_white%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -329,7 +327,6 @@
     <Compile Include="Add.designer.cs">
       <DependentUpon>Add.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\UIAutoCompleteTextField.cs" />
     <Compile Include="Views\Search\NormalSearchCells\FilterCheckboxCVCell.cs" />
     <Compile Include="Views\Search\NormalSearchCells\FilterCheckboxCVCell.designer.cs">
       <DependentUpon>FilterCheckboxCVCell.cs</DependentUpon>
@@ -338,7 +335,6 @@
     <Compile Include="Views\Search\NormalSearchCells\SearchAreaCheckboxCVCell.designer.cs">
       <DependentUpon>SearchAreaCheckboxCVCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\UIAutoCompleteTextCell.cs" />
     <Compile Include="Views\SearchResult\SearchResultDetailView.cs" />
     <Compile Include="Views\SearchResult\SearchResultDetailView.designer.cs">
       <DependentUpon>SearchResultDetailView.cs</DependentUpon>
@@ -384,6 +380,14 @@
     <Compile Include="ValueConverters\StringFormatConverter.cs" />
     <Compile Include="ValueConverters\LikemarkConverter.cs" />
     <Compile Include="ValueConverters\DislikemarkConverter.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchDetailFilterCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\SearchDetailFilterCell.designer.cs">
+      <DependentUpon>SearchDetailFilterCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\NormalSearchCells\LocationSuggestionCell.cs" />
+    <Compile Include="Views\Search\NormalSearchCells\LocationSuggestionCell.designer.cs">
+      <DependentUpon>LocationSuggestionCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />

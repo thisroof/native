@@ -43,6 +43,7 @@ namespace ThisRoofN.ViewModels
 
 		private void DoAffordSearch()
 		{
+			ShowViewModel<AffordSearchViewModel> ();
 		}
 	}
 }

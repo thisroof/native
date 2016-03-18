@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using MapKit;
 using CoreLocation;
+using ThisRoofN.Helpers;
 
 namespace ThisRoofN.iOS
 {
@@ -45,9 +46,9 @@ namespace ThisRoofN.iOS
 			cellHeight = masterView.MasterTableView.Frame.Height / 2;
 
 			TRDetailItemAnnotation annotation = new TRDetailItemAnnotation (
-				masterView.ViewModelInstace.ItemDetail.GeoLat, 
-				masterView.ViewModelInstace.ItemDetail.GeoLng, 
-				masterView.ViewModelInstace.ItemDetail.Address);
+				masterView.ViewModelInstace.ItemDetail.Latitude, 
+				masterView.ViewModelInstace.ItemDetail.Longitude, 
+				masterView.ViewModelInstace.ItemDetail.Address.FullStreetAddress);
 			map_result.AddAnnotation (annotation);
 
 			map_result.ZoomEnabled = true;
@@ -56,11 +57,11 @@ namespace ThisRoofN.iOS
 
 			map_result.SetRegion(new MKCoordinateRegion(
 				new CLLocationCoordinate2D(
-					masterView.ViewModelInstace.ItemDetail.GeoLat, 
-					masterView.ViewModelInstace.ItemDetail.GeoLng),
+					masterView.ViewModelInstace.ItemDetail.Latitude, 
+					masterView.ViewModelInstace.ItemDetail.Longitude),
 				new MKCoordinateSpan(
 					LocationHelper.KilometersToLatitudeDegrees(2),
-					LocationHelper.KilometersToLongitudeDegrees(2, masterView.ViewModelInstace.ItemDetail.GeoLat)
+					LocationHelper.KilometersToLongitudeDegrees(2, masterView.ViewModelInstace.ItemDetail.Latitude)
 				)), true);
 
 			// set map lock gesture

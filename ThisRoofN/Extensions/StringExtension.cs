@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace ThisRoofN
+namespace ThisRoofN.Extensions
 {
 	public static class StringExtension
 	{

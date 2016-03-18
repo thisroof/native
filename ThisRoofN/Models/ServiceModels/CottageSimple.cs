@@ -2,10 +2,10 @@
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 
-namespace ThisRoofN
+namespace ThisRoofN.Models.Service
 {
 	[DataContract]
-	public class TRCottage
+	public class CottageSimple
 	{
 		[DataMember(Name="listing_key")]
 		public string ID {get;set;}
@@ -20,7 +20,17 @@ namespace ThisRoofN
 		public double Longitude {get;set;}
 
 		[DataMember(Name="photos")]
-		public List<TRCottagePhoto> Photos {get;set;}
+		public List<CottagePhoto> Photos {get;set;}
+	}
+
+	[DataContract]
+	public class CottagePhoto
+	{
+		[DataMember(Name="media_url")]
+		public string MediaURL;
+
+		[DataMember(Name="media_modification_timestamp")]
+		public string ModificationTime;
 	}
 }
 

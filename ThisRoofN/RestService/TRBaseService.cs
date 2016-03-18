@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 
-namespace ThisRoofN
+namespace ThisRoofN.RestService
 {
 	public class TRBaseService
 	{
@@ -29,6 +29,28 @@ namespace ThisRoofN
 			};
 		}
 
+		protected async Task<T> CallRestAPI<T> (string url, string body, HTTP_METHOD httpMethod = HTTP_METHOD.POST) {
+			string jsonResponse = string.Empty;
+			T result = default(T);
+
+			try
+			{
+				jsonResponse = await CallRestAPI(url, body, httpMethod);
+				result = JsonConvert.DeserializeObject<T>(jsonResponse, jsonSerializeSetting);
+			}
+			catch (Exception e) {
+				Xamarin.Insights.Report (e, new Dictionary<string, string> {
+					{"Error Description", "Exception while parsing service response"},
+					{"Request Link", url },
+					{"Response Data", jsonResponse }
+				}, Xamarin.Insights.Severity.Error);
+
+				MvxTrace.Trace(String.Format("Exception in parsing Request Link:{1}\nResponse Data:{2}", url, jsonResponse));
+			}
+
+			return result;
+		}
+
 		protected async Task<string> CallRestAPI(string url, string body, HTTP_METHOD httpMethod = HTTP_METHOD.POST)
 		{
 			string result = string.Empty;
@@ -42,7 +64,6 @@ namespace ThisRoofN
 					if (!string.IsNullOrEmpty (Token)) {
 						httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bearer", Token);
 					}
-
 
 					switch (httpMethod) {
 					case HTTP_METHOD.GET:
@@ -63,12 +84,12 @@ namespace ThisRoofN
 					result = await response.Content.ReadAsStringAsync();
 				} catch(Exception ex) {
 					Xamarin.Insights.Report (ex, new Dictionary<string, string> {
-						{"Exception Time", DateTime.Now.ToString() },
-						{"URL", url },
-						{"BODY", body }
+						{"Error Description", "Exception while calling rest service"},
+						{"Reqeust Link", url },
+						{"Request Data", body }
 					}, Xamarin.Insights.Severity.Error);
 
-					MvxTrace.Trace(String.Format("Exception in RestService URL: {0},\nBody: {1}\nDescription:{2}", url, body, ex.Message));
+					MvxTrace.Trace(String.Format("Exception in RestService\nException:{0}\nRequest Link:{1}\nRequest Data:{2}", ex.Message, url, body));
 				}
 			}
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ThisRoofN
+namespace ThisRoofN.Models.Service
 {
 	[DataContract]
-	public class TRSetLikeRequest
+	public class CottageLikeRequest
 	{
 		[DataMember(Name="user_id")]
 		public int UserID { get; set; }
@@ -20,7 +20,7 @@ namespace ThisRoofN
 	}
 
 	[DataContract]
-	public class TRSetDisLikeRequest
+	public class CottageDislikeRequest
 	{
 		[DataMember(Name="user_id")]
 		public int UserID { get; set; }

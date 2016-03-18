@@ -9,6 +9,8 @@ using MvvmCross.Binding.iOS.Views;
 using CoreGraphics;
 using ThisRoofN.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using ThisRoofN.Models.App;
+using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.iOS
 {
@@ -42,6 +44,7 @@ namespace ThisRoofN.iOS
 
 			BindingSet = this.CreateBindingSet<SearchResultDetailView, SearchResultDetailViewModel> ();
 			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
+			BindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
 
 			BindingSet.Bind (view_dislikeSetting).For (i => i.Hidden).To (vm => vm.IsDislikeHidden);
 			BindingSet.Bind (btn_commit).To (vm => vm.DisLikeCommand);
@@ -100,7 +103,7 @@ namespace ThisRoofN.iOS
 			tbl_detail.AllowsSelection = false;
 			tbl_detail.TableFooterView = new UITableView (CGRect.Empty);
 
-			BindingSet.Bind (source).To (vm => vm.ItemDetail.Gallery);
+			BindingSet.Bind (source).To (vm => vm.ItemDetail.Photos);
 			BindingSet.Apply ();
 		}
 
@@ -134,7 +137,7 @@ namespace ThisRoofN.iOS
 				if (ItemsSource == null) {
 					return 4;
 				} else {
-					return ItemsSource.Cast<TileItemModel> ().Count () + 4;
+					return ItemsSource.Cast<TRCottageSimple> ().Count () + 4;
 				}
 			}
 
@@ -166,7 +169,7 @@ namespace ThisRoofN.iOS
 			protected override object GetItemAt (NSIndexPath indexPath)
 			{
 				if (indexPath.Row > 3) {
-					return ItemsSource.Cast<TileItemModel> ().ToList () [indexPath.Row - 4];
+					return ItemsSource.Cast<CottagePhoto> ().ToList () [indexPath.Row - 4];
 				} else {
 					return null;
 				}

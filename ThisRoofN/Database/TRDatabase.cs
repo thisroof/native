@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Linq;
 using MvvmCross.Plugins.Sqlite;
 using SQLite.Net;
 using SQLite.Net.Async;
 using ThisRoofN.Models;
 using System.Collections.Generic;
 using MvvmCross.Platform;
+using ThisRoofN.Models.App;
+using ThisRoofN.Models.Service;
+using System.Linq;
+using ThisRoofN.Database.Entities;
 
-namespace ThisRoofN
+namespace ThisRoofN.Database
 {
 	public class TRDatabase
 	{
@@ -22,8 +25,8 @@ namespace ThisRoofN
 		{
 			IMvxSqliteConnectionFactory connectionFactory = Mvx.Resolve<IMvxSqliteConnectionFactory> ();
 			mSqliteConnection = connectionFactory.GetConnection (DBName);
-			mSqliteConnection.CreateTable<TRUserSearchProperty> ();
-			mSqliteConnection.CreateTable<TRLikedProperty> ();
+			mSqliteConnection.CreateTable<SearchFilters> ();
+			mSqliteConnection.CreateTable<TREntityLikes> ();
 		}
 
 		public static TRDatabase Instance {
@@ -36,51 +39,56 @@ namespace ThisRoofN
 			}
 		}
 
-		public T GetItem<T> (int id) where T : TREntityBase
-		{
-			return mSqliteConnection.Table<T> ().FirstOrDefault (x => x.ID == id);
+		#region SearchFilter Methods
+		public int SaveItem(SearchFilters filter) {
+			if (filter.ID != 0) {
+				filter.RegistrationDate = DateTime.Now;
+				mSqliteConnection.Update (filter);
+				return filter.ID;
+			} else {
+				return mSqliteConnection.Insert (filter);
+			}
 		}
 
+		public SearchFilters GetSearchFilter(int userID) {
+			return mSqliteConnection.Table<SearchFilters> ().Where (i => i.UserID == userID).FirstOrDefault ();
+		}
+
+		public void DeleteSearchFilter(int userID) {
+			List<SearchFilters> filters = mSqliteConnection.Table<SearchFilters> ().Where (i => i.UserID == userID).ToList ();
+			foreach (SearchFilters filter in filters) {
+				mSqliteConnection.Delete<SearchFilters> (filter.ID);
+			}
+		}
+		#endregion
+
+		#region Like Table Methods
+		public int SaveItem(TREntityLikes info) {
+			TREntityLikes cottageLike = GetCottageLikeInfo (info.UserID, info.PropertyID);
+			if (cottageLike != null) {
+				cottageLike.LikeDislike = info.LikeDislike;
+				mSqliteConnection.Update (cottageLike);
+				return cottageLike.ID;
+			} else {
+				return mSqliteConnection.Insert (info);
+			}
+		}
+
+		public TREntityLikes GetCottageLikeInfo(int userID, string propertyID) {
+			return mSqliteConnection.Table<TREntityLikes> ().Where (i => i.UserID == userID && i.PropertyID == propertyID).FirstOrDefault ();
+		}
+
+		public void RemoveCottageLikeInfo(int userID, string propertyID) {
+			TREntityLikes cottageLike = GetCottageLikeInfo (userID, propertyID);
+			mSqliteConnection.Delete<TREntityLikes> (cottageLike.ID);
+		}
+		#endregion
+
+		#region Common Methods
 		public IEnumerable<T> GetItems<T> () where T : TREntityBase
 		{
 			return (from item in mSqliteConnection.Table<T> ()
 			        select item).ToList ();
-		}
-
-		public int SaveItem<T> (T item) where T : TREntityBase
-		{
-			if (item.ID != 0) {
-				mSqliteConnection.Update (item);
-				return item.ID;
-			} else {
-				return mSqliteConnection.Insert (item);
-			}
-		}
-
-		public void SaveItems<T> (IEnumerable<T> items) where T : TREntityBase
-		{
-			mSqliteConnection.BeginTransaction ();
-
-			foreach (T item in items) {
-				SaveItem<T> (item);
-			}
-
-			mSqliteConnection.Commit ();
-		}
-
-		public int DeleteItem<T> (int id) where T : TREntityBase
-		{
-			return mSqliteConnection.Delete<T> (id);
-		}
-
-		public int DeleteItem<T> (T item) where T : TREntityBase
-		{
-			return mSqliteConnection.Delete<T> (item.ID);
-		}
-
-		public void ClearTable<T> () where T : TREntityBase
-		{
-			mSqliteConnection.Execute (string.Format ("delete from \"{0}\"", typeof(T).Name));
 		}
 
 		// helper for checking if database has been populated
@@ -90,6 +98,17 @@ namespace ThisRoofN
 			var c = mSqliteConnection.CreateCommand (sql, new object[0]);
 			return c.ExecuteScalar<int> ();
 		}
+
+		public void ClearDatabase() {
+			mSqliteConnection.DeleteAll<SearchFilters> ();
+			mSqliteConnection.DeleteAll<CottageLikeInfo> ();
+		}
+
+		public void ClearTable<T> () where T : TREntityBase
+		{
+			mSqliteConnection.Execute (string.Format ("delete from \"{0}\"", typeof(T).Name));
+		}
+		#endregion
 	}
 }
 

@@ -5,6 +5,8 @@ using ThisRoofN.RestService;
 using ThisRoofN.Interfaces;
 using MvvmCross.Platform;
 using System.Collections.Generic;
+using Acr.UserDialogs;
+using ThisRoofN.Extensions;
 
 namespace ThisRoofN.ViewModels
 {
@@ -15,6 +17,7 @@ namespace ThisRoofN.ViewModels
 		protected IDevice mDeviceInfo;
 
 		private MvxCommand _closeCommand;
+		private MvxCommand _settingCommand;
 
 		public BaseViewModel ()
 		{
@@ -23,17 +26,45 @@ namespace ThisRoofN.ViewModels
 			mDeviceInfo = Mvx.Resolve<IDevice> ();
 		}
 
+		public ICommand SettingCommand
+		{
+			get {
+				_settingCommand = _settingCommand ?? new MvxCommand (() => {
+					ShowViewModel<SettingsViewModel>();
+				});
+				return _settingCommand;
+			}
+		}
+
 		public ICommand CloseCommand
 		{
 			get {
-				_closeCommand = _closeCommand ?? new MvxCommand (DoClose);
+				_closeCommand = _closeCommand ?? new MvxCommand (() => {
+					Close (this);
+				});
 				return _closeCommand;
 			}
 		}
 
-		public void DoClose()
+		public bool Validate(string email, string password)
 		{
-			Close (this);
+			bool result = true;
+			if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+			{
+				result = false;
+				UserDialogs.Instance.Alert("Please input email address and password.");
+			}
+			else if (!email.IsValidEmail())
+			{
+				result = false;
+				UserDialogs.Instance.Alert("You must enter a valid email address.");
+			}
+			else if (password.Length < 8)
+			{
+				result = false;
+				UserDialogs.Instance.Alert("Password should be more than 8 characters.");
+			}
+			return result;
 		}
 	}
 }

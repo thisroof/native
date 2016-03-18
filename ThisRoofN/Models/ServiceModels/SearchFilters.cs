@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Linq;
+using ThisRoofN.Database;
+using ThisRoofN.Models.App;
+using ThisRoofN.Extensions;
+using Newtonsoft.Json;
+using ThisRoofN.Interfaces;
+using MvvmCross.Platform;
+using ThisRoofN.Database.Entities;
 
-namespace ThisRoofN.Models
+namespace ThisRoofN.Models.Service
 {
 	[DataContract]
-	public class TRUserSearchProperty : TREntityBase
+	public class SearchFilters : TREntityBase
 	{
+		#region Default Properties
 		[DataMember(Name = "id")]
 		public int UserID { get; set; }
 
@@ -45,8 +53,6 @@ namespace ThisRoofN.Models
 
 		[DataMember(Name = "country")]
 		public string Country { get; set; }
-
-		public string CityStateZip{ get { return string.Format ("{0}, {1} {2}", City, State, Zip); } }
 
 		[DataMember(Name = "value")]
 		public double Value{ get; set; }
@@ -143,25 +149,76 @@ namespace ThisRoofN.Models
 
 		[DataMember(Name = "modify_date")]
 		public DateTime ModifyDate{ get{ return DateTime.Now; } }
+		#endregion
 
+		#region Additional Fields
+		public string JsonStringForUpdate {
+			get {
+				var json = new {
+					//				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
+					mobile_num = MobileNum,
+					first_name = "",
+					last_name = "",
+					latitude = GeoLat.ToString(),
+					longitude = GeoLng.ToString(),
+					email = "",
+					altitude = "0",
+					address = Address ?? "",
+					city = City ?? "",
+					state = State ?? "",
+					zip_code = Zip ?? "0",
+					country = "US",//usersAppPreferences.Country ?? "",
+					value = Value.ToString () ,
+					bedrooms = Bedrooms.ToString (),
+					baths_full = BathsFull.ToString (),
+					min_square_footage_structure = MinSquareFootageStructure.ToString (),
+					max_square_footage_structure = MaxSquareFootageStructure.ToString (),
+					min_lot_square_footage = MinLotSquareFootage.ToString (),
+					max_lot_square_footage = MaxLotSquareFootage.ToString (),
+					max_budget = MaxBudget,
+					min_beds = MinBeds.ToString(),
+					min_baths = MinBaths.ToString(),
+					start_zip = StartZip ?? "0",
+					search_type = SearchType.ToString (),
+					// search_dist = Utils.GetSearchDistanceValue(usersAppPreferences.SearchDistance),
+					search_dist = SearchDistance.ToString(),
+					metricus = MetricUS ?? "0",
+					proptypes = PropertyTypes.GetPropertyTypeValue(),
+					dislike_zipcodes = DislikeZipcodes,
+					traffic_type = TrafficType.ToString (),
+					travel_mode = TravelMode.ToString (),
+					state_filters = StateFilters,
+					year_built = YearBuilt.ToString(),
+					days_on_market = DaysOnMarket.ToString(),
+					has_pool = HasPool,
+					view_types = ViewTypes,
+					foreclosure_status = ForeclosureStatus,
+					sort_by = SortBy,
+					keywords = Keywords
+				};
 
+				return JsonConvert.SerializeObject (json);
+			}
+		}
+		#endregion
+
+		#region Methods
 		/// <summary>
 		/// Get saved Search Property from database
 		/// </summary>
 		/// <returns>The latest from database.</returns>
-		public static TRUserSearchProperty FetchLatestFromDatabase()
+		public static SearchFilters FetchLatestFromDatabase()
 		{
-			
-			TRUserSearchProperty result;
-			var searchPropertyList = TRDatabase.Instance.GetItems<TRUserSearchProperty> ();
-			if (searchPropertyList.Count () > 0) {
-				result = searchPropertyList.First ();
+			IUserPreference mUserPref =  Mvx.Resolve<IUserPreference> ();
+			var filter = TRDatabase.Instance.GetSearchFilter (mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0));
+			if (filter != null) {
+				return filter;
 			} else {
-				result = new TRUserSearchProperty ();
+				return new SearchFilters ();
 			}
-
-			return result;
 		}
+
+		#endregion
 	}
 }
 

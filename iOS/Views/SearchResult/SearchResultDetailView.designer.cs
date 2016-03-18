@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace ThisRoofN.iOS
 {
@@ -41,57 +43,48 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIView view_dislikeSetting { get; set; }
-		
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (tbl_detail != null) {
-				tbl_detail.Dispose ();
-				tbl_detail = null;
-			}
-
-			if (view_dislikeSetting != null) {
-				view_dislikeSetting.Dispose ();
-				view_dislikeSetting = null;
-			}
-
-			if (icon_tooFar != null) {
-				icon_tooFar.Dispose ();
-				icon_tooFar = null;
-			}
-
-			if (icon_tooClose != null) {
-				icon_tooClose.Dispose ();
-				icon_tooClose = null;
-			}
-
-			if (icon_tooSmall != null) {
-				icon_tooSmall.Dispose ();
-				icon_tooSmall = null;
-			}
-
-			if (icon_lotTooSmall != null) {
-				icon_lotTooSmall.Dispose ();
-				icon_lotTooSmall = null;
-			}
-
-			if (icon_tooBig != null) {
-				icon_tooBig.Dispose ();
-				icon_tooBig = null;
-			}
-
-			if (icon_ugly != null) {
-				icon_ugly.Dispose ();
-				icon_ugly = null;
-			}
-
 			if (btn_cancel != null) {
 				btn_cancel.Dispose ();
 				btn_cancel = null;
 			}
-
 			if (btn_commit != null) {
 				btn_commit.Dispose ();
 				btn_commit = null;
+			}
+			if (icon_lotTooSmall != null) {
+				icon_lotTooSmall.Dispose ();
+				icon_lotTooSmall = null;
+			}
+			if (icon_tooBig != null) {
+				icon_tooBig.Dispose ();
+				icon_tooBig = null;
+			}
+			if (icon_tooClose != null) {
+				icon_tooClose.Dispose ();
+				icon_tooClose = null;
+			}
+			if (icon_tooFar != null) {
+				icon_tooFar.Dispose ();
+				icon_tooFar = null;
+			}
+			if (icon_tooSmall != null) {
+				icon_tooSmall.Dispose ();
+				icon_tooSmall = null;
+			}
+			if (icon_ugly != null) {
+				icon_ugly.Dispose ();
+				icon_ugly = null;
+			}
+			if (tbl_detail != null) {
+				tbl_detail.Dispose ();
+				tbl_detail = null;
+			}
+			if (view_dislikeSetting != null) {
+				view_dislikeSetting.Dispose ();
+				view_dislikeSetting = null;
 			}
 		}
 	}

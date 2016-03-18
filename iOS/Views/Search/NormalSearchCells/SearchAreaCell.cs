@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using MvvmCross.Binding.iOS.Views;
 using CoreGraphics;
+using System.Linq;
 
 namespace ThisRoofN.iOS
 {

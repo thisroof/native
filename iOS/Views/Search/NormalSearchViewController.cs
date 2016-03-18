@@ -43,6 +43,7 @@ namespace ThisRoofN.iOS
 
 			BindingSet = this.CreateBindingSet<NormalSearchViewController, NormalSearchViewModel> ();
 			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
+			BindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
 			BindingSet.Bind (btn_viewResult).To (vm => vm.SearchCommand);
 
 			var source = new SearchTableViewSource (tbl_search, this);

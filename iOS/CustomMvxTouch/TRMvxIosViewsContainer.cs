@@ -14,11 +14,8 @@ namespace ThisRoofN.iOS
 		{
 			MvxTrace.Trace (MvxTraceLevel.Diagnostic, viewType.Name);
 
-//			if (viewType.Name == "SearchResultHomeView") {
-//				return new SearchResultHomeView ();
-//			}
-
 			string storyboardName = TRStoryboardHelper.GetStoryboardName (viewType);
+
 			return (IMvxIosView)UIStoryboard.FromName (storyboardName, null).InstantiateViewController (viewType.Name);
 		}
 	}

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ThisRoofN
+namespace ThisRoofN.Models.App
 {
 	public class TRGoogleMapPlace
 	{

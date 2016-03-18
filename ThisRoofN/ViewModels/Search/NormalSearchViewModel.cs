@@ -8,19 +8,25 @@ using Acr.UserDialogs;
 using System.Text.RegularExpressions;
 using ThisRoofN.Interfaces;
 using Newtonsoft.Json;
+using ThisRoofN.Models.Service;
+using ThisRoofN.RestService;
+using ThisRoofN.Models.App;
+using ThisRoofN.Helpers;
+using ThisRoofN.Extensions;
 
 namespace ThisRoofN.ViewModels
 {
 	public class NormalSearchViewModel : BaseViewModel
 	{
 		private IDevice deviceInfo;
-		private TRUserSearchProperty searchProperty;
+		private SearchFilters searchProperty;
 		private GeocodeService mGeocodeService;
+
 
 		public NormalSearchViewModel (IDevice device)
 		{
 			deviceInfo = device;
-			searchProperty = TRUserSearchProperty.FetchLatestFromDatabase ();
+			searchProperty = SearchFilters.FetchLatestFromDatabase();
 			mGeocodeService = new GeocodeService ();
 
 			MaxLotSize = MaxLotSizeOptions [0];

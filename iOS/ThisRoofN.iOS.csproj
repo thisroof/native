@@ -388,6 +388,26 @@
     <Compile Include="Views\Search\NormalSearchCells\LocationSuggestionCell.designer.cs">
       <DependentUpon>LocationSuggestionCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Search\AffordSearchView.cs" />
+    <Compile Include="Views\Search\AffordSearchView.designer.cs">
+      <DependentUpon>AffordSearchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\AffordResultView.cs" />
+    <Compile Include="Views\Search\AffordResultView.designer.cs">
+      <DependentUpon>AffordResultView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsView.cs" />
+    <Compile Include="Views\Settings\SettingsView.designer.cs">
+      <DependentUpon>SettingsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\TRWebViewController.cs" />
+    <Compile Include="Views\Settings\TRWebViewController.designer.cs">
+      <DependentUpon>TRWebViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PopTriangleView.cs" />
+    <Compile Include="PopTriangleView.designer.cs">
+      <DependentUpon>PopTriangleView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -409,6 +429,7 @@
     <Folder Include="Resources\Images.xcassets\icon_like_did.imageset\" />
     <Folder Include="Resources\Images.xcassets\icon_dislike.imageset\" />
     <Folder Include="Resources\Images.xcassets\icon_dislike_did.imageset\" />
+    <Folder Include="Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace ThisRoofN
+namespace ThisRoofN.Extensions
 {
 	public static class EnumerableExtension
 	{

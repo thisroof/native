@@ -5,6 +5,7 @@ using MvvmCross.Platform.Platform;
 using ThisRoofN.RestService;
 using Acr.UserDialogs;
 using ThisRoofN.Models;
+using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.ViewModels
 {
@@ -62,31 +63,33 @@ namespace ThisRoofN.ViewModels
 
 		private async void DoLogin()
 		{
-			UserDialogs.Instance.ShowLoading ();
-			TRUser user = await mTRService.Login (Email, Password);
-			UserDialogs.Instance.HideLoading ();
+			if (Validate (Email, Password)) {
+				UserDialogs.Instance.ShowLoading ();
+				TRUser user = await mTRService.Login (Email, Password);
+				UserDialogs.Instance.HideLoading ();
 
-			if (user != null && user.Success) {
-				TRService.Token = user.AccessToken;
-				MvxTrace.Trace("Login success:{0}", user.AccessToken);
+				if (user != null && user.Success) {
+					TRService.Token = user.AccessToken;
+					MvxTrace.Trace("Login success:{0}", user.AccessToken);
 
-				// Save user data to user preference
-				mUserPref.SetValue(TRConstant.UserPrefUserEmailKey, Email);
-				mUserPref.SetValue(TRConstant.UserPrefUserPasswordKey, Password);
-				mUserPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
-				mUserPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
+					// Save user data to user preference
+					mUserPref.SetValue(TRConstant.UserPrefUserEmailKey, Email);
+					mUserPref.SetValue(TRConstant.UserPrefUserPasswordKey, Password);
+					mUserPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
+					mUserPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
 
-				ShowViewModel<SearchTypeViewModel> ();
-			} else {
-				bool isForgot = await UserDialogs.Instance.ConfirmAsync(
-					"The username or password you entered did not match with our records. Please double-check and try again.",
-					"Please try again...", 
-					"Forgot Password?",
-					"OK");
+					ShowViewModel<SearchTypeViewModel> ();
+				} else {
+					bool isForgot = await UserDialogs.Instance.ConfirmAsync(
+						"The username or password you entered did not match with our records. Please double-check and try again.",
+						"Please try again...", 
+						"Forgot Password?",
+						"OK");
 
-				if (isForgot)
-				{
-					UserDialogs.Instance.Alert("Please proceed to your email to receive your password.", "Password Sent");
+					if (isForgot)
+					{
+						UserDialogs.Instance.Alert("Please proceed to your email to receive your password.", "Password Sent");
+					}
 				}
 			}
 		}

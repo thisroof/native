@@ -10,6 +10,7 @@ using Acr.UserDialogs;
 using Facebook.CoreKit;
 using System.Collections.Generic;
 using ThisRoofN.Models;
+using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.iOS
 {

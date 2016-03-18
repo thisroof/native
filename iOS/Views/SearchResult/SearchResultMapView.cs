@@ -7,6 +7,7 @@ using UIKit;
 using ThisRoofN.ViewModels;
 using CoreLocation;
 using MapKit;
+using ThisRoofN.Models.App;
 
 namespace ThisRoofN.iOS
 {
@@ -27,7 +28,7 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewDidLoad ();
 
-			foreach (MapItemModel item in ViewModelInstance.MapItems) {
+			foreach (TRCottageSimple item in ViewModelInstance.MapItems) {
 				TRMapAnnotation annotation = new TRMapAnnotation (item);
 				map_results.AddAnnotation (annotation);
 			}
@@ -65,8 +66,8 @@ namespace ThisRoofN.iOS
 		public class TRMapAnnotation : MKAnnotation
 		{
 			public static string Identifier = "TRMapAnnotation";
-			private MapItemModel item;
-			public TRMapAnnotation(MapItemModel itemData)
+			private TRCottageSimple item;
+			public TRMapAnnotation(TRCottageSimple itemData)
 			{
 				item = itemData;
 			}
@@ -79,7 +80,7 @@ namespace ThisRoofN.iOS
 
 			public override string Title {
 				get {
-					return item.PropertyID;
+					return item.CottageID;
 				}
 			}
 		}

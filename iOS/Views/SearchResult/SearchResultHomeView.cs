@@ -67,6 +67,7 @@ namespace ThisRoofN.iOS.Views
 
 			var bindingSet = this.CreateBindingSet<SearchResultHomeView, SearchResultHomeViewModel> ();
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
+			bindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
 			bindingSet.Apply ();
 		}
 

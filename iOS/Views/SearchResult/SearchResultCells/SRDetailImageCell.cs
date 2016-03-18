@@ -6,6 +6,8 @@ using Foundation;
 using UIKit;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
+using ThisRoofN.Models.App;
+using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.iOS
 {
@@ -16,8 +18,8 @@ namespace ThisRoofN.iOS
 		public SRDetailImageCell (IntPtr handle) : base (handle)
 		{
 			this.DelayBind (() => {
-				var set = this.CreateBindingSet<SRDetailImageCell, TileItemModel>();
-				set.Bind(img_detailItem).For(i => i.ImageUrl).To(vm => vm.ImageUrl);
+				var set = this.CreateBindingSet<SRDetailImageCell, CottagePhoto>();
+				set.Bind(img_detailItem).For(i => i.ImageUrl).To(vm => vm.MediaURL);
 				set.Apply();
 			});
 		}

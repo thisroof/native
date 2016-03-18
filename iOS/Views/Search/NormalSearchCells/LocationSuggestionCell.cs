@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
+using ThisRoofN.Models.App;
 
 namespace ThisRoofN.iOS
 {

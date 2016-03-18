@@ -1,27 +1,32 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
+using ThisRoofN.Database;
+using ThisRoofN.Database.Entities;
 
-namespace ThisRoofN
+namespace ThisRoofN.Models.Service
 {
 	[DataContract]
-	public class TRCottageDetail
+	public class CottageDetail
 	{
-		public TRCottageDetail ()
-		{
-		}
+		#region Default Fields
+		[DataMember(Name="data")]
+		public CottageDetailData Data {get;set;}
+		#endregion
 
+		#region Additional Fields
 		public string Address {
 			get { 
-				return this.Listing.AddressData.FullStreetAddress;
+				return this.Data.AddressData.FullStreetAddress;
 			}
 
 		}
 		public string PrimaryPhotoUrl {
 			get { 
-				if (this.Listing.Photos != null && this.Listing.Photos.Count > 0)
+				if (this.Data.Photos != null && this.Data.Photos.Count > 0)
 				{
-					return this.Listing.Photos[0].MediaURL;
+					return this.Data.Photos[0].MediaURL;
 				}
 				else
 				{
@@ -33,7 +38,7 @@ namespace ThisRoofN
 
 		public string GalleryUrl {
 			get { 
-				return this.Listing.MatrixUniqueID;
+				return this.Data.MatrixUniqueID;
 			}
 		}
 
@@ -41,7 +46,7 @@ namespace ThisRoofN
 			get {
 				// Property sub type is not working for now, so use acres without any validation.
 				double value = 0;
-				double.TryParse(this.Listing.Acres, out value);
+				double.TryParse(this.Data.Acres, out value);
 				return (int)value;
 			}
 		}
@@ -52,7 +57,7 @@ namespace ThisRoofN
 			{
 				try
 				{
-					return Listing.Participants[0].Licenses.License.LicenseNumber;
+					return Data.Participants[0].Licenses.License.LicenseNumber;
 				}
 				catch(NullReferenceException ex)
 				{
@@ -60,28 +65,27 @@ namespace ThisRoofN
 				}
 			}
 		}
-
-		[DataMember(Name="data")]
-		public SearchResultListing Listing {get;set;}
+		#endregion
 	}
 
+	#region DataContract Classes
 	[DataContract]
-	public class SearchResultListing
+	public class CottageDetailData
 	{
 		[DataMember(Name="photos")]
-		public List<PhotoDetail> Photos {get;set;}
+		public List<CottagePhoto> Photos {get;set;}
 
 		[DataMember(Name="address")]
-		public SearchResultAddress AddressData {get;set;}
+		public CottageAddress AddressData {get;set;}
 
 		[DataMember(Name="offices")]
-		public List<SearchResultOffice> Offices {get;set;}
+		public List<CottageOffice> Offices {get;set;}
 
 		[DataMember(Name="bedrooms")]
 		public int Bedrooms { get; set; }
 
 		[DataMember(Name="location")]
-		public SearchResultLocation Location {get;set;}
+		public CottageLocation Location {get;set;}
 
 		[DataMember(Name="lot_size")]
 		public string Acres{get;set;}
@@ -91,10 +95,6 @@ namespace ThisRoofN
 
 		[DataMember(Name="list_price")]
 		public double ListPrice { get; set; }
-
-		// Now This field is error so I skip this field for now.
-		//		[DataMember(Name="property_sub_type")]
-		//		public string PropertySubType { get; set; }
 
 		[DataMember(Name="listing_key")]
 		public string MatrixUniqueID { get; set; }
@@ -106,11 +106,11 @@ namespace ThisRoofN
 		public string PropertyDescription { get; set; }
 
 		[DataMember(Name="listing_participants")]
-		public List<SearchResultParticipant> Participants {get;set;}
+		public List<CottageParticipant> Participants {get;set;}
 	}
 
 	[DataContract]
-	public class SearchResultAddress
+	public class CottageAddress
 	{
 		[DataMember(Name="city")]
 		public string City { get; set; }
@@ -129,7 +129,7 @@ namespace ThisRoofN
 	}
 
 	[DataContract]
-	public class SearchResultLocation
+	public class CottageLocation
 	{
 		[DataMember(Name="county")]
 		public string County { get; set; }
@@ -143,17 +143,17 @@ namespace ThisRoofN
 
 
 	[DataContract]
-	public class SearchResultOffice
+	public class CottageOffice
 	{
 		[DataMember(Name="name")]
 		public string Name { get; set; }
 	}
 
 	[DataContract]
-	public class SearchResultParticipant
+	public class CottageParticipant
 	{
 		[DataMember(Name="licenses")]
-		public SearchResultLicenses Licenses {get; set;}
+		public CottageLicense Licenses {get; set;}
 
 		[DataMember(Name="first_name")]
 		public string FirstName { get; set; }
@@ -166,27 +166,18 @@ namespace ThisRoofN
 	}
 
 	[DataContract]
-	public class SearchResultLicenses
+	public class CottageLicense
 	{
 		[DataMember(Name="license")]
-		public SearchResultLicense License {get;set;}
+		public CottageLicenseNumber License {get;set;}
 	}
 
 	[DataContract]
-	public class SearchResultLicense
+	public class CottageLicenseNumber
 	{
 		[DataMember(Name="license_number")]
 		public string LicenseNumber {get;set;}
 	}
-
-	[DataContract]
-	public class PhotoDetail
-	{
-		[DataMember(Name="media_url")]
-		public string MediaURL {get;set;}
-
-		[DataMember(Name="media_modification_timestamp")]
-		public string ModificationTimeStamp {get;set;}
-	}
+	#endregion
 }
 

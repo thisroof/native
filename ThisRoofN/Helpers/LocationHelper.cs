@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ThisRoofN
+namespace ThisRoofN.Helpers
 {
 	public class LocationHelper
 	{

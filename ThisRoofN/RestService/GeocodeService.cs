@@ -9,7 +9,7 @@ using ThisRoofN.Models.ServiceModels;
 using System.Linq;
 using ThisRoofN.Models.App;
 
-namespace ThisRoofN
+namespace ThisRoofN.RestService
 {
 	public class GeocodeService : TRBaseService
 	{

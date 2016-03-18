@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ThisRoofN.Models.App;
+using ThisRoofN.Helpers;
 
 namespace ThisRoofN.ViewModels
 {
 	public class SearchResultMapViewModel : BaseViewModel
 	{
-		private List<MapItemModel> _mapItems;
+		private List<TRCottageSimple> _mapItems;
 		public SearchResultMapViewModel ()
 		{
 			if (DataHelper.SearchResults != null) {
 				_mapItems = DataHelper.SearchResults.Select (i =>
-					new MapItemModel() {
-						PropertyID = i.ID,
+					new TRCottageSimple() {
+						CottageID = i.ID,
+						PrimaryPhotoLink = i.Photos.FirstOrDefault().MediaURL,
 						Latitude = i.Latitude,
 						Longitude = i.Longitude,
 					}).ToList ();
 			}
 		}
 
-		public List<MapItemModel> MapItems
+		public List<TRCottageSimple> MapItems
 		{
 			get {
 				return _mapItems;

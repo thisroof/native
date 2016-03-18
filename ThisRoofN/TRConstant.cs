@@ -32,11 +32,25 @@ namespace ThisRoofN
 		public static readonly string UserPrefAccessTokenKey		= "access_token_key";
 		public static readonly string UserPrefRefreshTokenKey		= "refresh_token_key";
 
+		//Web pages with static content
+		public static readonly string SupportPageLink = "http://thisroof.com/app-docs/";
+		public static readonly string PrivacyPolicyPageLink = "http://thisroof.com/app-docs/pp/";
+		public static readonly string TermsOfUsePageLink = "http://thisroof.com/app-docs/tos/";
+		public static readonly string LicensePageLink = "http://thisroof.com/app-docs/lic/";
+		public static readonly string PreApprovalLink = "http://thisroof.com/pre-approval/";
 
 		// Normal Search Property Values
 		public static readonly int BudgetStep = 10000;
 		public static readonly int MinValidBudget = 10000;
 		public static readonly int MaxValidBudget = 200000000;
+
+		// Afford Constants
+		public static readonly int MinValidIncome = 10000;
+		public static readonly int MaxValidIncome = 50000000;
+		public static readonly int MinValidDebts = 0;
+		public static readonly int MaxValidDebts = 50000;
+		public static readonly int MinValidDownPayment = 0;
+		public static readonly int MaxValidDownPayment = 5000000;
 
 		public static readonly int OneAcreToSquareFoot = 43560;
 
@@ -273,6 +287,15 @@ namespace ThisRoofN
 			"1 hr 30 min",
 			"1 hr 45 min",
 			"2 hours"
+		};
+
+		public static readonly List<int> LoanTerms = new List<int>{
+			15,
+			20,
+			25,
+			30,
+			35,
+			40
 		};
 	}
 }

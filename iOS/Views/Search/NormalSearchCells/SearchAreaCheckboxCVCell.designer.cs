@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace ThisRoofN.iOS
 {
@@ -17,17 +19,16 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UILabel lbl_title { get; set; }
-		
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (lbl_title != null) {
-				lbl_title.Dispose ();
-				lbl_title = null;
-			}
-
 			if (iv_check != null) {
 				iv_check.Dispose ();
 				iv_check = null;
+			}
+			if (lbl_title != null) {
+				lbl_title.Dispose ();
+				lbl_title = null;
 			}
 		}
 	}

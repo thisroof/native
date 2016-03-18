@@ -30,8 +30,8 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
-			masterView.BindingSet.Bind (img_major).For (i => i.ImageUrl).To (vm => vm.ItemDetail.PrimaryPhoto);
-			masterView.BindingSet.Bind (lbl_budget).To (vm => vm.ItemDetail.FormattedValue);
+			masterView.BindingSet.Bind (img_major).For (i => i.ImageUrl).To (vm => vm.ItemDetail.PrimaryPhotoLink);
+			masterView.BindingSet.Bind (lbl_budget).To (vm => vm.ItemDetail.FormattedPrice);
 			masterView.BindingSet.Bind (lbl_address).To (vm => vm.ItemDetail.FormattedCityStateZip);
 			masterView.BindingSet.Bind (lbl_bedBath).To (vm => vm.ItemDetail.FormattedBedBath);
 			masterView.BindingSet.Bind (lbl_sqft).To (vm => vm.ItemDetail.FormattedSquareFootageStructure);

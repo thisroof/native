@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace ThisRoofN.iOS
 {
@@ -38,49 +40,41 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIView view_findAgent { get; set; }
-		
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (lbl_street != null) {
-				lbl_street.Dispose ();
-				lbl_street = null;
-			}
-
 			if (lbl_address != null) {
 				lbl_address.Dispose ();
 				lbl_address = null;
 			}
-
-			if (lbl_price != null) {
-				lbl_price.Dispose ();
-				lbl_price = null;
-			}
-
-			if (lbl_sqft != null) {
-				lbl_sqft.Dispose ();
-				lbl_sqft = null;
-			}
-
-			if (lbl_lotSqft != null) {
-				lbl_lotSqft.Dispose ();
-				lbl_lotSqft = null;
-			}
-
-			if (lbl_bd != null) {
-				lbl_bd.Dispose ();
-				lbl_bd = null;
-			}
-
 			if (lbl_ba != null) {
 				lbl_ba.Dispose ();
 				lbl_ba = null;
 			}
-
+			if (lbl_bd != null) {
+				lbl_bd.Dispose ();
+				lbl_bd = null;
+			}
+			if (lbl_lotSqft != null) {
+				lbl_lotSqft.Dispose ();
+				lbl_lotSqft = null;
+			}
+			if (lbl_price != null) {
+				lbl_price.Dispose ();
+				lbl_price = null;
+			}
+			if (lbl_sqft != null) {
+				lbl_sqft.Dispose ();
+				lbl_sqft = null;
+			}
+			if (lbl_street != null) {
+				lbl_street.Dispose ();
+				lbl_street = null;
+			}
 			if (view_contact != null) {
 				view_contact.Dispose ();
 				view_contact = null;
 			}
-
 			if (view_findAgent != null) {
 				view_findAgent.Dispose ();
 				view_findAgent = null;

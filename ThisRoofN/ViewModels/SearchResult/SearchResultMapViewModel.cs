@@ -12,13 +12,7 @@ namespace ThisRoofN.ViewModels
 		public SearchResultMapViewModel ()
 		{
 			if (DataHelper.SearchResults != null) {
-				_mapItems = DataHelper.SearchResults.Select (i =>
-					new TRCottageSimple() {
-						CottageID = i.ID,
-						PrimaryPhotoLink = i.Photos.FirstOrDefault().MediaURL,
-						Latitude = i.Latitude,
-						Longitude = i.Longitude,
-					}).ToList ();
+				_mapItems = DataHelper.SearchResults;
 			}
 		}
 

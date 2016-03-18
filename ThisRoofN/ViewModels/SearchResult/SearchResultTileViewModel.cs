@@ -8,6 +8,7 @@ using ThisRoofN.Interfaces;
 using MvvmCross.Platform;
 using ThisRoofN.Models.App;
 using ThisRoofN.Helpers;
+using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.ViewModels
 {
@@ -20,20 +21,10 @@ namespace ThisRoofN.ViewModels
 		public SearchResultTileViewModel ()
 		{
 			deviceInfo = Mvx.Resolve<IDevice> ();
-		
-			if (DataHelper.SearchResults != null) {
-				_tileItems = DataHelper.SearchResults.Select (i =>
-					new TRCottageSimple() {
-						CottageID = i.ID,
-						PrimaryPhotoLink = i.Photos.FirstOrDefault().MediaURL,
-						Latitude = i.Latitude,
-						Longitude = i.Longitude,
-					}).ToList ();
-			}
+			_tileItems = DataHelper.SearchResults;
 		}
 
-		public List<TRCottageSimple> TileItems
-		{
+		public List<TRCottageSimple> TileItems {
 			get {
 				return _tileItems;
 			} 
@@ -43,21 +34,25 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		public ICommand DetailCommand
-		{
+		public ICommand DetailCommand {
 			get {
 				_detailCommand = _detailCommand ?? new MvxCommand<int> (GotoDetail);
 				return _detailCommand;
 			}
 		}
 
-		private async void GotoDetail(int index)
+		private async void GotoDetail (int index)
 		{
 			string propertyID = _tileItems [index].CottageID;
 
 			UserDialogs.Instance.ShowLoading ();
-			DataHelper.SelectedDetail = await mTRService.GetCottageDetail(deviceInfo.GetUniqueIdentifier(), propertyID);
-			UserDialogs.Instance.HideLoading();
+
+			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
+
+			DataHelper.SelectedCottage = _tileItems [index];
+			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail, _tileItems[index]);
+
+			UserDialogs.Instance.HideLoading ();
 
 			ShowViewModel<SearchResultDetailViewModel> ();
 		}

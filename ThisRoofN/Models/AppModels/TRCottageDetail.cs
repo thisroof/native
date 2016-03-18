@@ -16,8 +16,13 @@ namespace ThisRoofN.Models.App
 		/// Convert server side detail info to app side for easy usage in view model classes
 		/// </summary>
 		/// <param name="serverCottageDetail">server side cottage detail</param>
-		public TRCottageDetail(CottageDetail serverData) {
-			CottageID = serverData.Data.MatrixUniqueID;
+		/// /// <param name="simpleData">selected simple data</param>
+		public TRCottageDetail(CottageDetail serverData, TRCottageSimple simpleData) {
+			CottageID = simpleData.CottageID;
+			PrimaryPhotoLink = simpleData.PrimaryPhotoLink;
+			Latitude = simpleData.Latitude;
+			Longitude = simpleData.Longitude;
+
 			Price = serverData.Data.ListPrice;
 			Description = serverData.Data.PropertyDescription;
 			Bedrooms = serverData.Data.Bedrooms;

@@ -44,11 +44,7 @@ namespace ThisRoofN.ViewModels
 
 		public SearchResultDetailViewModel ()
 		{
-			if (DataHelper.SelectedDetail != null) {
-				CottageDetail item = DataHelper.SelectedDetail;
-
-
-			}
+			itemDetail = DataHelper.SelectedCottageDetail;
 		}
 
 		#region Reject Reason Properties

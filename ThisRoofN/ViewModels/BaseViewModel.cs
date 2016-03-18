@@ -26,6 +26,24 @@ namespace ThisRoofN.ViewModels
 			mDeviceInfo = Mvx.Resolve<IDevice> ();
 		}
 
+		/// <summary>
+		/// API loading flag
+		/// </summary>
+		private bool _isLoading;
+		public bool IsLoading { 
+			get { return _isLoading; }
+			set {
+				_isLoading = value;
+				RaisePropertyChanged (() => IsLoading);
+				RaisePropertyChanged (() => IsHideLoading);
+			}
+		}
+
+		public bool IsHideLoading 
+		{
+			get { return !_isLoading; }
+		}
+
 		public ICommand SettingCommand
 		{
 			get {

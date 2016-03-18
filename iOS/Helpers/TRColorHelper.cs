@@ -9,6 +9,9 @@ namespace ThisRoofN.iOS.Helpers
 		public static UIColor ThemeBlue = UIColor.FromRGB(1, 172, 228);
 		public static UIColor DarkBlue = UIColor.FromRGB(33, 74, 114);
 		public static UIColor NavBarBlue = UIColor.FromRGB(0, 93, 176);
+
+		public static UIColor LoadingBack = new UIColor(0, 0, 0, 0.6f);
+
 	}
 }
 

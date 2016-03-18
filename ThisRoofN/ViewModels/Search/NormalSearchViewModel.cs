@@ -140,7 +140,15 @@ namespace ThisRoofN.ViewModels
 					var positions = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
 					UserDialogs.Instance.HideLoading ();
 				} else {
-					DataHelper.SearchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
+					List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
+					DataHelper.SearchResults = searchResults.Select (i =>
+						new TRCottageSimple() {
+							CottageID = i.ID,
+							PrimaryPhotoLink = i.Photos.FirstOrDefault().MediaURL,
+							Latitude = i.Latitude,
+							Longitude = i.Longitude,
+						}).ToList ();
+
 					UserDialogs.Instance.HideLoading ();
 					ShowViewModel<SearchResultHomeViewModel> ();
 				}

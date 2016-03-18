@@ -45,7 +45,7 @@ namespace ThisRoofN.RestService
 					{"Response Data", jsonResponse }
 				}, Xamarin.Insights.Severity.Error);
 
-				MvxTrace.Trace(String.Format("Exception in parsing Request Link:{1}\nResponse Data:{2}", url, jsonResponse));
+				MvxTrace.Trace(String.Format("Exception in parsing Request Link:{0}", url));
 			}
 
 			return result;

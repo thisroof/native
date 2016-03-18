@@ -64,6 +64,7 @@ namespace ThisRoofN.ViewModels
 		private async void DoLogin()
 		{
 			if (Validate (Email, Password)) {
+				this.LoadingText = "Log In...";
 				this.IsLoading = true;
 				TRUser user = await mTRService.Login (Email, Password);
 				this.IsLoading = false;

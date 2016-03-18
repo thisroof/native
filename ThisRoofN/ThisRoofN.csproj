@@ -75,6 +75,7 @@
     <Compile Include="Models\AppModels\TRStatusDataModel.cs" />
     <Compile Include="Database\Entities\TREntityBase.cs" />
     <Compile Include="Database\Entities\TREntityLikes.cs" />
+    <Compile Include="CustomMvx\TRMvxPresentationHint.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -158,5 +159,6 @@
     <Folder Include="Models\ServiceModels\" />
     <Folder Include="ViewModels\Settings\" />
     <Folder Include="Database\Entities\" />
+    <Folder Include="CustomMvx\" />
   </ItemGroup>
 </Project>

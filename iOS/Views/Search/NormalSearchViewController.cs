@@ -45,6 +45,8 @@ namespace ThisRoofN.iOS
 			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			BindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
 			BindingSet.Bind (btn_viewResult).To (vm => vm.SearchCommand);
+			BindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			BindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
 
 			var source = new SearchTableViewSource (tbl_search, this);
 			tbl_search.Source = source;

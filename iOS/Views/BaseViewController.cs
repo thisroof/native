@@ -15,6 +15,7 @@ namespace ThisRoofN.iOS
 		private const int LOADING_GIF_HEIGHT = 83; 
 
 		protected UIView loadingView;
+		protected UILabel loadingLabel;
 		protected UIButton backButton;
 		protected UIButton settingButton;
 
@@ -89,7 +90,7 @@ namespace ThisRoofN.iOS
 			gifWebView.LoadRequest (request);
 
 			CGRect loadingLabelFrame = new CGRect (8, LOADING_GIF_HEIGHT - 4, LOADING_GIF_WIDTH, 20);
-			UILabel loadingTextView = new UILabel (loadingLabelFrame) {
+			loadingLabel = new UILabel (loadingLabelFrame) {
 				Text = "Loading...",
 				BackgroundColor = UIColor.Clear,
 				TextColor = TRColorHelper.LightBlue,
@@ -99,7 +100,7 @@ namespace ThisRoofN.iOS
 
 			animatorView.BackgroundColor = UIColor.White;
 			animatorView.Add (gifWebView);
-			animatorView.Add (loadingTextView);
+			animatorView.Add (loadingLabel);
 			animatorView.Layer.BorderColor = TRColorHelper.LightBlue.CGColor;
 			animatorView.Layer.BorderWidth = 1.0f;
 			animatorView.Layer.CornerRadius = 5.0f;

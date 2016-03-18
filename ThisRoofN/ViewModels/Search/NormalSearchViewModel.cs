@@ -117,7 +117,8 @@ namespace ThisRoofN.ViewModels
 			searchProperty.PropertyTypes = GetPropertyTypesSelected ();
 			searchProperty.ViewTypes = GetViewTypesSelected ();
 
-			UserDialogs.Instance.ShowLoading (isSearch ? "Searching Results" : "Saving your Search");
+			this.IsLoading = true;
+			this.LoadingText = isSearch ? "Searching..." : "Saving...";
 			searchProperty.MobileNum = deviceInfo.GetUniqueIdentifier ();
 			var res = await mTRService.UpdateUserSearchProperty (searchProperty);
 
@@ -127,30 +128,35 @@ namespace ThisRoofN.ViewModels
 
 			if (!isSearch) {
 				// Save Search Case
-				UserDialogs.Instance.HideLoading ();
+				this.IsLoading = false;
+
 				if (res != null) {
 					UserDialogs.Instance.Alert ("Updated Successfully", "Success");
 				} else {
 					UserDialogs.Instance.Alert ("Failed to save, try again lager.", "Failure");
 				}
-			} else {
-				
+			} else {	
 				// Search Case
 				if (searchProperty.SearchType == 1) {
 					var positions = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
-					UserDialogs.Instance.HideLoading ();
+					this.IsLoading = false;
 				} else {
 					List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
-					DataHelper.SearchResults = searchResults.Select (i =>
-						new TRCottageSimple() {
+					if (searchResults != null) {
+						DataHelper.SearchResults = searchResults.Select (i =>
+							new TRCottageSimple () {
 							CottageID = i.ID,
-							PrimaryPhotoLink = i.Photos.FirstOrDefault().MediaURL,
+							PrimaryPhotoLink = i.Photos.FirstOrDefault ().MediaURL,
 							Latitude = i.Latitude,
 							Longitude = i.Longitude,
 						}).ToList ();
 
-					UserDialogs.Instance.HideLoading ();
-					ShowViewModel<SearchResultHomeViewModel> ();
+						this.IsLoading = false;
+						ShowViewModel<SearchResultHomeViewModel> ();
+					} else {
+						this.IsLoading = false;
+						UserDialogs.Instance.Alert ("Failed to get results from server. Please try again later.", "Error");
+					}
 				}
 			}
 		}

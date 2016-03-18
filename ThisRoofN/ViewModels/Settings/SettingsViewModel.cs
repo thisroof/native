@@ -135,7 +135,7 @@ namespace ThisRoofN.ViewModels
 
 		private void DoLogout()
 		{
-			
+			ChangePresentation (new TRMvxPresentationHint (TRMvxPresentationHint.TRPresentationType.GotoRoot));
 		}
 	}
 }

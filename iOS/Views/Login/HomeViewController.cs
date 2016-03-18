@@ -27,6 +27,8 @@ namespace ThisRoofN.iOS
 			var set = this.CreateBindingSet<HomeViewController, HomeViewModel> ();
 			set.Bind (btn_login).To (vm => vm.LoginCommand);
 			set.Bind (btn_signup).To (vm => vm.SignupCommand);
+			set.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			set.Bind (loadingLabel).To (vm => vm.LoadingText);
 			set.Apply ();
 		}
 
@@ -34,6 +36,7 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewWillAppear (animated);
 
+			this.NavigationController.SetNavigationBarHidden (true, true);
 			if (moviePlayer != null) {
 				moviePlayer.PrepareToPlay ();
 				moviePlayer.Play();

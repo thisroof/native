@@ -176,6 +176,7 @@ namespace ThisRoofN.Models.Service
 					min_lot_square_footage = MinLotSquareFootage.ToString (),
 					max_lot_square_footage = MaxLotSquareFootage.ToString (),
 					max_budget = MaxBudget,
+					min_budget = MinBudget,
 					min_beds = MinBeds.ToString(),
 					min_baths = MinBaths.ToString(),
 					start_zip = StartZip ?? "0",

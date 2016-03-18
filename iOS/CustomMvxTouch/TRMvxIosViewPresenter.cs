@@ -16,6 +16,16 @@ namespace ThisRoofN.iOS
 		{
 			base.Show(request);
 		}
+
+		public override void ChangePresentation (MvxPresentationHint hint)
+		{
+			if (hint is TRMvxPresentationHint) {
+				TRMvxPresentationHint pHint = (TRMvxPresentationHint)hint;
+				this.MasterNavigationController.PopToRootViewController (true);
+			} else {
+				base.ChangePresentation (hint);
+			}
+		}
 	}
 }
 

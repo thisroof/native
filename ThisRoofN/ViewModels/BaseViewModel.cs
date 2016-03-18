@@ -44,6 +44,17 @@ namespace ThisRoofN.ViewModels
 			get { return !_isLoading; }
 		}
 
+		private string _loadingText;
+		public string LoadingText
+		{
+			get {
+				return _loadingText;
+			} set {
+				_loadingText = value;
+				RaisePropertyChanged (() => LoadingText);
+			}
+		}
+
 		public ICommand SettingCommand
 		{
 			get {

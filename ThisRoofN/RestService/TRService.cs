@@ -74,6 +74,7 @@ namespace ThisRoofN.RestService
 			// First call Rest API
 			SearchFilters result = await CallRestAPI<SearchFilters> (endpoint_registerUserSearchFilter, searchProperty.JsonStringForUpdate);
 
+			searchProperty.UserID = result.UserID;
 			// Second save to Database
 			TRDatabase.Instance.SaveItem(searchProperty);
 

@@ -47,12 +47,12 @@ namespace ThisRoofN.ViewModels
 			// Trying to auto login
 			if(!string.IsNullOrEmpty(mUserPref.GetValue(TRConstant.UserPrefUserEmailKey)) && 
 				!string.IsNullOrEmpty(mUserPref.GetValue(TRConstant.UserPrefAccessTokenKey))) {
-				UserDialogs.Instance.ShowLoading ();
-
+				this.LoadingText = "Loading...";
+				this.IsLoading = true;
 				// Set the service token
 				TRService.Token = mUserPref.GetValue(TRConstant.UserPrefAccessTokenKey);
 				bool tokenValid = await mTRService.IsTokenValid ();
-				UserDialogs.Instance.HideLoading ();
+				this.IsLoading = false;
 
 				if (tokenValid) {
 					ShowViewModel<SearchTypeViewModel> ();

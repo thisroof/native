@@ -82,6 +82,13 @@ namespace ThisRoofN.Database
 			TREntityLikes cottageLike = GetCottageLikeInfo (userID, propertyID);
 			mSqliteConnection.Delete<TREntityLikes> (cottageLike.ID);
 		}
+
+		public void ClearLiked(int userID, bool likeDislike) {
+			List<TREntityLikes> likes = mSqliteConnection.Table<TREntityLikes> ().Where (i => i.UserID == userID && i.LikeDislike == likeDislike).ToList ();
+			foreach (TREntityLikes likeEntity in likes) {
+				mSqliteConnection.Delete<TREntityLikes> (likeEntity.ID);
+			}
+		}
 		#endregion
 
 		#region Common Methods

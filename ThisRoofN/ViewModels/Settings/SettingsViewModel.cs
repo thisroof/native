@@ -3,6 +3,7 @@ using ThisRoofN.ViewModels;
 using MvvmCross.Core.ViewModels;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using ThisRoofN.Database;
 
 namespace ThisRoofN.ViewModels
 {
@@ -121,21 +122,56 @@ namespace ThisRoofN.ViewModels
 			ShowViewModel<TRWebViewModel> (new {link=TRConstant.LicensePageLink});
 		}
 
-		private void DoClearLike()
+		private async void DoClearLike()
 		{
+			bool confirm = await UserDialogs.Instance.ConfirmAsync(
+				"Are you sure you would like to clear all of your saved properties? \n\r You will not be able to undo this action",
+				"Clear Liked Properties",
+				"Yes",
+				"No");
+
+			if (confirm)
+			{
+				TRDatabase.Instance.ClearLiked (mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0), true);
+				UserDialogs.Instance.Alert("Liked Properties were removed", "Confirm");
+			}
 		}
 
-		private void DoClearDislike()
+		private async void DoClearDislike()
 		{
+			bool confirm = await UserDialogs.Instance.ConfirmAsync(
+				"Are you sure you would like to clear all the properties you marked with a thumb down? \n\r You will not be able to undo this action",
+				"Clear Liked Properties",
+				"Yes",
+				"No");
+
+			if (confirm)
+			{
+				TRDatabase.Instance.ClearLiked (mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0), false);
+				UserDialogs.Instance.Alert("Thumbs down properties were removed", "Confirm");
+			}
 		}
 
 		private void DoEnableAllTutorial()
 		{
 		}
 
-		private void DoLogout()
+		private async void DoLogout()
 		{
-			ChangePresentation (new TRMvxPresentationHint (TRMvxPresentationHint.TRPresentationType.GotoRoot));
+			bool confirm = await UserDialogs.Instance.ConfirmAsync(
+				"Are you sure you would like to log out?",
+				"Logout",
+				"Yes",
+				"No");
+			
+			if (confirm) {
+				mUserPref.RemovePreference (TRConstant.UserPrefAccessTokenKey);
+				mUserPref.RemovePreference (TRConstant.UserPrefRefreshTokenKey);
+				mUserPref.RemovePreference (TRConstant.UserPrefUserEmailKey);
+				mUserPref.RemovePreference (TRConstant.UserPrefUserIDKey);
+				mUserPref.RemovePreference (TRConstant.UserPrefUserPasswordKey);
+				ChangePresentation (new TRMvxPresentationHint (TRMvxPresentationHint.TRPresentationType.GotoRoot));
+			}
 		}
 	}
 }

@@ -32,11 +32,24 @@ namespace ThisRoofN.iOS
 
 			InitRangeSlider ();
 
+			btn_lifeStyle.TitleLabel.Lines = 0;
+			btn_homeDetails.TitleLabel.Lines = 0;
+			btn_viewResult.Layer.BorderWidth = 1.0f;
+			btn_viewResult.Layer.BorderColor = UIColor.LightGray.CGColor;
+			btn_viewResult.Layer.CornerRadius = 0.4f;
+
 			var bindingSet = this.CreateBindingSet<SearchView, SearchViewModel> ();
 			bindingSet.Bind (lbl_priceRange).To (vm => vm.BudgetString);
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			bindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
-			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoSearchAreaCommand);
+			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.SearchArea);
+			bindingSet.Bind (btn_inHome).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.InHome);
+			bindingSet.Bind (btn_inArea).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.InArea);
+			bindingSet.Bind (btn_location).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.Location);
+			bindingSet.Bind (btn_architecture).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.Architecture);
+			bindingSet.Bind (btn_lifeStyle).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.Lifestyle);
+			bindingSet.Bind (btn_homeStructure).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeStructure);
+			bindingSet.Bind (btn_homeDetails).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeDetails);
 			bindingSet.Apply ();
 
 			UIComboBox soryByComboBox = new UIComboBox (ViewModelInstance.SortTypes, 0, txt_sortBy, 

@@ -12,9 +12,23 @@ namespace ThisRoofN.iOS
 	[Register ("InHomeItemCell")]
 	partial class InHomeItemCell
 	{
+		[Outlet]
+		UIKit.UIImageView iv_checkbox { get; set; }
+
+		[Outlet]
+		UIKit.UILabel lbl_title { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (lbl_title != null) {
+				lbl_title.Dispose ();
+				lbl_title = null;
+			}
+
+			if (iv_checkbox != null) {
+				iv_checkbox.Dispose ();
+				iv_checkbox = null;
+			}
 		}
 	}
 }

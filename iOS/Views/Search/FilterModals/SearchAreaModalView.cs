@@ -48,11 +48,20 @@ namespace ThisRoofN.iOS
 			tbl_suggestion.TableFooterView = new UITableView (CGRect.Empty);
 			tbl_suggestion.ReloadData ();
 
+			// Bind Item Tableview source
+			var itemSource = new SearchAreaCommuteItemsTableViewSource (this, tbl_commuteItems);
+			tbl_commuteItems.Source = itemSource;
+			tbl_commuteItems.RowHeight = UITableView.AutomaticDimension;
+			tbl_commuteItems.TableFooterView = new UITableView (CGRect.Empty);
+			tbl_commuteItems.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+			tbl_commuteItems.ReloadData ();
+
 			var bindingSet = this.CreateBindingSet<SearchAreaModalView, SearchAreaModalViewModel> ();
 			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
 			bindingSet.Bind (propertyTypeSource).To (vm => vm.States);
 			bindingSet.Bind (lbl_distanceRange).To (vm => vm.DistanceLabelText);
 			bindingSet.Bind (source).To (vm => vm.AddressSuggestionItems);
+			bindingSet.Bind (itemSource).To (vm => vm.CommuteItems);
 			bindingSet.Apply ();
 
 			InitUI ();
@@ -103,12 +112,14 @@ namespace ThisRoofN.iOS
 					distanceRangeSlider.MaxValue = TRConstant.SearchMinutes.Count() - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
+					tbl_commuteItems.Hidden = false;
 					ViewModelInstance.DistanceType = 1;
 					break;
 				case 1: // Distnace Selected
 					distanceRangeSlider.MaxValue = TRConstant.SearchDistances.Count() - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
+					tbl_commuteItems.Hidden = true;
 					ViewModelInstance.DistanceType = 0;
 					break;
 				case 2: // Nation Wide Selected
@@ -180,6 +191,32 @@ namespace ThisRoofN.iOS
 			{
 				LocationSuggestionCell cell = (LocationSuggestionCell)tableView.DequeueReusableCell (LocationSuggestionCell.Identifier);
 				return cell;
+			}
+		}
+
+		public class SearchAreaCommuteItemsTableViewSource : MvxTableViewSource
+		{
+			SearchAreaModalView masterView;
+			public SearchAreaCommuteItemsTableViewSource (SearchAreaModalView _masterView, UITableView tv) : base (tv)
+			{
+				masterView = _masterView;
+			}
+
+			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				return 50.0f;
+			}
+
+			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
+			{
+				SearchAreaCommuteCell cell = (SearchAreaCommuteCell)tableView.DequeueReusableCell (SearchAreaCommuteCell.Identifier);
+				return cell;
+			}
+
+			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+			{
+				tableView.DeselectRow (indexPath, true);
+				masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected = !masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected;
 			}
 		}
 	}

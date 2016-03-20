@@ -37,19 +37,10 @@ namespace ThisRoofN.iOS
 		UIKit.UISegmentedControl seg_areaType { get; set; }
 
 		[Outlet]
+		UIKit.UITableView tbl_commuteItems { get; set; }
+
+		[Outlet]
 		UIKit.UITableView tbl_suggestion { get; set; }
-
-		[Outlet]
-		UIKit.UIImageView tick_carpool { get; set; }
-
-		[Outlet]
-		UIKit.UIImageView tick_driving { get; set; }
-
-		[Outlet]
-		UIKit.UIImageView tick_notraffic { get; set; }
-
-		[Outlet]
-		UIKit.UIImageView tick_rushHour { get; set; }
 
 		[Outlet]
 		UIKit.UITextField txt_address { get; set; }
@@ -74,6 +65,11 @@ namespace ThisRoofN.iOS
 			if (btn_clearAll != null) {
 				btn_clearAll.Dispose ();
 				btn_clearAll = null;
+			}
+
+			if (btn_getOwnLocation != null) {
+				btn_getOwnLocation.Dispose ();
+				btn_getOwnLocation = null;
 			}
 
 			if (btn_modalBack != null) {
@@ -106,24 +102,19 @@ namespace ThisRoofN.iOS
 				seg_areaType = null;
 			}
 
-			if (tick_carpool != null) {
-				tick_carpool.Dispose ();
-				tick_carpool = null;
+			if (tbl_suggestion != null) {
+				tbl_suggestion.Dispose ();
+				tbl_suggestion = null;
 			}
 
-			if (tick_driving != null) {
-				tick_driving.Dispose ();
-				tick_driving = null;
+			if (txt_address != null) {
+				txt_address.Dispose ();
+				txt_address = null;
 			}
 
-			if (tick_notraffic != null) {
-				tick_notraffic.Dispose ();
-				tick_notraffic = null;
-			}
-
-			if (tick_rushHour != null) {
-				tick_rushHour.Dispose ();
-				tick_rushHour = null;
+			if (view_addressBack != null) {
+				view_addressBack.Dispose ();
+				view_addressBack = null;
 			}
 
 			if (view_distance != null) {
@@ -141,29 +132,14 @@ namespace ThisRoofN.iOS
 				view_rangeSlider = null;
 			}
 
-			if (view_addressBack != null) {
-				view_addressBack.Dispose ();
-				view_addressBack = null;
-			}
-
-			if (txt_address != null) {
-				txt_address.Dispose ();
-				txt_address = null;
-			}
-
-			if (btn_getOwnLocation != null) {
-				btn_getOwnLocation.Dispose ();
-				btn_getOwnLocation = null;
-			}
-
 			if (view_suggestionBack != null) {
 				view_suggestionBack.Dispose ();
 				view_suggestionBack = null;
 			}
 
-			if (tbl_suggestion != null) {
-				tbl_suggestion.Dispose ();
-				tbl_suggestion = null;
+			if (tbl_commuteItems != null) {
+				tbl_commuteItems.Dispose ();
+				tbl_commuteItems = null;
 			}
 		}
 	}

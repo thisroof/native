@@ -19,6 +19,7 @@ namespace ThisRoofN.iOS
 				viewType.Name == "NormalSearchViewController" ||
 				viewType.Name == "SearchView" ||
 				viewType.Name == "SearchAreaModalView" ||
+				viewType.Name == "InHomeModalView" ||
 				viewType.Name == "AffordSearchView" ||
 				viewType.Name == "AffordResultView") {
 				return SearchFlowStoryboard;
@@ -26,7 +27,7 @@ namespace ThisRoofN.iOS
 				viewType.Name == "TRWebViewController") {
 				return SettingsStoryboard;
 			} else {
-				return SearchResultStoryboard;
+				return SearchFlowStoryboard;
 			}
 		}
 	}

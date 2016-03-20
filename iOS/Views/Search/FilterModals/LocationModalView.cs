@@ -4,13 +4,66 @@ using System;
 
 using Foundation;
 using UIKit;
+using CoreGraphics;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.iOS.Views;
 
 namespace ThisRoofN.iOS
 {
-	public partial class LocationModalView : UIViewController
+	public partial class LocationModalView : BaseModalView
 	{
 		public LocationModalView (IntPtr handle) : base (handle)
 		{
+		}
+
+		public LocationModalViewModel ViewModelInstance {
+			get {
+				return (LocationModalViewModel)base.ViewModel;
+			}
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			// Bind Item Tableview source
+			var source = new LocationItemsTableViewSource (this, tbl_locationItems);
+			tbl_locationItems.Source = source;
+			tbl_locationItems.RowHeight = UITableView.AutomaticDimension;
+			tbl_locationItems.TableFooterView = new UITableView (CGRect.Empty);
+			tbl_locationItems.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+			tbl_locationItems.ReloadData ();
+
+			var bindingSet = this.CreateBindingSet<LocationModalView, LocationModalViewModel> ();
+			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
+			bindingSet.Bind (source).To (vm => vm.Items);
+			bindingSet.Apply ();
+		}
+
+		public class LocationItemsTableViewSource : MvxTableViewSource
+		{
+			LocationModalView masterView;
+			public LocationItemsTableViewSource (LocationModalView _masterView, UITableView tv) : base (tv)
+			{
+				masterView = _masterView;
+			}
+
+			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				return 60.0f;
+			}
+
+			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
+			{
+				LocationItemCell cell = (LocationItemCell)tableView.DequeueReusableCell (LocationItemCell.Identifier);
+				return cell;
+			}
+
+			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+			{
+				tableView.DeselectRow (indexPath, true);
+				masterView.ViewModelInstance.Items [indexPath.Row].Selected = !masterView.ViewModelInstance.Items [indexPath.Row].Selected;
+			}
 		}
 	}
 }

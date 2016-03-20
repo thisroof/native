@@ -39,7 +39,11 @@ namespace ThisRoofN.RestService
 		public async Task<bool> IsTokenValid()
 		{
 			TRSuccessModel response = await CallRestAPI<TRSuccessModel>(endpoint_testAPI, null, HTTP_METHOD.GET);
-			return response.Success;
+			if (response == null) {
+				return false;
+			} else {
+				return response.Success;
+			}
 		}
 
 		public async Task<TRUser> Login(string email, string password)

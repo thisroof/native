@@ -26,6 +26,7 @@ namespace ThisRoofN.ViewModels
 
 			// init states
 			InitStates ();
+			InitCommuteItems ();
 		}
 
 		private MvxCommand _modalCloseCommand;
@@ -174,6 +175,17 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+		private List<CheckboxItemModel> _commuteItems;
+
+		public List<CheckboxItemModel> CommuteItems {
+			get {
+				return _commuteItems;
+			}
+			set {
+				_commuteItems = value;
+			}
+		}
+
 		private void InitStates ()
 		{
 			_states = new List<CheckboxItemModel> ();
@@ -192,6 +204,18 @@ namespace ThisRoofN.ViewModels
 				_states.Add (new CheckboxItemModel {
 					Title = item,
 					Selected = (statesList.Contains (item))
+				});
+			}
+		}
+
+		private void InitCommuteItems()
+		{
+			_commuteItems = new List<CheckboxItemModel> ();
+
+			foreach (var item in TRConstant.CommuteItems) {
+				_commuteItems.Add (new CheckboxItemModel {
+					Title = item,
+					Selected = false
 				});
 			}
 		}

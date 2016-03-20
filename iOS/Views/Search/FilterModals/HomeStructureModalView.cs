@@ -4,13 +4,66 @@ using System;
 
 using Foundation;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using MvvmCross.Binding.BindingContext;
+using CoreGraphics;
 
 namespace ThisRoofN.iOS
 {
-	public partial class HomeStructureModalView : UIViewController
+	public partial class HomeStructureModalView : BaseModalView
 	{
 		public HomeStructureModalView (IntPtr handle) : base (handle)
 		{
+		}
+
+		public HomeStructureModalViewModel ViewModelInstance {
+			get {
+				return (HomeStructureModalViewModel)base.ViewModel;
+			}
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			// Bind Item Tableview source
+			var source = new HomeStructureItemsTableViewSource (this, tbl_items);
+			tbl_items.Source = source;
+			tbl_items.RowHeight = UITableView.AutomaticDimension;
+			tbl_items.TableFooterView = new UITableView (CGRect.Empty);
+			tbl_items.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+			tbl_items.ReloadData ();
+
+			var bindingSet = this.CreateBindingSet<HomeStructureModalView, HomeStructureModalViewModel> ();
+			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
+			bindingSet.Bind (source).To (vm => vm.Items);
+			bindingSet.Apply ();
+		}
+
+		public class HomeStructureItemsTableViewSource : MvxTableViewSource
+		{
+			HomeStructureModalView masterView;
+			public HomeStructureItemsTableViewSource (HomeStructureModalView _masterView, UITableView tv) : base (tv)
+			{
+				masterView = _masterView;
+			}
+
+			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				return 60.0f;
+			}
+
+			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
+			{
+				HomeStructureItemCell cell = (HomeStructureItemCell)tableView.DequeueReusableCell (HomeStructureItemCell.Identifier);
+				return cell;
+			}
+
+			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+			{
+				tableView.DeselectRow (indexPath, true);
+				masterView.ViewModelInstance.Items [indexPath.Row].Selected = !masterView.ViewModelInstance.Items [indexPath.Row].Selected;
+			}
 		}
 	}
 }

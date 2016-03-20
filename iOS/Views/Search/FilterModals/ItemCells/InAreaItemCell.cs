@@ -4,13 +4,23 @@ using System;
 
 using Foundation;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using MvvmCross.Binding.BindingContext;
+using ThisRoofN.iOS.ValueConverters;
 
 namespace ThisRoofN.iOS
 {
-	public partial class InAreaItemCell : UITableViewCell
+	public partial class InAreaItemCell : MvxTableViewCell
 	{
+		public static string Identifier = "InAreaItemCell";
 		public InAreaItemCell (IntPtr handle) : base (handle)
 		{
+			this.DelayBind (() => {
+				var set = this.CreateBindingSet<InAreaItemCell, CheckboxItemModel>();
+				set.Bind(iv_checkbox).To(vm => vm.Selected).WithConversion(new CheckmarkConverter());
+				set.Bind(lbl_title).To(vm => vm.Title);
+				set.Apply();
+			});
 		}
 	}
 }

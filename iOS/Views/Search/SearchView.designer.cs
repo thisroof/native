@@ -22,7 +22,7 @@ namespace ThisRoofN.iOS
 		UIKit.UIButton btn_homeStructure { get; set; }
 
 		[Outlet]
-		UIKit.UIImageView btn_inArea { get; set; }
+		UIKit.UIButton btn_inArea { get; set; }
 
 		[Outlet]
 		UIKit.UIButton btn_inHome { get; set; }
@@ -50,9 +50,49 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (view_rangeSlider != null) {
-				view_rangeSlider.Dispose ();
-				view_rangeSlider = null;
+			if (btn_architecture != null) {
+				btn_architecture.Dispose ();
+				btn_architecture = null;
+			}
+
+			if (btn_homeDetails != null) {
+				btn_homeDetails.Dispose ();
+				btn_homeDetails = null;
+			}
+
+			if (btn_homeStructure != null) {
+				btn_homeStructure.Dispose ();
+				btn_homeStructure = null;
+			}
+
+			if (btn_inHome != null) {
+				btn_inHome.Dispose ();
+				btn_inHome = null;
+			}
+
+			if (btn_inArea != null) {
+				btn_inArea.Dispose ();
+				btn_inArea = null;
+			}
+
+			if (btn_lifeStyle != null) {
+				btn_lifeStyle.Dispose ();
+				btn_lifeStyle = null;
+			}
+
+			if (btn_location != null) {
+				btn_location.Dispose ();
+				btn_location = null;
+			}
+
+			if (btn_searchArea != null) {
+				btn_searchArea.Dispose ();
+				btn_searchArea = null;
+			}
+
+			if (btn_viewResult != null) {
+				btn_viewResult.Dispose ();
+				btn_viewResult = null;
 			}
 
 			if (lbl_priceRange != null) {
@@ -65,49 +105,9 @@ namespace ThisRoofN.iOS
 				txt_sortBy = null;
 			}
 
-			if (btn_viewResult != null) {
-				btn_viewResult.Dispose ();
-				btn_viewResult = null;
-			}
-
-			if (btn_searchArea != null) {
-				btn_searchArea.Dispose ();
-				btn_searchArea = null;
-			}
-
-			if (btn_inArea != null) {
-				btn_inArea.Dispose ();
-				btn_inArea = null;
-			}
-
-			if (btn_location != null) {
-				btn_location.Dispose ();
-				btn_location = null;
-			}
-
-			if (btn_inHome != null) {
-				btn_inHome.Dispose ();
-				btn_inHome = null;
-			}
-
-			if (btn_architecture != null) {
-				btn_architecture.Dispose ();
-				btn_architecture = null;
-			}
-
-			if (btn_homeStructure != null) {
-				btn_homeStructure.Dispose ();
-				btn_homeStructure = null;
-			}
-
-			if (btn_homeDetails != null) {
-				btn_homeDetails.Dispose ();
-				btn_homeDetails = null;
-			}
-
-			if (btn_lifeStyle != null) {
-				btn_lifeStyle.Dispose ();
-				btn_lifeStyle = null;
+			if (view_rangeSlider != null) {
+				view_rangeSlider.Dispose ();
+				view_rangeSlider = null;
 			}
 		}
 	}

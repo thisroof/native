@@ -189,8 +189,6 @@
     <ImageAsset Include="Resources\Images.xcassets\icon_arrow_blue_right.imageset\icon_collapsed.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_tick.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_emp.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_emp.imageset\icon_checkbox_emp%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_tick.imageset\icon_checkbox_tick%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_navigator.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_slider_marker.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_navigator.imageset\current_location.png" />
@@ -224,6 +222,24 @@
     <ImageAsset Include="Resources\Images.xcassets\icon_commit.imageset\air_plane.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_google_logo.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_google_logo.imageset\powered_by_google_on_white%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_emp.imageset\icon_tick_emp.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_tick.imageset\icon_checkbox_tick.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_architecture.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_homeDetails.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_homeStructure.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_location.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_area.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_inArea.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_inHome.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_lifeStyle.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_architecture.imageset\img_architecture.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_area.imageset\img_searchArea.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_homeDetails.imageset\img_homedetails.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_homeStructure.imageset\img_homestructure.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_inArea.imageset\img_inArea.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_inHome.imageset\img_inhome.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_lifeStyle.imageset\img_lifestyle.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_location.imageset\img_location.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -457,6 +473,26 @@
     <Compile Include="Views\Search\FilterModals\ItemCells\LocationSuggestionCell.designer.cs">
       <DependentUpon>LocationSuggestionCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\ArchtectureItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\ArchtectureItemCell.designer.cs">
+      <DependentUpon>ArchtectureItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\HomeDetailItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\HomeDetailItemCell.designer.cs">
+      <DependentUpon>HomeDetailItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\HomeStructureItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\HomeStructureItemCell.designer.cs">
+      <DependentUpon>HomeStructureItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\LifestyleItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\LifestyleItemCell.designer.cs">
+      <DependentUpon>LifestyleItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\SearchAreaCommuteCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\SearchAreaCommuteCell.designer.cs">
+      <DependentUpon>SearchAreaCommuteCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -481,6 +517,7 @@
     <Folder Include="Views\Settings\" />
     <Folder Include="Views\Search\FilterModals\" />
     <Folder Include="Views\Search\FilterModals\ItemCells\" />
+    <Folder Include="Resources\Images.xcassets\img_search_homeDetails.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

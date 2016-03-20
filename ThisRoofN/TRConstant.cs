@@ -51,9 +51,140 @@ namespace ThisRoofN
 		public static readonly int MaxValidDebts = 50000;
 		public static readonly int MinValidDownPayment = 0;
 		public static readonly int MaxValidDownPayment = 5000000;
-
 		public static readonly int OneAcreToSquareFoot = 43560;
 
+		#region SEARCH AREA consts
+		public static readonly List<string> CommuteItems = new List<string>() {
+			"Driving",
+			"Carpool",
+			"No traffic",
+			"Rush Hour",
+		};
+		#endregion
+
+		#region IN THE HOME consts
+		public static readonly List<string> InHomeItems = new List<string>() {
+			"Garage",
+			"Swimming Pool",
+			"Spa/Hot Tub",
+			"Pond",
+			"Yard/Garden",
+			"Fireplace",
+			"BBQ",
+			"Walk in Closet",
+			"Eco-Friendly",
+			"Home Theater",
+			"Basement",
+			"Attic",
+			"Green House",
+			"Boat Doc",
+			"Disabled Access",
+			"Deck/Patio",
+			"Bright & Airy",
+			"RV Parking"
+		};
+		#endregion
+
+		#region IN THE AREA consts
+		public static readonly List<string> InAreaItems = new List<string>() {
+			"Schools",
+			"Top Rated Cafes/Restaurants",
+			"Grocery Stores",
+			"Shopping Malls/Plazas",
+			"Entertainment",
+			"Parks",
+			"Golf Course",
+			"Beaches",
+			"Mueseums/Galleries",
+			"Hospitals",
+			"Theatres",
+			"Sports Arenas",
+			"Amusement Parks",
+			"Salons",
+			"Airport",
+			"Public Library",
+			"Banks",
+			"Water Marina"
+		};
+		#endregion
+
+		#region Search LOCATION consts
+		public static readonly List<string> LocationItems = new List<string>() {
+			"City/Urban",
+			"Suburb",
+			"Rural"
+		};
+		#endregion
+
+		#region Search Archticture consts
+		public static readonly List<string> ArchitectureItems = new List<string>() {
+			"Modern",
+			"Contemporary",
+			"Loft",
+			"Historic Style Homes",
+			"Cottage",
+			"Cape Code",
+			"Craftsman",
+			"Colonial",
+			"Mid-Century Modern",
+			"Italianate",
+			"Prairie",
+			"Ranch Style",
+			"Neoclassical",
+			"Spanish",
+			"Tudor",
+			"Mediterranean",
+			"Oriental",
+			"Victorian",
+			"Art Deco",
+		};
+		#endregion
+
+		#region Search LIFESTYLE consts
+		public static readonly List<string> LifestyleItems = new List<string>() {
+			"Dog Lover",
+			"Fitness Junkie (gym/studios)",
+			"Hikers",
+			"Skiiers/Boarders",
+			"Foodies",
+			"Outdoor Junkie/Fishing",
+			"Higher Rollers - Casino/Resorts",
+			"Nightlife(bars)",
+			"Golfers",
+			"Ballers",
+			"Tennis Enthusiasts",
+			"Surfers",
+			"Skaters - skate parks"
+		};
+		#endregion
+
+		#region Search HOME STRUCTURE consts
+		public static readonly List<string> HomeStructureItems = new List<string>() {
+			"Single Family",
+			"Condo",
+			"Townhouse",
+			"Duplex",
+			"Manufactured",
+			"Lots/Land",
+			"Timeshare"
+		};
+		#endregion
+
+		#region HOME DETAILS consts
+		public static readonly int MinHomeAge = 1912;
+		public static readonly int MaxHomeAge = 2016;
+
+		public static readonly List<string> HomeDetailItems = new List<string>() {
+			"Guest Quarters",
+			"Forclosure/Bank Owned",
+			"New construction",
+			"Rennovated",
+			"No HOA",
+			"Farm/Horse"
+		};
+		#endregion
+
+		#region OTHER
 		public static readonly Dictionary<string, string> SortTypes = new Dictionary<string, string>{
 			{"best_deal", "Best Deal"},
 			{"list_price desc", "Price: High to Low"},
@@ -297,6 +428,7 @@ namespace ThisRoofN
 			35,
 			40
 		};
+		#endregion
 	}
 }
 

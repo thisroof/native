@@ -4,13 +4,66 @@ using System;
 
 using Foundation;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using MvvmCross.Binding.BindingContext;
+using CoreGraphics;
 
 namespace ThisRoofN.iOS
 {
-	public partial class LifestyleModalView : UIViewController
+	public partial class LifestyleModalView : BaseModalView
 	{
 		public LifestyleModalView (IntPtr handle) : base (handle)
 		{
+		}
+
+		public LifestyleModalViewModel ViewModelInstance {
+			get {
+				return (LifestyleModalViewModel)base.ViewModel;
+			}
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			// Bind Item Tableview source
+			var source = new LifestyleItemsTableViewSource (this, tbl_items);
+			tbl_items.Source = source;
+			tbl_items.RowHeight = UITableView.AutomaticDimension;
+			tbl_items.TableFooterView = new UITableView (CGRect.Empty);
+			tbl_items.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+			tbl_items.ReloadData ();
+
+			var bindingSet = this.CreateBindingSet<LifestyleModalView, LifestyleModalViewModel> ();
+			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
+			bindingSet.Bind (source).To (vm => vm.Items);
+			bindingSet.Apply ();
+		}
+
+		public class LifestyleItemsTableViewSource : MvxTableViewSource
+		{
+			LifestyleModalView masterView;
+			public LifestyleItemsTableViewSource (LifestyleModalView _masterView, UITableView tv) : base (tv)
+			{
+				masterView = _masterView;
+			}
+
+			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				return 60.0f;
+			}
+
+			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
+			{
+				LifestyleItemCell cell = (LifestyleItemCell)tableView.DequeueReusableCell (LifestyleItemCell.Identifier);
+				return cell;
+			}
+
+			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+			{
+				tableView.DeselectRow (indexPath, true);
+				masterView.ViewModelInstance.Items [indexPath.Row].Selected = !masterView.ViewModelInstance.Items [indexPath.Row].Selected;
+			}
 		}
 	}
 }

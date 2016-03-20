@@ -78,6 +78,13 @@
     <Compile Include="CustomMvx\TRMvxPresentationHint.cs" />
     <Compile Include="ViewModels\Search\SearchViewModel.cs" />
     <Compile Include="ViewModels\Search\FilterModals\SearchAreaModalViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\HomeDetailModalViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\HomeStructureModalViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\InAreaModalViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\InHomeModalViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\LifestyleModalViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\LocationModalViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\ArchitectureModalViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

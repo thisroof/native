@@ -4,13 +4,66 @@ using System;
 
 using Foundation;
 using UIKit;
+using CoreGraphics;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.iOS.Views;
 
 namespace ThisRoofN.iOS
 {
-	public partial class InAreaModalView : UIViewController
+	public partial class InAreaModalView : BaseModalView
 	{
 		public InAreaModalView (IntPtr handle) : base (handle)
 		{
+		}
+
+		public InAreaModalViewModel ViewModelInstance {
+			get {
+				return (InAreaModalViewModel)base.ViewModel;
+			}
+		}
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+
+			// Bind Item Tableview source
+			var source = new AreaItemsTableViewSource (this, tbl_inAreaItems);
+			tbl_inAreaItems.Source = source;
+			tbl_inAreaItems.RowHeight = UITableView.AutomaticDimension;
+			tbl_inAreaItems.TableFooterView = new UITableView (CGRect.Empty);
+			tbl_inAreaItems.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+			tbl_inAreaItems.ReloadData ();
+
+			var bindingSet = this.CreateBindingSet<InAreaModalView, InAreaModalViewModel> ();
+			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
+			bindingSet.Bind (source).To (vm => vm.Items);
+			bindingSet.Apply ();
+		}
+
+		public class AreaItemsTableViewSource : MvxTableViewSource
+		{
+			InAreaModalView masterView;
+			public AreaItemsTableViewSource (InAreaModalView _masterView, UITableView tv) : base (tv)
+			{
+				this.masterView = _masterView;
+			}
+
+			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				return 60.0f;
+			}
+
+			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
+			{
+				InAreaItemCell cell = (InAreaItemCell)tableView.DequeueReusableCell (InAreaItemCell.Identifier);
+				return cell;
+			}
+
+			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+			{
+				tableView.DeselectRow (indexPath, true);
+				masterView.ViewModelInstance.Items [indexPath.Row].Selected = !masterView.ViewModelInstance.Items [indexPath.Row].Selected;
+			}
 		}
 	}
 }

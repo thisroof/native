@@ -18,12 +18,24 @@ namespace ThisRoofN.ViewModels
 {
 	public class SearchViewModel : BaseViewModel
 	{
+		public enum ModalType
+		{
+			SearchArea,
+			InHome,
+			InArea,
+			Location,
+			Architecture,
+			Lifestyle,
+			HomeStructure,
+			HomeDetails
+		}
+
 		private IDevice deviceInfo;
 
 		private MvxCommand _saveCommand;
 		private MvxCommand _searchCommand;
 
-		private MvxCommand _gotoSearchAreaCommand;
+		private MvxCommand<ModalType> _gotoModalCommand;
 
 		public SearchViewModel (IDevice device)
 		{
@@ -38,11 +50,11 @@ namespace ThisRoofN.ViewModels
 //			InitializeViewTypes ();
 		}
 
-		public ICommand GotoSearchAreaCommand
+		public ICommand GotoModalCommand
 		{
 			get {
-				_gotoSearchAreaCommand = _gotoSearchAreaCommand ?? new MvxCommand (GotoSearchArea);
-				return _gotoSearchAreaCommand;
+				_gotoModalCommand = _gotoModalCommand ?? new MvxCommand<ModalType> (GotoModal);
+				return _gotoModalCommand;
 			}
 		}
 
@@ -72,9 +84,35 @@ namespace ThisRoofN.ViewModels
 //			DoSaveOrSearch (true);
 //		}
 
-		private void GotoSearchArea()
+		private void GotoModal(ModalType type)
 		{
-			ShowViewModel<SearchAreaModalViewModel> ();
+			switch (type) {
+			case ModalType.SearchArea:
+				ShowViewModel<SearchAreaModalViewModel> ();
+				break;
+			case ModalType.InHome:
+				ShowViewModel<InHomeModalViewModel> ();
+				break;
+			case ModalType.InArea:
+				ShowViewModel<InAreaModalViewModel> ();
+				break;
+			case ModalType.Location:
+				ShowViewModel<LocationModalViewModel> ();
+				break;
+			case ModalType.Architecture:
+				ShowViewModel<ArchitectureModalViewModel> ();
+				break;
+			case ModalType.Lifestyle:
+				ShowViewModel<LifestyleModalViewModel> ();
+				break;
+			case ModalType.HomeStructure:
+				ShowViewModel<HomeStructureModalViewModel> ();
+				break;
+			case ModalType.HomeDetails:
+				ShowViewModel<HomeDetailModalViewModel> ();
+				break;
+			}
+
 		}
 
 //		private async void DoSaveOrSearch (bool isSearch)

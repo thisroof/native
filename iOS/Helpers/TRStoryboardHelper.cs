@@ -17,6 +17,8 @@ namespace ThisRoofN.iOS
 				return LoginFlowStoryboard;
 			} else if (viewType.Name == "SearchTypeViewController" || 
 				viewType.Name == "NormalSearchViewController" ||
+				viewType.Name == "SearchView" ||
+				viewType.Name == "SearchAreaModalView" ||
 				viewType.Name == "AffordSearchView" ||
 				viewType.Name == "AffordResultView") {
 				return SearchFlowStoryboard;

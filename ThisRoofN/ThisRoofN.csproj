@@ -76,6 +76,8 @@
     <Compile Include="Database\Entities\TREntityBase.cs" />
     <Compile Include="Database\Entities\TREntityLikes.cs" />
     <Compile Include="CustomMvx\TRMvxPresentationHint.cs" />
+    <Compile Include="ViewModels\Search\SearchViewModel.cs" />
+    <Compile Include="ViewModels\Search\FilterModals\SearchAreaModalViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -160,5 +162,6 @@
     <Folder Include="ViewModels\Settings\" />
     <Folder Include="Database\Entities\" />
     <Folder Include="CustomMvx\" />
+    <Folder Include="ViewModels\Search\FilterModals\" />
   </ItemGroup>
 </Project>

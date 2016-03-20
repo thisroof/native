@@ -44,7 +44,7 @@ namespace ThisRoofN.ViewModels
 
 		public void DoStartSearch()
 		{
-			ShowViewModel<NormalSearchViewModel> ();
+			ShowViewModel<SearchViewModel> ();
 		}
 
 		public void DoGetApprove()

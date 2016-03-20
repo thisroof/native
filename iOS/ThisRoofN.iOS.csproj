@@ -331,10 +331,6 @@
     <Compile Include="Views\Search\NormalSearchCells\FilterCheckboxCVCell.designer.cs">
       <DependentUpon>FilterCheckboxCVCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCheckboxCVCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCheckboxCVCell.designer.cs">
-      <DependentUpon>SearchAreaCheckboxCVCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\SearchResult\SearchResultDetailView.cs" />
     <Compile Include="Views\SearchResult\SearchResultDetailView.designer.cs">
       <DependentUpon>SearchResultDetailView.cs</DependentUpon>
@@ -384,10 +380,6 @@
     <Compile Include="Views\Search\NormalSearchCells\SearchDetailFilterCell.designer.cs">
       <DependentUpon>SearchDetailFilterCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\LocationSuggestionCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\LocationSuggestionCell.designer.cs">
-      <DependentUpon>LocationSuggestionCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Search\AffordSearchView.cs" />
     <Compile Include="Views\Search\AffordSearchView.designer.cs">
       <DependentUpon>AffordSearchView.cs</DependentUpon>
@@ -407,6 +399,63 @@
     <Compile Include="PopTriangleView.cs" />
     <Compile Include="PopTriangleView.designer.cs">
       <DependentUpon>PopTriangleView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchView.cs" />
+    <Compile Include="Views\Search\SearchView.designer.cs">
+      <DependentUpon>SearchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\SearchAreaModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\SearchAreaModalView.designer.cs">
+      <DependentUpon>SearchAreaModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\BaseModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\ArchitectureModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\ArchitectureModalView.designer.cs">
+      <DependentUpon>ArchitectureModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\HomeDetailModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\HomeDetailModalView.designer.cs">
+      <DependentUpon>HomeDetailModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\HomeStructureModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\HomeStructureModalView.designer.cs">
+      <DependentUpon>HomeStructureModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\InAreaModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\InAreaModalView.designer.cs">
+      <DependentUpon>InAreaModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\InHomeModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\InHomeModalView.designer.cs">
+      <DependentUpon>InHomeModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\LifestyleModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\LifestyleModalView.designer.cs">
+      <DependentUpon>LifestyleModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\LocationModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\LocationModalView.designer.cs">
+      <DependentUpon>LocationModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\InAreaItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\InAreaItemCell.designer.cs">
+      <DependentUpon>InAreaItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\InHomeItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\InHomeItemCell.designer.cs">
+      <DependentUpon>InHomeItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\LocationItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\LocationItemCell.designer.cs">
+      <DependentUpon>LocationItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\SearchAreaCheckboxCVCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\SearchAreaCheckboxCVCell.designer.cs">
+      <DependentUpon>SearchAreaCheckboxCVCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\LocationSuggestionCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\LocationSuggestionCell.designer.cs">
+      <DependentUpon>LocationSuggestionCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -430,6 +479,8 @@
     <Folder Include="Resources\Images.xcassets\icon_dislike.imageset\" />
     <Folder Include="Resources\Images.xcassets\icon_dislike_did.imageset\" />
     <Folder Include="Views\Settings\" />
+    <Folder Include="Views\Search\FilterModals\" />
+    <Folder Include="Views\Search\FilterModals\ItemCells\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

@@ -12,6 +12,8 @@ namespace ThisRoofN.iOS.Helpers
 
 		public static UIColor LoadingBack = new UIColor(0, 0, 0, 0.6f);
 
+		public static UIColor Black50Alpha = new UIColor(0, 0, 0, 0.5f);
+
 	}
 }
 

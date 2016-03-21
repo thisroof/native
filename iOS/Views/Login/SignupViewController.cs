@@ -14,7 +14,7 @@ using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.iOS
 {
-	partial class SignupViewController : BaseViewController
+	partial class SignupViewController : BaseViewController, IUIGestureRecognizerDelegate
 	{
 		private MPMoviePlayerController moviePlayer;
 		private LoginManager loginManager;
@@ -50,13 +50,21 @@ namespace ThisRoofN.iOS
 			});
 
 			var facebookGesture = new UITapGestureRecognizer (() => {
-				ViewModelInstance.FacebookSignupCommand.Execute(null);
+				ProcessFacebookLogin();
 			});
+
+			var resignGesture = new UITapGestureRecognizer (HideKeyboard);
+			resignGesture.Delegate = this;
 
 			img_btnFbLogin.UserInteractionEnabled = true;
 			img_btn_back.UserInteractionEnabled = true;
 			img_btnFbLogin.AddGestureRecognizer (facebookGesture);
 			img_btn_back.AddGestureRecognizer (backGesture);
+
+			view_video.AddGestureRecognizer (resignGesture);
+
+			loginManager = new LoginManager ();
+			loginManager.LoginBehavior = LoginBehavior.Native;
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -84,6 +92,23 @@ namespace ThisRoofN.iOS
 			}
 		}
 
+		private void HideKeyboard()
+		{
+			this.View.EndEditing (true);
+		}
+
+		[Export ("gestureRecognizer:shouldReceiveTouch:")]
+		public bool ShouldReceiveTouch (UIKit.UIGestureRecognizer recognizer, UIKit.UITouch touch)
+		{
+			return true;
+		}
+
+		[Export ("gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:")]
+		public bool ShouldRecognizeSimultaneously (UIKit.UIGestureRecognizer gestureRecognizer, UIKit.UIGestureRecognizer otherGestureRecognizer)
+		{
+			return true;
+		}
+
 		private void InitVideoView()
 		{
 			moviePlayer	= new MPMoviePlayerController (NSUrl.FromFilename ("Videos/SplashVideo.mp4"));
@@ -101,7 +126,7 @@ namespace ThisRoofN.iOS
 			LoginManagerLoginResult result = await loginManager.LogInWithReadPermissionsAsync (readPermissions.ToArray());
 
 			if (result.IsCancelled) {
-				UserDialogs.Instance.Alert ("User cancelled Facebook Login", "ThisRoof");
+				UserDialogs.Instance.Alert ("User cancelled Facebook signup", "ThisRoof");
 				return;
 			}
 

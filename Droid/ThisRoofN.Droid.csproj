@@ -79,12 +79,6 @@
     <Reference Include="AndHUD">
       <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\MonoAndroid10\AndHUD.dll</HintPath>
     </Reference>
-    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs">
-      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.4.1.0\lib\MonoAndroid10\Acr.MvvmCross.Plugins.UserDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs.Droid">
-      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.4.1.0\lib\MonoAndroid10\Acr.MvvmCross.Plugins.UserDialogs.Droid.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -187,11 +181,14 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Bootstrap\UserDialogsPluginBootstrap.cs" />
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
     <Compile Include="Bootstrap\SqlitePluginBootstrap.cs" />
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
+    <Compile Include="Setup.cs" />
+    <Compile Include="CustomMvxDroid\TRMvxDroidViewPresenter.cs" />
+    <Compile Include="CustomMvxDroid\TRMvxFragmentTypeLookup.cs" />
+    <Compile Include="LinkerPleaseInclude.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -216,5 +213,8 @@
       <Version>4.10.0.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomMvxDroid\" />
   </ItemGroup>
 </Project>

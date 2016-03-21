@@ -98,7 +98,7 @@ namespace ThisRoofN.iOS
 
 		private async void ProcessFacebookLogin()
 		{
-			LoginManagerLoginResult result = await loginManager.LogInWithReadPermissionsAsync (readPermissions.ToArray(), this);
+			LoginManagerLoginResult result = await loginManager.LogInWithReadPermissionsAsync (readPermissions.ToArray());
 
 			if (result.IsCancelled) {
 				UserDialogs.Instance.Alert ("User cancelled Facebook Login", "ThisRoof");

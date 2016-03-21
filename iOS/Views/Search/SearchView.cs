@@ -52,6 +52,10 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (btn_homeDetails).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeDetails);
 			bindingSet.Apply ();
 
+			btn_searchArea.TouchUpInside += (object sender, EventArgs e) => {
+				Console.WriteLine("asdf");
+			};
+
 			UIComboBox soryByComboBox = new UIComboBox (ViewModelInstance.SortTypes, 0, txt_sortBy, 
 				(index, text) => {
 					ViewModelInstance.SelectedSortType = text;

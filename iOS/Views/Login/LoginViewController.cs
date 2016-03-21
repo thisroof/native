@@ -67,7 +67,7 @@ namespace ThisRoofN.iOS
 			view_video.AddGestureRecognizer (resignGesture);
 
 			loginManager = new LoginManager ();
-			loginManager.LoginBehavior = LoginBehavior.SystemAccount;
+			loginManager.LoginBehavior = LoginBehavior.Native;
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -127,7 +127,7 @@ namespace ThisRoofN.iOS
 
 		private async void ProcessFacebookLogin()
 		{
-			LoginManagerLoginResult result = await loginManager.LogInWithReadPermissionsAsync (readPermissions.ToArray(), this);
+			LoginManagerLoginResult result = await loginManager.LogInWithReadPermissionsAsync (readPermissions.ToArray());
 
 			if (result.IsCancelled) {
 				UserDialogs.Instance.Alert ("User cancelled Facebook Login", "ThisRoof");

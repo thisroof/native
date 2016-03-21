@@ -106,9 +106,6 @@
     <Reference Include="MvvmCross.Localization">
       <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="Facebook">
-      <HintPath>..\packages\Xamarin.Facebook.iOS.4.10.0.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
-    </Reference>
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
     </Reference>
@@ -162,6 +159,18 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook">
+      <HintPath>..\packages\Xamarin.Facebook.iOS.4.5.1.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +249,14 @@
     <ImageAsset Include="Resources\Images.xcassets\img_search_inHome.imageset\img_inhome.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_lifeStyle.imageset\img_lifestyle.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_location.imageset\img_location.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_inArea.imageset\img_inArea copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_location.imageset\img_location copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_lifeStyle.imageset\img_lifestyle copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_inHome.imageset\img_inhome copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_homeStructure.imageset\img_homestructure copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_homeDetails.imageset\img_homedetails copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_area.imageset\img_searchArea copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_search_architecture.imageset\img_architecture copy.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -493,6 +510,7 @@
     <Compile Include="Views\Search\FilterModals\ItemCells\SearchAreaCommuteCell.designer.cs">
       <DependentUpon>SearchAreaCommuteCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="LinkerPleaseInclude.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -526,12 +544,12 @@
     <BundleResource Include="Resources\animator.html" />
   </ItemGroup>
   <ItemGroup>
-    <XamarinComponentReference Include="facebookios">
-      <Version>4.10.0.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="rangeslider">
       <Version>1.1.0.3</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="facebookios">
+      <Version>4.5.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

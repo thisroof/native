@@ -14,6 +14,7 @@ namespace ThisRoofN.iOS
 	public partial class SearchView : BaseViewController
 	{
 		private RangeSliderView priceRangeSlider;
+
 		public SearchView (IntPtr handle) : base (handle)
 		{
 		}
@@ -42,50 +43,41 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (lbl_priceRange).To (vm => vm.BudgetString);
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			bindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
-			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.SearchArea);
-			bindingSet.Bind (btn_inHome).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.InHome);
-			bindingSet.Bind (btn_inArea).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.InArea);
-			bindingSet.Bind (btn_location).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.Location);
-			bindingSet.Bind (btn_architecture).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.Architecture);
-			bindingSet.Bind (btn_lifeStyle).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.Lifestyle);
-			bindingSet.Bind (btn_homeStructure).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeStructure);
-			bindingSet.Bind (btn_homeDetails).To (vm => vm.GotoModalCommand).CommandParameter(ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeDetails);
+			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.SearchArea);
+			bindingSet.Bind (btn_inHome).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InHome);
+			bindingSet.Bind (btn_inArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InArea);
+			bindingSet.Bind (btn_location).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.Location);
+			bindingSet.Bind (btn_architecture).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.Architecture);
+			bindingSet.Bind (btn_lifeStyle).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.Lifestyle);
+			bindingSet.Bind (btn_homeStructure).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeStructure);
+			bindingSet.Bind (btn_homeDetails).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeDetails);
 			bindingSet.Apply ();
 
 			btn_searchArea.TouchUpInside += (object sender, EventArgs e) => {
-				Console.WriteLine("asdf");
+				Console.WriteLine ("asdf");
 			};
 
 			UIComboBox soryByComboBox = new UIComboBox (ViewModelInstance.SortTypes, 0, txt_sortBy, 
-				(index, text) => {
+				                            (index, text) => {
 					ViewModelInstance.SelectedSortType = text;
 				});
 		}
 
-		private void InitRangeSlider() {
+		private void InitRangeSlider ()
+		{
 			priceRangeSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height));
 
-			priceRangeSlider.MinValue = TRConstant.MinValidBudget;
-			priceRangeSlider.MaxValue = TRConstant.MaxValidBudget;
-
-			if (ViewModelInstance.MinBudget < TRConstant.MinValidBudget || ViewModelInstance.MinBudget > TRConstant.MaxValidBudget) {
-				priceRangeSlider.LeftValue = TRConstant.MinValidBudget;
-			} else {
-				priceRangeSlider.LeftValue = (nfloat)ViewModelInstance.MinBudget;
-			}
-
-			if (ViewModelInstance.MaxBudget > TRConstant.MaxValidBudget || ViewModelInstance.MaxBudget < TRConstant.MinValidBudget) {
-				priceRangeSlider.RightValue = TRConstant.MaxValidBudget;
-			} else {
-				priceRangeSlider.RightValue = (nfloat)ViewModelInstance.MaxBudget;
-			}
+			priceRangeSlider.MinValue = 0;
+			priceRangeSlider.MaxValue = TRConstant.PriceStringValues.Count - 1;
+			priceRangeSlider.LeftValue = ViewModelInstance.MinBudget;
+			priceRangeSlider.RightValue = ViewModelInstance.MaxBudget;
 
 			priceRangeSlider.LeftValueChanged += (nfloat value) => {
-				ViewModelInstance.MinBudget = priceRangeSlider.LeftValue;
+				ViewModelInstance.MinBudget = (int)priceRangeSlider.LeftValue;
 			};
 
 			priceRangeSlider.RightValueChanged += (nfloat value) => {
-				ViewModelInstance.MaxBudget = priceRangeSlider.RightValue;
+				ViewModelInstance.MaxBudget = (int)priceRangeSlider.RightValue;
 			};
 
 			this.view_rangeSlider.AddSubview (priceRangeSlider);

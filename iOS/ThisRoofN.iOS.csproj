@@ -109,9 +109,6 @@
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Acr.Support.iOS">
-      <HintPath>..\packages\Acr.Support.1.0.0\lib\Xamarin.iOS10\Acr.Support.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="Acr.UserDialogs">
       <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
     </Reference>
@@ -171,6 +168,9 @@
     </Reference>
     <Reference Include="Facebook">
       <HintPath>..\packages\Xamarin.Facebook.iOS.4.5.1.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.Support.iOS">
+      <HintPath>..\packages\Acr.Support.1.1.1\lib\Xamarin.iOS10\Acr.Support.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +511,8 @@
       <DependentUpon>SearchAreaCommuteCell.cs</DependentUpon>
     </Compile>
     <Compile Include="LinkerPleaseInclude.cs" />
+    <Compile Include="CustomBinding\RangeSliderLeftTargetBinding.cs" />
+    <Compile Include="CustomBinding\RangeSliderRightTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -536,6 +538,7 @@
     <Folder Include="Views\Search\FilterModals\" />
     <Folder Include="Views\Search\FilterModals\ItemCells\" />
     <Folder Include="Resources\Images.xcassets\img_search_homeDetails.imageset\" />
+    <Folder Include="CustomBinding\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Videos\SplashVideo.mp4" />

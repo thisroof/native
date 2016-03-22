@@ -5,6 +5,7 @@ using UIKit;
 using Foundation;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Platform.IoC;
+using RangeSlider;
 
 namespace ThisRoofN.iOS
 {
@@ -76,6 +77,16 @@ namespace ThisRoofN.iOS
 		{
 			sw.On = !sw.On;
 			sw.ValueChanged += (sender, args) => { sw.On = false; };
+		}
+
+		public void Include(RangeSliderView rsv)
+		{
+			rsv.LeftValue = rsv.LeftValue + 1;
+			rsv.RightValue = rsv.RightValue + 1;
+			rsv.LeftValueChanged += (nfloat value) => {
+				rsv.LeftValue = 1;
+			};
+			rsv.RightValueChanged += (nfloat value) => {rsv.RightValue = 1;};
 		}
 
 		public void Include(INotifyCollectionChanged changed)

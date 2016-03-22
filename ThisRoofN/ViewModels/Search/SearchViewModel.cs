@@ -42,6 +42,11 @@ namespace ThisRoofN.ViewModels
 			deviceInfo = device;
 			DataHelper.CurrentSearchFilter = SearchFilters.FetchLatestFromDatabase();
 
+
+			// Init Values
+			MinBudget = 0;
+			MaxBudget = TRConstant.PriceStringValues.Count - 1;
+
 //			MaxLotSize = MaxLotSizeOptions [0];
 //			HasPool = HasPoolOptions [0];
 //			SelectedSortType = SortTypes [0];
@@ -229,23 +234,25 @@ namespace ThisRoofN.ViewModels
 //
 		#region BUDGET
 
-		public double MaxBudget {
+		private int _maxBudget;
+		public int MaxBudget {
 			get {
-				return DataHelper.CurrentSearchFilter.MaxBudget;
+				return _maxBudget;
 			} 
 			set {
-				DataHelper.CurrentSearchFilter.MaxBudget = ((int)value / TRConstant.BudgetStep) * TRConstant.BudgetStep;
+				_maxBudget = value;
 				RaisePropertyChanged (() => MaxBudget);
 				RaisePropertyChanged (() => BudgetString);
 			}
 		}
 
-		public double MinBudget {
+		private int _minBudget;
+		public int MinBudget {
 			get {
-				return DataHelper.CurrentSearchFilter.MinBudget;
+				return _minBudget;
 			} 
 			set {
-				DataHelper.CurrentSearchFilter.MinBudget = ((int)value / TRConstant.BudgetStep) * TRConstant.BudgetStep;
+				_minBudget = value;
 				RaisePropertyChanged (() => MinBudget);
 				RaisePropertyChanged (() => BudgetString);
 			}
@@ -253,7 +260,7 @@ namespace ThisRoofN.ViewModels
 
 		public string BudgetString {
 			get {
-				return string.Format ("${0} - ${1}", DataHelper.CurrentSearchFilter.MinBudget.ToString ("#,##0"), DataHelper.CurrentSearchFilter.MaxBudget.ToString ("#,##0"));
+				return string.Format ("{0} to {1}", TRConstant.PriceStringValues[MinBudget], TRConstant.PriceStringValues[MaxBudget]);
 			}
 		}
 

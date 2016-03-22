@@ -17,7 +17,6 @@ namespace ThisRoofN.iOS
 {
 	public partial class SearchAreaModalView : BaseModalView, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
-		private RangeSliderView distanceRangeSlider;
 		public SearchAreaModalView (IntPtr handle) : base (handle)
 		{
 		}
@@ -60,6 +59,8 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (propertyTypeSource).To (vm => vm.States);
 			bindingSet.Bind (lbl_distanceRange).To (vm => vm.DistanceLabelText);
 			bindingSet.Bind (source).To (vm => vm.AddressSuggestionItems);
+			bindingSet.Bind (slider_distance).To (vm => vm.Distance);
+
 			bindingSet.Bind (itemSource).To (vm => vm.CommuteItems);
 			bindingSet.Apply ();
 
@@ -108,14 +109,14 @@ namespace ThisRoofN.iOS
 			seg_areaType.ValueChanged += (object sender, EventArgs e) => {
 				switch (seg_areaType.SelectedSegment) {
 				case 0: // Commute Selected
-					distanceRangeSlider.MaxValue = TRConstant.SearchMinutes.Count() - 1;
+					slider_distance.MaxValue = TRConstant.SearchMinutes.Count() - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = false;
 					ViewModelInstance.DistanceType = 1;
 					break;
 				case 1: // Distnace Selected
-					distanceRangeSlider.MaxValue = TRConstant.SearchDistances.Count() - 1;
+					slider_distance.MaxValue = TRConstant.SearchDistances.Count() - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = true;
@@ -129,17 +130,8 @@ namespace ThisRoofN.iOS
 				}
 			};
 
-			// init distance range slider
-			distanceRangeSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height));
-			distanceRangeSlider.MinValue = 0;
-			distanceRangeSlider.MaxValue = TRConstant.SearchMinutes.Count();	// Default selection is commute
-			distanceRangeSlider.LeftValueChanged += (nfloat value) => {
-				ViewModelInstance.MinDistance = (int)distanceRangeSlider.LeftValue;
-			};
-			distanceRangeSlider.RightValueChanged += (nfloat value) => {
-				ViewModelInstance.MaxDistance = (int)distanceRangeSlider.RightValue;
-			};
-			this.view_rangeSlider.AddSubview (distanceRangeSlider);
+			slider_distance.MinValue = 0;
+			slider_distance.MaxValue = TRConstant.SearchMinutes.Count - 1;	// Default selection is commute
 
 			// init suggestion visibility
 			view_suggestionBack.Hidden = true;
@@ -212,11 +204,11 @@ namespace ThisRoofN.iOS
 				return cell;
 			}
 
-			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
-			{
-				tableView.DeselectRow (indexPath, true);
-				masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected = !masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected;
-			}
+//			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+//			{
+//				tableView.DeselectRow (indexPath, true);
+//				masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected = !masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected;
+//			}
 		}
 	}
 }

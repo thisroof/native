@@ -37,6 +37,9 @@ namespace ThisRoofN.iOS
 		UIKit.UISegmentedControl seg_areaType { get; set; }
 
 		[Outlet]
+		UIKit.UISlider slider_distance { get; set; }
+
+		[Outlet]
 		UIKit.UITableView tbl_commuteItems { get; set; }
 
 		[Outlet]
@@ -53,9 +56,6 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIView view_nationWide { get; set; }
-
-		[Outlet]
-		UIKit.UIView view_rangeSlider { get; set; }
 
 		[Outlet]
 		UIKit.UIView view_suggestionBack { get; set; }
@@ -102,6 +102,11 @@ namespace ThisRoofN.iOS
 				seg_areaType = null;
 			}
 
+			if (tbl_commuteItems != null) {
+				tbl_commuteItems.Dispose ();
+				tbl_commuteItems = null;
+			}
+
 			if (tbl_suggestion != null) {
 				tbl_suggestion.Dispose ();
 				tbl_suggestion = null;
@@ -127,19 +132,14 @@ namespace ThisRoofN.iOS
 				view_nationWide = null;
 			}
 
-			if (view_rangeSlider != null) {
-				view_rangeSlider.Dispose ();
-				view_rangeSlider = null;
+			if (slider_distance != null) {
+				slider_distance.Dispose ();
+				slider_distance = null;
 			}
 
 			if (view_suggestionBack != null) {
 				view_suggestionBack.Dispose ();
 				view_suggestionBack = null;
-			}
-
-			if (tbl_commuteItems != null) {
-				tbl_commuteItems.Dispose ();
-				tbl_commuteItems = null;
 			}
 		}
 	}

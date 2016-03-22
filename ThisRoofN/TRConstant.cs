@@ -53,10 +53,60 @@ namespace ThisRoofN
 		public static readonly int MaxValidDownPayment = 5000000;
 		public static readonly int OneAcreToSquareFoot = 43560;
 
+		#region Header consts
+		public static readonly List<string> PriceStringValues = new List<string> {
+			"$0", 
+			"$25k", 
+			"$50k", 
+			"$75k", 
+			"$100k", 
+			"$125k",
+			"$150k",
+			"$175k",
+			"$200k",
+			"$250k",
+			"$300k",
+			"$350k",
+			"$400k",
+			"$450k",
+			"$500k",
+			"$550k",
+			"$600k",
+			"$650k",
+			"$700k",
+			"$750k",
+			"$800k",
+			"$850k",
+			"$900k",
+			"$1M",
+			"$1.5M",
+			"$2M",
+			"$2.5M",
+			"$3M",
+			"$3.5M",
+			"$4M",
+			"$5M",
+			"Any Price"
+		};
+
+		public static readonly Dictionary<string, string> SortTypes = new Dictionary<string, string>{
+			{"best_deal", "Best Deal"},
+			{"list_price desc", "Price: High to Low"},
+			{"list_price asc", "Price: Low to High"},
+			{"listing_date", "Newly Listed"},
+			{"bedrooms", "Bedrooms"},
+			{"full_bathrooms", "Bathrooms"},
+			{"living_area", "Square Feet"},
+			{"lot_size", "Lot Size"},
+			{"year_built", "Year Built"},
+			{"modification_timestamp", "Recently Changed"}
+		};
+		#endregion
+
 		#region SEARCH AREA consts
 		public static readonly List<string> CommuteItems = new List<string>() {
-			"Driving",
-			"Carpool",
+//			"Driving",
+//			"Carpool",
 			"No traffic",
 			"Rush Hour",
 		};
@@ -182,21 +232,47 @@ namespace ThisRoofN
 			"No HOA",
 			"Farm/Horse"
 		};
+
+		public static readonly List<string> SquareFootageOptions = new List<string>{
+			"No Min",
+			"500",
+			"1000",
+			"1500",
+			"2000",
+			"2500",
+			"3000",
+			"3500",
+			"4000",
+			"5000",
+			"10000",
+			"No Max"
+		};
+
+		public static readonly List<string> HomeAgeOptions = new List<string> {
+			"Any Age",
+			"75yrs",
+			"50yrs",
+			"20yrs",
+			"10yrs",
+			"5yrs",
+			"New"
+		};
+
+		public static readonly List<string> LotSizeOptions = new List<string>{
+			"No Min.",
+			"2000",
+			"5000",
+			"8000",
+			"10000",
+			".5 Acres",
+			"1 Acres",
+			"5 Acres",
+			"No Max."
+		};
 		#endregion
 
 		#region OTHER
-		public static readonly Dictionary<string, string> SortTypes = new Dictionary<string, string>{
-			{"best_deal", "Best Deal"},
-			{"list_price desc", "Price: High to Low"},
-			{"list_price asc", "Price: Low to High"},
-			{"listing_date", "Newly Listed"},
-			{"bedrooms", "Bedrooms"},
-			{"full_bathrooms", "Bathrooms"},
-			{"living_area", "Square Feet"},
-			{"lot_size", "Lot Size"},
-			{"year_built", "Year Built"},
-			{"modification_timestamp", "Recently Changed"}
-		};
+
 
 		public static readonly List<string> SearchPropertyTypes = new List<string> {
 			"Single Family",
@@ -224,6 +300,7 @@ namespace ThisRoofN
 		};
 
 		public static readonly List<string> MaxSquareFeetOptions = new List<string>{
+			"0",
 			"500",
 			"1000",
 			"1500",
@@ -234,11 +311,10 @@ namespace ThisRoofN
 			"5000",
 			"6000",
 			"7000",
-			"8000",
-			"9000",
-			"10000",
-			"No Limit"
+			"8000"
 		};
+
+
 
 		public static readonly List<string> MinLotSizeOptions = new List<string>{
 			"0",

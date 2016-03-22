@@ -3,6 +3,9 @@ using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
 using ThisRoofN.Interfaces;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using ThisRoofN.iOS.CustomBinding;
+using RangeSlider;
 
 namespace ThisRoofN.iOS
 {
@@ -30,6 +33,13 @@ namespace ThisRoofN.iOS
 		protected override MvvmCross.iOS.Views.IMvxIosViewsContainer CreateIosViewsContainer ()
 		{
 			return new TRMvxIosViewsContainer ();
+		}
+
+		protected override void FillTargetFactories (MvvmCross.Binding.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
+		{
+			registry.RegisterCustomBindingFactory<RangeSliderView> ("LeftValueChange", view => new RangeSliderLeftTargetBinding(view));
+			registry.RegisterCustomBindingFactory<RangeSliderView> ("RightValueChange", view => new RangeSliderRightTargetBinding(view));
+			base.FillTargetFactories (registry);
 		}
 
 		protected override void InitializeFirstChance ()

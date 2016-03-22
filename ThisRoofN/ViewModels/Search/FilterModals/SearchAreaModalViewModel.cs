@@ -21,8 +21,7 @@ namespace ThisRoofN.ViewModels
 			DistanceType = 1;
 
 			// init min and max distance
-			MinDistance = 0;
-			MaxDistance = TRConstant.SearchMinutes.Count () - 1; // Default Commute Selected
+			Distance = 1;
 
 			// init states
 			InitStates ();
@@ -97,43 +96,29 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private int _minDistance;
+		private int _distance;
 
-		public int MinDistance {
+		public int Distance {
 			get {
-				return _minDistance;
+				return _distance;
 			} 
 			set {
-				_minDistance = value;
-				RaisePropertyChanged (() => MinDistance);
+				_distance = value;
+				RaisePropertyChanged (() => Distance);
 				RaisePropertyChanged (() => DistanceLabelText);
 			}
 		}
 
-		private int _maxDistance;
-
-		public int MaxDistance {
-			get {
-				return _maxDistance;
-			} 
-			set {
-				_maxDistance = value;
-				RaisePropertyChanged (() => MaxDistance);
-				RaisePropertyChanged (() => DistanceLabelText);
-			}
-		}
-
-		private string _distanceLabelText;
 
 		public string DistanceLabelText {
 			get {
 				string retString = string.Empty;
 				switch (DistanceType) {
 				case 0: //Distance
-					retString = string.Format ("{0} mile - {1} mile", TRConstant.SearchDistances [MinDistance], TRConstant.SearchDistances [MaxDistance]);
+					retString = string.Format ("{0} mile ", TRConstant.SearchDistances [Distance]);
 					break;
 				case 1: // Commute
-					retString = string.Format("{0} - {1}", TRConstant.SearchMinutes [MinDistance], TRConstant.SearchMinutes [MaxDistance]);
+					retString = string.Format("{0}", TRConstant.SearchMinutes [Distance]);
 					break;
 				}
 				return retString;

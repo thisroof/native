@@ -13,21 +13,21 @@ namespace ThisRoofN.iOS
 	partial class SearchAreaCommuteCell
 	{
 		[Outlet]
-		UIKit.UIImageView iv_checkbox { get; set; }
+		UIKit.UILabel lbl_title { get; set; }
 
 		[Outlet]
-		UIKit.UILabel lbl_title { get; set; }
+		UIKit.UISwitch swt_option { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (swt_option != null) {
+				swt_option.Dispose ();
+				swt_option = null;
+			}
+
 			if (lbl_title != null) {
 				lbl_title.Dispose ();
 				lbl_title = null;
-			}
-
-			if (iv_checkbox != null) {
-				iv_checkbox.Dispose ();
-				iv_checkbox = null;
 			}
 		}
 	}

@@ -17,7 +17,7 @@ namespace ThisRoofN.iOS
 		{
 			this.DelayBind (() => {
 				var set = this.CreateBindingSet<SearchAreaCommuteCell, CheckboxItemModel>();
-				set.Bind(iv_checkbox).To(vm => vm.Selected).WithConversion(new CheckmarkConverter());
+				set.Bind(swt_option).To(vm => vm.Selected);
 				set.Bind(lbl_title).To(vm => vm.Title);
 				set.Apply();
 			});

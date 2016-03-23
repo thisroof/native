@@ -513,6 +513,7 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="CustomBinding\RangeSliderLeftTargetBinding.cs" />
     <Compile Include="CustomBinding\RangeSliderRightTargetBinding.cs" />
+    <Compile Include="CustomControls\TRMovingLabelRangeSlider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />

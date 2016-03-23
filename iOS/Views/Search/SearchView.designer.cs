@@ -40,9 +40,6 @@ namespace ThisRoofN.iOS
 		UIKit.UIButton btn_viewResult { get; set; }
 
 		[Outlet]
-		UIKit.UILabel lbl_priceRange { get; set; }
-
-		[Outlet]
 		UIKit.UITextField txt_sortBy { get; set; }
 
 		[Outlet]
@@ -65,14 +62,14 @@ namespace ThisRoofN.iOS
 				btn_homeStructure = null;
 			}
 
-			if (btn_inHome != null) {
-				btn_inHome.Dispose ();
-				btn_inHome = null;
-			}
-
 			if (btn_inArea != null) {
 				btn_inArea.Dispose ();
 				btn_inArea = null;
+			}
+
+			if (btn_inHome != null) {
+				btn_inHome.Dispose ();
+				btn_inHome = null;
 			}
 
 			if (btn_lifeStyle != null) {
@@ -93,11 +90,6 @@ namespace ThisRoofN.iOS
 			if (btn_viewResult != null) {
 				btn_viewResult.Dispose ();
 				btn_viewResult = null;
-			}
-
-			if (lbl_priceRange != null) {
-				lbl_priceRange.Dispose ();
-				lbl_priceRange = null;
 			}
 
 			if (txt_sortBy != null) {

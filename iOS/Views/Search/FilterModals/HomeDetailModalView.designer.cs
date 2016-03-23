@@ -16,15 +16,6 @@ namespace ThisRoofN.iOS
 		UIKit.UIButton btn_modalBack { get; set; }
 
 		[Outlet]
-		UIKit.UILabel lbl_homeAge { get; set; }
-
-		[Outlet]
-		UIKit.UILabel lbl_lotSize { get; set; }
-
-		[Outlet]
-		UIKit.UILabel lbl_squareFootage { get; set; }
-
-		[Outlet]
 		UIKit.UITableView tbl_homeDetail { get; set; }
 
 		[Outlet]
@@ -46,21 +37,6 @@ namespace ThisRoofN.iOS
 				btn_modalBack = null;
 			}
 
-			if (lbl_homeAge != null) {
-				lbl_homeAge.Dispose ();
-				lbl_homeAge = null;
-			}
-
-			if (lbl_lotSize != null) {
-				lbl_lotSize.Dispose ();
-				lbl_lotSize = null;
-			}
-
-			if (lbl_squareFootage != null) {
-				lbl_squareFootage.Dispose ();
-				lbl_squareFootage = null;
-			}
-
 			if (tbl_homeDetail != null) {
 				tbl_homeDetail.Dispose ();
 				tbl_homeDetail = null;
@@ -71,14 +47,14 @@ namespace ThisRoofN.iOS
 				view_rangeSliderHomeAge = null;
 			}
 
-			if (view_rangeSliderSquare != null) {
-				view_rangeSliderSquare.Dispose ();
-				view_rangeSliderSquare = null;
-			}
-
 			if (view_rangeSliderLotSize != null) {
 				view_rangeSliderLotSize.Dispose ();
 				view_rangeSliderLotSize = null;
+			}
+
+			if (view_rangeSliderSquare != null) {
+				view_rangeSliderSquare.Dispose ();
+				view_rangeSliderSquare = null;
 			}
 
 			if (view_tableHeader != null) {

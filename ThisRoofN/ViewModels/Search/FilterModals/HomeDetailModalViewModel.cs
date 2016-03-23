@@ -61,8 +61,8 @@ namespace ThisRoofN
 				return _minSqareFootage;
 			} set {
 				_minSqareFootage = value;
+				RaisePropertyChanged (() => MinSquareFootageString);
 				RaisePropertyChanged (() => MinSquareFootage);
-				RaisePropertyChanged (() => SquareFootageString);
 			}
 		}
 
@@ -72,14 +72,20 @@ namespace ThisRoofN
 				return _maxSquareFootage;
 			} set {
 				_maxSquareFootage = value;
+				RaisePropertyChanged (() => MaxSquareFootageString);
 				RaisePropertyChanged (() => MaxSquareFootage);
-				RaisePropertyChanged (() => SquareFootageString);
 			}
 		}
 
-		public string SquareFootageString {
+		public string MinSquareFootageString {
 			get {
-				return string.Format("{0} to {1}", TRConstant.SquareFootageOptions[(int)MinSquareFootage], TRConstant.SquareFootageOptions[(int)MaxSquareFootage]);
+				return TRConstant.SquareFootageOptions [(int)Math.Round(MinSquareFootage, MidpointRounding.AwayFromZero)];
+			}
+		}
+
+		public string MaxSquareFootageString {
+			get {
+				return TRConstant.SquareFootageOptions [(int)Math.Round(MaxSquareFootage, MidpointRounding.AwayFromZero)];
 			}
 		}
 
@@ -89,8 +95,14 @@ namespace ThisRoofN
 				return _minLotSize;
 			} set {
 				_minLotSize = value;
+				RaisePropertyChanged (() => MinLotSizeString);
 				RaisePropertyChanged (() => MinLotSize);
-				RaisePropertyChanged (() => LotSizeString);
+			}
+		}
+
+		public string MinLotSizeString {
+			get {
+				return TRConstant.LotSizeOptions [(int)Math.Round(MinLotSize, MidpointRounding.AwayFromZero)];
 			}
 		}
 
@@ -100,14 +112,14 @@ namespace ThisRoofN
 				return _maxLotSize;
 			} set {
 				_maxLotSize = value;
+				RaisePropertyChanged (() => MaxLotSizeString);
 				RaisePropertyChanged (() => MaxLotSize);
-				RaisePropertyChanged (() => LotSizeString);
 			}
 		}
 
-		public string LotSizeString {
+		public string MaxLotSizeString {
 			get {
-				return string.Format("{0} to {1}", TRConstant.LotSizeOptions[(int)MinLotSize], TRConstant.LotSizeOptions[(int)MaxLotSize]);
+				return TRConstant.LotSizeOptions [(int)Math.Round(MaxLotSize, MidpointRounding.AwayFromZero)];
 			}
 		}
 
@@ -117,8 +129,16 @@ namespace ThisRoofN
 				return _minAge;
 			} set {
 				_minAge = value;
+				RaisePropertyChanged (() => MinAgeString);
 				RaisePropertyChanged (() => MinAge);
-				RaisePropertyChanged (() => AgeString);
+
+			}
+		}
+
+		public string MinAgeString
+		{
+			get {
+				return TRConstant.HomeAgeOptions [(int)Math.Round(MinAge, MidpointRounding.AwayFromZero)];
 			}
 		}
 
@@ -128,14 +148,14 @@ namespace ThisRoofN
 				return _maxAge;
 			} set {
 				_maxAge = value;
+				RaisePropertyChanged (() => MaxAgeString);
 				RaisePropertyChanged (() => MaxAge);
-				RaisePropertyChanged (() => AgeString);
 			}
 		}
 
-		public string AgeString {
+		public string MaxAgeString {
 			get {
-				return string.Format ("{0} to {1}", TRConstant.HomeAgeOptions[(int)MinAge], TRConstant.HomeAgeOptions[(int)MaxAge]);
+				return TRConstant.HomeAgeOptions [(int)Math.Round(MaxAge, MidpointRounding.AwayFromZero)];
 			}
 		}
 

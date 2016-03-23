@@ -13,7 +13,7 @@ namespace ThisRoofN.iOS
 {
 	public partial class SearchView : BaseViewController
 	{
-		private RangeSliderView priceRangeSlider;
+		private TRMovingLabelRangeSlider mPriceRangeSlider;
 
 		public SearchView (IntPtr handle) : base (handle)
 		{
@@ -40,7 +40,10 @@ namespace ThisRoofN.iOS
 			btn_viewResult.Layer.CornerRadius = 0.4f;
 
 			var bindingSet = this.CreateBindingSet<SearchView, SearchViewModel> ();
-			bindingSet.Bind (lbl_priceRange).To (vm => vm.BudgetString);
+			bindingSet.Bind(mPriceRangeSlider.minLabel).To (vm => vm.MinBudgetString);
+			bindingSet.Bind(mPriceRangeSlider.maxLabel).To (vm => vm.MaxBudgetString);
+			bindingSet.Bind(mPriceRangeSlider.rangeSlider).For ("LeftValueChange").To (vm => vm.MinBudget);
+			bindingSet.Bind(mPriceRangeSlider.rangeSlider).For ("RightValueChange").To (vm => vm.MaxBudget);
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			bindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
 			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.SearchArea);
@@ -65,22 +68,12 @@ namespace ThisRoofN.iOS
 
 		private void InitRangeSlider ()
 		{
-			priceRangeSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height));
+			mPriceRangeSlider = new TRMovingLabelRangeSlider (
+				new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height), 
+				0, 
+				TRConstant.PriceStringValues.Count - 1);
 
-			priceRangeSlider.MinValue = 0;
-			priceRangeSlider.MaxValue = TRConstant.PriceStringValues.Count - 1;
-			priceRangeSlider.LeftValue = ViewModelInstance.MinBudget;
-			priceRangeSlider.RightValue = ViewModelInstance.MaxBudget;
-
-			priceRangeSlider.LeftValueChanged += (nfloat value) => {
-				ViewModelInstance.MinBudget = (int)priceRangeSlider.LeftValue;
-			};
-
-			priceRangeSlider.RightValueChanged += (nfloat value) => {
-				ViewModelInstance.MaxBudget = (int)priceRangeSlider.RightValue;
-			};
-
-			this.view_rangeSlider.AddSubview (priceRangeSlider);
+			this.view_rangeSlider.AddSubview (mPriceRangeSlider);
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -94,8 +87,8 @@ namespace ThisRoofN.iOS
 		public override void ViewDidLayoutSubviews ()
 		{
 			base.ViewDidLayoutSubviews ();
-			if (priceRangeSlider != null) {
-				priceRangeSlider.Frame = new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height);
+			if (mPriceRangeSlider != null) {
+				mPriceRangeSlider.Frame = new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height);
 			}
 		}
 	}

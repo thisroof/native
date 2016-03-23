@@ -234,36 +234,41 @@ namespace ThisRoofN.ViewModels
 //
 		#region BUDGET
 
-		private int _maxBudget;
-		public int MaxBudget {
+		private float _maxBudget;
+		public float MaxBudget {
 			get {
 				return _maxBudget;
 			} 
 			set {
 				_maxBudget = value;
+				RaisePropertyChanged (() => MaxBudgetString);
 				RaisePropertyChanged (() => MaxBudget);
-				RaisePropertyChanged (() => BudgetString);
 			}
 		}
 
-		private int _minBudget;
-		public int MinBudget {
+		public string MaxBudgetString {
+			get {
+				return  TRConstant.PriceStringValues [(int)Math.Round(MaxBudget, MidpointRounding.AwayFromZero)];
+			}
+		}
+
+		private float _minBudget;
+		public float MinBudget {
 			get {
 				return _minBudget;
 			} 
 			set {
 				_minBudget = value;
+				RaisePropertyChanged (() => MinBudgetString);
 				RaisePropertyChanged (() => MinBudget);
-				RaisePropertyChanged (() => BudgetString);
 			}
 		}
 
-		public string BudgetString {
+		public string MinBudgetString {
 			get {
-				return string.Format ("{0} to {1}", TRConstant.PriceStringValues[MinBudget], TRConstant.PriceStringValues[MaxBudget]);
+				return  TRConstant.PriceStringValues [(int)Math.Round(MinBudget, MidpointRounding.AwayFromZero)];
 			}
 		}
-
 		#endregion
 
 		#region SORT_BY

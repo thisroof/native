@@ -105,9 +105,7 @@ namespace ThisRoofN
 
 		#region SEARCH AREA consts
 		public static readonly List<string> CommuteItems = new List<string>() {
-//			"Driving",
-//			"Carpool",
-			"No traffic",
+			"Carpool",
 			"Rush Hour",
 		};
 		#endregion

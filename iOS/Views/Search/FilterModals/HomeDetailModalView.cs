@@ -14,9 +14,12 @@ namespace ThisRoofN.iOS
 {
 	public partial class HomeDetailModalView : BaseModalView
 	{
-		private RangeSliderView squareSlider;
-		private RangeSliderView homeAgeSlider;
-		private RangeSliderView lotSizeSlider;
+		//		private RangeSliderView squareSlider;
+		//		private RangeSliderView homeAgeSlider;
+		//		private RangeSliderView lotSizeSlider;
+		private TRMovingLabelRangeSlider mSquareSlider;
+		private TRMovingLabelRangeSlider mHomeAgeSlider;
+		private TRMovingLabelRangeSlider mLotSizeSlider;
 
 		public HomeDetailModalView (IntPtr handle) : base (handle)
 		{
@@ -46,40 +49,61 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
 			bindingSet.Bind (source).To (vm => vm.Items);
 
-			bindingSet.Bind (squareSlider).For ("LeftValueChange").To (vm => vm.MinSquareFootage);
-			bindingSet.Bind (squareSlider).For ("RightValueChange").To (vm => vm.MaxSquareFootage);
-			bindingSet.Bind (homeAgeSlider).For ("LeftValueChange").To (vm => vm.MinAge);
-			bindingSet.Bind (homeAgeSlider).For ("RightValueChange").To (vm => vm.MaxAge);
-			bindingSet.Bind (lotSizeSlider).For ("LeftValueChange").To (vm => vm.MinLotSize);
-			bindingSet.Bind (lotSizeSlider).For ("RightValueChange").To (vm => vm.MaxLotSize);
+			bindingSet.Bind (mSquareSlider.minLabel).To (vm => vm.MinSquareFootageString);
+			bindingSet.Bind (mSquareSlider.maxLabel).To (vm => vm.MaxSquareFootageString);
+			bindingSet.Bind (mHomeAgeSlider.minLabel).To (vm => vm.MinAgeString);
+			bindingSet.Bind (mHomeAgeSlider.maxLabel).To (vm => vm.MaxAgeString);
+			bindingSet.Bind (mLotSizeSlider.minLabel).To (vm => vm.MinLotSizeString);
+			bindingSet.Bind (mLotSizeSlider.maxLabel).To (vm => vm.MaxLotSizeString);
 
-			bindingSet.Bind (lbl_squareFootage).To (vm => vm.SquareFootageString);
-			bindingSet.Bind (lbl_homeAge).To (vm => vm.AgeString);
-			bindingSet.Bind (lbl_lotSize).To (vm => vm.LotSizeString);
+			bindingSet.Bind (mSquareSlider.rangeSlider).For ("LeftValueChange").To (vm => vm.MinSquareFootage);
+			bindingSet.Bind (mSquareSlider.rangeSlider).For ("RightValueChange").To (vm => vm.MaxSquareFootage);
+			bindingSet.Bind (mHomeAgeSlider.rangeSlider).For ("LeftValueChange").To (vm => vm.MinAge);
+			bindingSet.Bind (mHomeAgeSlider.rangeSlider).For ("RightValueChange").To (vm => vm.MaxAge);
+			bindingSet.Bind (mLotSizeSlider.rangeSlider).For ("LeftValueChange").To (vm => vm.MinLotSize);
+			bindingSet.Bind (mLotSizeSlider.rangeSlider).For ("RightValueChange").To (vm => vm.MaxLotSize);
+
 			bindingSet.Apply ();
+		}
+
+		public override void ViewDidLayoutSubviews ()
+		{
+			base.ViewDidLayoutSubviews ();
+			mSquareSlider.Frame = new CGRect (0, 0, this.view_rangeSliderSquare.Frame.Width, this.view_rangeSliderSquare.Frame.Height);
+			mHomeAgeSlider.Frame = new CGRect (0, 0, this.view_rangeSliderHomeAge.Frame.Width, this.view_rangeSliderHomeAge.Frame.Height);
+			mLotSizeSlider.Frame = new CGRect (0, 0, this.view_rangeSliderLotSize.Frame.Width, this.view_rangeSliderLotSize.Frame.Height);
 		}
 
 		private void InitRangeSlider ()
 		{
-			squareSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSliderSquare.Frame.Width, this.view_rangeSliderSquare.Frame.Height));
-			squareSlider.MinValue = 0;
-			squareSlider.MaxValue = TRConstant.SquareFootageOptions.Count - 1;
-			this.view_rangeSliderSquare.AddSubview (squareSlider);
+//			squareSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSliderSquare.Frame.Width, this.view_rangeSliderSquare.Frame.Height));
+//			squareSlider.MinValue = 0;
+//			squareSlider.MaxValue = TRConstant.SquareFootageOptions.Count - 1;
+//			this.view_rangeSliderSquare.AddSubview (squareSlider);
 
-			homeAgeSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSliderHomeAge.Frame.Width, this.view_rangeSliderHomeAge.Frame.Height));
-			homeAgeSlider.MinValue = 0;
-			homeAgeSlider.MaxValue = TRConstant.HomeAgeOptions.Count - 1;
-			this.view_rangeSliderHomeAge.AddSubview (homeAgeSlider);
+			mSquareSlider = new TRMovingLabelRangeSlider (
+				new CGRect (0, 0, this.view_rangeSliderSquare.Frame.Width, this.view_rangeSliderSquare.Frame.Height), 
+				0, 
+				TRConstant.SquareFootageOptions.Count - 1);
+			this.view_rangeSliderSquare.AddSubview (mSquareSlider);
 
-			lotSizeSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSliderLotSize.Frame.Width, this.view_rangeSliderLotSize.Frame.Height));
-			lotSizeSlider.MinValue = 0;
-			lotSizeSlider.MaxValue = TRConstant.MaxLotSizeOptions.Count - 1;
-			this.view_rangeSliderLotSize.AddSubview (lotSizeSlider);
+			mHomeAgeSlider = new TRMovingLabelRangeSlider (
+				new CGRect (0, 0, this.view_rangeSliderHomeAge.Frame.Width, this.view_rangeSliderHomeAge.Frame.Height), 
+				0, 
+				TRConstant.HomeAgeOptions.Count - 1);
+			this.view_rangeSliderHomeAge.AddSubview (mHomeAgeSlider);
+
+			mLotSizeSlider = new TRMovingLabelRangeSlider (
+				new CGRect (0, 0, this.view_rangeSliderLotSize.Frame.Width, this.view_rangeSliderLotSize.Frame.Height), 
+				0, 
+				TRConstant.LotSizeOptions.Count - 1);
+			this.view_rangeSliderLotSize.AddSubview (mLotSizeSlider);
 		}
 
 		public class HomeDetailItemsTableViewSource : MvxTableViewSource
 		{
 			private HomeDetailModalView masterView;
+
 			public HomeDetailItemsTableViewSource (HomeDetailModalView _masterView, UITableView tv) : base (tv)
 			{
 				masterView = _masterView;

@@ -33,22 +33,22 @@ namespace ThisRoofN.iOS
 			base.ViewDidLoad ();
 
 			// Init the State Collection View
-			var propertyTypeSource = new MvxCollectionViewSource (cv_nations, new NSString ("SearchAreaCheckboxCVCell"));
+			var nationsSource = new MvxCollectionViewSource (cv_nations, new NSString ("SearchAreaCheckboxCVCell"));
 			cv_nations.AllowsSelection = true;
-			cv_nations.Source = propertyTypeSource;
+			cv_nations.Source = nationsSource;
 			cv_nations.Delegate = this;
 
 			// Bind Locatin Suggesion Table
-			var source = new LocationSuggestionTableViewSource (tbl_suggestion);
-			tbl_suggestion.Source = source;
+			var locationSuggestionSource = new LocationSuggestionTableViewSource (tbl_suggestion);
+			tbl_suggestion.Source = locationSuggestionSource;
 			tbl_suggestion.RowHeight = UITableView.AutomaticDimension;
 			tbl_suggestion.AllowsSelection = false;
 			tbl_suggestion.TableFooterView = new UITableView (CGRect.Empty);
 			tbl_suggestion.ReloadData ();
 
 			// Bind Item Tableview source
-			var itemSource = new SearchAreaCommuteItemsTableViewSource (this, tbl_commuteItems);
-			tbl_commuteItems.Source = itemSource;
+			var commuteSource = new SearchAreaCommuteItemsTableViewSource (this, tbl_commuteItems);
+			tbl_commuteItems.Source = commuteSource;
 			tbl_commuteItems.RowHeight = UITableView.AutomaticDimension;
 			tbl_commuteItems.TableFooterView = new UITableView (CGRect.Empty);
 			tbl_commuteItems.SeparatorStyle = UITableViewCellSeparatorStyle.None;
@@ -56,12 +56,11 @@ namespace ThisRoofN.iOS
 
 			var bindingSet = this.CreateBindingSet<SearchAreaModalView, SearchAreaModalViewModel> ();
 			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
-			bindingSet.Bind (propertyTypeSource).To (vm => vm.States);
 			bindingSet.Bind (lbl_distanceRange).To (vm => vm.DistanceLabelText);
-			bindingSet.Bind (source).To (vm => vm.AddressSuggestionItems);
 			bindingSet.Bind (slider_distance).To (vm => vm.Distance);
-
-			bindingSet.Bind (itemSource).To (vm => vm.CommuteItems);
+			bindingSet.Bind (nationsSource).To (vm => vm.States);
+			bindingSet.Bind (locationSuggestionSource).To (vm => vm.AddressSuggestionItems);
+			bindingSet.Bind (commuteSource).To (vm => vm.CommuteItems);
 			bindingSet.Apply ();
 
 			InitUI ();
@@ -204,11 +203,11 @@ namespace ThisRoofN.iOS
 				return cell;
 			}
 
-//			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
-//			{
-//				tableView.DeselectRow (indexPath, true);
+			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+			{
+				tableView.DeselectRow (indexPath, true);
 //				masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected = !masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected;
-//			}
+			}
 		}
 	}
 }

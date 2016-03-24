@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_navigationBase"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/TR_DARK_BLUE"
+    android:elevation="7dp">
+    <RelativeLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/mainContentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar" />
+        <include
+            android:id="@+id/loadingFrame"
+            layout="@layout/tr_loading_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:visibility="gone" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/tr_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/toolbar_top_padding" />
+    </RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

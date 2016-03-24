@@ -189,6 +189,12 @@
     <Compile Include="CustomMvxDroid\TRMvxDroidViewPresenter.cs" />
     <Compile Include="CustomMvxDroid\TRMvxFragmentTypeLookup.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="Views\HomeView.cs" />
+    <Compile Include="Views\BaseMvxActivity.cs" />
+    <Compile Include="TRApplication\ThisRoofApplication.cs" />
+    <Compile Include="Views\HomeViewContent.cs" />
+    <Compile Include="Views\BaseMvxFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -204,6 +210,32 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\layout\activity_navigation_base.axml" />
+    <AndroidResource Include="Resources\values\color.xml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\layout\activity_splash.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_splash.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_splash.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_splash.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_splash.png" />
+    <AndroidResource Include="Resources\layout\tr_loading_indicator.axml" />
+    <AndroidResource Include="Resources\anim\activity_slidein_left.xml" />
+    <AndroidResource Include="Resources\anim\activity_slidein_right.axml" />
+    <AndroidResource Include="Resources\anim\activity_slideout_left.xml" />
+    <AndroidResource Include="Resources\anim\activity_slideout_right.xml" />
+    <AndroidResource Include="Resources\anim\slidedown.xml" />
+    <AndroidResource Include="Resources\anim\slideup.xml" />
+    <AndroidResource Include="Resources\layout\tr_toolbar.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_arrow_left_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable\icon_setting_white.png" />
+    <AndroidResource Include="Resources\values\style_layout.xml" />
+    <AndroidResource Include="Resources\raw\animator.html" />
+    <AndroidResource Include="Resources\raw\loading_animator.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -216,5 +248,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomMvxDroid\" />
+    <Folder Include="Views\" />
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Resources\drawable-xxxhdpi\" />
+    <Folder Include="Resources\anim\" />
+    <Folder Include="TRApplication\" />
+    <Folder Include="Resources\raw\" />
   </ItemGroup>
 </Project>

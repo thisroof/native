@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+<!--	ThisRoof Font-->
+	<dimen name="font24sp">24sp</dimen>
+	<dimen name="font22sp">22sp</dimen>
+	<dimen name="font20sp">20sp</dimen>
+    <dimen name="font18sp">18sp</dimen>
+    <dimen name="font16sp">16sp</dimen>
+    <dimen name="font14sp">14sp</dimen>
+    <dimen name="font12sp">12sp</dimen>
+    <dimen name="font10sp">10sp</dimen>
+
+<!--    ThisRoof Paddings-->
+	<dimen name="padding_4dp">4dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="padding_32dp">32dp</dimen>
+    <dimen name="padding_48dp">48dp</dimen>
+    <dimen name="padding_64dp">64dp</dimen>
+
+<!--	ThisRoof Toolbar-->
+	<dimen name="toolbar_height">50dp</dimen>
+	<dimen name="toolbar_top_padding">4dp</dimen>
+
+
+<!--	ThisRoof Gif Animator-->
+
+	<dimen name="animator_width">150dp</dimen>
+	<dimen name="animator_height">83dp</dimen>
+</resources>
+

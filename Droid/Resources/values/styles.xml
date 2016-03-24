@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<!--ThisRoof APP Theme-->
+	<style name="AppTheme" parent="AppTheme.Base">
+	</style>
+	<style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="colorPrimary">@color/TR_DARK_BLUE</item>
+		<item name="colorPrimaryDark">@color/TR_DARK_BLUE</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:colorAccent">#000000</item>
+		<item name="android:colorControlActivated">@color/TR_DARK_BLUE</item>
+		<item name="android:colorControlNormal">#000000</item>
+		<item name="android:windowTranslucentStatus">true</item>
+	</style>
+
+	<!--This Roof Splash Style-->
+	<style name="Theme.Splash" parent="android:Theme">
+		<item name="android:windowNoTitle">true</item>
+	</style>
+
+	<!--Dialog Animation Style-->
+	<style name="DialogAnimation">
+		<item name="android:windowEnterAnimation">@anim/slideup</item>
+		<item name="android:windowExitAnimation">@anim/slidedown</item>
+	</style>
+</resources>

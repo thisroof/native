@@ -7,6 +7,7 @@ using UIKit;
 using MapKit;
 using CoreLocation;
 using ThisRoofN.Helpers;
+using ThisRoofN.iOS.ValueConverters;
 
 namespace ThisRoofN.iOS
 {
@@ -35,8 +36,8 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
-			masterView.BindingSet.Bind (img_like).To (vm => vm.Liked);
-			masterView.BindingSet.Bind (img_dislike).To (vm => vm.Disliked);
+			masterView.BindingSet.Bind (img_like).To (vm => vm.Liked).WithConversion(new LikemarkConverter());
+			masterView.BindingSet.Bind (img_dislike).To (vm => vm.Disliked).WithConversion(new DislikemarkConverter());
 
 			InitUI ();
 		}

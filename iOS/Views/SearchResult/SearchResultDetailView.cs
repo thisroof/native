@@ -11,12 +11,14 @@ using ThisRoofN.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using ThisRoofN.Models.App;
 using ThisRoofN.Models.Service;
+using ThisRoofN.iOS.ValueConverters;
 
 namespace ThisRoofN.iOS
 {
 	public partial class SearchResultDetailView : BaseViewController
 	{
 		public MvxFluentBindingDescriptionSet<SearchResultDetailView, SearchResultDetailViewModel> BindingSet;
+		private SearchResultDetailTableViewSource source;
 
 		public SearchResultDetailView (IntPtr handle) : base (handle)
 		{
@@ -50,12 +52,12 @@ namespace ThisRoofN.iOS
 			BindingSet.Bind (btn_commit).To (vm => vm.DisLikeCommand);
 			BindingSet.Bind (btn_cancel).To (vm => vm.ShowDislikeViewCommand).CommandParameter (false);
 
-			BindingSet.Bind (icon_tooFar).To (vm => vm.TooFar);
-			BindingSet.Bind (icon_tooClose).To (vm => vm.TooClose);
-			BindingSet.Bind (icon_tooSmall).To (vm => vm.TooSmall);
-			BindingSet.Bind (icon_lotTooSmall).To (vm => vm.LotTooSmall);
-			BindingSet.Bind (icon_tooBig).To (vm => vm.HouseTooBig);
-			BindingSet.Bind (icon_ugly).To (vm => vm.Ugly);
+			BindingSet.Bind (icon_tooFar).To (vm => vm.TooFar).WithConversion(new CheckmarkConverter());
+			BindingSet.Bind (icon_tooClose).To (vm => vm.TooClose).WithConversion(new CheckmarkConverter());
+			BindingSet.Bind (icon_tooSmall).To (vm => vm.TooSmall).WithConversion(new CheckmarkConverter());
+			BindingSet.Bind (icon_lotTooSmall).To (vm => vm.LotTooSmall).WithConversion(new CheckmarkConverter());
+			BindingSet.Bind (icon_tooBig).To (vm => vm.HouseTooBig).WithConversion(new CheckmarkConverter());
+			BindingSet.Bind (icon_ugly).To (vm => vm.Ugly).WithConversion(new CheckmarkConverter());
 
 			icon_tooFar.UserInteractionEnabled = true;
 			icon_tooClose.UserInteractionEnabled = true;
@@ -97,14 +99,18 @@ namespace ThisRoofN.iOS
 			base.ViewDidLayoutSubviews ();
 
 			// we set the source and bind here to get the tableview height, exactly
-			var source = new SearchResultDetailTableViewSource (tbl_detail, this);
-			tbl_detail.Source = source;
-			tbl_detail.RowHeight = UITableView.AutomaticDimension;
-			tbl_detail.AllowsSelection = false;
-			tbl_detail.TableFooterView = new UITableView (CGRect.Empty);
 
-			BindingSet.Bind (source).To (vm => vm.ItemDetail.Photos);
-			BindingSet.Apply ();
+			if (source == null) {
+				source = new SearchResultDetailTableViewSource (tbl_detail, this);
+				tbl_detail.Source = source;
+				tbl_detail.RowHeight = UITableView.AutomaticDimension;
+				tbl_detail.AllowsSelection = false;
+				tbl_detail.TableFooterView = new UITableView (CGRect.Empty);
+
+				BindingSet.Bind (source).To (vm => vm.ItemDetail.Photos);
+				BindingSet.Apply ();
+				tbl_detail.ReloadData ();
+			}
 		}
 
 		public class SearchResultDetailTableViewSource : MvxTableViewSource
@@ -137,7 +143,7 @@ namespace ThisRoofN.iOS
 				if (ItemsSource == null) {
 					return 4;
 				} else {
-					return ItemsSource.Cast<TRCottageSimple> ().Count () + 4;
+					return ItemsSource.Cast<CottagePhoto> ().Count () + 4;
 				}
 			}
 

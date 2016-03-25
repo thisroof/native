@@ -27,7 +27,7 @@ namespace ThisRoofN.iOS
 				viewType.Name == "TRWebViewController") {
 				return SettingsStoryboard;
 			} else {
-				return SearchFlowStoryboard;
+				return SearchResultStoryboard;
 			}
 		}
 	}

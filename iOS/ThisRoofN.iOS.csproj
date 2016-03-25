@@ -163,14 +163,20 @@
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
-    </Reference>
     <Reference Include="Facebook">
       <HintPath>..\packages\Xamarin.Facebook.iOS.4.5.1.0\lib\Xamarin.iOS10\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="Acr.Support.iOS">
       <HintPath>..\packages\Acr.Support.1.1.1\lib\Xamarin.iOS10\Acr.Support.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="MvxPlugins.Geocoder">
+      <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\Xamarin.iOS10\MvxPlugins.Geocoder.dll</HintPath>
+    </Reference>
+    <Reference Include="MvxPlugins.Geocoder.iOS">
+      <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\Xamarin.iOS10\MvxPlugins.Geocoder.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -514,6 +520,7 @@
     <Compile Include="CustomBinding\RangeSliderLeftTargetBinding.cs" />
     <Compile Include="CustomBinding\RangeSliderRightTargetBinding.cs" />
     <Compile Include="CustomControls\TRMovingLabelRangeSlider.cs" />
+    <Compile Include="Bootstrap\GeocoderPluginBootstrap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />

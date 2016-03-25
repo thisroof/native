@@ -41,7 +41,7 @@ namespace ThisRoofN
 
 		// Normal Search Property Values
 		public static readonly int BudgetStep = 10000;
-		public static readonly int MinValidBudget = 10000;
+		public static readonly int MinValidBudget = 0;
 		public static readonly int MaxValidBudget = 200000000;
 
 		// Afford Constants
@@ -87,6 +87,41 @@ namespace ThisRoofN
 			"$4M",
 			"$5M",
 			"Any Price"
+		};
+
+		public static readonly List<int> PriceValues = new List<int> {
+			0,
+			25000,
+			50000,
+			75000,
+			100000,
+			125000,
+			150000,
+			175000,
+			200000,
+			250000,
+			300000,
+			350000,
+			400000,
+			450000,
+			500000,
+			550000,
+			600000,
+			650000,
+			700000,
+			750000,
+			800000,
+			850000,
+			900000,
+			1000000,
+			1500000,
+			2000000,
+			2500000,
+			3000000,
+			3500000,
+			4000000,
+			5000000,
+			10000000
 		};
 
 		public static readonly Dictionary<string, string> SortTypes = new Dictionary<string, string>{

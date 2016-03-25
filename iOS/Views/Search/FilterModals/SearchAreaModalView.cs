@@ -12,6 +12,7 @@ using MvvmCross.Binding.iOS.Views;
 using CoreGraphics;
 using RangeSlider;
 using System.Linq;
+using ThisRoofN.Models.App;
 
 namespace ThisRoofN.iOS
 {
@@ -39,10 +40,10 @@ namespace ThisRoofN.iOS
 			cv_nations.Delegate = this;
 
 			// Bind Locatin Suggesion Table
-			var locationSuggestionSource = new LocationSuggestionTableViewSource (tbl_suggestion);
+			var locationSuggestionSource = new LocationSuggestionTableViewSource (this, tbl_suggestion);
 			tbl_suggestion.Source = locationSuggestionSource;
 			tbl_suggestion.RowHeight = UITableView.AutomaticDimension;
-			tbl_suggestion.AllowsSelection = false;
+//			tbl_suggestion.AllowsSelection = false;
 			tbl_suggestion.TableFooterView = new UITableView (CGRect.Empty);
 			tbl_suggestion.ReloadData ();
 
@@ -60,6 +61,7 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (slider_distance).To (vm => vm.Distance);
 			bindingSet.Bind (nationsSource).To (vm => vm.States);
 			bindingSet.Bind (locationSuggestionSource).To (vm => vm.AddressSuggestionItems);
+			bindingSet.Bind (txt_address).To (vm => vm.Address);
 			bindingSet.Bind (commuteSource).To (vm => vm.CommuteItems);
 			bindingSet.Apply ();
 
@@ -168,8 +170,10 @@ namespace ThisRoofN.iOS
 
 		public class LocationSuggestionTableViewSource : MvxTableViewSource
 		{
-			public LocationSuggestionTableViewSource (UITableView tv) : base (tv)
+			SearchAreaModalView masterView;
+			public LocationSuggestionTableViewSource (SearchAreaModalView _masterview, UITableView tv) : base (tv)
 			{
+				masterView = _masterview;
 			}
 
 			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
@@ -181,6 +185,14 @@ namespace ThisRoofN.iOS
 			{
 				LocationSuggestionCell cell = (LocationSuggestionCell)tableView.DequeueReusableCell (LocationSuggestionCell.Identifier);
 				return cell;
+			}
+
+			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+			{
+				tableView.DeselectRow(indexPath, true);
+
+				TRGoogleMapPlace place = masterView.ViewModelInstance.AddressSuggestionItems [indexPath.Row];
+				masterView.ViewModelInstance.Address = place.FullAddress;
 			}
 		}
 

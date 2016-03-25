@@ -8,12 +8,27 @@ using Newtonsoft.Json;
 using ThisRoofN.Interfaces;
 using MvvmCross.Platform;
 using ThisRoofN.Database.Entities;
+using System.Collections.Generic;
 
 namespace ThisRoofN.Models.Service
 {
+	public enum TRSearchType {
+		Distance = 0,
+		Commute = 1,
+		State = 2,
+	}
+
 	[DataContract]
 	public class SearchFilters : TREntityBase
 	{
+		public SearchFilters() {
+			SearchType = (int)TRSearchType.Commute;
+			SearchDistance = 4; // 1 hr for commute time
+			StateFilters = string.Join (",", TRConstant.StateFilters.ToArray ());
+			HasPool = string.Empty;
+			ViewTypes = string.Empty;
+		}
+
 		#region Default Properties
 		[DataMember(Name = "id")]
 		public int UserID { get; set; }
@@ -166,7 +181,7 @@ namespace ThisRoofN.Models.Service
 					address = Address ?? "",
 					city = City ?? "",
 					state = State ?? "",
-					zip_code = Zip ?? "0",
+					zip_code = Zip ?? "",
 					country = "US",//usersAppPreferences.Country ?? "",
 					value = Value.ToString () ,
 					bedrooms = Bedrooms.ToString (),
@@ -179,7 +194,7 @@ namespace ThisRoofN.Models.Service
 					min_budget = MinBudget,
 					min_beds = MinBeds.ToString(),
 					min_baths = MinBaths.ToString(),
-					start_zip = StartZip ?? "0",
+					start_zip = StartZip ?? "",
 					search_type = SearchType.ToString (),
 					// search_dist = Utils.GetSearchDistanceValue(usersAppPreferences.SearchDistance),
 					search_dist = SearchDistance.ToString(),

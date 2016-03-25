@@ -40,12 +40,18 @@ namespace ThisRoofN.iOS
 			btn_viewResult.Layer.CornerRadius = 0.4f;
 
 			var bindingSet = this.CreateBindingSet<SearchView, SearchViewModel> ();
+			bindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			bindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
+
 			bindingSet.Bind(mPriceRangeSlider.minLabel).To (vm => vm.MinBudgetString);
 			bindingSet.Bind(mPriceRangeSlider.maxLabel).To (vm => vm.MaxBudgetString);
 			bindingSet.Bind(mPriceRangeSlider.rangeSlider).For ("LeftValueChange").To (vm => vm.MinBudget);
 			bindingSet.Bind(mPriceRangeSlider.rangeSlider).For ("RightValueChange").To (vm => vm.MaxBudget);
+
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			bindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
+			bindingSet.Bind (btn_viewResult).To (vm => vm.SearchCommand);
+
 			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.SearchArea);
 			bindingSet.Bind (btn_inHome).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InHome);
 			bindingSet.Bind (btn_inArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InArea);

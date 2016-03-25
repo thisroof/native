@@ -6,6 +6,7 @@ using ModernHttpClient;
 using System.Net.Http.Headers;
 using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
+using System.Net;
 
 namespace ThisRoofN.RestService
 {
@@ -36,7 +37,10 @@ namespace ThisRoofN.RestService
 			try
 			{
 				jsonResponse = await CallRestAPI(url, body, httpMethod);
-				result = JsonConvert.DeserializeObject<T>(jsonResponse, jsonSerializeSetting);
+
+				if(!string.IsNullOrEmpty(jsonResponse)) {
+					result = JsonConvert.DeserializeObject<T>(jsonResponse, jsonSerializeSetting);
+				}
 			}
 			catch (Exception e) {
 				Xamarin.Insights.Report (e, new Dictionary<string, string> {
@@ -45,7 +49,7 @@ namespace ThisRoofN.RestService
 					{"Response Data", jsonResponse }
 				}, Xamarin.Insights.Severity.Error);
 
-				MvxTrace.Trace(String.Format("Exception in parsing Request Link:{0}", url));
+				MvxTrace.TaggedTrace("REST_API_PARSE_EXCEPTION", string.Format("\n\nURL: {0}", url));
 			}
 
 			return result;
@@ -64,6 +68,8 @@ namespace ThisRoofN.RestService
 					if (!string.IsNullOrEmpty (Token)) {
 						httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Bearer", Token);
 					}
+					MvxTrace.TaggedTrace("REST_API_REQUEST", string.Format("\n\nURL: {0}", url));
+					System.Diagnostics.Debug.WriteLine(body);
 
 					switch (httpMethod) {
 					case HTTP_METHOD.GET:
@@ -82,6 +88,14 @@ namespace ThisRoofN.RestService
 
 					response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 					result = await response.Content.ReadAsStringAsync();
+					MvxTrace.TaggedTrace("REST_API_NORMAL_RESPONSE", string.Format("\n\nURL: {0}", url));
+					System.Diagnostics.Debug.WriteLine(result);
+
+					if(response.StatusCode == HttpStatusCode.OK) {
+						return result;
+					} else {
+						return null;
+					}
 				} catch(Exception ex) {
 					Xamarin.Insights.Report (ex, new Dictionary<string, string> {
 						{"Error Description", "Exception while calling rest service"},
@@ -89,7 +103,7 @@ namespace ThisRoofN.RestService
 						{"Request Data", body }
 					}, Xamarin.Insights.Severity.Error);
 
-					MvxTrace.Trace(String.Format("Exception in RestService\nException:{0}\nRequest Link:{1}\nRequest Data:{2}", ex.Message, url, body));
+					MvxTrace.TaggedTrace("REST_API_EXCEPTON_RESPONSE", string.Format("\n\nURL: {0}\n Exception: {1}", url, ex.Message));
 				}
 			}
 

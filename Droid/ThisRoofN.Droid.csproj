@@ -170,6 +170,12 @@
     <Reference Include="Xamarin.Facebook.AudienceNetwork">
       <HintPath>..\packages\Xamarin.Facebook.AudienceNetwork.Android.4.10.0.0\lib\MonoAndroid41\Xamarin.Facebook.AudienceNetwork.dll</HintPath>
     </Reference>
+    <Reference Include="MvxPlugins.Geocoder">
+      <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\MonoAndroid\MvxPlugins.Geocoder.dll</HintPath>
+    </Reference>
+    <Reference Include="MvxPlugins.Geocoder.Droid">
+      <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\MonoAndroid\MvxPlugins.Geocoder.Droid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThisRoofN\ThisRoofN.csproj">
@@ -195,6 +201,7 @@
     <Compile Include="TRApplication\ThisRoofApplication.cs" />
     <Compile Include="Views\HomeViewContent.cs" />
     <Compile Include="Views\BaseMvxFragment.cs" />
+    <Compile Include="Bootstrap\GeocoderPluginBootstrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

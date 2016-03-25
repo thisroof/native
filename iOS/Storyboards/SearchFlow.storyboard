@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="5">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1533,6 +1532,41 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9d-GV-9Wb">
                                         <rect key="frame" x="0.0" y="220" width="311" height="447"/>
                                         <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jdq-5O-ri9">
+                                                <rect key="frame" x="8" y="220" width="295" height="195"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchAreaCommuteCell" id="DUh-QV-m5u" customClass="SearchAreaCommuteCell">
+                                                        <rect key="frame" x="0.0" y="28" width="295" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DUh-QV-m5u" id="eEa-86-X2b">
+                                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dog Lover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyI-hQ-kdX">
+                                                                    <rect key="frame" x="77" y="12" width="74" height="20"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-2R-xKS">
+                                                                    <rect key="frame" x="12" y="6" width="51" height="31"/>
+                                                                </switch>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="VyI-hQ-kdX" firstAttribute="centerY" secondItem="Rz1-2R-xKS" secondAttribute="centerY" id="3gF-pF-0gy"/>
+                                                                <constraint firstItem="VyI-hQ-kdX" firstAttribute="leading" secondItem="Rz1-2R-xKS" secondAttribute="trailing" constant="16" id="4vd-cZ-LrD"/>
+                                                                <constraint firstItem="Rz1-2R-xKS" firstAttribute="leading" secondItem="eEa-86-X2b" secondAttribute="leadingMargin" constant="4" id="STs-77-WaW"/>
+                                                                <constraint firstItem="Rz1-2R-xKS" firstAttribute="centerY" secondItem="eEa-86-X2b" secondAttribute="centerY" id="ZFT-N2-mqZ"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="lbl_title" destination="VyI-hQ-kdX" id="2LG-Pi-u8s"/>
+                                                            <outlet property="swt_option" destination="Rz1-2R-xKS" id="ctZ-91-k6U"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commute" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWp-Yv-4pN">
                                                 <rect key="frame" x="32" y="32" width="75" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1624,41 +1658,6 @@
                                                     <constraint firstAttribute="bottom" secondItem="isv-jv-mcY" secondAttribute="bottom" constant="8" id="zsW-vL-ZYr"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jdq-5O-ri9">
-                                                <rect key="frame" x="8" y="220" width="295" height="195"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchAreaCommuteCell" id="DUh-QV-m5u" customClass="SearchAreaCommuteCell">
-                                                        <rect key="frame" x="0.0" y="28" width="295" height="44"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DUh-QV-m5u" id="eEa-86-X2b">
-                                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dog Lover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyI-hQ-kdX">
-                                                                    <rect key="frame" x="77" y="12" width="74" height="20"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-2R-xKS">
-                                                                    <rect key="frame" x="12" y="6" width="51" height="31"/>
-                                                                </switch>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="VyI-hQ-kdX" firstAttribute="centerY" secondItem="Rz1-2R-xKS" secondAttribute="centerY" id="3gF-pF-0gy"/>
-                                                                <constraint firstItem="VyI-hQ-kdX" firstAttribute="leading" secondItem="Rz1-2R-xKS" secondAttribute="trailing" constant="16" id="4vd-cZ-LrD"/>
-                                                                <constraint firstItem="Rz1-2R-xKS" firstAttribute="leading" secondItem="eEa-86-X2b" secondAttribute="leadingMargin" constant="4" id="STs-77-WaW"/>
-                                                                <constraint firstItem="Rz1-2R-xKS" firstAttribute="centerY" secondItem="eEa-86-X2b" secondAttribute="centerY" id="ZFT-N2-mqZ"/>
-                                                            </constraints>
-                                                        </tableViewCellContentView>
-                                                        <connections>
-                                                            <outlet property="lbl_title" destination="VyI-hQ-kdX" id="2LG-Pi-u8s"/>
-                                                            <outlet property="swt_option" destination="Rz1-2R-xKS" id="ctZ-91-k6U"/>
-                                                        </connections>
-                                                    </tableViewCell>
-                                                </prototypes>
-                                            </tableView>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="pLG-ef-SJh">
                                                 <rect key="frame" x="30" y="53" width="250" height="31"/>
                                             </slider>

@@ -4,6 +4,7 @@ using System;
 
 using Foundation;
 using UIKit;
+using Acr.UserDialogs;
 
 namespace ThisRoofN.iOS
 {
@@ -38,12 +39,44 @@ namespace ThisRoofN.iOS
 			_masterView.BindingSet.Bind (lbl_bd).To (vm => vm.ItemDetail.Bedrooms);
 			_masterView.BindingSet.Bind (lbl_ba).To (vm => vm.ItemDetail.Bathrooms);
 
+			view_findAgent.AddGestureRecognizer(new UITapGestureRecognizer(() => {
+				_masterView.ViewModelInstace.FindAgentCommand.Execute(null);
+			}));
+
+			view_contact.AddGestureRecognizer (new UITapGestureRecognizer (ShowViewContact));
+
 			InitUI ();
 		}
 
 		private void InitUI()
 		{
 			cellHeight = view_contact.Frame.Bottom;
+		}
+
+		private void ShowViewContact()
+		{
+			string infoFormat = string.Empty;
+			if (masterView.ViewModelInstace.ItemDetail.Participant != null) {
+				infoFormat = "First Name: {0} \r\n" +
+				"Last Name: {1} \r\n" +
+				"License Number: {2} \r\n" +
+				"Contact Phone: {3} \r\n";
+
+				string license = "N/A";
+				if (masterView.ViewModelInstace.ItemDetail.Participant.Licenses != null && masterView.ViewModelInstace.ItemDetail.Participant.Licenses.License != null) {
+					license = masterView.ViewModelInstace.ItemDetail.Participant.Licenses.License.LicenseNumber;
+				}
+
+				infoFormat = string.Format (infoFormat, 
+					masterView.ViewModelInstace.ItemDetail.Participant.FirstName,
+					masterView.ViewModelInstace.ItemDetail.Participant.LastName, 
+					license,
+					masterView.ViewModelInstace.ItemDetail.Participant.OfficePhone);
+			} else {
+				infoFormat = "Not Available";
+			}
+
+			UserDialogs.Instance.Alert (infoFormat, "Listing Agent");
 		}
 	}
 }

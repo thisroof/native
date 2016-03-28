@@ -71,7 +71,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VSE-I8-MNr" customClass="MvxImageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="119" height="105"/>
+                                                    <rect key="frame" x="0.0" y="-16" width="119" height="137"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                             </subviews>
@@ -79,9 +79,9 @@
                                         </view>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="VSE-I8-MNr" firstAttribute="top" secondItem="vXh-2l-gy2" secondAttribute="top" id="8dH-xB-a2U"/>
+                                            <constraint firstItem="VSE-I8-MNr" firstAttribute="top" secondItem="vXh-2l-gy2" secondAttribute="top" constant="-16" id="8dH-xB-a2U"/>
                                             <constraint firstItem="VSE-I8-MNr" firstAttribute="leading" secondItem="vXh-2l-gy2" secondAttribute="leading" id="IOy-6U-rUr"/>
-                                            <constraint firstAttribute="bottom" secondItem="VSE-I8-MNr" secondAttribute="bottom" id="Q9T-FP-yqj"/>
+                                            <constraint firstAttribute="bottom" secondItem="VSE-I8-MNr" secondAttribute="bottom" constant="-16" id="Q9T-FP-yqj"/>
                                             <constraint firstAttribute="trailing" secondItem="VSE-I8-MNr" secondAttribute="trailing" id="TFn-v8-nAh"/>
                                         </constraints>
                                         <connections>
@@ -222,7 +222,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="263"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JQd-ie-d5z" customClass="MvxImageView">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_splash_back" translatesAutoresizingMaskIntoConstraints="NO" id="JQd-ie-d5z" customClass="MvxImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="263"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNB-by-UMZ">
@@ -621,7 +621,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyf-FB-xug">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyf-FB-xug">
                                 <rect key="frame" x="8" y="36" width="304" height="1156"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOT IT!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwi-cx-txa">
@@ -735,7 +735,7 @@
                                         <state key="normal" image="icon_commit"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="cPs-rx-6gj" firstAttribute="top" secondItem="f52-9v-lic" secondAttribute="bottom" constant="8" id="0xR-1G-7Ji"/>
                                     <constraint firstItem="zW3-Jk-Z4c" firstAttribute="leading" secondItem="dhF-Rv-fKA" secondAttribute="leading" id="7bo-Fx-GP7"/>
@@ -772,7 +772,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kyf-FB-xug" firstAttribute="top" secondItem="5nM-RG-CCP" secondAttribute="bottom" constant="16" id="CJV-f8-W4i"/>
                             <constraint firstItem="EeG-PX-BT6" firstAttribute="top" secondItem="kyf-FB-xug" secondAttribute="bottom" constant="8" id="DGS-OA-CsG"/>
@@ -812,5 +812,6 @@
         <image name="icon_dislike" width="41" height="41"/>
         <image name="icon_like" width="41" height="41"/>
         <image name="icon_map_locked" width="66" height="66"/>
+        <image name="img_splash_back" width="320" height="480"/>
     </resources>
 </document>

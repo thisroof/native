@@ -26,12 +26,15 @@ namespace ThisRoofN.ViewModels
 			mGeocodeService = new GeocodeService ();
 
 			DistanceType = DataHelper.CurrentSearchFilter.SearchType;
-			Distance = DataHelper.CurrentSearchFilter.SearchDistance;
 
-
-
+			if (DistanceType == 0) {
+				Distance = TRConstant.SearchDistances.IndexOf (DataHelper.CurrentSearchFilter.SearchDistance);
+			} else if (DistanceType == 1) {
+				Distance = TRConstant.SearchMinutesInt.IndexOf (DataHelper.CurrentSearchFilter.SearchDistance);
+			}
+				
 			// init states
-			InitAddress();
+			InitAddress ();
 			InitStates ();
 			InitCommuteItems ();
 		}
@@ -44,6 +47,28 @@ namespace ThisRoofN.ViewModels
 					DoSaveAndClose ();
 				});
 				return _modalCloseCommand;
+			}
+		}
+
+
+		private MvxCommand<bool> _selectAllStatesCommand;
+
+		public ICommand SelectAllStatesCommand {
+			get {
+				_selectAllStatesCommand = _selectAllStatesCommand ?? new MvxCommand<bool> (SelectAllStates);
+				return _selectAllStatesCommand;
+			}
+		}
+
+		private void SelectAllStates(bool isClean) {
+			if(isClean) {
+				foreach(CheckboxItemModel item in States) {
+					item.Selected = false;
+				}
+			} else {
+				foreach(CheckboxItemModel item in States) {
+					item.Selected = true;
+				}
 			}
 		}
 
@@ -85,17 +110,17 @@ namespace ThisRoofN.ViewModels
 						UserDialogs.Instance.ShowLoading ();
 						addresses = await geocoder.GetAddressesAsync (Address);
 						UserDialogs.Instance.HideLoading ();
-					} catch(Exception e) {
+					} catch (Exception e) {
 						Mvx.Trace ("GetAddressesAsync Failed");
 					}
 
 					if (addresses.Count () > 0) {
 						DataHelper.CurrentSearchFilter.GeoLat = addresses [0].Latitude;
 						DataHelper.CurrentSearchFilter.GeoLng = addresses [0].Longitude;
-
-
-						DataHelper.CurrentSearchFilter.Zip = addresses [0].PostalCode;
-						DataHelper.CurrentSearchFilter.StartZip = addresses [0].PostalCode;
+						DataHelper.CurrentSearchFilter.Address = addresses [0].AddressLine;
+						DataHelper.CurrentSearchFilter.City = addresses [0].SubLocality;
+						DataHelper.CurrentSearchFilter.State = addresses [0].AdministrativeArea;
+						DataHelper.CurrentSearchFilter.Country = addresses [0].Country;
 					} else {
 						UserDialogs.Instance.Alert ("Please input valid address.", "Invalid Input");
 						return;
@@ -122,15 +147,57 @@ namespace ThisRoofN.ViewModels
 			Close (this);
 		}
 
-		private int _distanceType;
+		private short _distanceType;
 		// 0 = distance, 1 = commute, 2 = state
-		public int DistanceType {
+		public short DistanceType {
 			get {
 				return _distanceType;
 			} 
 			set {
 				_distanceType = (short)value;
 				RaisePropertyChanged (() => DistanceType);
+				RaisePropertyChanged (() => DistanceTypeSegValue);
+			}
+		}
+
+		public int DistanceTypeSegValue {
+			get {
+				// Swap Commute and Distance between UI and Model
+				switch (DistanceType) {
+				case 0:
+					return 1;
+				case 1:
+					return 0;
+				case 2:
+					return 2;
+				}
+
+				return 0;
+			}
+			set {
+				short distType = 0;
+
+				switch (value) {
+				case 0:
+					distType = 1;
+					break;
+				case 1:
+					distType = 0;
+					break;
+				case 2:
+					distType = 2;
+					break;
+				}
+
+				short oldDistanceType = DistanceType;
+				DistanceType = distType;
+
+				if (oldDistanceType != DistanceType) {
+					Distance = 0;
+				}
+
+				RaisePropertyChanged (() => DistanceType);
+				RaisePropertyChanged (() => DistanceTypeSegValue);
 			}
 		}
 
@@ -232,11 +299,19 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void InitAddress()
+		private void InitAddress ()
 		{
 			string addressStr = string.Empty;
+			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.StartZip)) {
+				addressStr = DataHelper.CurrentSearchFilter.StartZip;
+			}
+
 			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Address)) {
-				addressStr = DataHelper.CurrentSearchFilter.Address;
+				if (string.IsNullOrEmpty (addressStr)) {
+					addressStr = DataHelper.CurrentSearchFilter.Address;
+				} else {
+					addressStr = " " + DataHelper.CurrentSearchFilter.Address;
+				}
 			}
 
 			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.City)) {
@@ -244,11 +319,11 @@ namespace ThisRoofN.ViewModels
 			}
 
 			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.State)) {
-				addressStr = addressStr + " " + DataHelper.CurrentSearchFilter.State;
+				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.State;
 			}
 
-			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.StartZip)) {
-				addressStr = addressStr + " " + DataHelper.CurrentSearchFilter.StartZip;
+			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Country)) {
+				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.Country;
 			}
 
 			Address = addressStr;
@@ -282,20 +357,19 @@ namespace ThisRoofN.ViewModels
 				DataHelper.CurrentSearchFilter.Zip = Regex.Match (address, @"[\d]{5,}").Value;
 				DataHelper.CurrentSearchFilter.StartZip = DataHelper.CurrentSearchFilter.Zip;
 				return true;
-			} else if (Regex.IsMatch (address, @"([A-Z]{2})\s([\d]{5,})")) {
-				Match match = Regex.Match (address, @"([A-Z]{2})\s([\d]{5,})");
-				string[] sub_comps = address.Substring (0, match.Index).Split (new String[]{ ", " }, StringSplitOptions.RemoveEmptyEntries);
-				DataHelper.CurrentSearchFilter.Address = sub_comps [0];
-				if (sub_comps.Length > 1) {
+			} else {
+				string[] sub_comps = address.Split (new String[]{ ", " }, StringSplitOptions.RemoveEmptyEntries);
+
+				if (sub_comps.Length > 3) {
+					DataHelper.CurrentSearchFilter.Address = sub_comps [0];
 					DataHelper.CurrentSearchFilter.City = sub_comps [1];
+					DataHelper.CurrentSearchFilter.State = sub_comps [2];
+					DataHelper.CurrentSearchFilter.Country = sub_comps [3];
+					return true;
+				} else {
+					return false;
 				}
-				DataHelper.CurrentSearchFilter.State = match.Groups [1].Value;
-				DataHelper.CurrentSearchFilter.Country = "US";
-				DataHelper.CurrentSearchFilter.Zip = match.Groups [2].Value;
-				DataHelper.CurrentSearchFilter.StartZip = DataHelper.CurrentSearchFilter.Zip;
-				return true;
 			}
-			return false;
 		}
 
 		private string GetStateFiltersSelected ()

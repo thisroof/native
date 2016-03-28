@@ -109,15 +109,6 @@
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Acr.UserDialogs">
-      <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="Acr.UserDialogs.Interface">
-      <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="BTProgressHUD">
-      <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
-    </Reference>
     <Reference Include="Acr.MvvmCross.Plugins.UserDialogs">
       <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.4.1.0\lib\Xamarin.iOS10\Acr.MvvmCross.Plugins.UserDialogs.dll</HintPath>
     </Reference>
@@ -169,14 +160,26 @@
     <Reference Include="Acr.Support.iOS">
       <HintPath>..\packages\Acr.Support.1.1.1\lib\Xamarin.iOS10\Acr.Support.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
-    </Reference>
     <Reference Include="MvxPlugins.Geocoder">
       <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\Xamarin.iOS10\MvxPlugins.Geocoder.dll</HintPath>
     </Reference>
     <Reference Include="MvxPlugins.Geocoder.iOS">
       <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\Xamarin.iOS10\MvxPlugins.Geocoder.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs">
+      <HintPath>..\packages\Acr.UserDialogs.4.3.4\lib\Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface">
+      <HintPath>..\packages\Acr.UserDialogs.4.3.4\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="BTProgressHUD">
+      <HintPath>..\packages\Acr.UserDialogs.4.3.4\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoJSON.Net">
+      <HintPath>..\packages\GeoJSON.Net.0.1.45\lib\portable-net40+sl5+wp80+win8+wpa81\GeoJSON.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +189,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_logo_stroke.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_logo_stroke.imageset\icon_logo%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_logo_stroke.imageset\icon_logo%403x.png" />
@@ -263,6 +265,27 @@
     <ImageAsset Include="Resources\Images.xcassets\img_search_homeDetails.imageset\img_homedetails copy.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_area.imageset\img_searchArea copy.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_architecture.imageset\img_architecture copy.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\.DS_Store" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-40-1%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-40.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-40%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-40%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-60%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-60%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-72.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-72%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-76.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-1.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-1%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-50.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small-50%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -521,6 +544,7 @@
     <Compile Include="CustomBinding\RangeSliderRightTargetBinding.cs" />
     <Compile Include="CustomControls\TRMovingLabelRangeSlider.cs" />
     <Compile Include="Bootstrap\GeocoderPluginBootstrap.cs" />
+    <Compile Include="CustomBinding\UISegmentTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -553,6 +577,7 @@
     <BundleResource Include="Resources\img_placeholder.png" />
     <BundleResource Include="Resources\loading_animator.gif" />
     <BundleResource Include="Resources\animator.html" />
+    <BundleResource Include="Videos\WelcomeVideo.mp4" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="rangeslider">

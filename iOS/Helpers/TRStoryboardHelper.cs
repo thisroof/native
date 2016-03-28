@@ -20,6 +20,11 @@ namespace ThisRoofN.iOS
 				viewType.Name == "SearchView" ||
 				viewType.Name == "SearchAreaModalView" ||
 				viewType.Name == "InHomeModalView" ||
+				viewType.Name == "ArchitectureModalView" ||
+				viewType.Name == "HomeDetailModalView" ||
+				viewType.Name == "InAreaModalView" ||
+				viewType.Name == "LifestyleModalView" ||
+				viewType.Name == "LocationModalView" ||
 				viewType.Name == "AffordSearchView" ||
 				viewType.Name == "AffordResultView") {
 				return SearchFlowStoryboard;

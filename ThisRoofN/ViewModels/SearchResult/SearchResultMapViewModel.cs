@@ -3,29 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using ThisRoofN.Models.App;
 using ThisRoofN.Helpers;
+using GeoJSON.Net.Geometry;
+using MvvmCross.Core.ViewModels;
+using System.Windows.Input;
+using ThisRoofN.Models.Service;
+using ThisRoofN.Interfaces;
+using MvvmCross.Platform;
 
 namespace ThisRoofN.ViewModels
 {
 	public class SearchResultMapViewModel : BaseViewModel
 	{
-		private List<TRCottageSimple> _mapItems;
+		private MvxCommand<string> _detailCommand;
+		private IDevice deviceInfo;
+
 		public SearchResultMapViewModel ()
 		{
-			if (DataHelper.SearchResults != null) {
-				_mapItems = DataHelper.SearchResults;
-			}
+			deviceInfo = Mvx.Resolve<IDevice> ();
 		}
 
 		public List<TRCottageSimple> MapItems
 		{
 			get {
-				return _mapItems;
+				return DataHelper.SearchResults;
 			} 
-			set {
-				_mapItems = value;
-				RaisePropertyChanged (() => MapItems);
+		}
+
+		public List<IPosition> MapRange
+		{
+			get {
+				return DataHelper.SearchMapRange;
 			}
 		}
+
+		public ICommand DetailCommand {
+			get {
+				_detailCommand = _detailCommand ?? new MvxCommand<string> (GotoDetail);
+				return _detailCommand;
+			}
+		}
+
+		private async void GotoDetail (string propertyID)
+		{
+			this.IsLoading = true;
+			this.LoadingText = "Loading Detail";
+			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
+
+			DataHelper.SelectedCottage = DataHelper.SearchResults.Find (i => i.CottageID == propertyID);
+			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail,  DataHelper.SelectedCottage);
+
+			this.IsLoading = false;
+
+			ShowViewModel<SearchResultDetailViewModel> ();
+		}
+
 	}
 }
 

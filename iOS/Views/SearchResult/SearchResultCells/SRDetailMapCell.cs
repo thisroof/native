@@ -44,7 +44,7 @@ namespace ThisRoofN.iOS
 
 		private void InitUI()
 		{
-			cellHeight = masterView.MasterTableView.Frame.Height / 2;
+			cellHeight = (UIScreen.MainScreen.Bounds.Height - 60) / 2;
 
 			TRDetailItemAnnotation annotation = new TRDetailItemAnnotation (
 				masterView.ViewModelInstace.ItemDetail.Latitude, 

@@ -8,6 +8,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
 
 namespace ThisRoofN.iOS
 {
@@ -15,7 +16,7 @@ namespace ThisRoofN.iOS
 	partial class SRDetailImageCell
 	{
 		[Outlet]
-		MvvmCross.Binding.iOS.Views.MvxImageView img_detailItem { get; set; }
+		MvxImageView img_detailItem { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

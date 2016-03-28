@@ -108,21 +108,17 @@ namespace ThisRoofN.iOS.Views
 			tileButton.SetTitle ("TILE", UIControlState.Normal);
 			tileItemView.Add (tileButton);
 			UIBarButtonItem tileItem = new UIBarButtonItem (tileItemView);
-			tileButton.TouchUpInside += (object sender, EventArgs e) => {
-				CurPage = 0;
-			};
+
 
 			UIView mapItemView = new UIView (new CGRect (0, 0, oneItemWidth, toolbarFrame.Height));
 			UIButton mapButton = new UIButton(new CGRect(0, 10, oneItemWidth, itemHeight));
 			mapButton.Font = UIFont.FromName ("HelveticaNeue", 20.0f);
-			mapButton.SetTitleColor (UIColor.White, UIControlState.Normal);
+			mapButton.SetTitleColor (UIColor.White.ColorWithAlpha(0.4f), UIControlState.Normal);
 			mapButton.SetTitle ("MAP", UIControlState.Normal);
 			mapItemView.Add (mapButton);
 			UIBarButtonItem mapItem = new UIBarButtonItem (mapItemView);
 
-			mapButton.TouchUpInside += (object sender, EventArgs e) => {
-				CurPage = 1;
-			};
+
 
 			this.SetToolbarItems (new UIBarButtonItem[] {
 				tileItem, mapItem
@@ -136,6 +132,20 @@ namespace ThisRoofN.iOS.Views
 			toolbar.Layer.ShadowColor = UIColor.Black.CGColor;
 			toolbar.Layer.ShadowOffset = new CGSize(0, -1);
 			toolbar.Layer.ShadowOpacity = .6f;
+
+			tileButton.TouchUpInside += (object sender, EventArgs e) => {
+				CurPage = 0;
+
+				tileButton.SetTitleColor(UIColor.White.ColorWithAlpha(1.0f), UIControlState.Normal);
+				mapButton.SetTitleColor(UIColor.White.ColorWithAlpha(0.4f), UIControlState.Normal);
+			};
+
+			mapButton.TouchUpInside += (object sender, EventArgs e) => {
+				CurPage = 1;
+
+				tileButton.SetTitleColor(UIColor.White.ColorWithAlpha(0.4f), UIControlState.Normal);
+				mapButton.SetTitleColor(UIColor.White.ColorWithAlpha(1.0f), UIControlState.Normal);
+			};
 		}
 	}
 }

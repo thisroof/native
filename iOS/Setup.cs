@@ -6,6 +6,7 @@ using ThisRoofN.Interfaces;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using ThisRoofN.iOS.CustomBinding;
 using RangeSlider;
+using UIKit;
 
 namespace ThisRoofN.iOS
 {
@@ -39,6 +40,7 @@ namespace ThisRoofN.iOS
 		{
 			registry.RegisterCustomBindingFactory<RangeSliderView> ("LeftValueChange", view => new RangeSliderLeftTargetBinding(view));
 			registry.RegisterCustomBindingFactory<RangeSliderView> ("RightValueChange", view => new RangeSliderRightTargetBinding(view));
+			registry.RegisterCustomBindingFactory<UISegmentedControl> ("SelectedIndex", view => new UISegmentTargetBinding(view));
 			base.FillTargetFactories (registry);
 		}
 

@@ -13,6 +13,7 @@ namespace ThisRoofN.iOS
 {
 	public partial class SearchResultTileView : BaseViewController,  IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
+		private bool _isLoading;
 		public UIActivityIndicatorView spinner;
 		public SearchResultTileView (IntPtr handle) : base (handle)
 		{
@@ -21,6 +22,20 @@ namespace ThisRoofN.iOS
 		public SearchResultTileViewModel ViewModelInstance {
 			get {
 				return (SearchResultTileViewModel)this.ViewModel;
+			}
+		}
+
+		public bool IsLoading {
+			get {
+				return _isLoading;
+			} set {
+				_isLoading = value;
+				if (value) {
+					spinner.StartAnimating ();
+				} else {
+					spinner.StopAnimating ();
+				}
+				cv_results.ReloadData ();
 			}
 		}
 
@@ -35,48 +50,39 @@ namespace ThisRoofN.iOS
 			cv_results.Delegate = this;
 			cv_results.AlwaysBounceVertical = true;
 
+			nfloat width = (UIScreen.MainScreen.Bounds.Width - 4) / 3;
+			((UICollectionViewFlowLayout) cv_results.CollectionViewLayout).MinimumInteritemSpacing = 2.0f;
+			((UICollectionViewFlowLayout) cv_results.CollectionViewLayout).MinimumLineSpacing = 2.0f;
+			((UICollectionViewFlowLayout) cv_results.CollectionViewLayout).ItemSize = new CGSize (width, width);
+
 			var bindingSet = this.CreateBindingSet<SearchResultTileView, SearchResultTileViewModel> ();
 			bindingSet.Bind (propertyTypeSource).To (vm => vm.TileItems);
+			bindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			bindingSet.Bind (this).For(i => i.IsLoading).To (vm => vm.SpinnerLoading);
+			bindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
 			bindingSet.Apply ();
 		}
 
 		public override void ViewDidLayoutSubviews ()
 		{
 			base.ViewDidLayoutSubviews ();
-
 		}
 			
-
-		// UICollectionView Delegate
-		[Export ("collectionView:layout:sizeForItemAtIndexPath:")]
-		public CoreGraphics.CGSize GetSizeForItem (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, Foundation.NSIndexPath indexPath)
-		{
-			return new CGSize ((collectionView.Frame.Width - 6) / 3, (collectionView.Frame.Width - 6) / 3);
-		}
-
-		[Export ("collectionView:layout:minimumInteritemSpacingForSectionAtIndex:")]
-		public System.nfloat GetMinimumInteritemSpacingForSection (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, System.nint section)
-		{
-			return 2.0f;
-		}
-
 		[Export ("collectionView:didSelectItemAtIndexPath:")]
 		public void ItemSelected (UIKit.UICollectionView collectionView, Foundation.NSIndexPath indexPath)
 		{
 			ViewModelInstance.DetailCommand.Execute (indexPath.Row);
-//			masterView.ViewModelInstance.PropertyTypes [indexPath.Row].Selected = !masterView.ViewModelInstance.PropertyTypes [indexPath.Row].Selected;
-		}
-
-		[Export ("collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:")]
-		public void WillDisplaySupplementaryView (UIKit.UICollectionView collectionView, UIKit.UICollectionReusableView view, string elementKind, Foundation.NSIndexPath indexPath)
-		{
-			
 		}
 
 		[Export ("collectionView:layout:referenceSizeForFooterInSection:")]
 		public CoreGraphics.CGSize GetReferenceSizeForFooter (UIKit.UICollectionView collectionView, UIKit.UICollectionViewLayout layout, System.nint section)
 		{
-			return new CGSize (UIScreen.MainScreen.Bounds.Width, 44.0f);
+			if (spinner.IsAnimating) {
+				return new CGSize (UIScreen.MainScreen.Bounds.Width, 44.0f);
+			} else {
+				return new CGSize (UIScreen.MainScreen.Bounds.Width, 2.0f);
+			}
+
 		}
 
 		[Export ("scrollViewDidEndDragging:willDecelerate:")]
@@ -92,8 +98,7 @@ namespace ThisRoofN.iOS
 			float reload_distance = 50;
 
 			if (y > h + reload_distance) {
-				spinner.StartAnimating ();
-				Console.WriteLine ("loadmore data");
+				ViewModelInstance.LoadMoreCommand.Execute (null);
 			}
 		}
 
@@ -114,12 +119,14 @@ namespace ThisRoofN.iOS
 				Console.WriteLine (elementKind);
 				UICollectionReusableView footerview = collectionView.DequeueReusableSupplementaryView (UICollectionElementKindSection.Footer, "SRTileFooter", indexPath);
 				footerview.Add (masterViewInstance.spinner);
+				footerview.ClipsToBounds = false;
 				return footerview;
 			}
 
 			protected override UICollectionViewCell GetOrCreateCellFor (UICollectionView collectionView, NSIndexPath indexPath, object item)
 			{
 				SRTileImageCell cell = (SRTileImageCell)base.GetOrCreateCellFor (collectionView, indexPath, item);
+				cell.IVItem.ContentMode = UIViewContentMode.ScaleAspectFill;
 				cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
 				return cell;
 			}

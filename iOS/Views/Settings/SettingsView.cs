@@ -40,5 +40,11 @@ namespace ThisRoofN.iOS
 			set.Bind (btn_logout).To (vm => vm.LogoutCommand);
 			set.Apply ();
 		}
+
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+			this.NavigationController.SetToolbarHidden (true, true);
+		}
 	}
 }

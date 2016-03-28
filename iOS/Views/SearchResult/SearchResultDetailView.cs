@@ -43,10 +43,13 @@ namespace ThisRoofN.iOS
 			SetupNavigationBar ();
 
 			view_dislikeSetting.Layer.CornerRadius = 5.0f;
+			tbl_detail.BackgroundColor = UIColor.Black;
 
 			BindingSet = this.CreateBindingSet<SearchResultDetailView, SearchResultDetailViewModel> ();
 			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			BindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
+			BindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			BindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
 
 			BindingSet.Bind (view_dislikeSetting).For (i => i.Hidden).To (vm => vm.IsDislikeHidden);
 			BindingSet.Bind (btn_commit).To (vm => vm.DisLikeCommand);
@@ -56,8 +59,18 @@ namespace ThisRoofN.iOS
 			BindingSet.Bind (icon_tooClose).To (vm => vm.TooClose).WithConversion(new CheckmarkConverter());
 			BindingSet.Bind (icon_tooSmall).To (vm => vm.TooSmall).WithConversion(new CheckmarkConverter());
 			BindingSet.Bind (icon_lotTooSmall).To (vm => vm.LotTooSmall).WithConversion(new CheckmarkConverter());
-			BindingSet.Bind (icon_tooBig).To (vm => vm.HouseTooBig).WithConversion(new CheckmarkConverter());
+			BindingSet.Bind (icon_tooBig).To (vm => vm.LotTooBig).WithConversion(new CheckmarkConverter());
 			BindingSet.Bind (icon_ugly).To (vm => vm.Ugly).WithConversion(new CheckmarkConverter());
+
+			source = new SearchResultDetailTableViewSource (tbl_detail, this);
+			tbl_detail.Source = source;
+			tbl_detail.RowHeight = UITableView.AutomaticDimension;
+			tbl_detail.AllowsSelection = false;
+			tbl_detail.TableFooterView = new UITableView (CGRect.Empty);
+
+			BindingSet.Bind (source).To (vm => vm.ItemDetail.Photos);
+			BindingSet.Apply ();
+			tbl_detail.ReloadData ();
 
 			icon_tooFar.UserInteractionEnabled = true;
 			icon_tooClose.UserInteractionEnabled = true;
@@ -66,22 +79,22 @@ namespace ThisRoofN.iOS
 			icon_tooBig.UserInteractionEnabled = true;
 			icon_ugly.UserInteractionEnabled = true;
 
-			icon_tooFar.AddGestureRecognizer (new UIGestureRecognizer (() => {
+			icon_tooFar.AddGestureRecognizer (new UITapGestureRecognizer (() => {
 				ViewModelInstace.TooFar = !ViewModelInstace.TooFar;
 			}));
-			icon_tooClose.AddGestureRecognizer (new UIGestureRecognizer (() => {
+			icon_tooClose.AddGestureRecognizer (new UITapGestureRecognizer (() => {
 				ViewModelInstace.TooClose = !ViewModelInstace.TooClose;
 			}));
-			icon_tooSmall.AddGestureRecognizer (new UIGestureRecognizer (() => {
+			icon_tooSmall.AddGestureRecognizer (new UITapGestureRecognizer (() => {
 				ViewModelInstace.TooSmall = !ViewModelInstace.TooSmall;
 			}));
-			icon_lotTooSmall.AddGestureRecognizer (new UIGestureRecognizer (() => {
+			icon_lotTooSmall.AddGestureRecognizer (new UITapGestureRecognizer (() => {
 				ViewModelInstace.LotTooSmall = !ViewModelInstace.LotTooSmall;
 			}));
-			icon_tooBig.AddGestureRecognizer (new UIGestureRecognizer (() => {
+			icon_tooBig.AddGestureRecognizer (new UITapGestureRecognizer (() => {
 				ViewModelInstace.LotTooBig = !ViewModelInstace.LotTooBig;
 			}));
-			icon_ugly.AddGestureRecognizer (new UIGestureRecognizer (() => {
+			icon_ugly.AddGestureRecognizer (new UITapGestureRecognizer (() => {
 				ViewModelInstace.Ugly = !ViewModelInstace.Ugly;
 			}));
 		}
@@ -97,20 +110,6 @@ namespace ThisRoofN.iOS
 		public override void ViewDidLayoutSubviews ()
 		{
 			base.ViewDidLayoutSubviews ();
-
-			// we set the source and bind here to get the tableview height, exactly
-
-			if (source == null) {
-				source = new SearchResultDetailTableViewSource (tbl_detail, this);
-				tbl_detail.Source = source;
-				tbl_detail.RowHeight = UITableView.AutomaticDimension;
-				tbl_detail.AllowsSelection = false;
-				tbl_detail.TableFooterView = new UITableView (CGRect.Empty);
-
-				BindingSet.Bind (source).To (vm => vm.ItemDetail.Photos);
-				BindingSet.Apply ();
-				tbl_detail.ReloadData ();
-			}
 		}
 
 		public class SearchResultDetailTableViewSource : MvxTableViewSource
@@ -134,8 +133,6 @@ namespace ThisRoofN.iOS
 				titleCell.BindData (masterView);
 				valueCell.BindData (masterView);
 				descCell.BindData (masterView);
-
-				masterView.BindingSet.Apply ();
 			}
 
 			public override nint RowsInSection (UITableView tableview, nint section)
@@ -167,6 +164,7 @@ namespace ThisRoofN.iOS
 					SRDetailImageCell cell = (SRDetailImageCell)tableView.DequeueReusableCell (SRDetailImageCell.Identifier);
 					cell.IVItem.ClipsToBounds = true;
 					cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
+					cell.IVItem.ImageUrl = ItemsSource.Cast<CottagePhoto> ().ToList () [indexPath.Row - 4].MediaURL;
 					return cell;
 
 				}
@@ -175,7 +173,8 @@ namespace ThisRoofN.iOS
 			protected override object GetItemAt (NSIndexPath indexPath)
 			{
 				if (indexPath.Row > 3) {
-					return ItemsSource.Cast<CottagePhoto> ().ToList () [indexPath.Row - 4];
+					CottagePhoto photo = ItemsSource.Cast<CottagePhoto> ().ToList () [indexPath.Row - 4];
+					return photo;
 				} else {
 					return null;
 				}

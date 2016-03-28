@@ -33,6 +33,8 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewDidLoad ();
 
+			InitUI ();
+
 			// Init the State Collection View
 			var nationsSource = new MvxCollectionViewSource (cv_nations, new NSString ("SearchAreaCheckboxCVCell"));
 			cv_nations.AllowsSelection = true;
@@ -43,7 +45,6 @@ namespace ThisRoofN.iOS
 			var locationSuggestionSource = new LocationSuggestionTableViewSource (this, tbl_suggestion);
 			tbl_suggestion.Source = locationSuggestionSource;
 			tbl_suggestion.RowHeight = UITableView.AutomaticDimension;
-//			tbl_suggestion.AllowsSelection = false;
 			tbl_suggestion.TableFooterView = new UITableView (CGRect.Empty);
 			tbl_suggestion.ReloadData ();
 
@@ -59,13 +60,19 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
 			bindingSet.Bind (lbl_distanceRange).To (vm => vm.DistanceLabelText);
 			bindingSet.Bind (slider_distance).To (vm => vm.Distance);
+			bindingSet.Bind (seg_areaType).For("SelectedIndex").To (vm => vm.DistanceTypeSegValue);
 			bindingSet.Bind (nationsSource).To (vm => vm.States);
 			bindingSet.Bind (locationSuggestionSource).To (vm => vm.AddressSuggestionItems);
 			bindingSet.Bind (txt_address).To (vm => vm.Address);
 			bindingSet.Bind (commuteSource).To (vm => vm.CommuteItems);
+			bindingSet.Bind (btn_selectAll).To (vm => vm.SelectAllStatesCommand).CommandParameter (false);
+			bindingSet.Bind (btn_clearAll).To (vm => vm.SelectAllStatesCommand).CommandParameter (true);
+
 			bindingSet.Apply ();
 
-			InitUI ();
+			this.View.AddGestureRecognizer (new UITapGestureRecognizer (() => {
+				txt_address.ResignFirstResponder();
+			}));
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -74,7 +81,6 @@ namespace ThisRoofN.iOS
 		}
 
 		private void InitUI() {
-
 			view_addressBack.Layer.BorderWidth = 1.0f;
 			view_addressBack.Layer.BorderColor = UIColor.LightGray.CGColor;
 			view_addressBack.Layer.CornerRadius = 3.0f;
@@ -87,19 +93,20 @@ namespace ThisRoofN.iOS
 			btn_clearAll.Layer.BorderColor = UIColor.LightGray.CGColor;
 			btn_clearAll.Layer.CornerRadius = 3.0f;
 
+			slider_distance.MinValue = 0;
+
 			switch (ViewModelInstance.DistanceType) {
 			case 0: // Distance
-				seg_areaType.SelectedSegment = 1;
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
+				slider_distance.MaxValue = TRConstant.SearchDistances.Count() - 1;
 				break;
 			case 1: // Commute
-				seg_areaType.SelectedSegment = 0;
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
+				slider_distance.MaxValue = TRConstant.SearchMinutes.Count() - 1;
 				break;
 			case 2: // States
-				seg_areaType.SelectedSegment = 2;
 				view_distance.Hidden = true;
 				view_nationWide.Hidden = false;
 				break;
@@ -108,31 +115,26 @@ namespace ThisRoofN.iOS
 			}
 
 			seg_areaType.ValueChanged += (object sender, EventArgs e) => {
+				txt_address.ResignFirstResponder();
 				switch (seg_areaType.SelectedSegment) {
 				case 0: // Commute Selected
 					slider_distance.MaxValue = TRConstant.SearchMinutes.Count() - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = false;
-					ViewModelInstance.DistanceType = 1;
 					break;
 				case 1: // Distnace Selected
 					slider_distance.MaxValue = TRConstant.SearchDistances.Count() - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = true;
-					ViewModelInstance.DistanceType = 0;
 					break;
 				case 2: // Nation Wide Selected
 					view_distance.Hidden = true;
 					view_nationWide.Hidden = false;
-					ViewModelInstance.DistanceType = 2;
 					break;
 				}
 			};
-
-			slider_distance.MinValue = 0;
-			slider_distance.MaxValue = TRConstant.SearchMinutes.Count - 1;	// Default selection is commute
 
 			// init suggestion visibility
 			view_suggestionBack.Hidden = true;
@@ -142,6 +144,12 @@ namespace ThisRoofN.iOS
 
 			txt_address.EditingDidEnd += (object sender, EventArgs e) => {
 				view_suggestionBack.Hidden = true;
+			};
+
+			txt_address.ShouldReturn += (textField) => {
+				txt_address.ResignFirstResponder ();
+				view_suggestionBack.Hidden = true;
+				return true;
 			};
 
 			txt_address.EditingChanged += (object sender, EventArgs e) => {

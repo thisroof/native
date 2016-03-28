@@ -21,6 +21,7 @@ namespace ThisRoofN.ViewModels
 		private MvxCommand _likeCommand;
 		private MvxCommand<bool> _showDislikeCommand;
 		private MvxCommand _dislikeCommand;
+		private MvxCommand _findAgentCommand;
 
 		private bool _liked;
 		private bool _disliked;
@@ -132,6 +133,15 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+		public ICommand FindAgentCommand {
+			get {
+				_findAgentCommand = _findAgentCommand ?? new MvxCommand (() => {
+					ShowViewModel<TRWebViewModel>(new {link = TRConstant.BuyersAgentLink});
+				});
+				return _findAgentCommand;
+			}
+		}
+
 		public ICommand LikeCommand {
 			get {
 				_likeCommand = _likeCommand ?? new MvxCommand (DoLike);
@@ -141,9 +151,7 @@ namespace ThisRoofN.ViewModels
 
 		public ICommand ShowDislikeViewCommand {
 			get {
-				_showDislikeCommand = _showDislikeCommand ?? new MvxCommand<bool> ((isShow) => {
-					IsDislikeShown = isShow;
-				});
+				_showDislikeCommand = _showDislikeCommand ?? new MvxCommand<bool> (DoShowDislikeDialog);
 				return _showDislikeCommand;
 			}
 		}
@@ -196,10 +204,13 @@ namespace ThisRoofN.ViewModels
 		private async void DoLike ()
 		{
 			if (_liked) {
+				this.IsLoading = true;
+				this.LoadingText = "Clearing Like";
 				if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), true, itemDetail.CottageID)) {
 					Liked = false;
 					TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), itemDetail.CottageID);
 				} 
+				this.IsLoading = false;
 			} else {
 
 				// Set like to cottage
@@ -210,13 +221,18 @@ namespace ThisRoofN.ViewModels
 					Like = true
 				};
 
+				this.IsLoading = true;
+				this.LoadingText = "Setting Like";
+
 				// Set request to server
 				CottageLikeInfo info = await mTRService.LikeCottage (request);
+
+				this.IsLoading = false;
 
 				// Set to database
 				if (info != null) {
 					TREntityLikes likeData = new TREntityLikes () {
-						UserID = mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0),
+						UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 						PropertyID = info.PropertyID,
 						LikeDislike = true,
 						Latitude = itemDetail.Latitude,
@@ -231,48 +247,65 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+		private async void DoShowDislikeDialog (bool isShow)
+		{
+			if (isShow) {
+				if (_disliked) {
+					this.IsLoading = true;
+					this.LoadingText = "Clearing Dislike";
+					if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false, itemDetail.CottageID)) {
+						Disliked = false;
+						TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), itemDetail.CottageID);
+					} 
+
+					this.IsLoading = false;
+				} else {
+					IsDislikeShown = true;
+				}
+			} else {
+				IsDislikeShown = false;
+			}
+
+		}
+
 		private async void DoDislike ()
 		{
-			if (_disliked) {
-				if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false, itemDetail.CottageID)) {
-					Disliked = false;
-					TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), itemDetail.CottageID);
-				} 
-			} else {
+			this.IsLoading = true;
+			this.LoadingText = "Setting Dislike";
+			// dislike request to server
+			CottageLikeInfo likeInfo = await mTRService.DislikeCottage (new CottageDislikeRequest () {
+				UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
+				DeviceID = mDeviceInfo.GetUniqueIdentifier (),
+				PropertyID = itemDetail.CottageID,
+				Like = false,
+				RejectReason = "Rejected",
+				TooFar = this.TooFar,
+				TooClose = this.TooClose,
+				BadArea = this.BadArea,
+				TooSmall = this.TooSmall,
+				HouseTooBig = this.HouseTooBig,
+				LotTooBig = this.LotTooBig,
+				Ugly = this.Ugly,
+				LotTooSmall = this.LotTooSmall
+			});
 
-				// dislike request to server
-				CottageLikeInfo likeInfo =  await mTRService.DislikeCottage (new CottageDislikeRequest () {
+			this.IsLoading = false;
+			// set to database
+			if (likeInfo != null) {
+				TREntityLikes likeData = new TREntityLikes () {
 					UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
-					DeviceID = mDeviceInfo.GetUniqueIdentifier (),
-					PropertyID = itemDetail.CottageID,
-					Like = false,
-					RejectReason = "Rejected",
-					TooFar = this.TooFar,
-					TooClose = this.TooClose,
-					BadArea = this.BadArea,
-					TooSmall = this.TooSmall,
-					HouseTooBig = this.HouseTooBig,
-					LotTooBig = this.LotTooBig,
-					Ugly = this.Ugly,
-					LotTooSmall = this.LotTooSmall
-				});
+					PropertyID = likeInfo.PropertyID,
+					LikeDislike = false,
+					Latitude = itemDetail.Latitude,
+					Longitude = itemDetail.Longitude,
+					PrimaryImageLink = itemDetail.PrimaryPhotoLink
+				};
 
-				// set to database
-				if (likeInfo != null) {
-					TREntityLikes likeData = new TREntityLikes () {
-						UserID = mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0),
-						PropertyID = likeInfo.PropertyID,
-						LikeDislike = false,
-						Latitude = itemDetail.Latitude,
-						Longitude = itemDetail.Longitude,
-						PrimaryImageLink = itemDetail.PrimaryPhotoLink
-					};
-
-					TRDatabase.Instance.SaveItem (likeData);
-				}
-
-				Disliked = true;
+				TRDatabase.Instance.SaveItem (likeData);
 			}
+
+			Disliked = true;
+			this.IsDislikeShown = false;
 		}
 
 		public void DoDescMore ()

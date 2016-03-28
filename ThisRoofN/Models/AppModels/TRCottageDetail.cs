@@ -115,6 +115,22 @@ namespace ThisRoofN.Models.App
 			}
 		}
 
+		public bool IsFormattedAcreValueShow {
+			get {
+				if (LotSquareSize >= 43000) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+
+		public bool IsFormattedAcreValueHide {
+			get {
+				return !IsFormattedAcreValueShow;
+			}
+		}
+
 		public string FormattedAddress {
 			get {
 				return this.Address.FullStreetAddress.ToUpper ();

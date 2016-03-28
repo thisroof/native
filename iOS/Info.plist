@@ -5,11 +5,9 @@
 	<key>CFBundleName</key>
 	<string>ThisRoof</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.thisroof.nativeapp</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>com.thisroof.app</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -89,5 +87,7 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1</string>
 </dict>
 </plist>

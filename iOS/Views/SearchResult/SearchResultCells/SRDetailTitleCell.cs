@@ -30,19 +30,21 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
+			img_major.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
 			masterView.BindingSet.Bind (img_major).For (i => i.ImageUrl).To (vm => vm.ItemDetail.PrimaryPhotoLink);
 			masterView.BindingSet.Bind (lbl_budget).To (vm => vm.ItemDetail.FormattedPrice);
 			masterView.BindingSet.Bind (lbl_address).To (vm => vm.ItemDetail.FormattedCityStateZip);
 			masterView.BindingSet.Bind (lbl_bedBath).To (vm => vm.ItemDetail.FormattedBedBath);
 			masterView.BindingSet.Bind (lbl_sqft).To (vm => vm.ItemDetail.FormattedSquareFootageStructure);
 			masterView.BindingSet.Bind (lbl_acre).To (vm => vm.ItemDetail.FormattedAcreValue).WithConversion(new StringFormatConverter(), "LOT: {0} Acres");
+			masterView.BindingSet.Bind (lbl_acre).For (i => i.Hidden).To (vm => vm.ItemDetail.IsFormattedAcreValueHide);
 
 			InitUI ();
 		}
 
 		private void InitUI()
 		{
-			cellHeight = masterView.MasterTableView.Frame.Height / 2;
+			cellHeight = (UIScreen.MainScreen.Bounds.Height - 60) / 2;
 		}
 	}
 }

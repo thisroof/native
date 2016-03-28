@@ -40,15 +40,24 @@ namespace ThisRoofN.ViewModels
 		public SearchViewModel (IDevice device)
 		{
 			deviceInfo = device;
-			DataHelper.CurrentSearchFilter = SearchFilters.FetchLatestFromDatabase();
+			DataHelper.CurrentSearchFilter = SearchFilters.FetchLatestFromDatabase ();
 
-			MinBudget = 0;
-			MaxBudget = TRConstant.PriceStringValues.Count - 1;
-			SelectedSortType = SortTypes[0];
+			if (TRConstant.PriceValues.Contains ((int)DataHelper.CurrentSearchFilter.MinBudget)) {
+				MinBudget = TRConstant.PriceValues.IndexOf ((int)DataHelper.CurrentSearchFilter.MinBudget);
+			} else {
+				MinBudget = 0;
+			}
+
+			if (TRConstant.PriceValues.Contains ((int)DataHelper.CurrentSearchFilter.MaxBudget)) {
+				MaxBudget = TRConstant.PriceValues.IndexOf ((int)DataHelper.CurrentSearchFilter.MaxBudget);
+			} else {
+				MaxBudget = TRConstant.PriceValues.Count - 1;
+			}
+
+			SelectedSortType = SortTypes [0];
 		}
 
-		public ICommand GotoModalCommand
-		{
+		public ICommand GotoModalCommand {
 			get {
 				_gotoModalCommand = _gotoModalCommand ?? new MvxCommand<ModalType> (GotoModal);
 				return _gotoModalCommand;
@@ -64,7 +73,9 @@ namespace ThisRoofN.ViewModels
 
 
 		#region BUDGET
+
 		private float _maxBudget;
+
 		public float MaxBudget {
 			get {
 				return _maxBudget;
@@ -78,11 +89,12 @@ namespace ThisRoofN.ViewModels
 
 		public string MaxBudgetString {
 			get {
-				return  TRConstant.PriceStringValues [(int)Math.Round(MaxBudget, MidpointRounding.AwayFromZero)];
+				return  TRConstant.PriceStringValues [(int)Math.Round (MaxBudget, MidpointRounding.AwayFromZero)];
 			}
 		}
 
 		private float _minBudget;
+
 		public float MinBudget {
 			get {
 				return _minBudget;
@@ -96,9 +108,10 @@ namespace ThisRoofN.ViewModels
 
 		public string MinBudgetString {
 			get {
-				return  TRConstant.PriceStringValues [(int)Math.Round(MinBudget, MidpointRounding.AwayFromZero)];
+				return  TRConstant.PriceStringValues [(int)Math.Round (MinBudget, MidpointRounding.AwayFromZero)];
 			}
 		}
+
 		#endregion
 
 		#region SORT_BY
@@ -112,6 +125,7 @@ namespace ThisRoofN.ViewModels
 		}
 
 		private string _selectedSortType;
+
 		public string SelectedSortType {
 			get {
 				return _selectedSortType;
@@ -125,7 +139,8 @@ namespace ThisRoofN.ViewModels
 		#endregion
 
 		#region Methods
-		private void GotoModal(ModalType type)
+
+		private void GotoModal (ModalType type)
 		{
 			switch (type) {
 			case ModalType.SearchArea:
@@ -162,8 +177,8 @@ namespace ThisRoofN.ViewModels
 
 		private async void DoSaveOrSearch (bool isSearch)
 		{
-			DataHelper.CurrentSearchFilter.MinBudget = TRConstant.PriceValues [(int)Math.Round(MinBudget, MidpointRounding.AwayFromZero)];
-			DataHelper.CurrentSearchFilter.MaxBudget =  TRConstant.PriceValues [(int)Math.Round(MaxBudget, MidpointRounding.AwayFromZero)];
+			DataHelper.CurrentSearchFilter.MinBudget = TRConstant.PriceValues [(int)Math.Round (MinBudget, MidpointRounding.AwayFromZero)];
+			DataHelper.CurrentSearchFilter.MaxBudget = TRConstant.PriceValues [(int)Math.Round (MaxBudget, MidpointRounding.AwayFromZero)];
 			DataHelper.CurrentSearchFilter.SortBy = TRConstant.SortTypes.Keys.ElementAt (TRConstant.SortTypes.Values.ToList<string> ().IndexOf (SelectedSortType));
 			DataHelper.CurrentSearchFilter.MobileNum = deviceInfo.GetUniqueIdentifier ();
 
@@ -192,27 +207,22 @@ namespace ThisRoofN.ViewModels
 					UserDialogs.Instance.Alert ("Failed to save, try again lager.", "Failure");
 				}
 			} else {	
-				// Search Case
-				if (DataHelper.CurrentSearchFilter.SearchType == 1) {
-					var positions = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
-					this.IsLoading = false;
-				} else {
-					List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
-					if (searchResults != null) {
-						DataHelper.SearchResults = searchResults.Select (i =>
+				List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
+				if (searchResults != null) {
+					DataHelper.SearchResults = searchResults.Select (i =>
 							new TRCottageSimple () {
-								CottageID = i.ID,
-								PrimaryPhotoLink = i.Photos.FirstOrDefault ().MediaURL,
-								Latitude = i.Latitude,
-								Longitude = i.Longitude,
-							}).ToList ();
+						CottageID = i.ID,
+						PrimaryPhotoLink = (i.Photos != null) ? i.Photos.FirstOrDefault ().MediaURL : string.Empty,
+						Latitude = i.Latitude,
+						Longitude = i.Longitude,
+					}).ToList ();
+					DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
+					this.IsLoading = false;
 
-						this.IsLoading = false;
-						ShowViewModel<SearchResultHomeViewModel> ();
-					} else {
-						this.IsLoading = false;
-						UserDialogs.Instance.Alert ("Failed to get results from server. Please try again later.", "Error");
-					}
+					ShowViewModel<SearchResultHomeViewModel> ();
+				} else {
+					this.IsLoading = false;
+					UserDialogs.Instance.Alert ("Failed to get results from server. Please try again later.", "Error");
 				}
 			}
 		}
@@ -220,7 +230,7 @@ namespace ThisRoofN.ViewModels
 		private bool Invalidate ()
 		{
 			if (DataHelper.CurrentSearchFilter.MaxBudget > TRConstant.MaxValidBudget ||
-				DataHelper.CurrentSearchFilter.MaxBudget < TRConstant.MinValidBudget) {
+			    DataHelper.CurrentSearchFilter.MaxBudget < TRConstant.MinValidBudget) {
 				UserDialogs.Instance.Alert (string.Format ("Budget value should be {0} to {1}", TRConstant.MinValidBudget, TRConstant.MaxValidBudget), "Validation");
 				return false;
 			}
@@ -231,8 +241,8 @@ namespace ThisRoofN.ViewModels
 			}
 
 			if (DataHelper.CurrentSearchFilter.MinSquareFootageStructure > 0 &&
-				DataHelper.CurrentSearchFilter.MaxLotSquareFootage > 0 &&
-				DataHelper.CurrentSearchFilter.MinSquareFootageStructure > DataHelper.CurrentSearchFilter.MaxLotSquareFootage) {
+			    DataHelper.CurrentSearchFilter.MaxLotSquareFootage > 0 &&
+			    DataHelper.CurrentSearchFilter.MinSquareFootageStructure > DataHelper.CurrentSearchFilter.MaxLotSquareFootage) {
 				UserDialogs.Instance.Alert ("The minimum suqare footage should be less than maxmum square footage", "Validation");
 				return false;
 			}
@@ -244,6 +254,7 @@ namespace ThisRoofN.ViewModels
 
 			return true;
 		}
+
 		#endregion
 	}
 }

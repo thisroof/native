@@ -30,6 +30,8 @@ namespace ThisRoofN.iOS
 
 			var set = this.CreateBindingSet<TRWebViewController, TRWebViewModel> ();
 			set.Bind (backButton).To (vm => vm.CloseCommand);
+			set.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			set.Bind (loadingLabel).To (vm => vm.LoadingText);
 			set.Apply ();
 		}
 
@@ -37,12 +39,13 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewWillAppear (animated);
 
-			UserDialogs.Instance.ShowLoading ();
+			ViewModelInstance.IsLoading = true;
+			ViewModelInstance.LoadingText = "Loading";
 			view_web.LoadRequest (new NSUrlRequest(new NSUrl(ViewModelInstance.ContentLink)));
 			view_web.ScalesPageToFit = true;
 
 			view_web.LoadFinished += (object sender, EventArgs e) => {
-				UserDialogs.Instance.HideLoading ();
+				ViewModelInstance.IsLoading = false;
 			};
 		}
 	}

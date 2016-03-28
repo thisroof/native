@@ -134,7 +134,7 @@ namespace ThisRoofN.iOS
 				return;
 			}
 
-			if (result.GrantedPermissions != null && result.GrantedPermissions.Contains ("email")) {
+			if (result.GrantedPermissions != null) {
 				string NAME = "name";
 				string ID = "id";
 				string EMAIL = "email";
@@ -144,11 +144,12 @@ namespace ThisRoofN.iOS
 					NAME, ID, EMAIL
 				});
 
-				UserDialogs.Instance.ShowLoading ();
+				ViewModelInstance.IsLoading = true;
+				ViewModelInstance.LoadingText = "Loading...";
 				var request = new GraphRequest ("me", new NSDictionary (FIELDS, REQUEST_FIELDS), AccessToken.CurrentAccessToken.TokenString, null, "GET");
 				var requestConnection = new GraphRequestConnection ();
 				requestConnection.AddRequest (request, (connection, graphResult, error) => {
-					UserDialogs.Instance.HideLoading ();
+					ViewModelInstance.IsLoading = false;
 					if (error != null || graphResult == null) {
 						// Error Handler
 						UserDialogs.Instance.Alert (String.Format("Facebook Login Error:{0}", error.Description), "ThisRoof");

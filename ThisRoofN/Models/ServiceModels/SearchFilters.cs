@@ -22,8 +22,9 @@ namespace ThisRoofN.Models.Service
 	public class SearchFilters : TREntityBase
 	{
 		public SearchFilters() {
+			MaxBudget = TRConstant.PriceValues [TRConstant.PriceValues.Count - 1];
 			SearchType = (int)TRSearchType.Commute;
-			SearchDistance = 4; // 1 hr for commute time
+			SearchDistance = 60; // 1 hr for commute time
 			StateFilters = string.Join (",", TRConstant.StateFilters.ToArray ());
 			HasPool = string.Empty;
 			ViewTypes = string.Empty;

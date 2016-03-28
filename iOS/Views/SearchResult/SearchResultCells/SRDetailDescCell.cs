@@ -4,6 +4,7 @@ using System;
 
 using Foundation;
 using UIKit;
+using Acr.UserDialogs;
 
 namespace ThisRoofN.iOS
 {
@@ -30,8 +31,11 @@ namespace ThisRoofN.iOS
 			this.masterView = _masterView;
 
 			_masterView.BindingSet.Bind (lbl_desc).To (vm => vm.ItemDetail.ShortenedDescription);
-			_masterView.BindingSet.Bind (btn_more).To (vm => vm.DescMoreCommand);
+//			_masterView.BindingSet.Bind (btn_more).To (vm => vm.DescMoreCommand);
 
+			btn_more.TouchUpInside += (object sender, EventArgs e) => {
+				UserDialogs.Instance.Alert(_masterView.ViewModelInstace.ItemDetail.Description, "Description");
+			};
 			InitUI ();
 		}
 

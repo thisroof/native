@@ -17,11 +17,11 @@ namespace ThisRoofN.iOS
 
 		public SRDetailImageCell (IntPtr handle) : base (handle)
 		{
-			this.DelayBind (() => {
-				var set = this.CreateBindingSet<SRDetailImageCell, CottagePhoto>();
-				set.Bind(img_detailItem).For(i => i.ImageUrl).To(vm => vm.MediaURL);
-				set.Apply();
-			});
+//			this.DelayBind (() => {
+//				var set = this.CreateBindingSet<SRDetailImageCell, CottagePhoto>();
+//				set.Bind(img_detailItem).For(i => i.ImageUrl).To(vm => vm.MediaURL);
+//				set.Apply();
+//			});
 		}
 
 		public MvxImageView IVItem {

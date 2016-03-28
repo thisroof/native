@@ -9,6 +9,7 @@ namespace ThisRoofN
 		public static readonly string FacebookAppName 			= "ThisRoof";
 		public static readonly string FacebookAppID 			= "196649054002336";
 		public static readonly string FacebookAppSecret 		= "44ee40904108c207763f4efbccdccc71";
+		public static readonly string FacebookAuthProvider 		= "facebook";
 
 		// Xamarin.Insights
 		public static readonly string InsightsApiKey 			= "c2ca12e603a2daa0deca1c39a7c62d7cd9fae812";
@@ -33,6 +34,7 @@ namespace ThisRoofN
 		public static readonly string UserPrefRefreshTokenKey		= "refresh_token_key";
 
 		//Web pages with static content
+		public static readonly string BuyersAgentLink = "http://thisroof.com/app-docs/";
 		public static readonly string SupportPageLink = "http://thisroof.com/app-docs/";
 		public static readonly string PrivacyPolicyPageLink = "http://thisroof.com/app-docs/pp/";
 		public static readonly string TermsOfUsePageLink = "http://thisroof.com/app-docs/tos/";
@@ -217,7 +219,6 @@ namespace ThisRoofN
 			"Spanish",
 			"Tudor",
 			"Mediterranean",
-			"Oriental",
 			"Victorian",
 			"Art Deco",
 		};

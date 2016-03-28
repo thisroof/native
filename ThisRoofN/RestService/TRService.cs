@@ -59,6 +59,7 @@ namespace ThisRoofN.RestService
 
 		public async Task<TRUser> FacebookLogin(FBUserInfo fbUserInfo)
 		{
+			fbUserInfo.Provider = TRConstant.FacebookAuthProvider;
 			return await CallRestAPI<TRUser> (endpoint_login, JsonConvert.SerializeObject (fbUserInfo));
 		}
 
@@ -130,7 +131,15 @@ namespace ThisRoofN.RestService
 
 		public async Task<List<IPosition>> GetPolygon(string deviceID)
 		{
-			var feature = await CallRestAPI<Feature> (endpoint_commutePolygon, JsonConvert.SerializeObject (deviceID));
+			var json = new {
+				mobile_num = deviceID
+			};
+
+			var feature = await CallRestAPI<Feature> (endpoint_commutePolygon, JsonConvert.SerializeObject (json));
+
+			if (feature == null) {
+				return null;
+			}
 
 			Polygon polygon = feature.Geometry as Polygon;
 			List<IPosition> positions = polygon.Coordinates[0].Coordinates;

@@ -63,9 +63,10 @@ namespace ThisRoofN.ViewModels
 		private async void DoSignup()
 		{
 			if (Validate (Email, Password)) {
-				UserDialogs.Instance.ShowLoading ();
+				this.IsLoading = true;
+				this.LoadingText = "Loading";
 				TRUser user = await mTRService.Signup (Email, Password);
-				UserDialogs.Instance.HideLoading ();
+				this.IsLoading = false;
 
 				if (user != null && user.Success) {
 					TRService.Token = user.AccessToken;
@@ -86,9 +87,10 @@ namespace ThisRoofN.ViewModels
 
 		private async void DoFacebookSignup(FBUserInfo fbUserInfo)
 		{
-			UserDialogs.Instance.ShowLoading ();
+			this.IsLoading = true;
+			this.LoadingText = "Loading";
 			TRUser user = await mTRService.FacebookLogin (fbUserInfo);
-			UserDialogs.Instance.HideLoading ();
+			this.IsLoading = false;
 
 			if (user != null && user.Success) {
 				TRService.Token = user.AccessToken;
@@ -96,7 +98,6 @@ namespace ThisRoofN.ViewModels
 
 				// Save user data to user preference
 				mUserPref.SetValue(TRConstant.UserPrefUserEmailKey, fbUserInfo.UserEmail);
-				mUserPref.SetValue(TRConstant.UserPrefUserPasswordKey, Password);
 				mUserPref.SetValue(TRConstant.UserPrefAccessTokenKey, user.AccessToken);
 				mUserPref.SetValue(TRConstant.UserPrefRefreshTokenKey, user.RefreshToken);
 

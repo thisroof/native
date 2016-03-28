@@ -43,6 +43,8 @@ namespace ThisRoofN.iOS
 			set.Bind (txt_email).To (vm => vm.Email);
 			set.Bind (txt_password).To (vm => vm.Password);
 			set.Bind (btn_signup).To (vm => vm.SignupCommand);
+			set.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			set.Bind (loadingLabel).To (vm => vm.LoadingText);
 			set.Apply ();
 
 			var backGesture = new UITapGestureRecognizer (() => {

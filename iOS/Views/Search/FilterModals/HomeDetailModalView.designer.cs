@@ -19,6 +19,9 @@ namespace ThisRoofN.iOS
 		UIKit.UITableView tbl_homeDetail { get; set; }
 
 		[Outlet]
+		UIKit.UIView view_back { get; set; }
+
+		[Outlet]
 		UIKit.UIView view_rangeSliderHomeAge { get; set; }
 
 		[Outlet]
@@ -26,6 +29,9 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIView view_rangeSliderSquare { get; set; }
+
+		[Outlet]
+		UIKit.UIView view_side { get; set; }
 
 		[Outlet]
 		UIKit.UIView view_tableHeader { get; set; }
@@ -60,6 +66,16 @@ namespace ThisRoofN.iOS
 			if (view_tableHeader != null) {
 				view_tableHeader.Dispose ();
 				view_tableHeader = null;
+			}
+
+			if (view_back != null) {
+				view_back.Dispose ();
+				view_back = null;
+			}
+
+			if (view_side != null) {
+				view_side.Dispose ();
+				view_side = null;
 			}
 		}
 	}

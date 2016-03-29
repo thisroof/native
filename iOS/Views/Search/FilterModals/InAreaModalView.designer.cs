@@ -17,6 +17,12 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UITableView tbl_inAreaItems { get; set; }
+
+		[Outlet]
+		UIKit.UIView view_back { get; set; }
+
+		[Outlet]
+		UIKit.UIView view_side { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -28,6 +34,16 @@ namespace ThisRoofN.iOS
 			if (tbl_inAreaItems != null) {
 				tbl_inAreaItems.Dispose ();
 				tbl_inAreaItems = null;
+			}
+
+			if (view_back != null) {
+				view_back.Dispose ();
+				view_back = null;
+			}
+
+			if (view_side != null) {
+				view_side.Dispose ();
+				view_side = null;
 			}
 		}
 	}

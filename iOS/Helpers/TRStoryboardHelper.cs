@@ -23,6 +23,7 @@ namespace ThisRoofN.iOS
 				viewType.Name == "ArchitectureModalView" ||
 				viewType.Name == "HomeDetailModalView" ||
 				viewType.Name == "InAreaModalView" ||
+				viewType.Name == "HomeStructureModalView" ||
 				viewType.Name == "LifestyleModalView" ||
 				viewType.Name == "LocationModalView" ||
 				viewType.Name == "AffordSearchView" ||

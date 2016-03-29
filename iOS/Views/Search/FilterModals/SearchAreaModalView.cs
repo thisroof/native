@@ -70,14 +70,33 @@ namespace ThisRoofN.iOS
 
 			bindingSet.Apply ();
 
-			this.View.AddGestureRecognizer (new UITapGestureRecognizer (() => {
-				txt_address.ResignFirstResponder();
+			this.view_distance.AddGestureRecognizer (new UITapGestureRecognizer (() => {
+				this.View.EndEditing(true);
+			}));
+
+			this.view_trans.AddGestureRecognizer (new UITapGestureRecognizer (() => {
+				ViewModelInstance.CloseCommand.Execute(null);
 			}));
 		}
 
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
+
+			//Add Observer for keyboard event
+			keyboardUpNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.DidShowNotification, KeyboardUpNotification);
+			keyboardDownNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, KeyBoardDownNotification);
+		}
+
+		public override void ViewWillDisappear (bool animated)
+		{
+			base.ViewWillDisappear (animated);
+
+			//Remove Observer
+			if (keyboardUpNotificationToken != null)
+				NSNotificationCenter.DefaultCenter.RemoveObserver(keyboardUpNotificationToken);
+			if (keyboardDownNotificationToken != null)
+				NSNotificationCenter.DefaultCenter.RemoveObserver(keyboardDownNotificationToken);
 		}
 
 		private void InitUI() {
@@ -155,6 +174,25 @@ namespace ThisRoofN.iOS
 			txt_address.EditingChanged += (object sender, EventArgs e) => {
 				ViewModelInstance.UpdateLocationsCommand.Execute (txt_address.Text);
 			};
+		}
+
+		private void KeyboardUpNotification(NSNotification notification) {
+			if (moveViewUp)
+				return;
+
+			//Calculate how fore we need to scroll
+			scroll_amount = img_title.Frame.Height;
+
+			//Perform the scrolling
+			if (scroll_amount > 0)
+			{
+				moveViewUp = true;
+				ScrollTheView(moveViewUp);
+			}
+			else
+			{
+				moveViewUp = false;
+			}
 		}
 
 		// UICollectionView Delegate

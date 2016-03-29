@@ -38,6 +38,11 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
 			bindingSet.Bind (source).To (vm => vm.Items);
 			bindingSet.Apply ();
+
+
+			this.view_side.AddGestureRecognizer (new UITapGestureRecognizer (() => {
+				ViewModelInstance.CloseCommand.Execute(null);
+			}));
 		}
 
 		public class AreaItemsTableViewSource : MvxTableViewSource

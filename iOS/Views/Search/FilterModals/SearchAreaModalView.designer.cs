@@ -52,6 +52,9 @@ namespace ThisRoofN.iOS
 		UIKit.UIView view_addressBack { get; set; }
 
 		[Outlet]
+		UIKit.UIView view_back { get; set; }
+
+		[Outlet]
 		UIKit.UIView view_distance { get; set; }
 
 		[Outlet]
@@ -59,6 +62,9 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIView view_suggestionBack { get; set; }
+
+		[Outlet]
+		UIKit.UIView view_trans { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -102,6 +108,11 @@ namespace ThisRoofN.iOS
 				seg_areaType = null;
 			}
 
+			if (slider_distance != null) {
+				slider_distance.Dispose ();
+				slider_distance = null;
+			}
+
 			if (tbl_commuteItems != null) {
 				tbl_commuteItems.Dispose ();
 				tbl_commuteItems = null;
@@ -132,14 +143,19 @@ namespace ThisRoofN.iOS
 				view_nationWide = null;
 			}
 
-			if (slider_distance != null) {
-				slider_distance.Dispose ();
-				slider_distance = null;
-			}
-
 			if (view_suggestionBack != null) {
 				view_suggestionBack.Dispose ();
 				view_suggestionBack = null;
+			}
+
+			if (view_back != null) {
+				view_back.Dispose ();
+				view_back = null;
+			}
+
+			if (view_trans != null) {
+				view_trans.Dispose ();
+				view_trans = null;
 			}
 		}
 	}

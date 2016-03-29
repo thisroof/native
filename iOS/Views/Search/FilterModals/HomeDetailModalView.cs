@@ -64,6 +64,11 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (mLotSizeSlider.rangeSlider).For ("RightValueChange").To (vm => vm.MaxLotSize);
 
 			bindingSet.Apply ();
+
+
+			this.view_side.AddGestureRecognizer (new UITapGestureRecognizer (() => {
+				ViewModelInstance.CloseCommand.Execute(null);
+			}));
 		}
 
 		public override void ViewDidLayoutSubviews ()

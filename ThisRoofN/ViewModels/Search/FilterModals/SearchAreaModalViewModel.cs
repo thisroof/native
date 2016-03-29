@@ -106,13 +106,14 @@ namespace ThisRoofN.ViewModels
 				if (!UpdateZipcode (Address)) {
 					Address[] addresses = new MvxPlugins.Geocoder.Address[] {
 					};
+
+					UserDialogs.Instance.ShowLoading ();
 					try {
-						UserDialogs.Instance.ShowLoading ();
 						addresses = await geocoder.GetAddressesAsync (Address);
-						UserDialogs.Instance.HideLoading ();
 					} catch (Exception e) {
 						Mvx.Trace ("GetAddressesAsync Failed");
 					}
+					UserDialogs.Instance.HideLoading ();
 
 					if (addresses.Count () > 0) {
 						DataHelper.CurrentSearchFilter.GeoLat = addresses [0].Latitude;

@@ -13,17 +13,21 @@ using CoreGraphics;
 using RangeSlider;
 using System.Linq;
 using ThisRoofN.Models.App;
+using CoreLocation;
+using Acr.UserDialogs;
 
 namespace ThisRoofN.iOS
 {
 	public partial class SearchAreaModalView : BaseModalView, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
+		private CLLocationManager locationManager;
+		private CLGeocoder geocoder;
+
 		public SearchAreaModalView (IntPtr handle) : base (handle)
 		{
 		}
 
-		public SearchAreaModalViewModel ViewModelInstance
-		{
+		public SearchAreaModalViewModel ViewModelInstance {
 			get {
 				return (SearchAreaModalViewModel)base.ViewModel;
 			}
@@ -34,6 +38,7 @@ namespace ThisRoofN.iOS
 			base.ViewDidLoad ();
 
 			InitUI ();
+			InitUserLocations ();
 
 			// Init the State Collection View
 			var nationsSource = new MvxCollectionViewSource (cv_nations, new NSString ("SearchAreaCheckboxCVCell"));
@@ -60,7 +65,7 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (btn_modalBack).To (vm => vm.ModalCloseCommand);
 			bindingSet.Bind (lbl_distanceRange).To (vm => vm.DistanceLabelText);
 			bindingSet.Bind (slider_distance).To (vm => vm.Distance);
-			bindingSet.Bind (seg_areaType).For("SelectedIndex").To (vm => vm.DistanceTypeSegValue);
+			bindingSet.Bind (seg_areaType).For ("SelectedIndex").To (vm => vm.DistanceTypeSegValue);
 			bindingSet.Bind (nationsSource).To (vm => vm.States);
 			bindingSet.Bind (locationSuggestionSource).To (vm => vm.AddressSuggestionItems);
 			bindingSet.Bind (txt_address).To (vm => vm.Address);
@@ -71,12 +76,75 @@ namespace ThisRoofN.iOS
 			bindingSet.Apply ();
 
 			this.view_distance.AddGestureRecognizer (new UITapGestureRecognizer (() => {
-				this.View.EndEditing(true);
+				this.View.EndEditing (true);
 			}));
 
 			this.view_trans.AddGestureRecognizer (new UITapGestureRecognizer (() => {
-				ViewModelInstance.CloseCommand.Execute(null);
+				ViewModelInstance.CloseCommand.Execute (null);
 			}));
+
+			btn_getOwnLocation.TouchUpInside += (object sender, EventArgs e) => {
+				if(CLLocationManager.Status == CLAuthorizationStatus.Authorized || 
+					CLLocationManager.Status == CLAuthorizationStatus.AuthorizedAlways || 
+					CLLocationManager.Status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+					UserDialogs.Instance.ShowLoading();
+					locationManager.StartUpdatingLocation();
+				} else {
+					UserDialogs.Instance.Alert ("Please turn on location service in settings.", "Location Service OFF");
+				}
+			};
+		}
+
+		private void InitUserLocations() {
+
+			locationManager = new CLLocationManager ();
+			locationManager.DesiredAccuracy = CLLocation.AccuracyBest;
+			locationManager.DistanceFilter = 1;
+			geocoder = new CLGeocoder ();
+
+			switch (CLLocationManager.Status) {
+			case CLAuthorizationStatus.Authorized:
+			case CLAuthorizationStatus.AuthorizedWhenInUse:
+
+				break;
+			case CLAuthorizationStatus.NotDetermined:
+				this.locationManager.RequestWhenInUseAuthorization ();
+				break;
+			case CLAuthorizationStatus.Denied:
+			case CLAuthorizationStatus.Restricted:
+				UserDialogs.Instance.Alert ("Please turn on location service in settings.", "Location Service OFF");
+				break;
+			default:
+				break;
+			}
+
+			locationManager.AuthorizationChanged += (object sender, CLAuthorizationChangedEventArgs e) => {
+				if(e.Status == CLAuthorizationStatus.Authorized || 
+					e.Status == CLAuthorizationStatus.AuthorizedAlways || 
+					e.Status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+					if(string.IsNullOrEmpty(ViewModelInstance.Address)) {
+						UserDialogs.Instance.ShowLoading();
+						locationManager.StartUpdatingLocation();
+					}
+
+				} else if(e.Status == CLAuthorizationStatus.NotDetermined) {
+					this.locationManager.RequestWhenInUseAuthorization ();
+				} else {
+					UserDialogs.Instance.Alert ("Please turn on location service in settings.", "Location Service OFF");
+				}
+			};
+
+			locationManager.LocationsUpdated += LocationUpdated;
+		}
+
+		private async void LocationUpdated(object sender, CLLocationsUpdatedEventArgs e) {
+			UserDialogs.Instance.HideLoading();
+			CLPlacemark[] places = await geocoder.ReverseGeocodeLocationAsync(e.Locations[0]);
+			if (places != null && places.Length > 0) {
+				CLPlacemark place = places.LastOrDefault ();
+				ViewModelInstance.Address = string.Format ("{0}, {1}, {2}, {3}", place.Thoroughfare, place.Locality, place.AdministrativeArea, place.Country);
+				locationManager.StopUpdatingLocation();	
+			}
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -84,8 +152,8 @@ namespace ThisRoofN.iOS
 			base.ViewWillAppear (animated);
 
 			//Add Observer for keyboard event
-			keyboardUpNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.DidShowNotification, KeyboardUpNotification);
-			keyboardDownNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, KeyBoardDownNotification);
+			keyboardUpNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver (UIKeyboard.DidShowNotification, KeyboardUpNotification);
+			keyboardDownNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver (UIKeyboard.WillHideNotification, KeyBoardDownNotification);
 		}
 
 		public override void ViewWillDisappear (bool animated)
@@ -94,12 +162,13 @@ namespace ThisRoofN.iOS
 
 			//Remove Observer
 			if (keyboardUpNotificationToken != null)
-				NSNotificationCenter.DefaultCenter.RemoveObserver(keyboardUpNotificationToken);
+				NSNotificationCenter.DefaultCenter.RemoveObserver (keyboardUpNotificationToken);
 			if (keyboardDownNotificationToken != null)
-				NSNotificationCenter.DefaultCenter.RemoveObserver(keyboardDownNotificationToken);
+				NSNotificationCenter.DefaultCenter.RemoveObserver (keyboardDownNotificationToken);
 		}
 
-		private void InitUI() {
+		private void InitUI ()
+		{
 			view_addressBack.Layer.BorderWidth = 1.0f;
 			view_addressBack.Layer.BorderColor = UIColor.LightGray.CGColor;
 			view_addressBack.Layer.CornerRadius = 3.0f;
@@ -118,12 +187,12 @@ namespace ThisRoofN.iOS
 			case 0: // Distance
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
-				slider_distance.MaxValue = TRConstant.SearchDistances.Count() - 1;
+				slider_distance.MaxValue = TRConstant.SearchDistances.Count () - 1;
 				break;
 			case 1: // Commute
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
-				slider_distance.MaxValue = TRConstant.SearchMinutes.Count() - 1;
+				slider_distance.MaxValue = TRConstant.SearchMinutes.Count () - 1;
 				break;
 			case 2: // States
 				view_distance.Hidden = true;
@@ -134,16 +203,16 @@ namespace ThisRoofN.iOS
 			}
 
 			seg_areaType.ValueChanged += (object sender, EventArgs e) => {
-				txt_address.ResignFirstResponder();
+				txt_address.ResignFirstResponder ();
 				switch (seg_areaType.SelectedSegment) {
 				case 0: // Commute Selected
-					slider_distance.MaxValue = TRConstant.SearchMinutes.Count() - 1;
+					slider_distance.MaxValue = TRConstant.SearchMinutes.Count () - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = false;
 					break;
 				case 1: // Distnace Selected
-					slider_distance.MaxValue = TRConstant.SearchDistances.Count() - 1;
+					slider_distance.MaxValue = TRConstant.SearchDistances.Count () - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = true;
@@ -176,7 +245,8 @@ namespace ThisRoofN.iOS
 			};
 		}
 
-		private void KeyboardUpNotification(NSNotification notification) {
+		private void KeyboardUpNotification (NSNotification notification)
+		{
 			if (moveViewUp)
 				return;
 
@@ -184,13 +254,10 @@ namespace ThisRoofN.iOS
 			scroll_amount = img_title.Frame.Height;
 
 			//Perform the scrolling
-			if (scroll_amount > 0)
-			{
+			if (scroll_amount > 0) {
 				moveViewUp = true;
-				ScrollTheView(moveViewUp);
-			}
-			else
-			{
+				ScrollTheView (moveViewUp);
+			} else {
 				moveViewUp = false;
 			}
 		}
@@ -217,6 +284,7 @@ namespace ThisRoofN.iOS
 		public class LocationSuggestionTableViewSource : MvxTableViewSource
 		{
 			SearchAreaModalView masterView;
+
 			public LocationSuggestionTableViewSource (SearchAreaModalView _masterview, UITableView tv) : base (tv)
 			{
 				masterView = _masterview;
@@ -235,7 +303,7 @@ namespace ThisRoofN.iOS
 
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
-				tableView.DeselectRow(indexPath, true);
+				tableView.DeselectRow (indexPath, true);
 
 				TRGoogleMapPlace place = masterView.ViewModelInstance.AddressSuggestionItems [indexPath.Row];
 				masterView.ViewModelInstance.Address = place.FullAddress;
@@ -245,6 +313,7 @@ namespace ThisRoofN.iOS
 		public class SearchAreaCommuteItemsTableViewSource : MvxTableViewSource
 		{
 			SearchAreaModalView masterView;
+
 			public SearchAreaCommuteItemsTableViewSource (SearchAreaModalView _masterView, UITableView tv) : base (tv)
 			{
 				masterView = _masterView;

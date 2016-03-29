@@ -89,5 +89,7 @@
 	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location service is required.</string>
 </dict>
 </plist>

@@ -131,12 +131,9 @@ namespace ThisRoofN
 			{"list_price desc", "Price: High to Low"},
 			{"list_price asc", "Price: Low to High"},
 			{"listing_date", "Newly Listed"},
-			{"bedrooms", "Bedrooms"},
-			{"full_bathrooms", "Bathrooms"},
-			{"living_area", "Square Feet"},
+			{"living_area", "Interior Space"},
 			{"lot_size", "Lot Size"},
-			{"year_built", "Year Built"},
-			{"modification_timestamp", "Recently Changed"}
+			{"year_built", "Year Built"}
 		};
 		#endregion
 

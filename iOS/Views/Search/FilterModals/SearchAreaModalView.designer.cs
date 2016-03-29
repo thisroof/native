@@ -31,6 +31,9 @@ namespace ThisRoofN.iOS
 		UIKit.UIImageView img_title { get; set; }
 
 		[Outlet]
+		UIKit.UILabel lbl_distanceMark { get; set; }
+
+		[Outlet]
 		UIKit.UILabel lbl_distanceRange { get; set; }
 
 		[Outlet]
@@ -133,6 +136,11 @@ namespace ThisRoofN.iOS
 				view_addressBack = null;
 			}
 
+			if (view_back != null) {
+				view_back.Dispose ();
+				view_back = null;
+			}
+
 			if (view_distance != null) {
 				view_distance.Dispose ();
 				view_distance = null;
@@ -148,14 +156,14 @@ namespace ThisRoofN.iOS
 				view_suggestionBack = null;
 			}
 
-			if (view_back != null) {
-				view_back.Dispose ();
-				view_back = null;
-			}
-
 			if (view_trans != null) {
 				view_trans.Dispose ();
 				view_trans = null;
+			}
+
+			if (lbl_distanceMark != null) {
+				lbl_distanceMark.Dispose ();
+				lbl_distanceMark = null;
 			}
 		}
 	}

@@ -185,11 +185,13 @@ namespace ThisRoofN.iOS
 
 			switch (ViewModelInstance.DistanceType) {
 			case 0: // Distance
+				lbl_distanceMark.Text = "Commute";
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
 				slider_distance.MaxValue = TRConstant.SearchDistances.Count () - 1;
 				break;
 			case 1: // Commute
+				lbl_distanceMark.Text = "Distance";
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
 				slider_distance.MaxValue = TRConstant.SearchMinutes.Count () - 1;
@@ -206,12 +208,14 @@ namespace ThisRoofN.iOS
 				txt_address.ResignFirstResponder ();
 				switch (seg_areaType.SelectedSegment) {
 				case 0: // Commute Selected
+					lbl_distanceMark.Text = "Commute";
 					slider_distance.MaxValue = TRConstant.SearchMinutes.Count () - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = false;
 					break;
 				case 1: // Distnace Selected
+					lbl_distanceMark.Text = "Distance";
 					slider_distance.MaxValue = TRConstant.SearchDistances.Count () - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;

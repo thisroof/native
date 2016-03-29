@@ -1725,6 +1725,7 @@
                         <outlet property="btn_selectAll" destination="NbB-Yd-nFZ" id="b1x-UL-c5Q"/>
                         <outlet property="cv_nations" destination="2IF-pm-30Z" id="Gxb-df-Ghk"/>
                         <outlet property="img_title" destination="Eud-2l-iwH" id="CxH-w0-9tS"/>
+                        <outlet property="lbl_distanceMark" destination="XWp-Yv-4pN" id="sSl-HC-nTK"/>
                         <outlet property="lbl_distanceRange" destination="hsh-WV-cUd" id="hmC-rH-zL0"/>
                         <outlet property="seg_areaType" destination="xYW-YX-kSa" id="7Fv-b5-LEt"/>
                         <outlet property="slider_distance" destination="pLG-ef-SJh" id="6Bk-BI-8gA"/>

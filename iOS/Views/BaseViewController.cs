@@ -19,6 +19,13 @@ namespace ThisRoofN.iOS
 		protected UIButton backButton;
 		protected UIButton settingButton;
 
+		// Text Field Up Delegate
+		protected 	nfloat scroll_amount = 0.0f;
+		protected 	nfloat bottom = 0.0f;
+		protected 	nfloat offset = 10.0f;
+		protected 	bool moveViewUp = false;
+		protected  	NSObject keyboardUpNotificationToken;
+		protected 	NSObject keyboardDownNotificationToken;
 
 		public BaseViewController (IntPtr handle) : base (handle)
 		{
@@ -111,6 +118,38 @@ namespace ThisRoofN.iOS
 
 			loadingView.Hidden = true;
 		}
+
+
+		#region Keyboard Notification Part
+		protected void KeyBoardDownNotification(NSNotification notification)
+		{
+			if (moveViewUp)
+			{
+				ScrollTheView(false);
+			}
+			moveViewUp = false;
+		}
+
+		protected void ScrollTheView(bool move)
+		{
+			UIView.BeginAnimations(string.Empty, System.IntPtr.Zero);
+			UIView.SetAnimationDuration(0.3);
+
+			CGRect frame = View.Frame;
+			if (move)
+			{
+				frame.Y -= scroll_amount;
+			}
+			else
+			{
+				frame.Y += scroll_amount;
+				scroll_amount = 0;
+			}
+
+			View.Frame = frame;
+			UIView.CommitAnimations();
+		}
+		#endregion
 	}
 }
 

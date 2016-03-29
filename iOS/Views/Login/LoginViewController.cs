@@ -90,6 +90,8 @@ namespace ThisRoofN.iOS
 		{ 
 			base.ViewWillDisappear (animated);
 
+
+
 			if (moviePlayer != null) {
 				moviePlayer.Pause ();
 			}
@@ -173,5 +175,7 @@ namespace ThisRoofN.iOS
 				UserDialogs.Instance.Alert ("Email Permission is not allowed", "ThisRoof");
 			}
 		}
+
+
 	}
 }

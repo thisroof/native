@@ -7,6 +7,7 @@ using UIKit;
 using MvvmCross.Binding.BindingContext;
 using ThisRoofN.ViewModels;
 using ThisRoofN.iOS.Helpers;
+using CoreGraphics;
 
 namespace ThisRoofN.iOS
 {
@@ -84,5 +85,65 @@ namespace ThisRoofN.iOS
 				ViewModelInstance.IncludeTax = !ViewModelInstance.IncludeTax;
 			}));
 		}
+
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+
+			//Add Observer for keyboard event
+			keyboardUpNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.DidShowNotification, KeyBoardUpScrollNotification);
+			keyboardDownNotificationToken = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, KeyBoardDownScrollNotification);
+		}
+
+		public override void ViewWillDisappear (bool animated)
+		{
+			base.ViewWillDisappear (animated);
+
+			//Remove Observer
+			if (keyboardUpNotificationToken != null)
+				NSNotificationCenter.DefaultCenter.RemoveObserver(keyboardUpNotificationToken);
+			if (keyboardDownNotificationToken != null)
+				NSNotificationCenter.DefaultCenter.RemoveObserver(keyboardDownNotificationToken);
+		}
+
+		#region Keyboard Notification Part
+		private void KeyBoardUpScrollNotification(NSNotification notification)
+		{
+			UIView activeView = null;
+
+			if (txt_propertyTax.IsFirstResponder) {
+				activeView = view_propertyTax;
+			}
+
+			if (txt_insurance.IsFirstResponder) {
+				activeView = view_insurance;
+			}
+
+			if (txt_hoaDues.IsFirstResponder) {
+				activeView = view_hoaDues;
+			}
+
+			//get the keyboard size
+			CGRect r = UIKeyboard.BoundsFromNotification(notification);
+			UIEdgeInsets contentInsets = new UIEdgeInsets (0.0f, 0.0f, r.Height, 0.0f);
+			scroll_back.ContentInset = contentInsets;
+			scroll_back.ScrollIndicatorInsets = contentInsets;
+
+			CGRect aRect = scroll_back.Frame;
+			aRect.Height -= r.Height;
+
+			if (!aRect.Contains (new CGPoint (aRect.Left, aRect.Bottom))) {
+				CGPoint scrollPoint = new CGPoint (0, activeView.Frame.Bottom - r.Height);
+				scroll_back.SetContentOffset (scrollPoint, true);
+			}
+		}
+
+		protected void KeyBoardDownScrollNotification(NSNotification notification)
+		{
+			UIEdgeInsets contentInsets = UIEdgeInsets.Zero;
+			scroll_back.ContentInset = contentInsets;
+			scroll_back.ScrollIndicatorInsets = contentInsets;
+		}
+		#endregion
 	}
 }

@@ -8,12 +8,15 @@ using RangeSlider;
 using ThisRoofN.ViewModels;
 using CoreGraphics;
 using MvvmCross.Binding.BindingContext;
+using AllianceCustomPicker;
+using System.Linq;
 
 namespace ThisRoofN.iOS
 {
 	public partial class SearchView : BaseViewController
 	{
 		private TRMovingLabelRangeSlider mPriceRangeSlider;
+		private UIPopoverController sortByController;
 
 		public SearchView (IntPtr handle) : base (handle)
 		{
@@ -60,16 +63,20 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (btn_lifeStyle).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.Lifestyle);
 			bindingSet.Bind (btn_homeStructure).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeStructure);
 			bindingSet.Bind (btn_homeDetails).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeDetails);
+			bindingSet.Bind (txt_sortBy).To (vm => vm.SelectedSortType);
 			bindingSet.Apply ();
 
-			btn_searchArea.TouchUpInside += (object sender, EventArgs e) => {
-				Console.WriteLine ("asdf");
-			};
 
-			UIComboBox soryByComboBox = new UIComboBox (ViewModelInstance.SortTypes, 0, txt_sortBy, 
-				                            (index, text) => {
-					ViewModelInstance.SelectedSortType = text;
-				});
+			AlliancePicker picker = new AlliancePicker(this);
+			picker.PlainPickerItems = TRConstant.SortTypes.Values.ToList();
+			picker.SourceField = txt_sortBy;
+			picker.Type = PickerType.List;
+			picker.HeaderTitle = "Choose Sort By";
+			picker.View.Layer.CornerRadius = 5.0f;
+
+			btn_selectSortBy.TouchUpInside += (object sender, EventArgs e) => {
+				picker.Show();
+			};
 		}
 
 		private void InitRangeSlider ()

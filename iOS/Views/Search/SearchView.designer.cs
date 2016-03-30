@@ -37,6 +37,9 @@ namespace ThisRoofN.iOS
 		UIKit.UIButton btn_searchArea { get; set; }
 
 		[Outlet]
+		UIKit.UIButton btn_selectSortBy { get; set; }
+
+		[Outlet]
 		UIKit.UIButton btn_viewResult { get; set; }
 
 		[Outlet]
@@ -100,6 +103,11 @@ namespace ThisRoofN.iOS
 			if (view_rangeSlider != null) {
 				view_rangeSlider.Dispose ();
 				view_rangeSlider = null;
+			}
+
+			if (btn_selectSortBy != null) {
+				btn_selectSortBy.Dispose ();
+				btn_selectSortBy = null;
 			}
 		}
 	}

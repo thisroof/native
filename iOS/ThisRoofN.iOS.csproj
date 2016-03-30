@@ -183,6 +183,9 @@
     <Reference Include="GeoJSON.Net">
       <HintPath>..\packages\GeoJSON.Net.0.1.45\lib\portable-net40+sl5+wp80+win8+wpa81\GeoJSON.Net.dll</HintPath>
     </Reference>
+    <Reference Include="AllianceCustomPicker">
+      <HintPath>..\Components\alliancePicker-2.1.1\lib\ios-unified\AllianceCustomPicker.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThisRoofN\ThisRoofN.csproj">
@@ -547,6 +550,10 @@
     <Compile Include="CustomControls\TRMovingLabelRangeSlider.cs" />
     <Compile Include="Bootstrap\GeocoderPluginBootstrap.cs" />
     <Compile Include="CustomBinding\UISegmentTargetBinding.cs" />
+    <Compile Include="Storyboards\SortByMenuVC.cs" />
+    <Compile Include="Storyboards\SortByMenuVC.designer.cs">
+      <DependentUpon>SortByMenuVC.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
@@ -588,6 +595,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="facebookios">
       <Version>4.5.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="alliancePicker">
+      <Version>2.1.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

@@ -847,9 +847,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Price: High to Low" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="52d-8R-PPp">
-                                                <rect key="frame" x="219" y="107" width="140" height="30"/>
+                                                <rect key="frame" x="179" y="107" width="180" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="140" id="i0N-5O-8g4"/>
+                                                    <constraint firstAttribute="width" constant="180" id="i0N-5O-8g4"/>
                                                 </constraints>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1287,16 +1287,23 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cT-AH-naW">
+                                                <rect key="frame" x="179" y="106" width="180" height="33"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="z1A-DI-P6F" firstAttribute="top" secondItem="DYy-qJ-Zvd" secondAttribute="bottom" constant="4" id="0pK-X1-ipI"/>
+                                            <constraint firstItem="8cT-AH-naW" firstAttribute="leading" secondItem="52d-8R-PPp" secondAttribute="leading" id="2wH-2u-a19"/>
+                                            <constraint firstItem="8cT-AH-naW" firstAttribute="top" secondItem="52d-8R-PPp" secondAttribute="top" id="3gv-MI-LX3"/>
                                             <constraint firstAttribute="trailing" secondItem="aaX-aK-eLM" secondAttribute="trailing" id="5Ta-xy-PEC"/>
                                             <constraint firstItem="nTx-bu-rtL" firstAttribute="centerY" secondItem="52d-8R-PPp" secondAttribute="centerY" id="5cA-YF-7bl"/>
                                             <constraint firstItem="aaX-aK-eLM" firstAttribute="leading" secondItem="SgD-sz-6vw" secondAttribute="leading" id="AQt-wi-ZfF"/>
                                             <constraint firstItem="z1A-DI-P6F" firstAttribute="leading" secondItem="SgD-sz-6vw" secondAttribute="leading" constant="16" id="AUt-b5-xo3"/>
                                             <constraint firstItem="GmQ-LF-Stp" firstAttribute="leading" secondItem="SgD-sz-6vw" secondAttribute="leading" id="BzF-gD-emL"/>
                                             <constraint firstAttribute="bottom" secondItem="GmQ-LF-Stp" secondAttribute="bottom" id="DAC-H9-eo1"/>
+                                            <constraint firstItem="8cT-AH-naW" firstAttribute="width" secondItem="52d-8R-PPp" secondAttribute="width" id="Hvn-Rg-Epa"/>
+                                            <constraint firstItem="8cT-AH-naW" firstAttribute="height" secondItem="52d-8R-PPp" secondAttribute="height" id="PYk-Bv-IAp"/>
                                             <constraint firstAttribute="trailing" secondItem="fuY-9w-DVU" secondAttribute="trailing" constant="16" id="Rc5-Af-qrr"/>
                                             <constraint firstItem="DYy-qJ-Zvd" firstAttribute="leading" secondItem="SgD-sz-6vw" secondAttribute="leading" constant="16" id="TIT-iw-DlG"/>
                                             <constraint firstItem="52d-8R-PPp" firstAttribute="top" secondItem="fuY-9w-DVU" secondAttribute="bottom" constant="8" id="Vky-HL-1wM"/>
@@ -1355,6 +1362,7 @@
                         <outlet property="btn_lifeStyle" destination="Eim-nS-sQU" id="1UJ-PD-s2e"/>
                         <outlet property="btn_location" destination="gQb-Rv-EG4" id="VjY-rz-LUJ"/>
                         <outlet property="btn_searchArea" destination="NWU-Qs-vty" id="sxF-gz-a0v"/>
+                        <outlet property="btn_selectSortBy" destination="8cT-AH-naW" id="CAG-2G-Tj8"/>
                         <outlet property="btn_viewResult" destination="vRQ-dq-xup" id="I1F-jz-kaR"/>
                         <outlet property="txt_sortBy" destination="52d-8R-PPp" id="fbV-qY-gtL"/>
                         <outlet property="view_rangeSlider" destination="z1A-DI-P6F" id="AgE-FI-X90"/>
@@ -1362,7 +1370,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghB-cJ-pZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="559.5" y="102"/>
+            <point key="canvasLocation" x="559.5" y="101.5"/>
         </scene>
         <!--Search Area Modal View-->
         <scene sceneID="Wbs-mX-Df9">

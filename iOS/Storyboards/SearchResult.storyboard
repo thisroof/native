@@ -225,6 +225,10 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_splash_back" translatesAutoresizingMaskIntoConstraints="NO" id="JQd-ie-d5z" customClass="MvxImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="263"/>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFF-JJ-hjJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="263"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                                </view>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNB-by-UMZ">
                                                     <rect key="frame" x="24" y="42" width="272" height="181"/>
                                                     <subviews>
@@ -288,14 +292,18 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="aFF-JJ-hjJ" secondAttribute="bottom" id="1ZW-8I-0Kf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="HNB-by-UMZ" secondAttribute="trailing" constant="16" id="1iX-3q-bhS"/>
                                                 <constraint firstItem="HNB-by-UMZ" firstAttribute="centerY" secondItem="rSV-Z1-NoZ" secondAttribute="centerY" id="2OX-x8-tl7"/>
                                                 <constraint firstAttribute="bottom" secondItem="iGa-Ih-7q3" secondAttribute="bottom" constant="4" id="3eL-Gf-Fbu"/>
+                                                <constraint firstItem="aFF-JJ-hjJ" firstAttribute="leading" secondItem="rSV-Z1-NoZ" secondAttribute="leading" id="ATu-bz-2dn"/>
+                                                <constraint firstAttribute="trailing" secondItem="aFF-JJ-hjJ" secondAttribute="trailing" id="Dof-aF-5Mq"/>
                                                 <constraint firstAttribute="trailing" secondItem="JQd-ie-d5z" secondAttribute="trailing" id="MhH-A5-9tq"/>
                                                 <constraint firstItem="JQd-ie-d5z" firstAttribute="top" secondItem="rSV-Z1-NoZ" secondAttribute="top" id="iOX-KP-wmh"/>
                                                 <constraint firstItem="JQd-ie-d5z" firstAttribute="leading" secondItem="rSV-Z1-NoZ" secondAttribute="leading" id="rPU-Hf-PA2"/>
                                                 <constraint firstItem="HNB-by-UMZ" firstAttribute="leading" secondItem="rSV-Z1-NoZ" secondAttribute="leadingMargin" constant="16" id="teX-aw-js9"/>
                                                 <constraint firstAttribute="bottom" secondItem="JQd-ie-d5z" secondAttribute="bottom" id="umO-QL-sPg"/>
+                                                <constraint firstItem="aFF-JJ-hjJ" firstAttribute="top" secondItem="rSV-Z1-NoZ" secondAttribute="top" id="yWp-S9-aso"/>
                                                 <constraint firstItem="iGa-Ih-7q3" firstAttribute="centerX" secondItem="JQd-ie-d5z" secondAttribute="centerX" id="ys9-jO-M5P"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -621,8 +629,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyf-FB-xug">
-                                <rect key="frame" x="8" y="36" width="304" height="1156"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyf-FB-xug">
+                                <rect key="frame" x="400" y="36" width="304" height="1156"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOT IT!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwi-cx-txa">
                                         <rect key="frame" x="118" y="48" width="69" height="29"/>

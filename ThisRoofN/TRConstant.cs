@@ -190,37 +190,6 @@ namespace ThisRoofN
 		};
 		#endregion
 
-		#region Search LOCATION consts
-		public static readonly List<string> LocationItems = new List<string>() {
-			"City/Urban",
-			"Suburb",
-			"Rural"
-		};
-		#endregion
-
-		#region Search Archticture consts
-		public static readonly List<string> ArchitectureItems = new List<string>() {
-			"Modern",
-			"Contemporary",
-			"Loft",
-			"Historic Style Homes",
-			"Cottage",
-			"Cape Code",
-			"Craftsman",
-			"Colonial",
-			"Mid-Century Modern",
-			"Italianate",
-			"Prairie",
-			"Ranch Style",
-			"Neoclassical",
-			"Spanish",
-			"Tudor",
-			"Mediterranean",
-			"Victorian",
-			"Art Deco",
-		};
-		#endregion
-
 		#region Search LIFESTYLE consts
 		public static readonly List<string> LifestyleItems = new List<string>() {
 			"Dog Lover",
@@ -261,7 +230,27 @@ namespace ThisRoofN
 			"New construction",
 			"Rennovated",
 			"No HOA",
-			"Farm/Horse"
+			"Farm/Horse",
+
+			"Modern",		// Architecture ITems added
+			"Contemporary",
+			"Loft",
+			"Historic Style Homes",
+			"Cottage",
+			"Cape Code",
+			"Craftsman",
+			"Colonial",
+			"Mid-Century Modern",
+			"Italianate",
+			"Prairie",
+			"Ranch Style",
+			"Neoclassical",
+			"Spanish",
+			"Tudor",
+			"Mediterranean",
+			"Victorian",
+			"Art Deco",
+
 		};
 
 		public static readonly List<string> SquareFootageOptions = new List<string>{

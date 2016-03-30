@@ -15,6 +15,7 @@ using System.Linq;
 using ThisRoofN.Models.App;
 using CoreLocation;
 using Acr.UserDialogs;
+using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.iOS
 {
@@ -99,7 +100,7 @@ namespace ThisRoofN.iOS
 
 			locationManager = new CLLocationManager ();
 			locationManager.DesiredAccuracy = CLLocation.AccuracyBest;
-			locationManager.DistanceFilter = 1;
+//			locationManager.DistanceFilter = 1;
 			geocoder = new CLGeocoder ();
 
 			switch (CLLocationManager.Status) {
@@ -122,6 +123,7 @@ namespace ThisRoofN.iOS
 				if(e.Status == CLAuthorizationStatus.Authorized || 
 					e.Status == CLAuthorizationStatus.AuthorizedAlways || 
 					e.Status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+					this.locationManager.RequestWhenInUseAuthorization ();
 					if(string.IsNullOrEmpty(ViewModelInstance.Address)) {
 						UserDialogs.Instance.ShowLoading();
 						locationManager.StartUpdatingLocation();
@@ -133,17 +135,20 @@ namespace ThisRoofN.iOS
 					UserDialogs.Instance.Alert ("Please turn on location service in settings.", "Location Service OFF");
 				}
 			};
-
+				
 			locationManager.LocationsUpdated += LocationUpdated;
+			locationManager.LocationUpdatesPaused += (object sender, EventArgs e) => {
+				UserDialogs.Instance.HideLoading();
+			};
 		}
 
 		private async void LocationUpdated(object sender, CLLocationsUpdatedEventArgs e) {
+			locationManager.StopUpdatingLocation();	
 			UserDialogs.Instance.HideLoading();
 			CLPlacemark[] places = await geocoder.ReverseGeocodeLocationAsync(e.Locations[0]);
 			if (places != null && places.Length > 0) {
 				CLPlacemark place = places.LastOrDefault ();
 				ViewModelInstance.Address = string.Format ("{0}, {1}, {2}, {3}", place.Thoroughfare, place.Locality, place.AdministrativeArea, place.Country);
-				locationManager.StopUpdatingLocation();	
 			}
 		}
 
@@ -169,6 +174,11 @@ namespace ThisRoofN.iOS
 
 		private void InitUI ()
 		{
+			switch_city.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
+			switch_metro.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
+			switch_rural.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
+			switch_suburb.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
+
 			view_addressBack.Layer.BorderWidth = 1.0f;
 			view_addressBack.Layer.BorderColor = UIColor.LightGray.CGColor;
 			view_addressBack.Layer.CornerRadius = 3.0f;
@@ -184,19 +194,19 @@ namespace ThisRoofN.iOS
 			slider_distance.MinValue = 0;
 
 			switch (ViewModelInstance.DistanceType) {
-			case 0: // Distance
-				lbl_distanceMark.Text = "Commute";
+			case (int)TRSearchType.Distance:
+				lbl_distanceMark.Text = "Distance";
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
 				slider_distance.MaxValue = TRConstant.SearchDistances.Count () - 1;
 				break;
-			case 1: // Commute
-				lbl_distanceMark.Text = "Distance";
+			case (int)TRSearchType.Commute:
+				lbl_distanceMark.Text = "Commute";
 				view_distance.Hidden = false;
 				view_nationWide.Hidden = true;
 				slider_distance.MaxValue = TRConstant.SearchMinutes.Count () - 1;
 				break;
-			case 2: // States
+			case (int)TRSearchType.State: // States
 				view_distance.Hidden = true;
 				view_nationWide.Hidden = false;
 				break;

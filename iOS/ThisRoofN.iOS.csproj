@@ -476,10 +476,6 @@
       <DependentUpon>SearchAreaModalView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Search\FilterModals\BaseModalView.cs" />
-    <Compile Include="Views\Search\FilterModals\ArchitectureModalView.cs" />
-    <Compile Include="Views\Search\FilterModals\ArchitectureModalView.designer.cs">
-      <DependentUpon>ArchitectureModalView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Search\FilterModals\HomeDetailModalView.cs" />
     <Compile Include="Views\Search\FilterModals\HomeDetailModalView.designer.cs">
       <DependentUpon>HomeDetailModalView.cs</DependentUpon>
@@ -499,10 +495,6 @@
     <Compile Include="Views\Search\FilterModals\LifestyleModalView.cs" />
     <Compile Include="Views\Search\FilterModals\LifestyleModalView.designer.cs">
       <DependentUpon>LifestyleModalView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\FilterModals\LocationModalView.cs" />
-    <Compile Include="Views\Search\FilterModals\LocationModalView.designer.cs">
-      <DependentUpon>LocationModalView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Search\FilterModals\ItemCells\InAreaItemCell.cs" />
     <Compile Include="Views\Search\FilterModals\ItemCells\InAreaItemCell.designer.cs">
@@ -550,9 +542,13 @@
     <Compile Include="CustomControls\TRMovingLabelRangeSlider.cs" />
     <Compile Include="Bootstrap\GeocoderPluginBootstrap.cs" />
     <Compile Include="CustomBinding\UISegmentTargetBinding.cs" />
-    <Compile Include="Storyboards\SortByMenuVC.cs" />
-    <Compile Include="Storyboards\SortByMenuVC.designer.cs">
-      <DependentUpon>SortByMenuVC.cs</DependentUpon>
+    <Compile Include="ArchitectureModalView.cs" />
+    <Compile Include="ArchitectureModalView.designer.cs">
+      <DependentUpon>ArchitectureModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocationModalView.cs" />
+    <Compile Include="LocationModalView.designer.cs">
+      <DependentUpon>LocationModalView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

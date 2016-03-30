@@ -13,13 +13,10 @@ namespace ThisRoofN.iOS
 	partial class SearchView
 	{
 		[Outlet]
-		UIKit.UIButton btn_architecture { get; set; }
-
-		[Outlet]
 		UIKit.UIButton btn_homeDetails { get; set; }
 
 		[Outlet]
-		UIKit.UIButton btn_homeStructure { get; set; }
+		UIKit.UIButton btn_homeType { get; set; }
 
 		[Outlet]
 		UIKit.UIButton btn_inArea { get; set; }
@@ -29,9 +26,6 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIButton btn_lifeStyle { get; set; }
-
-		[Outlet]
-		UIKit.UIButton btn_location { get; set; }
 
 		[Outlet]
 		UIKit.UIButton btn_searchArea { get; set; }
@@ -50,21 +44,6 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btn_architecture != null) {
-				btn_architecture.Dispose ();
-				btn_architecture = null;
-			}
-
-			if (btn_homeDetails != null) {
-				btn_homeDetails.Dispose ();
-				btn_homeDetails = null;
-			}
-
-			if (btn_homeStructure != null) {
-				btn_homeStructure.Dispose ();
-				btn_homeStructure = null;
-			}
-
 			if (btn_inArea != null) {
 				btn_inArea.Dispose ();
 				btn_inArea = null;
@@ -80,14 +59,14 @@ namespace ThisRoofN.iOS
 				btn_lifeStyle = null;
 			}
 
-			if (btn_location != null) {
-				btn_location.Dispose ();
-				btn_location = null;
-			}
-
 			if (btn_searchArea != null) {
 				btn_searchArea.Dispose ();
 				btn_searchArea = null;
+			}
+
+			if (btn_selectSortBy != null) {
+				btn_selectSortBy.Dispose ();
+				btn_selectSortBy = null;
 			}
 
 			if (btn_viewResult != null) {
@@ -105,9 +84,14 @@ namespace ThisRoofN.iOS
 				view_rangeSlider = null;
 			}
 
-			if (btn_selectSortBy != null) {
-				btn_selectSortBy.Dispose ();
-				btn_selectSortBy = null;
+			if (btn_homeType != null) {
+				btn_homeType.Dispose ();
+				btn_homeType = null;
+			}
+
+			if (btn_homeDetails != null) {
+				btn_homeDetails.Dispose ();
+				btn_homeDetails = null;
 			}
 		}
 	}

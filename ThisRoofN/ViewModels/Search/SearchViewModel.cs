@@ -23,10 +23,8 @@ namespace ThisRoofN.ViewModels
 			SearchArea,
 			InHome,
 			InArea,
-			Location,
-			Architecture,
 			Lifestyle,
-			HomeStructure,
+			HomeType,
 			HomeDetails
 		}
 
@@ -152,16 +150,10 @@ namespace ThisRoofN.ViewModels
 			case ModalType.InArea:
 				ShowViewModel<InAreaModalViewModel> ();
 				break;
-			case ModalType.Location:
-				ShowViewModel<LocationModalViewModel> ();
-				break;
-			case ModalType.Architecture:
-				ShowViewModel<ArchitectureModalViewModel> ();
-				break;
 			case ModalType.Lifestyle:
 				ShowViewModel<LifestyleModalViewModel> ();
 				break;
-			case ModalType.HomeStructure:
+			case ModalType.HomeType:
 				ShowViewModel<HomeStructureModalViewModel> ();
 				break;
 			case ModalType.HomeDetails:
@@ -216,7 +208,11 @@ namespace ThisRoofN.ViewModels
 						Latitude = i.Latitude,
 						Longitude = i.Longitude,
 					}).ToList ();
-					DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
+
+					if (DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.Commute) {
+						DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
+					}
+
 					this.IsLoading = false;
 
 					ShowViewModel<SearchResultHomeViewModel> ();

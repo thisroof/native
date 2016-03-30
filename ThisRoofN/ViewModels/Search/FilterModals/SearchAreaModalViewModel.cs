@@ -90,7 +90,7 @@ namespace ThisRoofN.ViewModels
 		private async void DoSaveAndClose ()
 		{
 			DataHelper.CurrentSearchFilter.SearchType = (short)DistanceType;
-			if (string.IsNullOrEmpty (Address)) {
+			if (string.IsNullOrEmpty (Address) || DistanceType == (int)TRSearchType.State) {
 				if (DistanceType == (int)TRSearchType.State) {
 					DataHelper.CurrentSearchFilter.Address = string.Empty;
 					DataHelper.CurrentSearchFilter.City = string.Empty;
@@ -104,24 +104,25 @@ namespace ThisRoofN.ViewModels
 				}
 			} else {
 				if (!UpdateZipcode (Address)) {
-					Address[] addresses = new MvxPlugins.Geocoder.Address[] {
-					};
+					Address[] addresses = new MvxPlugins.Geocoder.Address[] {};
 
 					UserDialogs.Instance.ShowLoading ();
 					try {
 						addresses = await geocoder.GetAddressesAsync (Address);
 					} catch (Exception e) {
-						Mvx.Trace ("GetAddressesAsync Failed");
+						Mvx.Trace (e.Message + "GetAddressesAsync Failed");
 					}
 					UserDialogs.Instance.HideLoading ();
 
-					if (addresses.Count () > 0) {
+					if (addresses.Count () > 0 && !string.IsNullOrEmpty(addresses[0].PostalCode)) {
 						DataHelper.CurrentSearchFilter.GeoLat = addresses [0].Latitude;
 						DataHelper.CurrentSearchFilter.GeoLng = addresses [0].Longitude;
 						DataHelper.CurrentSearchFilter.Address = addresses [0].AddressLine;
 						DataHelper.CurrentSearchFilter.City = addresses [0].SubLocality;
 						DataHelper.CurrentSearchFilter.State = addresses [0].AdministrativeArea;
 						DataHelper.CurrentSearchFilter.Country = addresses [0].Country;
+						DataHelper.CurrentSearchFilter.StartZip = addresses [0].PostalCode;
+						DataHelper.CurrentSearchFilter.Zip = addresses [0].PostalCode;
 					} else {
 						UserDialogs.Instance.Alert ("Please input valid address.", "Invalid Input");
 						return;
@@ -357,15 +358,22 @@ namespace ThisRoofN.ViewModels
 			if (Regex.IsMatch (address, @"^\s*[\d]{5,}\s*$")) {
 				DataHelper.CurrentSearchFilter.Zip = Regex.Match (address, @"[\d]{5,}").Value;
 				DataHelper.CurrentSearchFilter.StartZip = DataHelper.CurrentSearchFilter.Zip;
+
+				DataHelper.CurrentSearchFilter.Address = string.Empty;
+				DataHelper.CurrentSearchFilter.City = string.Empty;
+				DataHelper.CurrentSearchFilter.State = string.Empty;
+				DataHelper.CurrentSearchFilter.Country = string.Empty;
 				return true;
 			} else {
 				string[] sub_comps = address.Split (new String[]{ ", " }, StringSplitOptions.RemoveEmptyEntries);
 
-				if (sub_comps.Length > 3) {
-					DataHelper.CurrentSearchFilter.Address = sub_comps [0];
-					DataHelper.CurrentSearchFilter.City = sub_comps [1];
-					DataHelper.CurrentSearchFilter.State = sub_comps [2];
-					DataHelper.CurrentSearchFilter.Country = sub_comps [3];
+				if (sub_comps.Length > 4) {
+					DataHelper.CurrentSearchFilter.StartZip = sub_comps [0];
+					DataHelper.CurrentSearchFilter.Zip = sub_comps [0];
+					DataHelper.CurrentSearchFilter.Address = sub_comps [1];
+					DataHelper.CurrentSearchFilter.City = sub_comps [2];
+					DataHelper.CurrentSearchFilter.State = sub_comps [3];
+					DataHelper.CurrentSearchFilter.Country = sub_comps [4];
 					return true;
 				} else {
 					return false;

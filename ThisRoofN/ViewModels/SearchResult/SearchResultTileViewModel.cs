@@ -71,6 +71,10 @@ namespace ThisRoofN.ViewModels
 		}
 
 		private async void LoadMore() {
+			if (TileItems.Count < 24) {
+				return;
+			}
+
 			int page = TileItems.Count / 24;
 
 			this.SpinnerLoading = true;

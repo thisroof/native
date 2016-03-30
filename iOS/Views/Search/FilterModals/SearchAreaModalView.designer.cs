@@ -43,6 +43,18 @@ namespace ThisRoofN.iOS
 		UIKit.UISlider slider_distance { get; set; }
 
 		[Outlet]
+		UIKit.UISwitch switch_city { get; set; }
+
+		[Outlet]
+		UIKit.UISwitch switch_metro { get; set; }
+
+		[Outlet]
+		UIKit.UISwitch switch_rural { get; set; }
+
+		[Outlet]
+		UIKit.UISwitch switch_suburb { get; set; }
+
+		[Outlet]
 		UIKit.UITableView tbl_commuteItems { get; set; }
 
 		[Outlet]
@@ -91,6 +103,26 @@ namespace ThisRoofN.iOS
 				btn_selectAll = null;
 			}
 
+			if (switch_city != null) {
+				switch_city.Dispose ();
+				switch_city = null;
+			}
+
+			if (switch_suburb != null) {
+				switch_suburb.Dispose ();
+				switch_suburb = null;
+			}
+
+			if (switch_metro != null) {
+				switch_metro.Dispose ();
+				switch_metro = null;
+			}
+
+			if (switch_rural != null) {
+				switch_rural.Dispose ();
+				switch_rural = null;
+			}
+
 			if (cv_nations != null) {
 				cv_nations.Dispose ();
 				cv_nations = null;
@@ -99,6 +131,11 @@ namespace ThisRoofN.iOS
 			if (img_title != null) {
 				img_title.Dispose ();
 				img_title = null;
+			}
+
+			if (lbl_distanceMark != null) {
+				lbl_distanceMark.Dispose ();
+				lbl_distanceMark = null;
 			}
 
 			if (lbl_distanceRange != null) {
@@ -159,11 +196,6 @@ namespace ThisRoofN.iOS
 			if (view_trans != null) {
 				view_trans.Dispose ();
 				view_trans = null;
-			}
-
-			if (lbl_distanceMark != null) {
-				lbl_distanceMark.Dispose ();
-				lbl_distanceMark = null;
 			}
 		}
 	}

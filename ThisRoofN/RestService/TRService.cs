@@ -142,6 +142,11 @@ namespace ThisRoofN.RestService
 			}
 
 			Polygon polygon = feature.Geometry as Polygon;
+
+			if (polygon == null || polygon.Coordinates == null || polygon.Coordinates.Count == 0) {
+				return null;
+			}
+
 			List<IPosition> positions = polygon.Coordinates[0].Coordinates;
 			return positions;
 		}

@@ -68,23 +68,25 @@ namespace ThisRoofN.iOS
 			bottomRightCoord.Latitude = 90;
 			bottomRightCoord.Longitude = -180;
 
-			foreach (TRCottageSimple item in ViewModelInstance.MapItems) {
-				TRMapAnnotation annotation = new TRMapAnnotation (item);
-				topLeftCoord.Longitude = Math.Min (topLeftCoord.Longitude, annotation.Coordinate.Longitude);
-				topLeftCoord.Latitude = Math.Max (topLeftCoord.Latitude, annotation.Coordinate.Latitude);
+			if (ViewModelInstance.MapItems != null && ViewModelInstance.MapItems.Count > 0) {
+				foreach (TRCottageSimple item in ViewModelInstance.MapItems) {
+					TRMapAnnotation annotation = new TRMapAnnotation (item);
+					topLeftCoord.Longitude = Math.Min (topLeftCoord.Longitude, annotation.Coordinate.Longitude);
+					topLeftCoord.Latitude = Math.Max (topLeftCoord.Latitude, annotation.Coordinate.Latitude);
 
-				bottomRightCoord.Longitude = Math.Max (bottomRightCoord.Longitude, annotation.Coordinate.Longitude);
-				bottomRightCoord.Latitude = Math.Min (bottomRightCoord.Latitude, annotation.Coordinate.Latitude);
-				map_results.AddAnnotation (annotation);
+					bottomRightCoord.Longitude = Math.Max (bottomRightCoord.Longitude, annotation.Coordinate.Longitude);
+					bottomRightCoord.Latitude = Math.Min (bottomRightCoord.Latitude, annotation.Coordinate.Latitude);
+					map_results.AddAnnotation (annotation);
+				}
+
+				MKCoordinateRegion region;
+				region.Center.Latitude = topLeftCoord.Latitude - (topLeftCoord.Latitude - bottomRightCoord.Latitude) * 0.5;
+				region.Center.Longitude = topLeftCoord.Longitude + (bottomRightCoord.Longitude - topLeftCoord.Longitude) * 0.5;
+				region.Span.LatitudeDelta = Math.Abs (topLeftCoord.Latitude - bottomRightCoord.Latitude) * 1.1;
+				region.Span.LongitudeDelta = Math.Abs (bottomRightCoord.Longitude - topLeftCoord.Longitude) * 1.1;
+				region = map_results.RegionThatFits (region);
+				map_results.SetRegion (region, true);
 			}
-
-			MKCoordinateRegion region;
-			region.Center.Latitude = topLeftCoord.Latitude - (topLeftCoord.Latitude - bottomRightCoord.Latitude) * 0.5;
-			region.Center.Longitude = topLeftCoord.Longitude + (bottomRightCoord.Longitude - topLeftCoord.Longitude) * 0.5;
-			region.Span.LatitudeDelta = Math.Abs (topLeftCoord.Latitude - bottomRightCoord.Latitude) * 1.1;
-			region.Span.LongitudeDelta = Math.Abs (bottomRightCoord.Longitude - topLeftCoord.Longitude) * 1.1;
-			region = map_results.RegionThatFits (region);
-			map_results.SetRegion (region, true);
 		}
 
 		[Export ("mapView:viewForAnnotation:")]

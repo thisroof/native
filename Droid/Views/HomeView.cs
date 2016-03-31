@@ -15,6 +15,7 @@ using Android.Graphics;
 using ThisRoofN.Droid.CustomMvxDroid;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Views;
+using ThisRoofN.Droid.Helpers;
 
 namespace ThisRoofN.Droid
 {
@@ -24,6 +25,13 @@ namespace ThisRoofN.Droid
 		private TRMvxDroidViewPresenter mPresenter;
 		private RelativeLayout contentLayout;
 		private WebView gifWebView;
+		private ToolbarHelper toolbarManager;
+
+		public ToolbarHelper ToolbarManager {
+			get {
+				return this.toolbarManager;
+			}
+		}
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -32,6 +40,7 @@ namespace ThisRoofN.Droid
 			SetContentView (Resource.Layout.activity_navigation_base);
 			contentLayout = FindViewById<RelativeLayout> (Resource.Id.contentLayout);
 			gifWebView = FindViewById<WebView> (Resource.Id.gifWebView);
+			toolbarManager = new ToolbarHelper (this, SupportFragmentManager);
 
 			if (savedInstanceState == null) {
 				if (gifWebView != null) {

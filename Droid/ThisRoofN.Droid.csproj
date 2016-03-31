@@ -67,18 +67,6 @@
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\monoandroid\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Acr.Support.Android">
-      <HintPath>..\packages\Acr.Support.1.0.0\lib\MonoAndroid10\Acr.Support.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Acr.UserDialogs">
-      <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\MonoAndroid10\Acr.UserDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="Acr.UserDialogs.Interface">
-      <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\MonoAndroid10\Acr.UserDialogs.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="AndHUD">
-      <HintPath>..\packages\Acr.UserDialogs.4.1.0\lib\MonoAndroid10\AndHUD.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -176,6 +164,18 @@
     <Reference Include="MvxPlugins.Geocoder.Droid">
       <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\MonoAndroid\MvxPlugins.Geocoder.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="Acr.Support.Android">
+      <HintPath>..\packages\Acr.Support.1.1.1\lib\MonoAndroid10\Acr.Support.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs">
+      <HintPath>..\packages\Acr.UserDialogs.4.3.4\lib\MonoAndroid10\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface">
+      <HintPath>..\packages\Acr.UserDialogs.4.3.4\lib\MonoAndroid10\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="AndHUD">
+      <HintPath>..\packages\Acr.UserDialogs.4.3.4\lib\MonoAndroid10\AndHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThisRoofN\ThisRoofN.csproj">
@@ -184,7 +184,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
@@ -202,6 +201,10 @@
     <Compile Include="Views\HomeViewContent.cs" />
     <Compile Include="Views\BaseMvxFragment.cs" />
     <Compile Include="Bootstrap\GeocoderPluginBootstrap.cs" />
+    <Compile Include="Helpers\DeviceHelper.cs" />
+    <Compile Include="Helpers\UserPreferenceHelper.cs" />
+    <Compile Include="ValueConverters\FontValueConverter.cs" />
+    <Compile Include="Helpers\ToolbarHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -210,7 +213,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\Icon.png" />
@@ -226,7 +228,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\img_splash.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\img_splash.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\img_splash.png" />
-    <AndroidResource Include="Resources\layout\tr_loading_indicator.axml" />
     <AndroidResource Include="Resources\anim\activity_slidein_left.xml" />
     <AndroidResource Include="Resources\anim\activity_slidein_right.axml" />
     <AndroidResource Include="Resources\anim\activity_slideout_left.xml" />
@@ -243,6 +244,19 @@
     <AndroidResource Include="Resources\values\style_layout.xml" />
     <AndroidResource Include="Resources\raw\animator.html" />
     <AndroidResource Include="Resources\raw\loading_animator.gif" />
+    <AndroidResource Include="Resources\layout\fragment_home.axml" />
+    <AndroidResource Include="Resources\values\style_button.xml" />
+    <AndroidResource Include="Resources\drawable\img_nav_title.png" />
+    <AndroidResource Include="Resources\values-v19\dimens.xml" />
+    <AndroidResource Include="Resources\values-v21\dimens.xml" />
+    <AndroidResource Include="Resources\drawable\icon_logo_small.png" />
+    <AndroidResource Include="Resources\layout\fragment_login.axml" />
+    <AndroidResource Include="Resources\layout\tr_loading_indicator.axml" />
+    <AndroidResource Include="Resources\layout\fragment_signup.axml" />
+    <AndroidResource Include="Resources\drawable\img_fb_login.png" />
+    <AndroidResource Include="Resources\drawable\img_fb_signup.png" />
+    <AndroidResource Include="Resources\layout\fragment_search_type.axml" />
+    <AndroidResource Include="Resources\drawable\btn_clear.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -265,5 +279,21 @@
     <Folder Include="Resources\anim\" />
     <Folder Include="TRApplication\" />
     <Folder Include="Resources\raw\" />
+    <Folder Include="Assets\Videos\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Assets\Fonts\" />
+    <Folder Include="ValueConverters\" />
+    <Folder Include="Resources\values-v21\" />
+    <Folder Include="Resources\values-v19\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Videos\WelcomeVideo.mp4" />
+    <AndroidAsset Include="Assets\Videos\SplashVideo.mp4" />
+    <AndroidAsset Include="Assets\Fonts\Helvetica_Black_Ex.otf" />
+    <AndroidAsset Include="Assets\Fonts\Helvetica_Black_Ex_Cn.otf" />
+    <AndroidAsset Include="Assets\Fonts\Helvetica_Bold.otf" />
+    <AndroidAsset Include="Assets\Fonts\Helvetica_Bold_Cn.otf" />
+    <AndroidAsset Include="Assets\Fonts\Helvetica_Thin.otf" />
+    <AndroidAsset Include="Assets\Fonts\Helvetica_Thin_Cn.otf" />
   </ItemGroup>
 </Project>

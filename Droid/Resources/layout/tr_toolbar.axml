@@ -7,7 +7,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/TR_DARK_BLUE">
+        android:background="@color/TR_DARK_BLUE"
+        android:layout_marginTop="@dimen/padding_4dp"
+        android:layout_marginBottom="@dimen/padding_4dp">
         <ImageView
             android:id="@+id/nav_back"
             android:layout_width="40dp"
@@ -15,13 +17,14 @@
             android:src="@drawable/ic_arrow_left_white_24dp"
             android:scaleType="centerInside"
             android:layout_marginLeft="5dp" />
-        <TextView
-            android:id="@+id/lbl_actionbar_title"
-            style="@style/ScreenTitleStyle"
-            android:text="Discounts"
-            android:textColor="@android:color/white"
-            android:gravity="center"
-            android:layout_centerInParent="true" />
+        <ImageView
+            android:id="@+id/img_navMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_nav_title"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="@dimen/padding_8dp"
+            android:layout_marginRight="@dimen/padding_8dp" />
         <ImageView
             android:id="@+id/nav_setting"
             android:layout_width="40dp"
@@ -29,7 +32,9 @@
             android:src="@drawable/icon_setting_white"
             android:scaleType="centerInside"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="@dimen/padding_4dp"
+            android:layout_marginBottom="@dimen/padding_4dp" />
         <View
             android:id="@+id/separatorLine"
             android:background="@android:color/background_dark"

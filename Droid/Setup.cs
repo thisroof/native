@@ -6,6 +6,9 @@ using System.Reflection;
 using MvvmCross.Platform;
 using ThisRoofN.Droid.CustomMvxDroid;
 using MvvmCross.Droid.Views;
+using System.Linq;
+using ThisRoofN.Interfaces;
+using ThisRoofN.Droid.Helpers;
 
 namespace ThisRoofN.Droid
 {
@@ -44,8 +47,19 @@ namespace ThisRoofN.Droid
 			base.FillTargetFactories (registry);
 		}
 
+		protected override IEnumerable<Assembly> AndroidViewAssemblies {
+			get {
+				List<Assembly> toReturn = base.AndroidViewAssemblies.ToList ();
+				toReturn.Add (this.GetType ().Assembly);
+				return toReturn;
+			}
+		}
+
 		protected override void InitializeFirstChance ()
 		{
+			Mvx.RegisterSingleton<IUserPreference>( new UserPreferenceHelper() );
+			Mvx.RegisterSingleton<IDevice>( new DeviceHelper() );
+
 			base.InitializeFirstChance ();
 		}
 

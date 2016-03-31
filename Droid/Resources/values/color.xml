@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+
+	<!--TR Custom Colors-->
 	<color name="TR_DARK_BLUE">#214a72</color>
 	<color name="TR_LIGHT_BLUE">#00a1ff</color>
 	<color name="TR_THEME_BLUE">#01ace4</color>
+
+	<!--Defulat Colors-->
+	<color name="white">#ffffff</color>
+	<color name="black_40">#66000000</color>
 </resources>
 

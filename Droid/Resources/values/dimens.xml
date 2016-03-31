@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
 <!--	ThisRoof Font-->
+	<dimen name="font30sp">30sp</dimen>
 	<dimen name="font24sp">24sp</dimen>
 	<dimen name="font22sp">22sp</dimen>
 	<dimen name="font20sp">20sp</dimen>
@@ -24,8 +25,10 @@
 
 
 <!--	ThisRoof Gif Animator-->
-
 	<dimen name="animator_width">150dp</dimen>
 	<dimen name="animator_height">83dp</dimen>
+
+	<dimen name="login_logo_size">65dp</dimen>
+	<dimen name="welcome_logo_size">80dp</dimen>
 </resources>
 

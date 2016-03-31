@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_signin">
+        <VideoView
+            android:id="@+id/view_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_32dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/welcome_logo_size"
+                android:layout_height="@dimen/welcome_logo_size"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_logo_small" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unrestricted Search"
+                android:textSize="@dimen/font12sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/padding_4dp"
+                local:MvxBind="Typeface Font('Thin_Cn')" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_16dp"
+        android:layout_alignParentBottom="true">
+        <Button
+            style="@style/ActionButtonStyle"
+            android:id="@+id/btn_signin"
+            android:text="CALCULATOR"
+            android:background="@drawable/btn_clear"
+            local:MvxBind="Click LoginCommand; Typeface Font('Black_Ex_Cn')" />
+        <Button
+            style="@style/ActionButtonStyle"
+            android:id="@+id/btn_signup"
+            android:text="START SEARCH"
+            android:layout_marginTop="@dimen/padding_8dp"
+            local:MvxBind="Click SignupCommand; Typeface Font('Black_Ex_Cn')" />
+    </LinearLayout>
+</RelativeLayout>

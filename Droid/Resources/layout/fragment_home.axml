@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_signin">
+        <VideoView
+            android:id="@+id/view_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_width="@dimen/login_logo_size"
+            android:layout_height="@dimen/login_logo_size"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_logo_small"
+            android:layout_marginRight="@dimen/padding_16dp"
+            android:layout_marginTop="@dimen/padding_16dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_40"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/padding_8dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discover + Opportunities"
+                    android:textSize="@dimen/font16sp"
+                    android:textColor="@color/white"
+                    local:MvxBind="Typeface Font('Bold_Cn')" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TM"
+                    android:textSize="@dimen/font10sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="2dp"
+                    local:MvxBind="Typeface Font('Thin_Cn')" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <Button
+        style="@style/ActionButtonStyle"
+        android:id="@+id/btn_signin"
+        android:text="LOGIN"
+        android:background="@color/TR_DARK_BLUE"
+        android:layout_above="@+id/btn_signup"
+        local:MvxBind="Click LoginCommand; Typeface Font('Black_Ex_Cn')" />
+    <Button
+        style="@style/ActionButtonStyle"
+        android:id="@+id/btn_signup"
+        android:text="SIGN UP"
+        android:layout_alignParentBottom="true"
+        local:MvxBind="Click SignupCommand; Typeface Font('Black_Ex_Cn')" />
+</RelativeLayout>

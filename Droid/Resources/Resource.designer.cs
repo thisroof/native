@@ -48,8 +48,32 @@ namespace ThisRoofN.Droid
 			global::MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
 			global::MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxListView_MvxItemTemplate;
 			global::Splat.Resource.String.library_name = global::ThisRoofN.Droid.Resource.String.library_name;
-			global::Acr.Support.Android.Resource.String.ApplicationName = global::ThisRoofN.Droid.Resource.String.ApplicationName;
-			global::Acr.Support.Android.Resource.String.Hello = global::ThisRoofN.Droid.Resource.String.Hello;
+			global::ModernHttpClient.Resource.String.library_name = global::ThisRoofN.Droid.Resource.String.library_name;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::ThisRoofN.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::ThisRoofN.Droid.Resource.String.Hello;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxBind = global::ThisRoofN.Droid.Resource.Attribute.MvxBind;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxDropDownItemTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxGroupItemTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxGroupItemTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxItemTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxItemTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxLang = global::ThisRoofN.Droid.Resource.Attribute.MvxLang;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxSource = global::ThisRoofN.Droid.Resource.Attribute.MvxSource;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Id.MvvmCrossTagId = global::ThisRoofN.Droid.Resource.Id.MvvmCrossTagId;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Id.MvxBindingTagUnique = global::ThisRoofN.Droid.Resource.Id.MvxBindingTagUnique;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.ApplicationName = global::ThisRoofN.Droid.Resource.String.ApplicationName;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.Hello = global::ThisRoofN.Droid.Resource.String.Hello;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxBinding = global::ThisRoofN.Droid.Resource.Styleable.MvxBinding;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxBinding_MvxBind = global::ThisRoofN.Droid.Resource.Styleable.MvxBinding_MvxBind;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxBinding_MvxLang = global::ThisRoofN.Droid.Resource.Styleable.MvxBinding_MvxLang;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxControl = global::ThisRoofN.Droid.Resource.Styleable.MvxControl;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxControl_MvxTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxControl_MvxTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxExpandableListView = global::ThisRoofN.Droid.Resource.Styleable.MvxExpandableListView;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxImageView = global::ThisRoofN.Droid.Resource.Styleable.MvxImageView;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxImageView_MvxSource = global::ThisRoofN.Droid.Resource.Styleable.MvxImageView_MvxSource;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxListView = global::ThisRoofN.Droid.Resource.Styleable.MvxListView;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxListView_MvxItemTemplate;
 			global::AndroidHUD.Resource.Attribute.ahBarColor = global::ThisRoofN.Droid.Resource.Attribute.ahBarColor;
 			global::AndroidHUD.Resource.Attribute.ahBarLength = global::ThisRoofN.Droid.Resource.Attribute.ahBarLength;
 			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::ThisRoofN.Droid.Resource.Attribute.ahBarWidth;
@@ -87,32 +111,6 @@ namespace ThisRoofN.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::ThisRoofN.Droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::ThisRoofN.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::ThisRoofN.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
-			global::ModernHttpClient.Resource.String.library_name = global::ThisRoofN.Droid.Resource.String.library_name;
-			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::ThisRoofN.Droid.Resource.String.ApplicationName;
-			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::ThisRoofN.Droid.Resource.String.Hello;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxBind = global::ThisRoofN.Droid.Resource.Attribute.MvxBind;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxDropDownItemTemplate;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxGroupItemTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxGroupItemTemplate;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxItemTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxItemTemplate;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxLang = global::ThisRoofN.Droid.Resource.Attribute.MvxLang;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxSource = global::ThisRoofN.Droid.Resource.Attribute.MvxSource;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Attribute.MvxTemplate = global::ThisRoofN.Droid.Resource.Attribute.MvxTemplate;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Id.MvvmCrossTagId = global::ThisRoofN.Droid.Resource.Id.MvvmCrossTagId;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Id.MvxBindingTagUnique = global::ThisRoofN.Droid.Resource.Id.MvxBindingTagUnique;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.ApplicationName = global::ThisRoofN.Droid.Resource.String.ApplicationName;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.Hello = global::ThisRoofN.Droid.Resource.String.Hello;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxBinding = global::ThisRoofN.Droid.Resource.Styleable.MvxBinding;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxBinding_MvxBind = global::ThisRoofN.Droid.Resource.Styleable.MvxBinding_MvxBind;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxBinding_MvxLang = global::ThisRoofN.Droid.Resource.Styleable.MvxBinding_MvxLang;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxControl = global::ThisRoofN.Droid.Resource.Styleable.MvxControl;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxControl_MvxTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxControl_MvxTemplate;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxExpandableListView = global::ThisRoofN.Droid.Resource.Styleable.MvxExpandableListView;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxImageView = global::ThisRoofN.Droid.Resource.Styleable.MvxImageView;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxImageView_MvxSource = global::ThisRoofN.Droid.Resource.Styleable.MvxImageView_MvxSource;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxListView = global::ThisRoofN.Droid.Resource.Styleable.MvxListView;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
-			global::MvvmCross.Plugins.Sqlite.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::ThisRoofN.Droid.Resource.Styleable.MvxListView_MvxItemTemplate;
 		}
 		
 		public partial class Animation
@@ -311,41 +309,41 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f010002
 			public const int adUnitId = 2130771970;
 			
-			// aapt resource value: 0x7f0100f2
-			public const int ahBarColor = 2130772210;
+			// aapt resource value: 0x7f0100e6
+			public const int ahBarColor = 2130772198;
 			
-			// aapt resource value: 0x7f0100fa
-			public const int ahBarLength = 2130772218;
+			// aapt resource value: 0x7f0100ee
+			public const int ahBarLength = 2130772206;
 			
-			// aapt resource value: 0x7f0100f9
-			public const int ahBarWidth = 2130772217;
+			// aapt resource value: 0x7f0100ed
+			public const int ahBarWidth = 2130772205;
 			
-			// aapt resource value: 0x7f0100f7
-			public const int ahCircleColor = 2130772215;
+			// aapt resource value: 0x7f0100eb
+			public const int ahCircleColor = 2130772203;
 			
-			// aapt resource value: 0x7f0100f6
-			public const int ahDelayMillis = 2130772214;
+			// aapt resource value: 0x7f0100ea
+			public const int ahDelayMillis = 2130772202;
 			
-			// aapt resource value: 0x7f0100f8
-			public const int ahRadius = 2130772216;
+			// aapt resource value: 0x7f0100ec
+			public const int ahRadius = 2130772204;
 			
-			// aapt resource value: 0x7f0100f3
-			public const int ahRimColor = 2130772211;
+			// aapt resource value: 0x7f0100e7
+			public const int ahRimColor = 2130772199;
 			
-			// aapt resource value: 0x7f0100f4
-			public const int ahRimWidth = 2130772212;
+			// aapt resource value: 0x7f0100e8
+			public const int ahRimWidth = 2130772200;
 			
-			// aapt resource value: 0x7f0100f5
-			public const int ahSpinSpeed = 2130772213;
+			// aapt resource value: 0x7f0100e9
+			public const int ahSpinSpeed = 2130772201;
 			
-			// aapt resource value: 0x7f0100ef
-			public const int ahText = 2130772207;
+			// aapt resource value: 0x7f0100e3
+			public const int ahText = 2130772195;
 			
-			// aapt resource value: 0x7f0100f0
-			public const int ahTextColor = 2130772208;
+			// aapt resource value: 0x7f0100e4
+			public const int ahTextColor = 2130772196;
 			
-			// aapt resource value: 0x7f0100f1
-			public const int ahTextSize = 2130772209;
+			// aapt resource value: 0x7f0100e5
+			public const int ahTextSize = 2130772197;
 			
 			// aapt resource value: 0x7f0100bd
 			public const int alertDialogButtonGroupStyle = 2130772157;
@@ -488,41 +486,41 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0100ba
 			public const int colorSwitchThumbNormal = 2130772154;
 			
-			// aapt resource value: 0x7f0100e7
-			public const int com_facebook_auxiliary_view_position = 2130772199;
+			// aapt resource value: 0x7f0100f3
+			public const int com_facebook_auxiliary_view_position = 2130772211;
 			
-			// aapt resource value: 0x7f0100e9
-			public const int com_facebook_confirm_logout = 2130772201;
+			// aapt resource value: 0x7f0100f5
+			public const int com_facebook_confirm_logout = 2130772213;
 			
-			// aapt resource value: 0x7f0100e3
-			public const int com_facebook_foreground_color = 2130772195;
+			// aapt resource value: 0x7f0100ef
+			public const int com_facebook_foreground_color = 2130772207;
 			
-			// aapt resource value: 0x7f0100e8
-			public const int com_facebook_horizontal_alignment = 2130772200;
+			// aapt resource value: 0x7f0100f4
+			public const int com_facebook_horizontal_alignment = 2130772212;
 			
-			// aapt resource value: 0x7f0100ee
-			public const int com_facebook_is_cropped = 2130772206;
+			// aapt resource value: 0x7f0100fa
+			public const int com_facebook_is_cropped = 2130772218;
 			
-			// aapt resource value: 0x7f0100ea
-			public const int com_facebook_login_text = 2130772202;
+			// aapt resource value: 0x7f0100f6
+			public const int com_facebook_login_text = 2130772214;
 			
-			// aapt resource value: 0x7f0100eb
-			public const int com_facebook_logout_text = 2130772203;
+			// aapt resource value: 0x7f0100f7
+			public const int com_facebook_logout_text = 2130772215;
 			
-			// aapt resource value: 0x7f0100e4
-			public const int com_facebook_object_id = 2130772196;
+			// aapt resource value: 0x7f0100f0
+			public const int com_facebook_object_id = 2130772208;
 			
-			// aapt resource value: 0x7f0100e5
-			public const int com_facebook_object_type = 2130772197;
+			// aapt resource value: 0x7f0100f1
+			public const int com_facebook_object_type = 2130772209;
 			
-			// aapt resource value: 0x7f0100ed
-			public const int com_facebook_preset_size = 2130772205;
+			// aapt resource value: 0x7f0100f9
+			public const int com_facebook_preset_size = 2130772217;
 			
-			// aapt resource value: 0x7f0100e6
-			public const int com_facebook_style = 2130772198;
+			// aapt resource value: 0x7f0100f2
+			public const int com_facebook_style = 2130772210;
 			
-			// aapt resource value: 0x7f0100ec
-			public const int com_facebook_tooltip_mode = 2130772204;
+			// aapt resource value: 0x7f0100f8
+			public const int com_facebook_tooltip_mode = 2130772216;
 			
 			// aapt resource value: 0x7f010058
 			public const int commitIcon = 2130772056;
@@ -1012,32 +1010,32 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f09005c
 			public const int TR_THEME_BLUE = 2131296348;
 			
-			// aapt resource value: 0x7f09005d
-			public const int abc_background_cache_hint_selector_material_dark = 2131296349;
-			
-			// aapt resource value: 0x7f09005e
-			public const int abc_background_cache_hint_selector_material_light = 2131296350;
-			
 			// aapt resource value: 0x7f09005f
-			public const int abc_color_highlight_material = 2131296351;
+			public const int abc_background_cache_hint_selector_material_dark = 2131296351;
+			
+			// aapt resource value: 0x7f090060
+			public const int abc_background_cache_hint_selector_material_light = 2131296352;
+			
+			// aapt resource value: 0x7f090061
+			public const int abc_color_highlight_material = 2131296353;
 			
 			// aapt resource value: 0x7f09000e
 			public const int abc_input_method_navigation_guard = 2131296270;
 			
-			// aapt resource value: 0x7f090060
-			public const int abc_primary_text_disable_only_material_dark = 2131296352;
-			
-			// aapt resource value: 0x7f090061
-			public const int abc_primary_text_disable_only_material_light = 2131296353;
-			
 			// aapt resource value: 0x7f090062
-			public const int abc_primary_text_material_dark = 2131296354;
+			public const int abc_primary_text_disable_only_material_dark = 2131296354;
 			
 			// aapt resource value: 0x7f090063
-			public const int abc_primary_text_material_light = 2131296355;
+			public const int abc_primary_text_disable_only_material_light = 2131296355;
 			
 			// aapt resource value: 0x7f090064
-			public const int abc_search_url_text = 2131296356;
+			public const int abc_primary_text_material_dark = 2131296356;
+			
+			// aapt resource value: 0x7f090065
+			public const int abc_primary_text_material_light = 2131296357;
+			
+			// aapt resource value: 0x7f090066
+			public const int abc_search_url_text = 2131296358;
 			
 			// aapt resource value: 0x7f09000f
 			public const int abc_search_url_text_normal = 2131296271;
@@ -1048,11 +1046,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f090011
 			public const int abc_search_url_text_selected = 2131296273;
 			
-			// aapt resource value: 0x7f090065
-			public const int abc_secondary_text_material_dark = 2131296357;
+			// aapt resource value: 0x7f090067
+			public const int abc_secondary_text_material_dark = 2131296359;
 			
-			// aapt resource value: 0x7f090066
-			public const int abc_secondary_text_material_light = 2131296358;
+			// aapt resource value: 0x7f090068
+			public const int abc_secondary_text_material_light = 2131296360;
 			
 			// aapt resource value: 0x7f090012
 			public const int accent_material_dark = 2131296274;
@@ -1071,6 +1069,9 @@ namespace ThisRoofN.Droid
 			
 			// aapt resource value: 0x7f090017
 			public const int background_material_light = 2131296279;
+			
+			// aapt resource value: 0x7f09005e
+			public const int black_40 = 2131296350;
 			
 			// aapt resource value: 0x7f090018
 			public const int bright_foreground_disabled_material_dark = 2131296280;
@@ -1144,8 +1145,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f090053
 			public const int com_facebook_button_send_background_color_pressed = 2131296339;
 			
-			// aapt resource value: 0x7f090067
-			public const int com_facebook_button_text_color = 2131296359;
+			// aapt resource value: 0x7f090069
+			public const int com_facebook_button_text_color = 2131296361;
 			
 			// aapt resource value: 0x7f090054
 			public const int com_facebook_device_auth_text = 2131296340;
@@ -1162,8 +1163,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f090058
 			public const int com_facebook_messenger_blue = 2131296344;
 			
-			// aapt resource value: 0x7f090068
-			public const int com_facebook_send_button_text_color = 2131296360;
+			// aapt resource value: 0x7f09006a
+			public const int com_facebook_send_button_text_color = 2131296362;
 			
 			// aapt resource value: 0x7f090059
 			public const int com_facebook_share_button_text_color = 2131296345;
@@ -1198,11 +1199,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f090005
 			public const int common_signin_btn_light_text_pressed = 2131296261;
 			
-			// aapt resource value: 0x7f090069
-			public const int common_signin_btn_text_dark = 2131296361;
+			// aapt resource value: 0x7f09006b
+			public const int common_signin_btn_text_dark = 2131296363;
 			
-			// aapt resource value: 0x7f09006a
-			public const int common_signin_btn_text_light = 2131296362;
+			// aapt resource value: 0x7f09006c
+			public const int common_signin_btn_text_light = 2131296364;
 			
 			// aapt resource value: 0x7f090020
 			public const int dim_foreground_disabled_material_dark = 2131296288;
@@ -1318,17 +1319,20 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f090045
 			public const int switch_thumb_disabled_material_light = 2131296325;
 			
-			// aapt resource value: 0x7f09006b
-			public const int switch_thumb_material_dark = 2131296363;
+			// aapt resource value: 0x7f09006d
+			public const int switch_thumb_material_dark = 2131296365;
 			
-			// aapt resource value: 0x7f09006c
-			public const int switch_thumb_material_light = 2131296364;
+			// aapt resource value: 0x7f09006e
+			public const int switch_thumb_material_light = 2131296366;
 			
 			// aapt resource value: 0x7f090046
 			public const int switch_thumb_normal_material_dark = 2131296326;
 			
 			// aapt resource value: 0x7f090047
 			public const int switch_thumb_normal_material_light = 2131296327;
+			
+			// aapt resource value: 0x7f09005d
+			public const int white = 2131296349;
 			
 			static Color()
 			{
@@ -1544,11 +1548,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0b0008
 			public const int abc_text_size_title_material_toolbar = 2131427336;
 			
-			// aapt resource value: 0x7f0b0076
-			public const int animator_height = 2131427446;
+			// aapt resource value: 0x7f0b0077
+			public const int animator_height = 2131427447;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int animator_width = 2131427445;
+			// aapt resource value: 0x7f0b0076
+			public const int animator_width = 2131427446;
 			
 			// aapt resource value: 0x7f0b0001
 			public const int cardview_compat_inset_shadow = 2131427329;
@@ -1631,29 +1635,32 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0b0048
 			public const int disabled_alpha_material_light = 2131427400;
 			
+			// aapt resource value: 0x7f0b006d
+			public const int font10sp = 2131427437;
+			
 			// aapt resource value: 0x7f0b006c
-			public const int font10sp = 2131427436;
+			public const int font12sp = 2131427436;
 			
 			// aapt resource value: 0x7f0b006b
-			public const int font12sp = 2131427435;
+			public const int font14sp = 2131427435;
 			
 			// aapt resource value: 0x7f0b006a
-			public const int font14sp = 2131427434;
+			public const int font16sp = 2131427434;
 			
 			// aapt resource value: 0x7f0b0069
-			public const int font16sp = 2131427433;
+			public const int font18sp = 2131427433;
 			
 			// aapt resource value: 0x7f0b0068
-			public const int font18sp = 2131427432;
+			public const int font20sp = 2131427432;
 			
 			// aapt resource value: 0x7f0b0067
-			public const int font20sp = 2131427431;
+			public const int font22sp = 2131427431;
 			
 			// aapt resource value: 0x7f0b0066
-			public const int font22sp = 2131427430;
+			public const int font24sp = 2131427430;
 			
 			// aapt resource value: 0x7f0b0065
-			public const int font24sp = 2131427429;
+			public const int font30sp = 2131427429;
 			
 			// aapt resource value: 0x7f0b0049
 			public const int highlight_alpha_material_colored = 2131427401;
@@ -1667,6 +1674,9 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0b0000
 			public const int item_touch_helper_max_drag_scroll_per_frame = 2131427328;
 			
+			// aapt resource value: 0x7f0b0078
+			public const int login_logo_size = 2131427448;
+			
 			// aapt resource value: 0x7f0b004c
 			public const int notification_large_icon_height = 2131427404;
 			
@@ -1676,29 +1686,32 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0b004e
 			public const int notification_subtext_size = 2131427406;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int padding_16dp = 2131427439;
-			
 			// aapt resource value: 0x7f0b0070
-			public const int padding_32dp = 2131427440;
+			public const int padding_16dp = 2131427440;
 			
 			// aapt resource value: 0x7f0b0071
-			public const int padding_48dp = 2131427441;
-			
-			// aapt resource value: 0x7f0b006d
-			public const int padding_4dp = 2131427437;
+			public const int padding_32dp = 2131427441;
 			
 			// aapt resource value: 0x7f0b0072
-			public const int padding_64dp = 2131427442;
+			public const int padding_48dp = 2131427442;
 			
 			// aapt resource value: 0x7f0b006e
-			public const int padding_8dp = 2131427438;
+			public const int padding_4dp = 2131427438;
 			
 			// aapt resource value: 0x7f0b0073
-			public const int toolbar_height = 2131427443;
+			public const int padding_64dp = 2131427443;
+			
+			// aapt resource value: 0x7f0b006f
+			public const int padding_8dp = 2131427439;
 			
 			// aapt resource value: 0x7f0b0074
-			public const int toolbar_top_padding = 2131427444;
+			public const int toolbar_height = 2131427444;
+			
+			// aapt resource value: 0x7f0b0075
+			public const int toolbar_top_padding = 2131427445;
+			
+			// aapt resource value: 0x7f0b0079
+			public const int welcome_logo_size = 2131427449;
 			
 			static Dimension()
 			{
@@ -1921,139 +1934,154 @@ namespace ThisRoofN.Droid
 			public const int abc_textfield_search_material = 2130837572;
 			
 			// aapt resource value: 0x7f020045
-			public const int com_facebook_auth_dialog_background = 2130837573;
+			public const int btn_clear = 2130837573;
 			
 			// aapt resource value: 0x7f020046
-			public const int com_facebook_auth_dialog_cancel_background = 2130837574;
+			public const int com_facebook_auth_dialog_background = 2130837574;
 			
 			// aapt resource value: 0x7f020047
-			public const int com_facebook_auth_dialog_header_background = 2130837575;
+			public const int com_facebook_auth_dialog_cancel_background = 2130837575;
 			
 			// aapt resource value: 0x7f020048
-			public const int com_facebook_button_background = 2130837576;
+			public const int com_facebook_auth_dialog_header_background = 2130837576;
 			
 			// aapt resource value: 0x7f020049
-			public const int com_facebook_button_icon = 2130837577;
+			public const int com_facebook_button_background = 2130837577;
 			
 			// aapt resource value: 0x7f02004a
-			public const int com_facebook_button_icon_blue = 2130837578;
+			public const int com_facebook_button_icon = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public const int com_facebook_button_icon_white = 2130837579;
+			public const int com_facebook_button_icon_blue = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int com_facebook_button_like_background = 2130837580;
+			public const int com_facebook_button_icon_white = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int com_facebook_button_like_icon_selected = 2130837581;
+			public const int com_facebook_button_like_background = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int com_facebook_button_login_silver_background = 2130837582;
+			public const int com_facebook_button_like_icon_selected = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int com_facebook_button_send_background = 2130837583;
+			public const int com_facebook_button_login_silver_background = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int com_facebook_button_send_icon_blue = 2130837584;
+			public const int com_facebook_button_send_background = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int com_facebook_button_send_icon_white = 2130837585;
+			public const int com_facebook_button_send_icon_blue = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int com_facebook_close = 2130837586;
+			public const int com_facebook_button_send_icon_white = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int com_facebook_favicon_white = 2130837587;
+			public const int com_facebook_close = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int com_facebook_profile_picture_blank_portrait = 2130837588;
+			public const int com_facebook_favicon_white = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int com_facebook_profile_picture_blank_square = 2130837589;
+			public const int com_facebook_profile_picture_blank_portrait = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int com_facebook_send_button_icon = 2130837590;
+			public const int com_facebook_profile_picture_blank_square = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int com_facebook_tooltip_black_background = 2130837591;
+			public const int com_facebook_send_button_icon = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int com_facebook_tooltip_black_bottomnub = 2130837592;
+			public const int com_facebook_tooltip_black_background = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int com_facebook_tooltip_black_topnub = 2130837593;
+			public const int com_facebook_tooltip_black_bottomnub = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int com_facebook_tooltip_black_xout = 2130837594;
+			public const int com_facebook_tooltip_black_topnub = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int com_facebook_tooltip_blue_background = 2130837595;
+			public const int com_facebook_tooltip_black_xout = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int com_facebook_tooltip_blue_bottomnub = 2130837596;
+			public const int com_facebook_tooltip_blue_background = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int com_facebook_tooltip_blue_topnub = 2130837597;
+			public const int com_facebook_tooltip_blue_bottomnub = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int com_facebook_tooltip_blue_xout = 2130837598;
+			public const int com_facebook_tooltip_blue_topnub = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int common_full_open_on_phone = 2130837599;
+			public const int com_facebook_tooltip_blue_xout = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int common_ic_googleplayservices = 2130837600;
+			public const int common_full_open_on_phone = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int ic_arrow_left_white_24dp = 2130837601;
+			public const int common_ic_googleplayservices = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int ic_errorstatus = 2130837602;
+			public const int ic_arrow_left_white_24dp = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int ic_successstatus = 2130837603;
+			public const int ic_errorstatus = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int icon_setting_white = 2130837604;
+			public const int ic_successstatus = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int img_splash = 2130837605;
+			public const int icon_logo_small = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int messenger_bubble_large_blue = 2130837606;
+			public const int icon_setting_white = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int messenger_bubble_large_white = 2130837607;
+			public const int img_fb_login = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int messenger_bubble_small_blue = 2130837608;
+			public const int img_fb_signup = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int messenger_bubble_small_white = 2130837609;
+			public const int img_nav_title = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int messenger_button_blue_bg_round = 2130837610;
+			public const int img_splash = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int messenger_button_blue_bg_selector = 2130837611;
+			public const int messenger_bubble_large_blue = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int messenger_button_send_round_shadow = 2130837612;
+			public const int messenger_bubble_large_white = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int messenger_button_white_bg_round = 2130837613;
+			public const int messenger_bubble_small_blue = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int messenger_button_white_bg_selector = 2130837614;
-			
-			// aapt resource value: 0x7f020071
-			public const int notification_template_icon_bg = 2130837617;
+			public const int messenger_bubble_small_white = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int roundedbg = 2130837615;
+			public const int messenger_button_blue_bg_round = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int roundedbgdark = 2130837616;
+			public const int messenger_button_blue_bg_selector = 2130837616;
+			
+			// aapt resource value: 0x7f020071
+			public const int messenger_button_send_round_shadow = 2130837617;
+			
+			// aapt resource value: 0x7f020072
+			public const int messenger_button_white_bg_round = 2130837618;
+			
+			// aapt resource value: 0x7f020073
+			public const int messenger_button_white_bg_selector = 2130837619;
+			
+			// aapt resource value: 0x7f020076
+			public const int notification_template_icon_bg = 2130837622;
+			
+			// aapt resource value: 0x7f020074
+			public const int roundedbg = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int roundedbgdark = 2130837621;
 			
 			static Drawable()
 			{
@@ -2074,8 +2102,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c000b
 			public const int MvxBindingTagUnique = 2131492875;
 			
-			// aapt resource value: 0x7f0c007e
-			public const int action0 = 2131492990;
+			// aapt resource value: 0x7f0c0085
+			public const int action0 = 2131492997;
 			
 			// aapt resource value: 0x7f0c0057
 			public const int action_bar = 2131492951;
@@ -2101,8 +2129,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0058
 			public const int action_context_bar = 2131492952;
 			
-			// aapt resource value: 0x7f0c0082
-			public const int action_divider = 2131492994;
+			// aapt resource value: 0x7f0c0089
+			public const int action_divider = 2131493001;
 			
 			// aapt resource value: 0x7f0c0003
 			public const int action_menu_divider = 2131492867;
@@ -2137,6 +2165,9 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0032
 			public const int automatic = 2131492914;
 			
+			// aapt resource value: 0x7f0c007b
+			public const int back = 2131492987;
+			
 			// aapt resource value: 0x7f0c001d
 			public const int beginning = 2131492893;
 			
@@ -2146,14 +2177,20 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0029
 			public const int box_count = 2131492905;
 			
+			// aapt resource value: 0x7f0c0078
+			public const int btn_signin = 2131492984;
+			
+			// aapt resource value: 0x7f0c007a
+			public const int btn_signup = 2131492986;
+			
 			// aapt resource value: 0x7f0c002a
 			public const int button = 2131492906;
 			
 			// aapt resource value: 0x7f0c0041
 			public const int buttonPanel = 2131492929;
 			
-			// aapt resource value: 0x7f0c007f
-			public const int cancel_action = 2131492991;
+			// aapt resource value: 0x7f0c0086
+			public const int cancel_action = 2131492998;
 			
 			// aapt resource value: 0x7f0c0071
 			public const int cancel_button = 2131492977;
@@ -2164,8 +2201,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c004f
 			public const int checkbox = 2131492943;
 			
-			// aapt resource value: 0x7f0c0085
-			public const int chronometer = 2131492997;
+			// aapt resource value: 0x7f0c008c
+			public const int chronometer = 2131493004;
 			
 			// aapt resource value: 0x7f0c0021
 			public const int collapseActionView = 2131492897;
@@ -2227,8 +2264,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c001e
 			public const int end = 2131492894;
 			
-			// aapt resource value: 0x7f0c008a
-			public const int end_padder = 2131493002;
+			// aapt resource value: 0x7f0c0091
+			public const int end_padder = 2131493009;
 			
 			// aapt resource value: 0x7f0c003b
 			public const int expand_activities_button = 2131492923;
@@ -2236,8 +2273,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c004e
 			public const int expanded_menu = 2131492942;
 			
-			// aapt resource value: 0x7f0c008b
-			public const int gifWebView = 2131493003;
+			// aapt resource value: 0x7f0c0092
+			public const int gifWebView = 2131493010;
 			
 			// aapt resource value: 0x7f0c0005
 			public const int home = 2131492869;
@@ -2257,8 +2294,17 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c006b
 			public const int imageView1 = 2131492971;
 			
-			// aapt resource value: 0x7f0c0089
-			public const int info = 2131493001;
+			// aapt resource value: 0x7f0c007e
+			public const int img_fbLogin = 2131492990;
+			
+			// aapt resource value: 0x7f0c007f
+			public const int img_fbSignup = 2131492991;
+			
+			// aapt resource value: 0x7f0c0094
+			public const int img_navMain = 2131493012;
+			
+			// aapt resource value: 0x7f0c0090
+			public const int info = 2131493008;
 			
 			// aapt resource value: 0x7f0c002d
 			public const int inline = 2131492909;
@@ -2272,17 +2318,14 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0066
 			public const int layout_navigationBase = 2131492966;
 			
-			// aapt resource value: 0x7f0c008d
-			public const int lbl_actionbar_title = 2131493005;
-			
 			// aapt resource value: 0x7f0c0030
 			public const int left = 2131492912;
 			
-			// aapt resource value: 0x7f0c0083
-			public const int line1 = 2131492995;
+			// aapt resource value: 0x7f0c008a
+			public const int line1 = 2131493002;
 			
-			// aapt resource value: 0x7f0c0087
-			public const int line3 = 2131492999;
+			// aapt resource value: 0x7f0c008e
+			public const int line3 = 2131493006;
 			
 			// aapt resource value: 0x7f0c000f
 			public const int listMode = 2131492879;
@@ -2293,23 +2336,23 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c006a
 			public const int loadingFrame = 2131492970;
 			
-			// aapt resource value: 0x7f0c007a
-			public const int loadingImage = 2131492986;
+			// aapt resource value: 0x7f0c0082
+			public const int loadingImage = 2131492994;
 			
-			// aapt resource value: 0x7f0c0078
-			public const int loadingProgressBar = 2131492984;
+			// aapt resource value: 0x7f0c0080
+			public const int loadingProgressBar = 2131492992;
 			
-			// aapt resource value: 0x7f0c007b
-			public const int loadingProgressWheel = 2131492987;
+			// aapt resource value: 0x7f0c0083
+			public const int loadingProgressWheel = 2131492995;
 			
 			// aapt resource value: 0x7f0c0068
 			public const int mainContentLayout = 2131492968;
 			
-			// aapt resource value: 0x7f0c0081
-			public const int media_actions = 2131492993;
+			// aapt resource value: 0x7f0c0088
+			public const int media_actions = 2131493000;
 			
-			// aapt resource value: 0x7f0c007d
-			public const int messenger_send_button = 2131492989;
+			// aapt resource value: 0x7f0c0084
+			public const int messenger_send_button = 2131492996;
 			
 			// aapt resource value: 0x7f0c001f
 			public const int middle = 2131492895;
@@ -2317,14 +2360,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0018
 			public const int multiply = 2131492888;
 			
-			// aapt resource value: 0x7f0c007c
-			public const int myButton = 2131492988;
+			// aapt resource value: 0x7f0c0093
+			public const int nav_back = 2131493011;
 			
-			// aapt resource value: 0x7f0c008c
-			public const int nav_back = 2131493004;
-			
-			// aapt resource value: 0x7f0c008e
-			public const int nav_setting = 2131493006;
+			// aapt resource value: 0x7f0c0095
+			public const int nav_setting = 2131493013;
 			
 			// aapt resource value: 0x7f0c0023
 			public const int never = 2131492899;
@@ -2407,8 +2447,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0065
 			public const int select_dialog_listview = 2131492965;
 			
-			// aapt resource value: 0x7f0c008f
-			public const int separatorLine = 2131493007;
+			// aapt resource value: 0x7f0c0096
+			public const int separatorLine = 2131493014;
 			
 			// aapt resource value: 0x7f0c0050
 			public const int shortcut = 2131492944;
@@ -2443,8 +2483,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c002b
 			public const int standard = 2131492907;
 			
-			// aapt resource value: 0x7f0c0080
-			public const int status_bar_latest_event_content = 2131492992;
+			// aapt resource value: 0x7f0c0087
+			public const int status_bar_latest_event_content = 2131492999;
 			
 			// aapt resource value: 0x7f0c0062
 			public const int submit_area = 2131492962;
@@ -2452,11 +2492,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0011
 			public const int tabMode = 2131492881;
 			
-			// aapt resource value: 0x7f0c0088
-			public const int text = 2131493000;
+			// aapt resource value: 0x7f0c008f
+			public const int text = 2131493007;
 			
-			// aapt resource value: 0x7f0c0086
-			public const int text2 = 2131492998;
+			// aapt resource value: 0x7f0c008d
+			public const int text2 = 2131493005;
 			
 			// aapt resource value: 0x7f0c004a
 			public const int textSpacerNoButtons = 2131492938;
@@ -2464,11 +2504,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c006d
 			public const int textView = 2131492973;
 			
-			// aapt resource value: 0x7f0c0079
-			public const int textViewStatus = 2131492985;
+			// aapt resource value: 0x7f0c0081
+			public const int textViewStatus = 2131492993;
 			
-			// aapt resource value: 0x7f0c0084
-			public const int time = 2131492996;
+			// aapt resource value: 0x7f0c008b
+			public const int time = 2131493003;
 			
 			// aapt resource value: 0x7f0c0040
 			public const int title = 2131492928;
@@ -2485,6 +2525,12 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f0c0044
 			public const int topPanel = 2131492932;
 			
+			// aapt resource value: 0x7f0c007c
+			public const int txt_email = 2131492988;
+			
+			// aapt resource value: 0x7f0c007d
+			public const int txt_password = 2131492989;
+			
 			// aapt resource value: 0x7f0c0028
 			public const int unknown = 2131492904;
 			
@@ -2493,6 +2539,9 @@ namespace ThisRoofN.Droid
 			
 			// aapt resource value: 0x7f0c0017
 			public const int useLogo = 2131492887;
+			
+			// aapt resource value: 0x7f0c0079
+			public const int view_video = 2131492985;
 			
 			// aapt resource value: 0x7f0c0024
 			public const int withText = 2131492900;
@@ -2638,76 +2687,85 @@ namespace ThisRoofN.Droid
 			public const int com_facebook_tooltip_bubble = 2130968606;
 			
 			// aapt resource value: 0x7f04001f
-			public const int loading = 2130968607;
+			public const int fragment_home = 2130968607;
 			
 			// aapt resource value: 0x7f040020
-			public const int loadingimage = 2130968608;
+			public const int fragment_login = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int loadingprogress = 2130968609;
+			public const int fragment_search_type = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int Main = 2130968610;
+			public const int fragment_signup = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int messenger_button_send_blue_large = 2130968611;
+			public const int loading = 2130968611;
 			
 			// aapt resource value: 0x7f040024
-			public const int messenger_button_send_blue_round = 2130968612;
+			public const int loadingimage = 2130968612;
 			
 			// aapt resource value: 0x7f040025
-			public const int messenger_button_send_blue_small = 2130968613;
+			public const int loadingprogress = 2130968613;
 			
 			// aapt resource value: 0x7f040026
-			public const int messenger_button_send_white_large = 2130968614;
+			public const int messenger_button_send_blue_large = 2130968614;
 			
 			// aapt resource value: 0x7f040027
-			public const int messenger_button_send_white_round = 2130968615;
+			public const int messenger_button_send_blue_round = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int messenger_button_send_white_small = 2130968616;
+			public const int messenger_button_send_blue_small = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int notification_media_action = 2130968617;
+			public const int messenger_button_send_white_large = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int notification_media_cancel_action = 2130968618;
+			public const int messenger_button_send_white_round = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int notification_template_big_media = 2130968619;
+			public const int messenger_button_send_white_small = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int notification_template_big_media_narrow = 2130968620;
+			public const int notification_media_action = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int notification_template_lines = 2130968621;
+			public const int notification_media_cancel_action = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int notification_template_media = 2130968622;
+			public const int notification_template_big_media = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int notification_template_part_chronometer = 2130968623;
+			public const int notification_template_big_media_narrow = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int notification_template_part_time = 2130968624;
+			public const int notification_template_lines = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int select_dialog_item_material = 2130968625;
+			public const int notification_template_media = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int select_dialog_multichoice_material = 2130968626;
+			public const int notification_template_part_chronometer = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int select_dialog_singlechoice_material = 2130968627;
+			public const int notification_template_part_time = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int support_simple_spinner_dropdown_item = 2130968628;
+			public const int select_dialog_item_material = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int tr_loading_indicator = 2130968629;
+			public const int select_dialog_multichoice_material = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int tr_toolbar = 2130968630;
+			public const int select_dialog_singlechoice_material = 2130968630;
+			
+			// aapt resource value: 0x7f040037
+			public const int support_simple_spinner_dropdown_item = 2130968631;
+			
+			// aapt resource value: 0x7f040038
+			public const int tr_loading_indicator = 2130968632;
+			
+			// aapt resource value: 0x7f040039
+			public const int tr_toolbar = 2130968633;
 			
 			static Layout()
 			{
@@ -2757,11 +2815,11 @@ namespace ThisRoofN.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f08004d
-			public const int ApplicationName = 2131230797;
+			// aapt resource value: 0x7f08004e
+			public const int ApplicationName = 2131230798;
 			
-			// aapt resource value: 0x7f08004c
-			public const int Hello = 2131230796;
+			// aapt resource value: 0x7f08004d
+			public const int Hello = 2131230797;
 			
 			// aapt resource value: 0x7f080026
 			public const int abc_action_bar_home_description = 2131230758;
@@ -2832,56 +2890,56 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f080006
 			public const int auth_google_play_services_client_google_display_name = 2131230726;
 			
-			// aapt resource value: 0x7f08003a
-			public const int com_facebook_device_auth_instructions = 2131230778;
-			
 			// aapt resource value: 0x7f08003b
-			public const int com_facebook_image_download_unknown_error = 2131230779;
+			public const int com_facebook_device_auth_instructions = 2131230779;
 			
 			// aapt resource value: 0x7f08003c
-			public const int com_facebook_internet_permission_error_message = 2131230780;
+			public const int com_facebook_image_download_unknown_error = 2131230780;
 			
 			// aapt resource value: 0x7f08003d
-			public const int com_facebook_internet_permission_error_title = 2131230781;
+			public const int com_facebook_internet_permission_error_message = 2131230781;
 			
 			// aapt resource value: 0x7f08003e
-			public const int com_facebook_like_button_liked = 2131230782;
+			public const int com_facebook_internet_permission_error_title = 2131230782;
 			
 			// aapt resource value: 0x7f08003f
-			public const int com_facebook_like_button_not_liked = 2131230783;
+			public const int com_facebook_like_button_liked = 2131230783;
 			
 			// aapt resource value: 0x7f080040
-			public const int com_facebook_loading = 2131230784;
+			public const int com_facebook_like_button_not_liked = 2131230784;
 			
 			// aapt resource value: 0x7f080041
-			public const int com_facebook_loginview_cancel_action = 2131230785;
+			public const int com_facebook_loading = 2131230785;
 			
 			// aapt resource value: 0x7f080042
-			public const int com_facebook_loginview_log_in_button = 2131230786;
+			public const int com_facebook_loginview_cancel_action = 2131230786;
 			
 			// aapt resource value: 0x7f080043
-			public const int com_facebook_loginview_log_in_button_long = 2131230787;
+			public const int com_facebook_loginview_log_in_button = 2131230787;
 			
 			// aapt resource value: 0x7f080044
-			public const int com_facebook_loginview_log_out_action = 2131230788;
+			public const int com_facebook_loginview_log_in_button_long = 2131230788;
 			
 			// aapt resource value: 0x7f080045
-			public const int com_facebook_loginview_log_out_button = 2131230789;
+			public const int com_facebook_loginview_log_out_action = 2131230789;
 			
 			// aapt resource value: 0x7f080046
-			public const int com_facebook_loginview_logged_in_as = 2131230790;
+			public const int com_facebook_loginview_log_out_button = 2131230790;
 			
 			// aapt resource value: 0x7f080047
-			public const int com_facebook_loginview_logged_in_using_facebook = 2131230791;
+			public const int com_facebook_loginview_logged_in_as = 2131230791;
 			
 			// aapt resource value: 0x7f080048
-			public const int com_facebook_send_button_text = 2131230792;
+			public const int com_facebook_loginview_logged_in_using_facebook = 2131230792;
 			
 			// aapt resource value: 0x7f080049
-			public const int com_facebook_share_button_text = 2131230793;
+			public const int com_facebook_send_button_text = 2131230793;
 			
 			// aapt resource value: 0x7f08004a
-			public const int com_facebook_tooltip_default = 2131230794;
+			public const int com_facebook_share_button_text = 2131230794;
+			
+			// aapt resource value: 0x7f08004b
+			public const int com_facebook_tooltip_default = 2131230795;
 			
 			// aapt resource value: 0x7f08000a
 			public const int common_android_wear_notification_needs_update_text = 2131230730;
@@ -2985,11 +3043,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f08004f
 			public const int hello = 2131230799;
 			
-			// aapt resource value: 0x7f08004e
-			public const int library_name = 2131230798;
+			// aapt resource value: 0x7f08003a
+			public const int library_name = 2131230778;
 			
-			// aapt resource value: 0x7f08004b
-			public const int messenger_send_button_text = 2131230795;
+			// aapt resource value: 0x7f08004c
+			public const int messenger_send_button_text = 2131230796;
 			
 			// aapt resource value: 0x7f080039
 			public const int status_bar_notification_info_overflow = 2131230777;
@@ -3013,6 +3071,9 @@ namespace ThisRoofN.Droid
 		public partial class Style
 		{
 			
+			// aapt resource value: 0x7f07014e
+			public const int ActionButtonStyle = 2131165518;
+			
 			// aapt resource value: 0x7f070081
 			public const int AlertDialog_AppCompat = 2131165313;
 			
@@ -3025,11 +3086,11 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f070084
 			public const int Animation_AppCompat_DropDownUp = 2131165316;
 			
-			// aapt resource value: 0x7f07014e
-			public const int AppTheme = 2131165518;
-			
 			// aapt resource value: 0x7f07014f
-			public const int AppTheme_Base = 2131165519;
+			public const int AppTheme = 2131165519;
+			
+			// aapt resource value: 0x7f070150
+			public const int AppTheme_Base = 2131165520;
 			
 			// aapt resource value: 0x7f070085
 			public const int Base_AlertDialog_AppCompat = 2131165317;
@@ -3460,8 +3521,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f070003
 			public const int CardView_Light = 2131165187;
 			
-			// aapt resource value: 0x7f070151
-			public const int DialogAnimation = 2131165521;
+			// aapt resource value: 0x7f070152
+			public const int DialogAnimation = 2131165522;
 			
 			// aapt resource value: 0x7f070137
 			public const int MessengerButton = 2131165495;
@@ -3781,8 +3842,8 @@ namespace ThisRoofN.Droid
 			// aapt resource value: 0x7f070000
 			public const int Theme_IAPTheme = 2131165184;
 			
-			// aapt resource value: 0x7f070150
-			public const int Theme_Splash = 2131165520;
+			// aapt resource value: 0x7f070151
+			public const int Theme_Splash = 2131165521;
 			
 			// aapt resource value: 0x7f0700ee
 			public const int ThemeOverlay_AppCompat = 2131165422;
@@ -4642,18 +4703,18 @@ namespace ThisRoofN.Droid
 			
 			public static int[] ProgressWheel = new int[]
 			{
-					2130772207,
-					2130772208,
-					2130772209,
-					2130772210,
-					2130772211,
-					2130772212,
-					2130772213,
-					2130772214,
-					2130772215,
-					2130772216,
-					2130772217,
-					2130772218};
+					2130772195,
+					2130772196,
+					2130772197,
+					2130772198,
+					2130772199,
+					2130772200,
+					2130772201,
+					2130772202,
+					2130772203,
+					2130772204,
+					2130772205,
+					2130772206};
 			
 			// aapt resource value: 3
 			public const int ProgressWheel_ahBarColor = 3;
@@ -5487,12 +5548,12 @@ namespace ThisRoofN.Droid
 			
 			public static int[] com_facebook_like_view = new int[]
 			{
-					2130772195,
-					2130772196,
-					2130772197,
-					2130772198,
-					2130772199,
-					2130772200};
+					2130772207,
+					2130772208,
+					2130772209,
+					2130772210,
+					2130772211,
+					2130772212};
 			
 			// aapt resource value: 4
 			public const int com_facebook_like_view_com_facebook_auxiliary_view_position = 4;
@@ -5514,10 +5575,10 @@ namespace ThisRoofN.Droid
 			
 			public static int[] com_facebook_login_view = new int[]
 			{
-					2130772201,
-					2130772202,
-					2130772203,
-					2130772204};
+					2130772213,
+					2130772214,
+					2130772215,
+					2130772216};
 			
 			// aapt resource value: 0
 			public const int com_facebook_login_view_com_facebook_confirm_logout = 0;
@@ -5533,8 +5594,8 @@ namespace ThisRoofN.Droid
 			
 			public static int[] com_facebook_profile_picture_view = new int[]
 			{
-					2130772205,
-					2130772206};
+					2130772217,
+					2130772218};
 			
 			// aapt resource value: 1
 			public const int com_facebook_profile_picture_view_com_facebook_is_cropped = 1;

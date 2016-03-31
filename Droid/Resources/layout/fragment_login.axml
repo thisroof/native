@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_signin">
+        <VideoView
+            android:id="@+id/view_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/login_logo_size"
+            android:layout_height="@dimen/login_logo_size"
+            android:src="@drawable/ic_arrow_left_white_24dp"
+            android:scaleType="centerInside"
+            android:layout_marginTop="@dimen/padding_16dp" />
+        <ImageView
+            android:layout_width="@dimen/login_logo_size"
+            android:layout_height="@dimen/login_logo_size"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_logo_small"
+            android:layout_marginRight="@dimen/padding_16dp"
+            android:layout_marginTop="@dimen/padding_16dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_64dp"
+            android:padding="@dimen/padding_16dp">
+            <EditText
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email Address"
+                android:textSize="@dimen/font16sp"
+                android:textColor="@color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:imeOptions="actionNext"
+                local:MvxBind="Text EmailAddress; Typeface StringToFont('Bold_Cn')" />
+        <!--            <View
+            	android:layout_width="match_parent"
+            	android:layout_height="1dp"
+            	android:background="@color/white"/>-->
+            <EditText
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:password="true"
+                android:textSize="@dimen/font16sp"
+                android:textColor="@color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:imeOptions="actionGo"
+                local:MvxBind="Text EmailAddress; Typeface StringToFont('Bold_Cn')" />
+        <!--            <View
+            	android:layout_width="match_parent"
+            	android:layout_height="1dp"
+            	android:background="@color/white"/>-->
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_40"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/padding_8dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discover + Opportunities"
+                    android:textSize="@dimen/font16sp"
+                    android:textColor="@color/white"
+                    local:MvxBind="Typeface Font('Bold_Cn')" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TM"
+                    android:textSize="@dimen/font10sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="2dp"
+                    local:MvxBind="Typeface Font('Thin_Cn')" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <Button
+        style="@style/ActionButtonStyle"
+        android:id="@+id/btn_signin"
+        android:text="LOGIN"
+        android:layout_above="@+id/img_fbLogin"
+        local:MvxBind="Click LoginCommand; Typeface Font('Black_Ex_Cn')" />
+    <ImageView
+        android:id="@+id/img_fbLogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/img_fb_login"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

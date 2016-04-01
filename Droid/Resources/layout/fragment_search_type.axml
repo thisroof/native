@@ -44,12 +44,12 @@
             android:id="@+id/btn_signin"
             android:text="CALCULATOR"
             android:background="@drawable/btn_clear"
-            local:MvxBind="Click LoginCommand; Typeface Font('Black_Ex_Cn')" />
+            local:MvxBind="Click AffordSearchCommand; Typeface Font('Black_Ex_Cn')" />
         <Button
             style="@style/ActionButtonStyle"
             android:id="@+id/btn_signup"
             android:text="START SEARCH"
             android:layout_marginTop="@dimen/padding_8dp"
-            local:MvxBind="Click SignupCommand; Typeface Font('Black_Ex_Cn')" />
+            local:MvxBind="Click NormalSearchCommand; Typeface Font('Black_Ex_Cn')" />
     </LinearLayout>
 </RelativeLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_viewResult"
+        android:background="@color/white">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/header"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PRICE RANGE"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font16sp" />
+                <rangeslider.RangeSliderView
+                    android:id="@+id/rangeSlider1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    min_value="0"
+                    max_value="100"
+                    left_value="20"
+                    right_value="80"
+                    android:layout_marginTop="@dimen/padding_8dp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/TR_LIGHT_GRAY"
+                    android:layout_marginTop="@dimen/padding_8dp"
+                    android:layout_marginBottom="@dimen/padding_8dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="SORT BY"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/font16sp"
+                        android:layout_weight="6" />
+                    <EditText
+                        android:id="@+id/txt_email"
+                        android:background="@drawable/edittext_gray"
+                        android:layout_weight="4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font16sp"
+                        android:textColor="@color/TR_DARK_GRAY"
+                        android:imeOptions="actionDone"
+                        android:text="Lot Size"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp"
+                        local:MvxBind="Text EmailAddress;" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+                <ThisRoofN.Droid.SquareRelativeLayout
+                    android:id="@+id/layout_location"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="1dp"
+                    android:background="@android:color/holo_blue_bright">
+                    <ImageView
+                        android:id="@+id/iv_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_location"
+                        android:scaleType="centerCrop" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="TEST"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/font16sp" />
+                </ThisRoofN.Droid.SquareRelativeLayout>
+                <ThisRoofN.Droid.SquareRelativeLayout
+                    android:id="@+id/layout_inHome"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="1dp"
+                    android:background="@android:color/holo_blue_bright">
+                    <ImageView
+                        android:id="@+id/iv_inHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_inhome"
+                        android:scaleType="centerCrop" />
+                </ThisRoofN.Droid.SquareRelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        style="@style/ActionButtonStyle"
+        android:id="@+id/btn_viewResult"
+        android:text="View Results"
+        android:layout_alignParentBottom="true"
+        local:MvxBind="Click SignupCommand; Typeface Font('Black_Ex_Cn')" />
+</RelativeLayout>

@@ -176,6 +176,9 @@
     <Reference Include="AndHUD">
       <HintPath>..\packages\Acr.UserDialogs.4.3.4\lib\MonoAndroid10\AndHUD.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Controls.RangeSlider.Android">
+      <HintPath>..\Components\rangeslider-1.1.0.3\lib\android\Xamarin.Controls.RangeSlider.Android.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThisRoofN\ThisRoofN.csproj">
@@ -198,13 +201,18 @@
     <Compile Include="Views\HomeView.cs" />
     <Compile Include="Views\BaseMvxActivity.cs" />
     <Compile Include="TRApplication\ThisRoofApplication.cs" />
-    <Compile Include="Views\HomeViewContent.cs" />
     <Compile Include="Views\BaseMvxFragment.cs" />
     <Compile Include="Bootstrap\GeocoderPluginBootstrap.cs" />
     <Compile Include="Helpers\DeviceHelper.cs" />
     <Compile Include="Helpers\UserPreferenceHelper.cs" />
     <Compile Include="ValueConverters\FontValueConverter.cs" />
     <Compile Include="Helpers\ToolbarHelper.cs" />
+    <Compile Include="CustomControls\SquareRelativeLayout.cs" />
+    <Compile Include="Views\LoginFlow\HomeViewContent.cs" />
+    <Compile Include="Views\LoginFlow\LoginView.cs" />
+    <Compile Include="Views\LoginFlow\SignupView.cs" />
+    <Compile Include="Views\Search\SearchTypeView.cs" />
+    <Compile Include="Views\Search\SearchView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -257,6 +265,14 @@
     <AndroidResource Include="Resources\drawable\img_fb_signup.png" />
     <AndroidResource Include="Resources\layout\fragment_search_type.axml" />
     <AndroidResource Include="Resources\drawable\btn_clear.xml" />
+    <AndroidResource Include="Resources\layout\fragment_search_main.axml" />
+    <AndroidResource Include="Resources\drawable\edittext_gray.xml" />
+    <AndroidResource Include="Resources\drawable\img_homeDetails.png" />
+    <AndroidResource Include="Resources\drawable\img_homeType.png" />
+    <AndroidResource Include="Resources\drawable\img_inArea.png" />
+    <AndroidResource Include="Resources\drawable\img_inHome.png" />
+    <AndroidResource Include="Resources\drawable\img_lifestyle.png" />
+    <AndroidResource Include="Resources\drawable\img_location.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -264,6 +280,10 @@
   <ItemGroup>
     <XamarinComponentReference Include="facebookandroid">
       <Version>4.10.0.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="rangeslider">
+      <Version>1.1.0.3</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
@@ -285,6 +305,9 @@
     <Folder Include="ValueConverters\" />
     <Folder Include="Resources\values-v21\" />
     <Folder Include="Resources\values-v19\" />
+    <Folder Include="CustomControls\" />
+    <Folder Include="Views\LoginFlow\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Videos\WelcomeVideo.mp4" />

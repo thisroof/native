@@ -5,6 +5,11 @@ using Acr.UserDialogs;
 
 namespace ThisRoofN.Droid
 {
+	#if DEBUG
+	[Application(Debuggable=true)]
+	#else
+	[Application(Debuggable=false)]
+	#endif
 	public class ThisRoofApplication : Application
 	{
 		public ThisRoofApplication (IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
@@ -15,6 +20,10 @@ namespace ThisRoofN.Droid
 		{
 			base.OnCreate ();
 
+			// Initialize Xamarin Insights
+			Xamarin.Insights.Initialize(TRConstant.InsightsApiKey, this);
+
+			// Initialize User Dialogs
 			UserDialogs.Init (this);
 		}
 	}

@@ -15,13 +15,6 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar" />
         <include
-            android:id="@+id/loadingFrame"
-            layout="@layout/tr_loading_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
-            android:visibility="gone" />
-        <include
             android:id="@+id/toolbar"
             layout="@layout/tr_toolbar"
             android:layout_width="match_parent"

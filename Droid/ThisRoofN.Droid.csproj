@@ -248,7 +248,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_arrow_left_white_24dp.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_arrow_left_white_24dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_arrow_left_white_24dp.png" />
-    <AndroidResource Include="Resources\drawable\icon_setting_white.png" />
     <AndroidResource Include="Resources\values\style_layout.xml" />
     <AndroidResource Include="Resources\raw\animator.html" />
     <AndroidResource Include="Resources\raw\loading_animator.gif" />
@@ -273,6 +272,11 @@
     <AndroidResource Include="Resources\drawable\img_inHome.png" />
     <AndroidResource Include="Resources\drawable\img_lifestyle.png" />
     <AndroidResource Include="Resources\drawable\img_location.png" />
+    <AndroidResource Include="Resources\drawable\loading_back.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_setting_white.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_setting_white.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\icon_setting_white.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\icon_setting_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

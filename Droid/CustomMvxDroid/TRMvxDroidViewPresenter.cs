@@ -80,6 +80,39 @@ namespace ThisRoofN.Droid.CustomMvxDroid
 		{
 			dialogFragment.Show (_fragmentManager, dialogFragment.GetType ().Name);
 		}
+
+		public override void ChangePresentation (MvxPresentationHint hint)
+		{
+			if (hint is TRMvxPresentationHint) {
+				for (int i = 0; i < _fragmentManager.BackStackEntryCount - 1; i++) {
+					_fragmentManager.PopBackStack ();
+				}
+				return;
+			} else {
+				base.ChangePresentation (hint);
+			}
+		}
+
+		public override void Close (IMvxViewModel viewModel)
+		{
+			if (_fragmentManager != null) {
+				// Check if fragment exists, and pop from backstack.
+				var currentFragment = _fragmentManager.FindFragmentById (Resource.Id.mainContentLayout) as MvxFragment;
+				if (currentFragment != null && currentFragment.ViewModel == viewModel) {
+					_fragmentManager.PopBackStack ();
+					return;
+				}
+
+//				MvxDialogFragment currentDialogFragment = _fragmentManager.FindFragmentByTag ("DiscountAddImageDialog") as MvxDialogFragment;
+//				if (currentDialogFragment != null && currentDialogFragment.ViewModel == viewModel) {
+//					currentDialogFragment.Dismiss ();
+//					return;
+//				}
+			}
+
+			// If fragment not exist, call default close method. (Activity case)
+			base.Close (viewModel);
+		}
 	}
 }
 

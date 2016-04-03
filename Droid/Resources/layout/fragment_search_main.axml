@@ -86,13 +86,24 @@
                         android:layout_height="match_parent"
                         android:src="@drawable/img_location"
                         android:scaleType="centerCrop" />
-                    <TextView
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/black_40"
                         android:layout_centerInParent="true"
-                        android:text="TEST"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/font16sp" />
+                        android:paddingLeft="@dimen/padding_8dp"
+                        android:paddingRight="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LOCATION"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            local:MvxBind="Typeface Font('Bold')" />
+                    </LinearLayout>
                 </ThisRoofN.Droid.SquareRelativeLayout>
                 <ThisRoofN.Droid.SquareRelativeLayout
                     android:id="@+id/layout_inHome"
@@ -107,6 +118,166 @@
                         android:layout_height="match_parent"
                         android:src="@drawable/img_inhome"
                         android:scaleType="centerCrop" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black_40"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="@dimen/padding_8dp"
+                        android:paddingRight="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IN THE HOME"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            local:MvxBind="Typeface Font('Bold')" />
+                    </LinearLayout>
+                </ThisRoofN.Droid.SquareRelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+                <ThisRoofN.Droid.SquareRelativeLayout
+                    android:id="@+id/layout_inArea"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="1dp"
+                    android:background="@android:color/holo_blue_bright">
+                    <ImageView
+                        android:id="@+id/iv_inArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_inArea"
+                        android:scaleType="centerCrop" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black_40"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="@dimen/padding_8dp"
+                        android:paddingRight="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IN THE AREA"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            local:MvxBind="Typeface Font('Bold')" />
+                    </LinearLayout>
+                </ThisRoofN.Droid.SquareRelativeLayout>
+                <ThisRoofN.Droid.SquareRelativeLayout
+                    android:id="@+id/layout_homeType"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="1dp"
+                    android:background="@android:color/holo_blue_bright">
+                    <ImageView
+                        android:id="@+id/iv_homeType"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_homeType"
+                        android:scaleType="centerCrop" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black_40"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="@dimen/padding_8dp"
+                        android:paddingRight="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HOME TYPE"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            local:MvxBind="Typeface Font('Bold')" />
+                    </LinearLayout>
+                </ThisRoofN.Droid.SquareRelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+                <ThisRoofN.Droid.SquareRelativeLayout
+                    android:id="@+id/layout_homeDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="1dp"
+                    android:background="@android:color/holo_blue_bright">
+                    <ImageView
+                        android:id="@+id/iv_homeDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_homeDetails"
+                        android:scaleType="centerCrop" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black_40"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="@dimen/padding_8dp"
+                        android:paddingRight="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HOME DETAILS"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            local:MvxBind="Typeface Font('Bold')" />
+                    </LinearLayout>
+                </ThisRoofN.Droid.SquareRelativeLayout>
+                <ThisRoofN.Droid.SquareRelativeLayout
+                    android:id="@+id/layout_lifeStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="1dp"
+                    android:background="@android:color/holo_blue_bright">
+                    <ImageView
+                        android:id="@+id/iv_lifeStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_lifestyle"
+                        android:scaleType="centerCrop" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black_40"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="@dimen/padding_8dp"
+                        android:paddingRight="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LIFESTYLE/\nACTIVITIES"
+                            android:lines="2"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            local:MvxBind="Typeface Font('Bold')" />
+                    </LinearLayout>
                 </ThisRoofN.Droid.SquareRelativeLayout>
             </LinearLayout>
         </LinearLayout>

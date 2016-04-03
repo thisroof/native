@@ -6,8 +6,7 @@
     android:background="@android:color/darker_gray">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/btn_signin">
+        android:layout_height="match_parent">
         <VideoView
             android:id="@+id/view_video"
             android:layout_width="match_parent"
@@ -16,7 +15,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_32dp"
+            android:layout_marginTop="@dimen/padding_64dp"
             android:gravity="center">
             <ImageView
                 android:layout_width="@dimen/welcome_logo_size"
@@ -27,10 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Unrestricted Search"
-                android:textSize="@dimen/font12sp"
+                android:textSize="@dimen/font16sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/padding_4dp"
-                local:MvxBind="Typeface Font('Thin_Cn')" />
+                local:MvxBind="Typeface Font('Thin')" />
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout
@@ -44,12 +43,12 @@
             android:id="@+id/btn_signin"
             android:text="CALCULATOR"
             android:background="@drawable/btn_clear"
-            local:MvxBind="Click AffordSearchCommand; Typeface Font('Black_Ex_Cn')" />
+            local:MvxBind="Click AffordSearchCommand; Typeface Font('Bold_Cn')" />
         <Button
             style="@style/ActionButtonStyle"
             android:id="@+id/btn_signup"
             android:text="START SEARCH"
             android:layout_marginTop="@dimen/padding_8dp"
-            local:MvxBind="Click NormalSearchCommand; Typeface Font('Black_Ex_Cn')" />
+            local:MvxBind="Click NormalSearchCommand; Typeface Font('Bold_Cn')" />
     </LinearLayout>
 </RelativeLayout>

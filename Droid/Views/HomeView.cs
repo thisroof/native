@@ -24,7 +24,6 @@ namespace ThisRoofN.Droid
 	{
 		private TRMvxDroidViewPresenter mPresenter;
 		private RelativeLayout contentLayout;
-		private WebView gifWebView;
 		private ToolbarHelper toolbarManager;
 
 		public ToolbarHelper ToolbarManager {
@@ -39,16 +38,9 @@ namespace ThisRoofN.Droid
 
 			SetContentView (Resource.Layout.activity_navigation_base);
 			contentLayout = FindViewById<RelativeLayout> (Resource.Id.contentLayout);
-			gifWebView = FindViewById<WebView> (Resource.Id.gifWebView);
 			toolbarManager = new ToolbarHelper (this, SupportFragmentManager);
 
 			if (savedInstanceState == null) {
-				if (gifWebView != null) {
-					gifWebView.LoadUrl ("file:///android_res/raw/animator.html");
-					gifWebView.SetBackgroundColor (Color.Transparent);
-					gifWebView.SetLayerType (LayerType.Software, null);
-				}
-
 				mPresenter = (TRMvxDroidViewPresenter)Mvx.Resolve<IMvxAndroidViewPresenter> ();
 				mPresenter.RegisterFragmentManager (SupportFragmentManager, this);
 			}

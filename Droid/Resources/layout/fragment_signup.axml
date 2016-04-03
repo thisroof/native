@@ -13,24 +13,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <ImageView
-            android:id="@+id/back"
+            android:id="@+id/img_back"
             android:layout_width="@dimen/login_logo_size"
             android:layout_height="@dimen/login_logo_size"
             android:src="@drawable/ic_arrow_left_white_24dp"
             android:scaleType="centerInside"
-            android:layout_marginTop="@dimen/padding_16dp" />
+            android:layout_marginTop="@dimen/padding_32dp" />
         <ImageView
             android:layout_width="@dimen/login_logo_size"
             android:layout_height="@dimen/login_logo_size"
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_logo_small"
             android:layout_marginRight="@dimen/padding_16dp"
-            android:layout_marginTop="@dimen/padding_16dp" />
+            android:layout_marginTop="@dimen/padding_32dp" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_64dp"
+            android:layout_below="@+id/img_back"
+            android:layout_marginTop="@dimen/padding_32dp"
             android:padding="@dimen/padding_16dp">
             <EditText
                 android:id="@+id/txt_email"
@@ -89,7 +90,7 @@
         android:id="@+id/btn_signin"
         android:text="SIGN UP"
         android:layout_above="@+id/img_fbSignup"
-        local:MvxBind="Click LoginCommand; Typeface Font('Black_Ex_Cn')" />
+        local:MvxBind="Click LoginCommand; Typeface Font('Bold_Cn')" />
     <ImageView
         android:id="@+id/img_fbSignup"
         android:layout_width="match_parent"

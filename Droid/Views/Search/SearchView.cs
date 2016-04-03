@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.Droid.BindingContext;
 using RangeSlider;
+using ThisRoofN.Droid.Helpers;
 
 namespace ThisRoofN.Droid
 {
@@ -33,6 +34,14 @@ namespace ThisRoofN.Droid
 
 
 			return view;
+		}
+
+		public override void OnResume ()
+		{
+			base.OnResume ();
+
+			HomeView homeView = (HomeView)Activity;
+			homeView.ToolbarManager.SetToolbarType (ToolbarHelper.ToolbarType.Visible);
 		}
 	}
 }

@@ -20,7 +20,7 @@
     <dimen name="padding_64dp">64dp</dimen>
 
 <!--	ThisRoof Toolbar-->
-	<dimen name="toolbar_height">50dp</dimen>
+	<dimen name="toolbar_height">40dp</dimen>
 	<dimen name="toolbar_top_padding">4dp</dimen>
 
 

@@ -18,7 +18,7 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_logo_small"
             android:layout_marginRight="@dimen/padding_16dp"
-            android:layout_marginTop="@dimen/padding_16dp" />
+            android:layout_marginTop="@dimen/padding_32dp" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -55,11 +55,11 @@
         android:text="LOGIN"
         android:background="@color/TR_DARK_BLUE"
         android:layout_above="@+id/btn_signup"
-        local:MvxBind="Click LoginCommand; Typeface Font('Black_Ex_Cn')" />
+        local:MvxBind="Click LoginCommand; Typeface Font('Bold_Cn')" />
     <Button
         style="@style/ActionButtonStyle"
         android:id="@+id/btn_signup"
         android:text="SIGN UP"
         android:layout_alignParentBottom="true"
-        local:MvxBind="Click SignupCommand; Typeface Font('Black_Ex_Cn')" />
+        local:MvxBind="Click SignupCommand; Typeface Font('Bold_Cn')" />
 </RelativeLayout>

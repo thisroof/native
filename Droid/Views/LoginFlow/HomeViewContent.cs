@@ -11,16 +11,9 @@ namespace ThisRoofN.Droid
 	{
 		private MediaPlayer mediaPlayer;
 
-		public HomeViewContent ()
-		{
-			
-		}
-
 		public override View OnCreateView (Android.Views.LayoutInflater inflater, Android.Views.ViewGroup container, Android.OS.Bundle savedInstanceState)
 		{
 			base.OnCreateView (inflater, container, savedInstanceState);
-
-
 
 			View view = this.BindingInflate (Resource.Layout.fragment_home, null);
 
@@ -30,10 +23,11 @@ namespace ThisRoofN.Droid
 
 			var descriptor = Activity.Assets.OpenFd ("Videos/SplashVideo.mp4");
 			mediaPlayer = new MediaPlayer ();
-			mediaPlayer.SetDataSource (descriptor.FileDescriptor, descriptor.StartOffset, descriptor.Length);
-			mediaPlayer.Prepare ();
 			mediaPlayer.Looping = true;
-			mediaPlayer.Start ();
+			mediaPlayer.SetDataSource (descriptor.FileDescriptor, descriptor.StartOffset, descriptor.Length);
+			mediaPlayer.SetVideoScalingMode (VideoScalingMode.ScaleToFitWithCropping);
+			mediaPlayer.SetOnPreparedListener (this);
+			mediaPlayer.Prepare ();
 
 			return view;
 		}
@@ -46,24 +40,36 @@ namespace ThisRoofN.Droid
 			homeView.ToolbarManager.SetToolbarType (ToolbarHelper.ToolbarType.None);
 		}
 
-		public void OnPrepared(MediaPlayer player)
+		public override void OnPause ()
 		{
-			Console.WriteLine ("Mediaplayer prepared");
+			base.OnPause ();
+
+			if (mediaPlayer.IsPlaying == true) {
+				mediaPlayer.Stop ();
+			}
+
+			mediaPlayer.SetDisplay (null);
+			mediaPlayer.Release ();
+		}
+
+		public void OnPrepared (MediaPlayer player)
+		{
+			if (!mediaPlayer.IsPlaying) {
+				mediaPlayer.Start ();  
+			}
 		}
 
 		public void SurfaceChanged (ISurfaceHolder holder, Android.Graphics.Format format, int width, int height)
-		{
-			mediaPlayer.SetDisplay (holder);	
+		{	
 		}
 
 		public void SurfaceCreated (ISurfaceHolder holder)
 		{
-			Console.WriteLine ("Surface Created");
+			mediaPlayer.SetDisplay (holder);
 		}
 
-		public void SurfaceDestroyed (ISurfaceHolder holder) 
+		public void SurfaceDestroyed (ISurfaceHolder holder)
 		{
-			Console.WriteLine ("Surface Destroyed");
 		}
 	}
 }

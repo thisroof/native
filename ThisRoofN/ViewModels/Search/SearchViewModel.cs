@@ -219,6 +219,8 @@ namespace ThisRoofN.ViewModels
 
 					if (DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.Commute) {
 						DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
+					} else {
+						DataHelper.SearchMapRange = null;
 					}
 
 					this.IsLoading = false;
@@ -248,7 +250,7 @@ namespace ThisRoofN.ViewModels
 				return false;
 			}
 
-			if (string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.StartZip) && string.IsNullOrEmpty(DataHelper.CurrentSearchFilter.Address) && DataHelper.CurrentSearchFilter.SearchType != (int)TRSearchType.State) {
+			if (string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.StartZip) && DataHelper.CurrentSearchFilter.SearchType != (int)TRSearchType.State) {
 				UserDialogs.Instance.Alert ("Please input address in SEARCH AREA category", "Validation");
 				return false;
 			}

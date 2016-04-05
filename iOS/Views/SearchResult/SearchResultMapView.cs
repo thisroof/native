@@ -66,10 +66,12 @@ namespace ThisRoofN.iOS
 					GeographicPosition posItem = position as GeographicPosition;
 					coords.Add (new CLLocationCoordinate2D (posItem.Latitude, posItem.Longitude));
 				}
+
+				MKPolygon polygon = MKPolygon.FromCoordinates (coords.ToArray ());
+				map_results.AddOverlay (polygon);
 			}
 
-			MKPolygon polygon = MKPolygon.FromCoordinates (coords.ToArray ());
-			map_results.AddOverlay (polygon);
+
 //			map_results.SetVisibleMapRect (polygon.BoundingMapRect, new UIEdgeInsets (-10, -10, -10, -10), true);
 		}
 

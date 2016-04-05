@@ -86,7 +86,7 @@ namespace ThisRoofN.Models.App
 
 		public string FormattedCityStateZip {
 			get {
-				return string.Format ("{0}, {1} {2}", Address.City, Address.City, Address.ZipCode);
+				return string.Format ("{0}, {1} {2}", Address.City, Address.State, Address.ZipCode) ;
 			}
 		}
 

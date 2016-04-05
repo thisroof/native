@@ -121,12 +121,29 @@ namespace ThisRoofN.ViewModels
 				}
 			} else {
 				DataHelper.CurrentSearchFilter.Address = Address;
+
+				// First, we try to get from address string
 				UserDialogs.Instance.ShowLoading ();
 				TRGoogleMapGeocoding result = await mGeocodeService.GetAddressGeocode (Address);
 				UserDialogs.Instance.HideLoading ();
 
 				try {
 					AddressComponent component = result.results [0].address_components.Where (i => i.types.Contains ("postal_code")).FirstOrDefault ();
+
+					// If we fail to get postal_code from address then try with latitude and longitude
+					if(component == null) {
+						UserDialogs.Instance.ShowLoading ();
+						result = await mGeocodeService.GetAddressGeocode (result.results[0].geometry.location.lat, result.results[0].geometry.location.lng);
+						UserDialogs.Instance.HideLoading ();
+
+						foreach(Result item in result.results) {
+							component = item.address_components.Where (i => i.types.Contains ("postal_code")).FirstOrDefault ();
+							if(component != null) {
+								break;
+							}
+						}
+					}
+
 					DataHelper.CurrentSearchFilter.StartZip = component.long_name;
 					DataHelper.CurrentSearchFilter.Zip = component.long_name;
 					DataHelper.CurrentSearchFilter.GeoLat = result.results [0].geometry.location.lat;

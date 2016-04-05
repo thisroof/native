@@ -60,15 +60,38 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void SelectAllStates(bool isClean) {
-			if(isClean) {
-				foreach(CheckboxItemModel item in States) {
+		private void SelectAllStates (bool isClean)
+		{
+			if (isClean) {
+				foreach (CheckboxItemModel item in States) {
 					item.Selected = false;
 				}
 			} else {
-				foreach(CheckboxItemModel item in States) {
+				foreach (CheckboxItemModel item in States) {
 					item.Selected = true;
 				}
+			}
+		}
+
+		private MvxCommand<Location> _getCurrentAddressCommand;
+
+		public ICommand GetCurrentAddressCommand {
+			get {
+				_getCurrentAddressCommand = _getCurrentAddressCommand ?? new MvxCommand<Location> (DoGetCurrentAddress);
+				return _getCurrentAddressCommand;
+			}
+		}
+
+		public async void DoGetCurrentAddress (Location curLocation)
+		{
+			UserDialogs.Instance.ShowLoading ();
+			TRGoogleMapGeocoding result = await mGeocodeService.GetAddressGeocode (curLocation.lat, curLocation.lng);
+			UserDialogs.Instance.HideLoading ();
+
+			if (result.results != null && result.results.Count > 0) {
+				Address = result.results [0].formatted_address;
+			} else {
+				UserDialogs.Instance.Alert ("Failed to get current location", "Error");
 			}
 		}
 
@@ -91,42 +114,27 @@ namespace ThisRoofN.ViewModels
 		{
 			DataHelper.CurrentSearchFilter.SearchType = (short)DistanceType;
 			if (string.IsNullOrEmpty (Address) || DistanceType == (int)TRSearchType.State) {
-				if (DistanceType == (int)TRSearchType.State) {
-					DataHelper.CurrentSearchFilter.Address = string.Empty;
-					DataHelper.CurrentSearchFilter.City = string.Empty;
-					DataHelper.CurrentSearchFilter.State = string.Empty;
-					DataHelper.CurrentSearchFilter.Zip = string.Empty;
-					DataHelper.CurrentSearchFilter.StartZip = string.Empty;
-					DataHelper.CurrentSearchFilter.Country = string.Empty;
-				} else {
+				ClearAddressFields ();
+				if (DistanceType != (int)TRSearchType.State) {
 					UserDialogs.Instance.Alert ("Please input address for Commute or Distance search", "Invalid Input");
 					return;
 				}
 			} else {
-				if (!UpdateZipcode (Address)) {
-					Address[] addresses = new MvxPlugins.Geocoder.Address[] {};
+				DataHelper.CurrentSearchFilter.Address = Address;
+				UserDialogs.Instance.ShowLoading ();
+				TRGoogleMapGeocoding result = await mGeocodeService.GetAddressGeocode (Address);
+				UserDialogs.Instance.HideLoading ();
 
-					UserDialogs.Instance.ShowLoading ();
-					try {
-						addresses = await geocoder.GetAddressesAsync (Address);
-					} catch (Exception e) {
-						Mvx.Trace (e.Message + "GetAddressesAsync Failed");
-					}
-					UserDialogs.Instance.HideLoading ();
-
-					if (addresses.Count () > 0 && !string.IsNullOrEmpty(addresses[0].PostalCode)) {
-						DataHelper.CurrentSearchFilter.GeoLat = addresses [0].Latitude;
-						DataHelper.CurrentSearchFilter.GeoLng = addresses [0].Longitude;
-						DataHelper.CurrentSearchFilter.Address = addresses [0].AddressLine;
-						DataHelper.CurrentSearchFilter.City = addresses [0].SubLocality;
-						DataHelper.CurrentSearchFilter.State = addresses [0].AdministrativeArea;
-						DataHelper.CurrentSearchFilter.Country = addresses [0].Country;
-						DataHelper.CurrentSearchFilter.StartZip = addresses [0].PostalCode;
-						DataHelper.CurrentSearchFilter.Zip = addresses [0].PostalCode;
-					} else {
-						UserDialogs.Instance.Alert ("Please input valid address.", "Invalid Input");
-						return;
-					}
+				try {
+					AddressComponent component = result.results [0].address_components.Where (i => i.types.Contains ("postal_code")).FirstOrDefault ();
+					DataHelper.CurrentSearchFilter.StartZip = component.long_name;
+					DataHelper.CurrentSearchFilter.Zip = component.long_name;
+					DataHelper.CurrentSearchFilter.GeoLat = result.results [0].geometry.location.lat;
+					DataHelper.CurrentSearchFilter.GeoLng = result.results [0].geometry.location.lng;
+				} catch (Exception e) {
+					ClearAddressFields ();
+					UserDialogs.Instance.Alert ("Please input valid address.", "Invalid Input");
+					return;
 				}
 			}
 
@@ -145,9 +153,23 @@ namespace ThisRoofN.ViewModels
 				break;
 			}
 
-
 			Close (this);
 		}
+
+		private void ClearAddressFields ()
+		{
+			DataHelper.CurrentSearchFilter.Address = string.Empty;
+			DataHelper.CurrentSearchFilter.City = string.Empty;
+			DataHelper.CurrentSearchFilter.State = string.Empty;
+			DataHelper.CurrentSearchFilter.Zip = string.Empty;
+			DataHelper.CurrentSearchFilter.StartZip = string.Empty;
+			DataHelper.CurrentSearchFilter.Country = string.Empty;
+			DataHelper.CurrentSearchFilter.GeoLat = 0;
+			DataHelper.CurrentSearchFilter.GeoLng = 0;
+		}
+
+
+
 
 		private short _distanceType;
 		// 0 = distance, 1 = commute, 2 = state
@@ -303,32 +325,26 @@ namespace ThisRoofN.ViewModels
 
 		private void InitAddress ()
 		{
-			string addressStr = string.Empty;
-			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.StartZip)) {
-				addressStr = DataHelper.CurrentSearchFilter.StartZip;
-			}
-
-			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Address)) {
-				if (string.IsNullOrEmpty (addressStr)) {
-					addressStr = DataHelper.CurrentSearchFilter.Address;
-				} else {
-					addressStr = " " + DataHelper.CurrentSearchFilter.Address;
-				}
-			}
-
-			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.City)) {
-				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.City;
-			}
-
-			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.State)) {
-				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.State;
-			}
-
-			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Country)) {
-				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.Country;
-			}
-
-			Address = addressStr;
+			Address = DataHelper.CurrentSearchFilter.Address;
+//			string addressStr = string.Empty;
+//
+//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Address)) {
+//				addressStr = DataHelper.CurrentSearchFilter.Address;
+//			}
+//
+//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.City)) {
+//				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.City;
+//			}
+//
+//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.State)) {
+//				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.State;
+//			}
+//
+//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Country)) {
+//				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.Country;
+//			}
+//
+//			Address = addressStr;
 		}
 
 		private void InitStates ()
@@ -367,13 +383,13 @@ namespace ThisRoofN.ViewModels
 			} else {
 				string[] sub_comps = address.Split (new String[]{ ", " }, StringSplitOptions.RemoveEmptyEntries);
 
-				if (sub_comps.Length > 4) {
-					DataHelper.CurrentSearchFilter.StartZip = sub_comps [0];
-					DataHelper.CurrentSearchFilter.Zip = sub_comps [0];
-					DataHelper.CurrentSearchFilter.Address = sub_comps [1];
-					DataHelper.CurrentSearchFilter.City = sub_comps [2];
-					DataHelper.CurrentSearchFilter.State = sub_comps [3];
-					DataHelper.CurrentSearchFilter.Country = sub_comps [4];
+				if (sub_comps.Length > 3) {
+					DataHelper.CurrentSearchFilter.StartZip = "";
+					DataHelper.CurrentSearchFilter.Zip = "";
+					DataHelper.CurrentSearchFilter.Address = sub_comps [0];
+					DataHelper.CurrentSearchFilter.City = sub_comps [1];
+					DataHelper.CurrentSearchFilter.State = sub_comps [2];
+					DataHelper.CurrentSearchFilter.Country = sub_comps [3];
 					return true;
 				} else {
 					return false;

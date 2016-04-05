@@ -19,7 +19,7 @@ using ThisRoofN.Models.Service;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchAreaModalView : BaseModalView, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
+	public partial class SearchAreaModalView : BaseModalView, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate, IUIGestureRecognizerDelegate
 	{
 		private CLLocationManager locationManager;
 		private CLGeocoder geocoder;
@@ -76,9 +76,12 @@ namespace ThisRoofN.iOS
 
 			bindingSet.Apply ();
 
-			this.view_distance.AddGestureRecognizer (new UITapGestureRecognizer (() => {
+			UITapGestureRecognizer endEditingTap = new UITapGestureRecognizer (() => {
 				this.View.EndEditing (true);
-			}));
+			});
+			endEditingTap.Delegate = this;
+
+			this.view_distance.AddGestureRecognizer (endEditingTap);
 
 			this.view_trans.AddGestureRecognizer (new UITapGestureRecognizer (() => {
 				ViewModelInstance.CloseCommand.Execute (null);
@@ -145,10 +148,14 @@ namespace ThisRoofN.iOS
 		private async void LocationUpdated(object sender, CLLocationsUpdatedEventArgs e) {
 			locationManager.StopUpdatingLocation();	
 			UserDialogs.Instance.HideLoading();
-			CLPlacemark[] places = await geocoder.ReverseGeocodeLocationAsync(e.Locations[0]);
-			if (places != null && places.Length > 0) {
-				CLPlacemark place = places.LastOrDefault ();
-				ViewModelInstance.Address = string.Format ("{0}, {1}, {2}, {3}", place.Thoroughfare, place.Locality, place.AdministrativeArea, place.Country);
+
+			if (e.Locations.Length > 0) {
+				ViewModelInstance.GetCurrentAddressCommand.Execute (new Location () {
+					lat = e.Locations [0].Coordinate.Latitude,
+					lng = e.Locations [0].Coordinate.Longitude
+				});
+			} else {
+				UserDialogs.Instance.Alert ("Failed to get current location", "Error");
 			}
 		}
 
@@ -178,6 +185,8 @@ namespace ThisRoofN.iOS
 			switch_metro.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
 			switch_rural.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
 			switch_suburb.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
+
+			switch_rural.On = false;
 
 			view_addressBack.Layer.BorderWidth = 1.0f;
 			view_addressBack.Layer.BorderColor = UIColor.LightGray.CGColor;
@@ -274,6 +283,15 @@ namespace ThisRoofN.iOS
 			} else {
 				moveViewUp = false;
 			}
+		}
+
+		[Export ("gestureRecognizer:shouldReceiveTouch:")]
+		public bool ShouldReceiveTouch (UIKit.UIGestureRecognizer recognizer, UIKit.UITouch touch)
+		{
+			if (touch.View.IsDescendantOfView (tbl_suggestion)) {
+				return false;
+			}
+			return true;
 		}
 
 		// UICollectionView Delegate

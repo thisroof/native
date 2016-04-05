@@ -40,6 +40,20 @@ namespace ThisRoofN.iOS
 			map_results.MapType = MKMapType.Standard;
 			map_results.ZoomEnabled = true;
 			map_results.ScrollEnabled = true;
+			seg_mapMode.SelectedSegment = 1;
+			seg_mapMode.ValueChanged += (object sender, EventArgs e) => {
+				switch(seg_mapMode.SelectedSegment) {
+				case 0:
+					map_results.MapType = MKMapType.Satellite;
+					break;
+				case 1:
+					map_results.MapType = MKMapType.Standard;
+					break;
+				case 2:
+					map_results.MapType = MKMapType.Hybrid;
+					break;
+				}
+			};
 
 			AddAnnotation ();
 			AddPolygonOverlay ();

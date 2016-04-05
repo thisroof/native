@@ -71,7 +71,7 @@ namespace ThisRoofN.ViewModels
 		}
 
 		private async void LoadMore() {
-			if (TileItems.Count < 24) {
+			if (TileItems == null || TileItems.Count < 24) {
 				return;
 			}
 

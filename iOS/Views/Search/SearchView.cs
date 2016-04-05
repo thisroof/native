@@ -16,7 +16,6 @@ namespace ThisRoofN.iOS
 	public partial class SearchView : BaseViewController
 	{
 		private TRMovingLabelRangeSlider mPriceRangeSlider;
-		private UIPopoverController sortByController;
 
 		public SearchView (IntPtr handle) : base (handle)
 		{
@@ -40,7 +39,6 @@ namespace ThisRoofN.iOS
 			btn_homeDetails.TitleLabel.Lines = 0;
 			btn_viewResult.Layer.BorderWidth = 1.0f;
 			btn_viewResult.Layer.BorderColor = UIColor.LightGray.CGColor;
-			btn_viewResult.Layer.CornerRadius = 0.4f;
 
 			var bindingSet = this.CreateBindingSet<SearchView, SearchViewModel> ();
 			bindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
@@ -55,12 +53,14 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
 			bindingSet.Bind (btn_viewResult).To (vm => vm.SearchCommand);
 
+			bindingSet.Bind (btn_propertyTypes).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.PropertyTypes);
 			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.SearchArea);
 			bindingSet.Bind (btn_inHome).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InHome);
 			bindingSet.Bind (btn_inArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InArea);
-			bindingSet.Bind (btn_homeType).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeType);
+//			bindingSet.Bind (btn_homeType).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeType);
 			bindingSet.Bind (btn_homeDetails).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeDetails);
 			bindingSet.Bind (btn_lifeStyle).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.Lifestyle);
+			bindingSet.Bind (btn_savedHome).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.SavedHome);
 
 			bindingSet.Bind (txt_sortBy).To (vm => vm.SelectedSortType);
 			bindingSet.Apply ();

@@ -30,7 +30,6 @@
     <CodesignProvision>9d2656f0-11bf-4401-bd0e-1081065abc8d</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -43,6 +42,8 @@
     <CodesignKey>iPhone Distribution: This Roof, LLC (3V52WRLNDD)</CodesignKey>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignProvision>9c9c021d-91d6-4112-8394-8630a5be6e3a</CodesignProvision>
+    <IpaPackageName>ThisRoof.ipa</IpaPackageName>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -81,12 +82,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.11.4\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
-    </Reference>
-    <Reference Include="PLCrashReporterUnifiedBinding">
-      <HintPath>..\packages\Xamarin.Insights.1.11.4\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Platform.iOS">
       <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
     </Reference>
@@ -185,6 +180,12 @@
     </Reference>
     <Reference Include="AllianceCustomPicker">
       <HintPath>..\Components\alliancePicker-2.1.1\lib\ios-unified\AllianceCustomPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.12.2\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="PLCrashReporterUnifiedBinding">
+      <HintPath>..\packages\Xamarin.Insights.1.12.2\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +292,16 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-Small%403x.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_heart.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_savedHomes.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_heart.imageset\icon_heart.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_savedHomes.imageset\img_savedHomes.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_logo_nostroke.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_logo_nostroke.imageset\icon_logo%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_logo_nostroke.imageset\icon_logo%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_propertyType.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_propertyType.imageset\img_propertyType.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_propertyType.imageset\img_propertyType%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -550,10 +561,18 @@
     <Compile Include="LocationModalView.designer.cs">
       <DependentUpon>LocationModalView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Search\FilterModals\ItemCells\PropertyTypeItemCell.cs" />
+    <Compile Include="Views\Search\FilterModals\ItemCells\PropertyTypeItemCell.designer.cs">
+      <DependentUpon>PropertyTypeItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\FilterModals\PropertyTypeModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\PropertyTypeModalView.designer.cs">
+      <DependentUpon>PropertyTypeModalView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Import Project="..\packages\Xamarin.Insights.1.12.2\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.12.2\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
   <ItemGroup>
     <Folder Include="CustomMvxTouch\" />
     <Folder Include="Views\" />
@@ -578,10 +597,10 @@
     <Folder Include="CustomBinding\" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Videos\SplashVideo.mp4" />
     <BundleResource Include="Resources\img_placeholder.png" />
     <BundleResource Include="Resources\loading_animator.gif" />
     <BundleResource Include="Resources\animator.html" />
+    <BundleResource Include="Videos\SplashVideo.mp4" />
     <BundleResource Include="Videos\WelcomeVideo.mp4" />
   </ItemGroup>
   <ItemGroup>

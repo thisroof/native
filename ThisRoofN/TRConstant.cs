@@ -17,6 +17,7 @@ namespace ThisRoofN
 		// Google API KEY
 		public static readonly string GMapAndroidApiKey 		= "AIzaSyASoYzYHkwODn11TzHjAJpE0eTGDgFGfLI";
 		public static readonly string GMapIosApiKey 			= "AIzaSyDMLSurJ3zEsOtHk1GWNtL6LA2iL1gLc9w";
+		public static readonly string GeocodingApiKey 			= "AIzaSyAeaRD5WlNDyTxjTSP-YCPC61E5P_wdLOA";
 		public static readonly string GoogleAnalyticsID 		= "UA-68009456-1";// Craig Account
 
 		// ThisRoof Service
@@ -137,6 +138,18 @@ namespace ThisRoofN
 		};
 		#endregion
 
+		#region PROPERTY TYPE consts
+		public static readonly List<string> SearchPropertyTypes = new List<string> {
+			"Single Family",
+			"Townhouse",
+			"Condo",
+			"Duplex",
+			"Manufactured",
+			"Lots/Land",
+			"Timeshare",
+		};
+		#endregion
+
 		#region SEARCH AREA consts
 		public static readonly List<string> CommuteItems = new List<string>() {
 			"Carpool",
@@ -163,48 +176,55 @@ namespace ThisRoofN
 			"Disabled Access",
 			"Deck/Patio",
 			"Bright & Airy",
-			"RV Parking"
+			"RV Parking",
+			"Tennis Court",
+			"Basketball Court"
 		};
 		#endregion
 
 		#region IN THE AREA consts
 		public static readonly List<string> InAreaItems = new List<string>() {
-			"Schools",
+			"Top Grade Schools",
+			"Universities",
 			"Top Rated Cafes/Restaurants",
 			"Grocery Stores",
-			"Shopping Malls/Plazas",
+			"Shopping Malls",
+			"Airport",
+			"Public Library",
+			"Banks",
+			"Salon",
 			"Entertainment",
 			"Parks",
-			"Golf Course",
 			"Beaches",
-			"Mueseums/Galleries",
+			"Museums/Galleries",
 			"Hospitals",
 			"Theatres",
 			"Sports Arenas",
 			"Amusement Parks",
-			"Salons",
-			"Airport",
-			"Public Library",
-			"Banks",
-			"Water Marina"
+			"Water Marina",
+			"Lakes"
 		};
 		#endregion
 
 		#region Search LIFESTYLE consts
 		public static readonly List<string> LifestyleItems = new List<string>() {
-			"Dog Lover",
-			"Fitness Junkie (gym/studios)",
+			"Dog Lover (Dog Parks)",
+			"Fitness Freak",
+			"Yoga Yogis",
 			"Hikers",
 			"Skiiers/Boarders",
 			"Foodies",
-			"Outdoor Junkie/Fishing",
-			"Higher Rollers - Casino/Resorts",
-			"Nightlife(bars)",
+			"Fishermen",
+			"Boaters",
+			"High Rollers - Casino Resorts",
+			"Clubbers (Nightlife)",
 			"Golfers",
-			"Ballers",
-			"Tennis Enthusiasts",
+			"B-Ballers",
+			"Tennis Players",
 			"Surfers",
-			"Skaters - skate parks"
+			"Skaters (Skate Parks)",
+			"Hockey/Ice Skating",
+			"LGBT Friendly",
 		};
 		#endregion
 
@@ -294,15 +314,7 @@ namespace ThisRoofN
 		#region OTHER
 
 
-		public static readonly List<string> SearchPropertyTypes = new List<string> {
-			"Single Family",
-			"Townhouse",
-			"Condo",
-			"Duplex",
-			"Manufactured",
-			"Lots/Land",
-			"Timeshare",
-		};
+
 
 		public static readonly List<string> MinSquareFeetOptions = new List<string>{
 			"0",

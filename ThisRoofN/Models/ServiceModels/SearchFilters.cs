@@ -12,7 +12,8 @@ using System.Collections.Generic;
 
 namespace ThisRoofN.Models.Service
 {
-	public enum TRSearchType {
+	public enum TRSearchType
+	{
 		Distance = 0,
 		Commute = 1,
 		State = 2,
@@ -21,7 +22,12 @@ namespace ThisRoofN.Models.Service
 	[DataContract]
 	public class SearchFilters : TREntityBase
 	{
-		public SearchFilters() {
+		public SearchFilters ()
+		{
+			PropertyTypes = TRConstant.SearchPropertyTypes [0] + "," +
+			TRConstant.SearchPropertyTypes [1] + "," +
+			TRConstant.SearchPropertyTypes [2];
+			
 			MaxBudget = TRConstant.PriceValues [TRConstant.PriceValues.Count - 1];
 			SearchType = (int)TRSearchType.Commute;
 			SearchDistance = 60; // 1 hr for commute time
@@ -31,152 +37,155 @@ namespace ThisRoofN.Models.Service
 		}
 
 		#region Default Properties
-		[DataMember(Name = "id")]
+
+		[DataMember (Name = "id")]
 		public int UserID { get; set; }
 
-		[DataMember(Name = "mobile_num")]
+		[DataMember (Name = "mobile_num")]
 		public string MobileNum{ get; set; }
 
-		[DataMember(Name = "first_name")]
+		[DataMember (Name = "first_name")]
 		public string FirstName{ get; set; }
 
-		[DataMember(Name = "last_name")]
+		[DataMember (Name = "last_name")]
 		public string LastName{ get; set; }
 
-		[DataMember(Name = "email")]
+		[DataMember (Name = "email")]
 		public string Email{ get; set; }
 
-		[DataMember(Name = "altitude")]
-		public double Altitude {get;set;}
+		[DataMember (Name = "altitude")]
+		public double Altitude { get; set; }
 
-		[DataMember(Name = "latitude")]
+		[DataMember (Name = "latitude")]
 		public double GeoLat{ get; set; }
 
-		[DataMember(Name = "longitude")]
+		[DataMember (Name = "longitude")]
 		public double GeoLng{ get; set; }
 
-		[DataMember(Name = "address")]
+		[DataMember (Name = "address")]
 		public string Address { get; set; }
 
-		[DataMember(Name = "city")]
+		[DataMember (Name = "city")]
 		public string City { get; set; }
 
-		[DataMember(Name = "state")]
+		[DataMember (Name = "state")]
 		public string State { get; set; }
 
-		[DataMember(Name = "zip_code")]
+		[DataMember (Name = "zip_code")]
 		public string Zip { get; set; }
 
-		[DataMember(Name = "country")]
+		[DataMember (Name = "country")]
 		public string Country { get; set; }
 
-		[DataMember(Name = "value")]
+		[DataMember (Name = "value")]
 		public double Value{ get; set; }
 
-		[DataMember(Name = "bedrooms")]
+		[DataMember (Name = "bedrooms")]
 		public double Bedrooms { get; set; }
 
-		[DataMember(Name = "baths_full")]
+		[DataMember (Name = "baths_full")]
 		public double BathsFull { get; set; }
 
-		[DataMember(Name = "min_square_footage_structure")]
+		[DataMember (Name = "min_square_footage_structure")]
 		public int MinSquareFootageStructure{ get; set; }
 
-		[DataMember(Name = "max_square_footage_structure")]
+		[DataMember (Name = "max_square_footage_structure")]
 		public int MaxSquareFootageStructure{ get; set; }
 
-		[DataMember(Name = "square_footage_structure")]
+		[DataMember (Name = "square_footage_structure")]
 		public int SquareFootageStructure{ get; set; }
 
-		[DataMember(Name = "min_lot_square_footage")]
+		[DataMember (Name = "min_lot_square_footage")]
 		public int MinLotSquareFootage { get; set; }
 
-		[DataMember(Name = "max_lot_square_footage")]
+		[DataMember (Name = "max_lot_square_footage")]
 		public int MaxLotSquareFootage { get; set; }
 
-		[DataMember(Name = "lot_square_footage")]
+		[DataMember (Name = "lot_square_footage")]
 		public int LotSquareFootage { get; set; }
 
-		[DataMember(Name = "acres")]
+		[DataMember (Name = "acres")]
 		public string Acres { get; set; }
 
-		[DataMember(Name = "max_budget")]
+		[DataMember (Name = "max_budget")]
 		public double MaxBudget{ get; set; }
 
-		[DataMember(Name = "min_budget")]
+		[DataMember (Name = "min_budget")]
 		public double MinBudget { get; set; }
 
-		[DataMember(Name = "min_beds")]
+		[DataMember (Name = "min_beds")]
 		public double MinBeds{ get; set; }
 
-		[DataMember(Name = "min_baths")]
+		[DataMember (Name = "min_baths")]
 		public double MinBaths { get; set; }
 
-		[DataMember(Name = "start_zip")]
+		[DataMember (Name = "start_zip")]
 		public string StartZip{ get; set; }
 
-		[DataMember(Name = "search_type")]
+		[DataMember (Name = "search_type")]
 		public short SearchType{ get; set; }
 
-		[DataMember(Name = "search_dist")]
+		[DataMember (Name = "search_dist")]
 		public int SearchDistance{ get; set; }
 
-		[DataMember(Name = "metricus")]
+		[DataMember (Name = "metricus")]
 		public string MetricUS{ get; set; }
 
-		[DataMember(Name = "proptypes")]
+		[DataMember (Name = "proptypes")]
 		public string PropertyTypes{ get; set; }
 
-		[DataMember(Name = "dislike_zipcodes")]
+		[DataMember (Name = "dislike_zipcodes")]
 		public string DislikeZipcodes{ get; set; }
 
-		[DataMember(Name = "traffic_type")]
+		[DataMember (Name = "traffic_type")]
 		public int TrafficType{ get; set; }
 
-		[DataMember(Name = "travel_mode")]
+		[DataMember (Name = "travel_mode")]
 		public int TravelMode{ get; set; }
 
-		[DataMember(Name = "state_filters")]
+		[DataMember (Name = "state_filters")]
 		public string StateFilters{ get; set; }
 
-		[DataMember(Name = "year_built")]
+		[DataMember (Name = "year_built")]
 		public int YearBuilt{ get; set; }
 
-		[DataMember(Name = "days_on_market")]
+		[DataMember (Name = "days_on_market")]
 		public int DaysOnMarket{ get; set; }
 
-		[DataMember(Name = "has_pool")]
+		[DataMember (Name = "has_pool")]
 		public string HasPool{ get; set; }
 
-		[DataMember(Name = "view_types")]
+		[DataMember (Name = "view_types")]
 		public string ViewTypes{ get; set; }
 
-		[DataMember(Name = "foreclosure_status")]
+		[DataMember (Name = "foreclosure_status")]
 		public string ForeclosureStatus{ get; set; }
 
-		[DataMember(Name = "sort_by")]
+		[DataMember (Name = "sort_by")]
 		public string SortBy{ get; set; }
 
-		[DataMember(Name = "keywords")]
+		[DataMember (Name = "keywords")]
 		public string Keywords{ get; set; }
 
-		[DataMember(Name = "registration_date")]
+		[DataMember (Name = "registration_date")]
 		public DateTime RegistrationDate{ get; set; }
 
-		[DataMember(Name = "modify_date")]
-		public DateTime ModifyDate{ get{ return DateTime.Now; } }
+		[DataMember (Name = "modify_date")]
+		public DateTime ModifyDate{ get { return DateTime.Now; } }
+
 		#endregion
 
 		#region Additional Fields
+
 		public string JsonStringForUpdate {
 			get {
 				var json = new {
-					//				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
+				           //				mobile_num = "035ed031-1cb1-46aa-ba72-b0943d1896da",
 					mobile_num = MobileNum,
 					first_name = "",
 					last_name = "",
-					latitude = GeoLat.ToString(),
-					longitude = GeoLng.ToString(),
+					latitude = GeoLat.ToString (),
+					longitude = GeoLng.ToString (),
 					email = "",
 					altitude = "0",
 					address = Address ?? "",
@@ -193,20 +202,20 @@ namespace ThisRoofN.Models.Service
 					max_lot_square_footage = MaxLotSquareFootage.ToString (),
 					max_budget = MaxBudget,
 					min_budget = MinBudget,
-					min_beds = MinBeds.ToString(),
-					min_baths = MinBaths.ToString(),
+					min_beds = MinBeds.ToString (),
+					min_baths = MinBaths.ToString (),
 					start_zip = StartZip ?? "",
 					search_type = SearchType.ToString (),
-					// search_dist = Utils.GetSearchDistanceValue(usersAppPreferences.SearchDistance),
-					search_dist = SearchDistance.ToString(),
+				           // search_dist = Utils.GetSearchDistanceValue(usersAppPreferences.SearchDistance),
+					search_dist = SearchDistance.ToString (),
 					metricus = MetricUS ?? "0",
-					proptypes = PropertyTypes.GetPropertyTypeValue(),
+					proptypes = PropertyTypes.GetPropertyTypeValue (),
 					dislike_zipcodes = DislikeZipcodes,
 					traffic_type = TrafficType.ToString (),
 					travel_mode = TravelMode.ToString (),
 					state_filters = StateFilters,
-					year_built = YearBuilt.ToString(),
-					days_on_market = DaysOnMarket.ToString(),
+					year_built = YearBuilt.ToString (),
+					days_on_market = DaysOnMarket.ToString (),
 					has_pool = HasPool,
 					view_types = ViewTypes,
 					foreclosure_status = ForeclosureStatus,
@@ -217,17 +226,19 @@ namespace ThisRoofN.Models.Service
 				return JsonConvert.SerializeObject (json);
 			}
 		}
+
 		#endregion
 
 		#region Methods
+
 		/// <summary>
 		/// Get saved Search Property from database
 		/// </summary>
 		/// <returns>The latest from database.</returns>
-		public static SearchFilters FetchLatestFromDatabase()
+		public static SearchFilters FetchLatestFromDatabase ()
 		{
-			IUserPreference mUserPref =  Mvx.Resolve<IUserPreference> ();
-			var filter = TRDatabase.Instance.GetSearchFilter (mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0));
+			IUserPreference mUserPref = Mvx.Resolve<IUserPreference> ();
+			var filter = TRDatabase.Instance.GetSearchFilter (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0));
 			if (filter != null) {
 				return filter;
 			} else {

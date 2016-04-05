@@ -1,13 +1,11 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Xamarin Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace ThisRoofN.iOS
 {
@@ -17,11 +15,19 @@ namespace ThisRoofN.iOS
 		[Outlet]
 		MapKit.MKMapView map_results { get; set; }
 
+		[Outlet]
+		UIKit.UISegmentedControl seg_mapMode { get; set; }
+		
 		void ReleaseDesignerOutlets ()
 		{
 			if (map_results != null) {
 				map_results.Dispose ();
 				map_results = null;
+			}
+
+			if (seg_mapMode != null) {
+				seg_mapMode.Dispose ();
+				seg_mapMode = null;
 			}
 		}
 	}

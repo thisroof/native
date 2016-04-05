@@ -83,7 +83,7 @@ namespace ThisRoofN.iOS.Views
 		{
 			base.ViewDidLayoutSubviews ();
 			tileVC.View.Frame = new CGRect (0, 0, page_scroll.Frame.Width, page_scroll.Frame.Height);
-			mapVC.View.Frame = new CGRect (page_scroll.Frame.Width, 0, page_scroll.Frame.Width * 2, page_scroll.Frame.Height);
+			mapVC.View.Frame = new CGRect (page_scroll.Frame.Width, 0, page_scroll.Frame.Width, page_scroll.Frame.Height);
 		}
 
 		private UIViewController CreatePage(IMvxViewModel viewModel)

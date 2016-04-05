@@ -7,6 +7,7 @@ using MvvmCross.Platform;
 using System.Collections.Generic;
 using Acr.UserDialogs;
 using ThisRoofN.Extensions;
+using System.Linq;
 
 namespace ThisRoofN.ViewModels
 {
@@ -73,6 +74,11 @@ namespace ThisRoofN.ViewModels
 				});
 				return _closeCommand;
 			}
+		}
+
+		public string GetSelectedCheckboxItems (List<CheckboxItemModel> list)
+		{
+			return string.Join (",", list.Where (x => x.Selected).Select (x => x.Title).ToArray ());
 		}
 
 		public bool Validate(string email, string password)

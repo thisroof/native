@@ -122,30 +122,43 @@
                         <viewControllerLayoutGuide type="bottom" id="BO9-fP-Tt9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2bx-BD-svz">
-                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Mez-vh-rZT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                             </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="x7u-1k-K7X">
+                                <rect key="frame" x="32" y="515" width="311" height="29"/>
+                                <segments>
+                                    <segment title="Satellite"/>
+                                    <segment title="Street"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Mez-vh-rZT" firstAttribute="top" secondItem="ifU-Xc-hwJ" secondAttribute="bottom" id="Frs-Qx-ens"/>
-                            <constraint firstItem="Mez-vh-rZT" firstAttribute="leading" secondItem="2bx-BD-svz" secondAttribute="leading" id="Hzr-Ir-vNs"/>
-                            <constraint firstItem="BO9-fP-Tt9" firstAttribute="top" secondItem="Mez-vh-rZT" secondAttribute="bottom" id="iGJ-TO-cDV"/>
-                            <constraint firstAttribute="trailing" secondItem="Mez-vh-rZT" secondAttribute="trailing" id="yWH-Q9-etL"/>
+                            <constraint firstItem="BO9-fP-Tt9" firstAttribute="top" secondItem="x7u-1k-K7X" secondAttribute="bottom" constant="16" id="DcM-Rb-0Yx"/>
+                            <constraint firstAttribute="trailing" secondItem="Mez-vh-rZT" secondAttribute="trailing" id="GdG-4b-3Bj"/>
+                            <constraint firstAttribute="trailing" secondItem="x7u-1k-K7X" secondAttribute="trailing" constant="32" id="cGP-cK-t9X"/>
+                            <constraint firstItem="Mez-vh-rZT" firstAttribute="leading" secondItem="2bx-BD-svz" secondAttribute="leading" id="p03-kX-gFa"/>
+                            <constraint firstItem="x7u-1k-K7X" firstAttribute="leading" secondItem="2bx-BD-svz" secondAttribute="leading" constant="32" id="rLI-NK-H9f"/>
+                            <constraint firstItem="Mez-vh-rZT" firstAttribute="top" secondItem="ifU-Xc-hwJ" secondAttribute="bottom" id="urr-3V-USc"/>
+                            <constraint firstItem="BO9-fP-Tt9" firstAttribute="top" secondItem="Mez-vh-rZT" secondAttribute="bottom" id="xSn-AW-QX3"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="map_results" destination="Mez-vh-rZT" id="5gO-uf-zfV"/>
+                        <outlet property="seg_mapMode" destination="x7u-1k-K7X" id="cE8-YP-Wfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eu2-Z5-gsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="635" y="475"/>
+            <point key="canvasLocation" x="674.5" y="524.5"/>
         </scene>
         <!--Search Result Detail View-->
         <scene sceneID="cfk-Le-zMo">

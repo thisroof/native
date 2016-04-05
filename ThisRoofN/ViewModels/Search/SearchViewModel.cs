@@ -20,12 +20,14 @@ namespace ThisRoofN.ViewModels
 	{
 		public enum ModalType
 		{
+			PropertyTypes,
 			SearchArea,
 			InHome,
 			InArea,
 			Lifestyle,
 			HomeType,
-			HomeDetails
+			HomeDetails,
+			SavedHome,
 		}
 
 		private IDevice deviceInfo;
@@ -141,6 +143,9 @@ namespace ThisRoofN.ViewModels
 		private void GotoModal (ModalType type)
 		{
 			switch (type) {
+			case ModalType.PropertyTypes:
+				ShowViewModel<PropertyTypeModalViewModel> ();
+				break;
 			case ModalType.SearchArea:
 				ShowViewModel<SearchAreaModalViewModel> ();
 				break;
@@ -158,6 +163,9 @@ namespace ThisRoofN.ViewModels
 				break;
 			case ModalType.HomeDetails:
 				ShowViewModel<HomeDetailModalViewModel> ();
+				break;
+			case ModalType.SavedHome:
+				UserDialogs.Instance.Alert ("You do not have any saved properties.", "Saved Homes");
 				break;
 			}
 		}
@@ -218,7 +226,16 @@ namespace ThisRoofN.ViewModels
 					ShowViewModel<SearchResultHomeViewModel> ();
 				} else {
 					this.IsLoading = false;
-					UserDialogs.Instance.Alert ("Failed to get results from server. Please try again later.", "Error");
+					bool confirm = await UserDialogs.Instance.ConfirmAsync(
+						"Failed to get results from server. Are you going to continue?",
+						"Error",
+						"Yes",
+						"No");
+
+					if (confirm)
+					{
+						ShowViewModel<SearchResultHomeViewModel> ();
+					}
 				}
 			}
 		}
@@ -231,7 +248,7 @@ namespace ThisRoofN.ViewModels
 				return false;
 			}
 
-			if (string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.StartZip) && DataHelper.CurrentSearchFilter.SearchType != (int)TRSearchType.State) {
+			if (string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.StartZip) && string.IsNullOrEmpty(DataHelper.CurrentSearchFilter.Address) && DataHelper.CurrentSearchFilter.SearchType != (int)TRSearchType.State) {
 				UserDialogs.Instance.Alert ("Please input address in SEARCH AREA category", "Validation");
 				return false;
 			}

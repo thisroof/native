@@ -28,8 +28,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -90,6 +88,6 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location service is required.</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>4</string>
 </dict>
 </plist>

@@ -16,9 +16,6 @@ namespace ThisRoofN.iOS
 		UIKit.UIButton btn_homeDetails { get; set; }
 
 		[Outlet]
-		UIKit.UIButton btn_homeType { get; set; }
-
-		[Outlet]
 		UIKit.UIButton btn_inArea { get; set; }
 
 		[Outlet]
@@ -26,6 +23,12 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIButton btn_lifeStyle { get; set; }
+
+		[Outlet]
+		UIKit.UIButton btn_propertyTypes { get; set; }
+
+		[Outlet]
+		UIKit.UIButton btn_savedHome { get; set; }
 
 		[Outlet]
 		UIKit.UIButton btn_searchArea { get; set; }
@@ -44,6 +47,16 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btn_propertyTypes != null) {
+				btn_propertyTypes.Dispose ();
+				btn_propertyTypes = null;
+			}
+
+			if (btn_homeDetails != null) {
+				btn_homeDetails.Dispose ();
+				btn_homeDetails = null;
+			}
+
 			if (btn_inArea != null) {
 				btn_inArea.Dispose ();
 				btn_inArea = null;
@@ -57,6 +70,11 @@ namespace ThisRoofN.iOS
 			if (btn_lifeStyle != null) {
 				btn_lifeStyle.Dispose ();
 				btn_lifeStyle = null;
+			}
+
+			if (btn_savedHome != null) {
+				btn_savedHome.Dispose ();
+				btn_savedHome = null;
 			}
 
 			if (btn_searchArea != null) {
@@ -82,16 +100,6 @@ namespace ThisRoofN.iOS
 			if (view_rangeSlider != null) {
 				view_rangeSlider.Dispose ();
 				view_rangeSlider = null;
-			}
-
-			if (btn_homeType != null) {
-				btn_homeType.Dispose ();
-				btn_homeType = null;
-			}
-
-			if (btn_homeDetails != null) {
-				btn_homeDetails.Dispose ();
-				btn_homeDetails = null;
 			}
 		}
 	}

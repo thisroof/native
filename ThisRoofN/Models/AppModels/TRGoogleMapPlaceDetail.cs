@@ -8,13 +8,6 @@ namespace ThisRoofN.Models.App
 		public string long_name { get; set; }
 		public string short_name { get; set; }
 		public List<string> types { get; set; }
-
-		//street_number, 18
-		//route, Monte Carlo
-		//locality, Irvine
-		//administrative_area_level_1, CA (short_name)
-		//country, US (short_name)
-		//postal_code, 92614
 	}
 
 	public class Location
@@ -49,6 +42,12 @@ namespace ThisRoofN.Models.App
 	{
 		public List<object> html_attributions { get; set; }
 		public Result result { get; set; }
+		public string status { get; set; }
+	}
+
+	public class TRGoogleMapGeocoding
+	{
+		public List<Result> results { get; set; }
 		public string status { get; set; }
 	}
 }

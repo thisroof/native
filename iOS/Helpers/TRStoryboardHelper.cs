@@ -18,6 +18,7 @@ namespace ThisRoofN.iOS
 			} else if (viewType.Name == "SearchTypeViewController" || 
 				viewType.Name == "NormalSearchViewController" ||
 				viewType.Name == "SearchView" ||
+				viewType.Name == "PropertyTypeModalView" ||
 				viewType.Name == "SearchAreaModalView" ||
 				viewType.Name == "InHomeModalView" ||
 				viewType.Name == "ArchitectureModalView" ||

@@ -20,13 +20,13 @@ namespace ThisRoofN.RestService
 		{
 			IDevice deviceInfo = Mvx.Resolve<IDevice> ();
 			GoogleApiKey = deviceInfo.GetGoogleMapsApiKey ();
-			baseURL = "https://maps.googleapis.com/maps/api/place/";
+			baseURL = "https://maps.googleapis.com/maps/api/";
 		}
 
 		public async Task<List<TRGoogleMapPlace>> GetAutoCompleteSuggestionsAsync( string hint )
 		{			
 			var stringBuilder = new StringBuilder ();
-			stringBuilder.Append("autocomplete/json?input=")
+			stringBuilder.Append("place/autocomplete/json?input=")
 				.Append(hint).Append("&types=address&language=en&components=country:us&key=").Append(GoogleApiKey);
 			var requestUri = stringBuilder.ToString();
 			var places = new List<TRGoogleMapPlace>();
@@ -50,6 +50,40 @@ namespace ThisRoofN.RestService
 				}		
 			}
 			return places;
+		}
+
+		public async Task<TRGoogleMapGeocoding> GetAddressGeocode( string address )
+		{			
+			var stringBuilder = new StringBuilder ();
+			stringBuilder.Append("geocode/json?address=").Append(address).Append("&key=").Append(TRConstant.GeocodingApiKey);
+			var requestUri = stringBuilder.ToString ();
+			var jsonString = await CallRestAPI (requestUri, null, HTTP_METHOD.GET);
+
+			var jsonObject = JsonConvert.DeserializeObject<TRGoogleMapGeocoding> (jsonString, jsonSerializeSetting);
+			if (jsonObject != null) {
+				if (jsonObject.status == "OK") {
+					return jsonObject;
+				}
+			}		
+
+			return null;
+		}
+
+		public async Task<TRGoogleMapGeocoding> GetAddressGeocode( double latitude, double longitude)
+		{			
+			var stringBuilder = new StringBuilder ();
+			stringBuilder.Append("geocode/json?latlng=").Append(latitude).Append(",").Append(longitude).Append("&key=").Append(TRConstant.GeocodingApiKey);
+			var requestUri = stringBuilder.ToString ();
+			var jsonString = await CallRestAPI (requestUri, null, HTTP_METHOD.GET);
+
+			var jsonObject = JsonConvert.DeserializeObject<TRGoogleMapGeocoding> (jsonString, jsonSerializeSetting);
+			if (jsonObject != null) {
+				if (jsonObject.status == "OK") {
+					return jsonObject;
+				}
+			}		
+
+			return null;
 		}
 
 		public async Task<TRGoogleMapPlaceDetail> GetPlaceDetailAsync( string placeId )

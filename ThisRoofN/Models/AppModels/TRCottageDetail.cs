@@ -6,6 +6,8 @@ using ThisRoofN.Models.Service;
 using ThisRoofN.Database.Entities;
 using ThisRoofN.Database;
 using System.Text.RegularExpressions;
+using ThisRoofN.Interfaces;
+using MvvmCross.Platform;
 
 namespace ThisRoofN.Models.App
 {
@@ -174,7 +176,8 @@ namespace ThisRoofN.Models.App
 		public bool Liked
 		{
 			get {
-				TREntityLikes item = TRDatabase.Instance.GetCottageLikeInfo (0, CottageID);
+				IUserPreference mUserPref = Mvx.Resolve<IUserPreference> ();
+				TREntityLikes item = TRDatabase.Instance.GetCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), CottageID);
 				if(item != null && item.LikeDislike == true) {
 					return true;
 				} else {
@@ -186,7 +189,8 @@ namespace ThisRoofN.Models.App
 		public bool Disliked
 		{
 			get {
-				TREntityLikes item = TRDatabase.Instance.GetCottageLikeInfo (0, CottageID);
+				IUserPreference mUserPref = Mvx.Resolve<IUserPreference> ();
+				TREntityLikes item = TRDatabase.Instance.GetCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), CottageID);
 				if(item != null && item.LikeDislike == false) {
 					return true;
 				} else {

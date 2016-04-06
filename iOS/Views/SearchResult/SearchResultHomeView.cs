@@ -19,28 +19,42 @@ namespace ThisRoofN.iOS.Views
 		private UIViewController mapVC;
 		private int _curPage;
 
+		private UIButton tileButton;
+		private UIButton mapButton;
+
 		public SearchResultHomeView (IntPtr handle) : base (handle)
 		{
 		}
 
-		public SearchResultHomeView() : base() {
+		public SearchResultHomeView () : base ()
+		{
 		}
 
-		public int CurPage
-		{
-			get{
+		public int CurPage {
+			get {
 				return _curPage;
 			}
 			set {
 				if (_curPage != value) {
+					if (mapButton != null && tileButton != null) {
+						if (value == 0) {
+							tileButton.SetTitleColor (UIColor.White.ColorWithAlpha (1.0f), UIControlState.Normal);
+							mapButton.SetTitleColor (UIColor.White.ColorWithAlpha (0.4f), UIControlState.Normal);
+						} else {
+							tileButton.SetTitleColor (UIColor.White.ColorWithAlpha (0.4f), UIControlState.Normal);
+							mapButton.SetTitleColor (UIColor.White.ColorWithAlpha (1.0f), UIControlState.Normal);
+
+							((SearchResultMapView)mapVC).AddAnnotation ();
+						}
+					}
+
 					page_scroll.SetContentOffset (new CGPoint ((value * UIScreen.MainScreen.Bounds.Width), 0), true);
 					_curPage = value;
 				}
 			}
 		}
 
-		public SearchResultHomeViewModel ViewModelInstance
-		{
+		public SearchResultHomeViewModel ViewModelInstance {
 			get {
 				return (SearchResultHomeViewModel)ViewModel;
 			}
@@ -75,6 +89,8 @@ namespace ThisRoofN.iOS.Views
 		{
 			base.ViewWillAppear (animated);
 
+
+			page_scroll.SetContentOffset (new CGPoint ((CurPage * UIScreen.MainScreen.Bounds.Width), 0), false);
 			this.NavigationController.SetNavigationBarHidden (false, true);
 			this.NavigationController.SetToolbarHidden (false, true);
 		}
@@ -86,23 +102,23 @@ namespace ThisRoofN.iOS.Views
 			mapVC.View.Frame = new CGRect (page_scroll.Frame.Width, 0, page_scroll.Frame.Width, page_scroll.Frame.Height);
 		}
 
-		private UIViewController CreatePage(IMvxViewModel viewModel)
+		private UIViewController CreatePage (IMvxViewModel viewModel)
 		{
-			var controller = new UINavigationController ();
+//			var controller = new UINavigationController ();
 			var screen = this.CreateViewControllerFor (viewModel) as UIViewController;
-			controller.PushViewController (screen, false);
-			controller.NavigationBarHidden = true;
-			return controller;
+//			controller.PushViewController (screen, false);
+//			controller.NavigationBarHidden = true;
+			return screen;
 		}
 
-		private void SetSearchResultToolbar()
+		private void SetSearchResultToolbar ()
 		{
 			CGRect toolbarFrame = this.NavigationController.Toolbar.Frame;
 			nfloat oneItemWidth = (UIScreen.MainScreen.Bounds.Width - 36) / 2;
 			nfloat itemHeight = toolbarFrame.Size.Height - 20;
 
 			UIView tileItemView = new UIView (new CGRect (0, 0, oneItemWidth, toolbarFrame.Height));
-			UIButton tileButton = new UIButton(new CGRect(0, 10, oneItemWidth, itemHeight));
+			tileButton = new UIButton (new CGRect (0, 10, oneItemWidth, itemHeight));
 			tileButton.Font = UIFont.FromName ("HelveticaNeue", 20.0f);
 			tileButton.SetTitleColor (UIColor.White, UIControlState.Normal);
 			tileButton.SetTitle ("TILE", UIControlState.Normal);
@@ -111,9 +127,9 @@ namespace ThisRoofN.iOS.Views
 
 
 			UIView mapItemView = new UIView (new CGRect (0, 0, oneItemWidth, toolbarFrame.Height));
-			UIButton mapButton = new UIButton(new CGRect(0, 10, oneItemWidth, itemHeight));
+			mapButton = new UIButton (new CGRect (0, 10, oneItemWidth, itemHeight));
 			mapButton.Font = UIFont.FromName ("HelveticaNeue", 20.0f);
-			mapButton.SetTitleColor (UIColor.White.ColorWithAlpha(0.4f), UIControlState.Normal);
+			mapButton.SetTitleColor (UIColor.White.ColorWithAlpha (0.4f), UIControlState.Normal);
 			mapButton.SetTitle ("MAP", UIControlState.Normal);
 			mapItemView.Add (mapButton);
 			UIBarButtonItem mapItem = new UIBarButtonItem (mapItemView);
@@ -130,21 +146,15 @@ namespace ThisRoofN.iOS.Views
 			toolbar.Layer.BorderWidth = 2;
 			toolbar.Layer.BorderColor = TRColorHelper.LightBlue.CGColor; 
 			toolbar.Layer.ShadowColor = UIColor.Black.CGColor;
-			toolbar.Layer.ShadowOffset = new CGSize(0, -1);
+			toolbar.Layer.ShadowOffset = new CGSize (0, -1);
 			toolbar.Layer.ShadowOpacity = .6f;
 
 			tileButton.TouchUpInside += (object sender, EventArgs e) => {
 				CurPage = 0;
-
-				tileButton.SetTitleColor(UIColor.White.ColorWithAlpha(1.0f), UIControlState.Normal);
-				mapButton.SetTitleColor(UIColor.White.ColorWithAlpha(0.4f), UIControlState.Normal);
 			};
 
 			mapButton.TouchUpInside += (object sender, EventArgs e) => {
 				CurPage = 1;
-
-				tileButton.SetTitleColor(UIColor.White.ColorWithAlpha(0.4f), UIControlState.Normal);
-				mapButton.SetTitleColor(UIColor.White.ColorWithAlpha(1.0f), UIControlState.Normal);
 			};
 		}
 	}

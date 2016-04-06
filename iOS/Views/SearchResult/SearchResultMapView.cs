@@ -59,6 +59,11 @@ namespace ThisRoofN.iOS
 			AddPolygonOverlay ();
 		}
 
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+		}
+
 		private void AddPolygonOverlay() {
 			List<CLLocationCoordinate2D> coords = new List<CLLocationCoordinate2D>();
 			if(ViewModelInstance.MapRange != null && ViewModelInstance.MapRange.Count > 0) {
@@ -75,7 +80,9 @@ namespace ThisRoofN.iOS
 //			map_results.SetVisibleMapRect (polygon.BoundingMapRect, new UIEdgeInsets (-10, -10, -10, -10), true);
 		}
 
-		private void AddAnnotation() {
+		public void AddAnnotation() {
+			map_results.RemoveAnnotations (map_results.Annotations);
+
 			CLLocationCoordinate2D topLeftCoord;
 			topLeftCoord.Latitude = -90;
 			topLeftCoord.Longitude = 180;

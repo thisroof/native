@@ -75,7 +75,7 @@ namespace ThisRoofN.ViewModels
 				return;
 			}
 
-			int page = TileItems.Count / 24;
+			int page = TileItems.Count / 24 + 1;
 
 			this.SpinnerLoading = true;
 

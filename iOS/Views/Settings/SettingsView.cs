@@ -38,6 +38,8 @@ namespace ThisRoofN.iOS
 			set.Bind (btn_clearDisliked).To (vm => vm.ClearDislikeCommand);
 			set.Bind (btn_enableAllTutorial).To (vm => vm.EnableAllTutorialCommand);
 			set.Bind (btn_logout).To (vm => vm.LogoutCommand);
+			set.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			set.Bind (loadingLabel).To (vm => vm.LoadingText);
 			set.Apply ();
 		}
 

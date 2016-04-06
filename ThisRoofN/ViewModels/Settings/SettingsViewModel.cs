@@ -4,11 +4,16 @@ using MvvmCross.Core.ViewModels;
 using System.Windows.Input;
 using Acr.UserDialogs;
 using ThisRoofN.Database;
+using System.Collections.Generic;
+using ThisRoofN.Models.Service;
+using Newtonsoft.Json;
+using ThisRoofN.Interfaces;
 
 namespace ThisRoofN.ViewModels
 {
 	public class SettingsViewModel : BaseViewModel
 	{
+		private IDevice deviceInfo;
 		private MvxCommand _savedPropertyCommand;
 		private MvxCommand _supportCommand;
 		private MvxCommand _privacyCommand;
@@ -19,9 +24,9 @@ namespace ThisRoofN.ViewModels
 		private MvxCommand _enableAllTutorialCommand;
 		private MvxCommand _logoutCommand;
 
-		public SettingsViewModel ()
+		public SettingsViewModel (IDevice device)
 		{
-			
+			deviceInfo = device;
 		}
 
 		public ICommand SavedPropertyCommand
@@ -97,9 +102,18 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void DoGetSavedProperty()
+		private async void DoGetSavedProperty()
 		{
-			UserDialogs.Instance.Alert ("You do not have any saved properties.", "Settings");
+			IsLoading = true;
+			List <CottageDetail> savedResults = await mTRService.GetLikes (deviceInfo.GetUniqueIdentifier ());
+			IsLoading = false;
+
+			if (savedResults.Count > 0) {
+				var serialized = JsonConvert.SerializeObject (savedResults);
+				ShowViewModel<SavedPropertiesViewModel> (new {data = serialized});
+			} else {
+				UserDialogs.Instance.Alert ("You do not have any saved properties.", "Saved Homes");
+			}
 		}
 
 		private void DoSupport()

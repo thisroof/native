@@ -46,6 +46,8 @@ namespace ThisRoofN.ViewModels
 		public SearchResultDetailViewModel ()
 		{
 			itemDetail = DataHelper.SelectedCottageDetail;
+			_liked = itemDetail.Liked;
+			_disliked = itemDetail.Disliked;
 		}
 
 		#region Reject Reason Properties

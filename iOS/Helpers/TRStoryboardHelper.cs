@@ -31,7 +31,8 @@ namespace ThisRoofN.iOS
 				viewType.Name == "AffordResultView") {
 				return SearchFlowStoryboard;
 			} else if (viewType.Name == "SettingsView" || 
-				viewType.Name == "TRWebViewController") {
+				viewType.Name == "TRWebViewController" ||
+				viewType.Name == "SavedPropertiesView") {
 				return SettingsStoryboard;
 			} else {
 				return SearchResultStoryboard;

@@ -140,7 +140,7 @@ namespace ThisRoofN.ViewModels
 
 		#region Methods
 
-		private void GotoModal (ModalType type)
+		private async void GotoModal (ModalType type)
 		{
 			switch (type) {
 			case ModalType.PropertyTypes:
@@ -165,7 +165,17 @@ namespace ThisRoofN.ViewModels
 				ShowViewModel<HomeDetailModalViewModel> ();
 				break;
 			case ModalType.SavedHome:
-				UserDialogs.Instance.Alert ("You do not have any saved properties.", "Saved Homes");
+				IsLoading = true;
+				List <CottageDetail> savedResults = await mTRService.GetLikes (deviceInfo.GetUniqueIdentifier ());
+				IsLoading = false;
+
+				if (savedResults.Count > 0) {
+					var serialized = JsonConvert.SerializeObject (savedResults);
+					ShowViewModel<SavedPropertiesViewModel> (new {data = serialized});
+				} else {
+					UserDialogs.Instance.Alert ("You do not have any saved properties.", "Saved Homes");
+				}
+
 				break;
 			}
 		}

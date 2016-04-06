@@ -113,6 +113,15 @@ namespace ThisRoofN.RestService
 			return await CallRestAPI<CottageLikeInfo> (endpoint_like, JsonConvert.SerializeObject (request));
 		}
 
+		public async Task<List<CottageDetail>> GetLikes(string deviceID)
+		{
+			var json = new {
+				mobile_num = deviceID
+			};
+
+			return await CallRestAPI<List<CottageDetail>> (endpoint_getLikes, JsonConvert.SerializeObject (json));				
+		}
+
 		public async Task<bool> ClearLikeDislike(string deviceID, int userID, bool likeDislike, string propertyID) {
 			var json = new {
 				user_id = userID.ToString(),

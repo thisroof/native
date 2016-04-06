@@ -20,8 +20,20 @@ namespace ThisRoofN.Models.Service
 			get { 
 				return this.Data.AddressData.FullStreetAddress;
 			}
-
 		}
+
+		public string CityStateZip {
+			get {
+				return string.Format ("{0}, {1} {2}", this.Data.AddressData.City, this.Data.AddressData.State, this.Data.AddressData.ZipCode) ;
+			}
+		}
+
+		public string FormattedSalePrice {
+			get {
+				return string.Format ("Sales For ${0:C0}", this.Data.ListPrice);
+			}
+		}
+
 		public string PrimaryPhotoUrl {
 			get { 
 				if (this.Data.Photos != null && this.Data.Photos.Count > 0)

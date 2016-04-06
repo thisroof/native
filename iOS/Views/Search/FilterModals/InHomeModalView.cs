@@ -40,7 +40,7 @@ namespace ThisRoofN.iOS
 			bindingSet.Apply ();
 
 			this.view_side.AddGestureRecognizer (new UITapGestureRecognizer (() => {
-				ViewModelInstance.CloseCommand.Execute(null);
+				ViewModelInstance.ModalCloseCommand.Execute(null);
 			}));
 		}
 

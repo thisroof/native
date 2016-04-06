@@ -84,7 +84,7 @@ namespace ThisRoofN.iOS
 			this.view_distance.AddGestureRecognizer (endEditingTap);
 
 			this.view_trans.AddGestureRecognizer (new UITapGestureRecognizer (() => {
-				ViewModelInstance.CloseCommand.Execute (null);
+				ViewModelInstance.ModalCloseCommand.Execute (null);
 			}));
 
 			btn_getOwnLocation.TouchUpInside += (object sender, EventArgs e) => {

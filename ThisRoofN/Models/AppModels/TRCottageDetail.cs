@@ -42,6 +42,32 @@ namespace ThisRoofN.Models.App
 				Participant = new CottageParticipant ();
 			}
 		}
+
+		public TRCottageDetail(CottageDetail serverData) {
+			CottageID = serverData.Data.MatrixUniqueID;
+			PrimaryPhotoLink = serverData.PrimaryPhotoUrl;
+			Latitude = serverData.Data.Location.Latitude;
+			Longitude = serverData.Data.Location.Longitude;
+
+			Price = serverData.Data.ListPrice;
+			Description = serverData.Data.PropertyDescription;
+			Bedrooms = serverData.Data.Bedrooms;
+			Bathrooms = (int)serverData.Data.Bathrooms;
+
+			double squareFootageStructure = 0;
+			double.TryParse (serverData.Data.SquareFootageStructure, out squareFootageStructure);
+			SquareFootageStructure = (int)squareFootageStructure;
+			LotSquareSize = serverData.LotSquareSize;
+			Acres = serverData.Data.Acres;
+			Photos = serverData.Data.Photos;
+			Address = serverData.Data.AddressData;
+
+			if (serverData.Data.Participants != null && serverData.Data.Participants.Count > 0) {
+				Participant = serverData.Data.Participants [0];
+			} else {
+				Participant = new CottageParticipant ();
+			}
+		}
 			
 		public double 					Price { get; set; }
 		public string 					Description { get; set; }

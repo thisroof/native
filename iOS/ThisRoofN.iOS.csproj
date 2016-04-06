@@ -302,6 +302,9 @@
     <ImageAsset Include="Resources\Images.xcassets\img_propertyType.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_propertyType.imageset\img_propertyType.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_propertyType.imageset\img_propertyType%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_placeholder_small.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\img_placeholder_small.imageset\img_placeholder_small%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_placeholder_small.imageset\img_placeholder_small%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -569,6 +572,14 @@
     <Compile Include="Views\Search\FilterModals\PropertyTypeModalView.designer.cs">
       <DependentUpon>PropertyTypeModalView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\SavedPropertiesView.cs" />
+    <Compile Include="Views\Settings\SavedPropertiesView.designer.cs">
+      <DependentUpon>SavedPropertiesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SavedPropertyCell.cs" />
+    <Compile Include="Views\Settings\SavedPropertyCell.designer.cs">
+      <DependentUpon>SavedPropertyCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -602,6 +613,7 @@
     <BundleResource Include="Resources\animator.html" />
     <BundleResource Include="Videos\SplashVideo.mp4" />
     <BundleResource Include="Videos\WelcomeVideo.mp4" />
+    <BundleResource Include="Resources\img_placeholder_small.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="rangeslider">

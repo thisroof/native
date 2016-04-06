@@ -127,7 +127,7 @@ namespace ThisRoofN.iOS
 			{
 				SRTileImageCell cell = (SRTileImageCell)base.GetOrCreateCellFor (collectionView, indexPath, item);
 				cell.IVItem.ContentMode = UIViewContentMode.ScaleAspectFill;
-				cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
+				cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder_small", "png");
 				return cell;
 			}
 		}

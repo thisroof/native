@@ -127,7 +127,7 @@ namespace ThisRoofN.RestService
 				user_id = userID.ToString(),
 				mobile_num = deviceID,
 				property_id = propertyID,
-				like_dislike = likeDislike
+				like_dislike = likeDislike ? "1" : "0"
 			};
 
 			TRStatusDataModel response = await CallRestAPI<TRStatusDataModel>(endpoint_clear, JsonConvert.SerializeObject(json));

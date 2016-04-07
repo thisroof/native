@@ -16,7 +16,7 @@ namespace ThisRoofN.Models.Service
 		public string PropertyID { get; set; }
 
 		[DataMember(Name="like_dislike")]
-		public bool Like { get; set; }
+		public string Like { get; set; }
 	}
 
 	[DataContract]
@@ -32,7 +32,7 @@ namespace ThisRoofN.Models.Service
 		public string PropertyID { get; set; }
 
 		[DataMember(Name="like_dislike")]
-		public bool Like { get; set; }
+		public string Like { get; set; }
 
 		[DataMember(Name="reject_reasons")]
 		public string RejectReason {get;set;}

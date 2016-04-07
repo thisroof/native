@@ -220,7 +220,7 @@ namespace ThisRoofN.ViewModels
 					UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 					DeviceID = mDeviceInfo.GetUniqueIdentifier (),
 					PropertyID = itemDetail.CottageID,
-					Like = true
+					Like = "1"
 				};
 
 				this.IsLoading = true;
@@ -279,7 +279,7 @@ namespace ThisRoofN.ViewModels
 				UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 				DeviceID = mDeviceInfo.GetUniqueIdentifier (),
 				PropertyID = itemDetail.CottageID,
-				Like = false,
+				Like = "0",
 				RejectReason = "Rejected",
 				TooFar = this.TooFar,
 				TooClose = this.TooClose,

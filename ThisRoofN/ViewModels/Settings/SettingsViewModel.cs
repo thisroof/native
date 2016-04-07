@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using ThisRoofN.Models.Service;
 using Newtonsoft.Json;
 using ThisRoofN.Interfaces;
+using ThisRoofN.Database.Entities;
 
 namespace ThisRoofN.ViewModels
 {
@@ -29,16 +30,14 @@ namespace ThisRoofN.ViewModels
 			deviceInfo = device;
 		}
 
-		public ICommand SavedPropertyCommand
-		{
+		public ICommand SavedPropertyCommand {
 			get {
 				_savedPropertyCommand = _savedPropertyCommand ?? new MvxCommand (DoGetSavedProperty);
 				return _savedPropertyCommand;
 			}
 		}
 
-		public ICommand SupportCommand
-		{
+		public ICommand SupportCommand {
 			get {
 				_supportCommand = _supportCommand ?? new MvxCommand (DoSupport);
 				return _supportCommand;
@@ -46,137 +45,126 @@ namespace ThisRoofN.ViewModels
 		}
 
 
-		public ICommand PrivacyCommand
-		{
+		public ICommand PrivacyCommand {
 			get {
 				_privacyCommand = _privacyCommand ?? new MvxCommand (GotoPrivacy);
 				return _privacyCommand;
 			}
 		}
 
-		public ICommand TermsCommand
-		{
+		public ICommand TermsCommand {
 			get {
 				_termCommand = _termCommand ?? new MvxCommand (GotoTerms);
 				return _termCommand;
 			}
 		}
 
-		public ICommand LicenseCommand
-		{
+		public ICommand LicenseCommand {
 			get {
 				_licenseCommand = _licenseCommand ?? new MvxCommand (GotoLicense);
 				return _licenseCommand;
 			}
 		}
 
-		public ICommand ClearLikeCommand
-		{
+		public ICommand ClearLikeCommand {
 			get {
 				_clearLikeCommand = _clearLikeCommand ?? new MvxCommand (DoClearLike);
 				return _clearLikeCommand;
 			}
 		}
 
-		public ICommand ClearDislikeCommand
-		{
+		public ICommand ClearDislikeCommand {
 			get {
 				_clearDislikeCommand = _clearDislikeCommand ?? new MvxCommand (DoClearLike);
 				return _clearDislikeCommand;
 			}
 		}
 
-		public ICommand EnableAllTutorialCommand
-		{
+		public ICommand EnableAllTutorialCommand {
 			get {
 				_enableAllTutorialCommand = _enableAllTutorialCommand ?? new MvxCommand (DoEnableAllTutorial);
 				return _enableAllTutorialCommand;
 			}
 		}
 
-		public ICommand LogoutCommand
-		{
+		public ICommand LogoutCommand {
 			get {
 				_logoutCommand = _logoutCommand ?? new MvxCommand (DoLogout);
 				return _logoutCommand;
 			}
 		}
 
-		private async void DoGetSavedProperty()
+		private async void DoGetSavedProperty ()
 		{
-			IsLoading = true;
-			List <CottageDetail> savedResults = await mTRService.GetLikes (deviceInfo.GetUniqueIdentifier ());
-			IsLoading = false;
+//			IsLoading = true;
+//			LoadingText = "Loading";
+//			List <CottageDetail> savedResults = await mTRService.GetLikes (deviceInfo.GetUniqueIdentifier ());
+//			IsLoading = false;
 
-			if (savedResults.Count > 0) {
-				var serialized = JsonConvert.SerializeObject (savedResults);
-				ShowViewModel<SavedPropertiesViewModel> (new {data = serialized});
-			} else {
-				UserDialogs.Instance.Alert ("You do not have any saved properties.", "Saved Homes");
+
+
+			ShowViewModel<SavedPropertiesViewModel> ();
+		}
+
+		private void DoSupport ()
+		{
+			ShowViewModel<TRWebViewModel> (new {link = TRConstant.SupportPageLink});
+		}
+
+		private void GotoPrivacy ()
+		{
+			ShowViewModel<TRWebViewModel> (new {link = TRConstant.PrivacyPolicyPageLink});
+		}
+
+		private void GotoTerms ()
+		{
+			ShowViewModel<TRWebViewModel> (new {link = TRConstant.TermsOfUsePageLink});
+		}
+
+		private void GotoLicense ()
+		{
+			ShowViewModel<TRWebViewModel> (new {link = TRConstant.LicensePageLink});
+		}
+
+		private async void DoClearLike ()
+		{
+			bool confirm = await UserDialogs.Instance.ConfirmAsync (
+				               "Are you sure you would like to clear all of your saved properties? \n\r You will not be able to undo this action",
+				               "Clear Liked Properties",
+				               "Yes",
+				               "No");
+
+			if (confirm) {
+				TRDatabase.Instance.ClearLiked (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), true);
+				UserDialogs.Instance.Alert ("Liked Properties were removed", "Confirm");
 			}
 		}
 
-		private void DoSupport()
+		private async void DoClearDislike ()
 		{
-			ShowViewModel<TRWebViewModel> (new {link=TRConstant.SupportPageLink});
-		}
+			bool confirm = await UserDialogs.Instance.ConfirmAsync (
+				               "Are you sure you would like to clear all the properties you marked with a thumb down? \n\r You will not be able to undo this action",
+				               "Clear Liked Properties",
+				               "Yes",
+				               "No");
 
-		private void GotoPrivacy()
-		{
-			ShowViewModel<TRWebViewModel> (new {link=TRConstant.PrivacyPolicyPageLink});
-		}
-
-		private void GotoTerms()
-		{
-			ShowViewModel<TRWebViewModel> (new {link=TRConstant.TermsOfUsePageLink});
-		}
-
-		private void GotoLicense()
-		{
-			ShowViewModel<TRWebViewModel> (new {link=TRConstant.LicensePageLink});
-		}
-
-		private async void DoClearLike()
-		{
-			bool confirm = await UserDialogs.Instance.ConfirmAsync(
-				"Are you sure you would like to clear all of your saved properties? \n\r You will not be able to undo this action",
-				"Clear Liked Properties",
-				"Yes",
-				"No");
-
-			if (confirm)
-			{
-				TRDatabase.Instance.ClearLiked (mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0), true);
-				UserDialogs.Instance.Alert("Liked Properties were removed", "Confirm");
+			if (confirm) {
+				TRDatabase.Instance.ClearLiked (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false);
+				UserDialogs.Instance.Alert ("Thumbs down properties were removed", "Confirm");
 			}
 		}
 
-		private async void DoClearDislike()
-		{
-			bool confirm = await UserDialogs.Instance.ConfirmAsync(
-				"Are you sure you would like to clear all the properties you marked with a thumb down? \n\r You will not be able to undo this action",
-				"Clear Liked Properties",
-				"Yes",
-				"No");
-
-			if (confirm)
-			{
-				TRDatabase.Instance.ClearLiked (mUserPref.GetValue(TRConstant.UserPrefUserIDKey, 0), false);
-				UserDialogs.Instance.Alert("Thumbs down properties were removed", "Confirm");
-			}
-		}
-
-		private void DoEnableAllTutorial()
+		private void DoEnableAllTutorial ()
 		{
 		}
 
-		private async void DoLogout()
+		private async void DoLogout ()
 		{
-			bool confirm = await UserDialogs.Instance.ConfirmAsync(
-				"Are you sure you would like to log out?",
-				"Logout",
-				"Yes",
-				"No");
+			bool confirm = await UserDialogs.Instance.ConfirmAsync (
+				               "Are you sure you would like to log out?",
+				               "Logout",
+				               "Yes",
+				               "No");
 			
 			if (confirm) {
 				mUserPref.RemovePreference (TRConstant.UserPrefAccessTokenKey);

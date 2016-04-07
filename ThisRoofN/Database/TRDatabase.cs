@@ -78,6 +78,10 @@ namespace ThisRoofN.Database
 			return mSqliteConnection.Table<TREntityLikes> ().Where (i => i.UserID == userID && i.PropertyID == propertyID).FirstOrDefault ();
 		}
 
+		public List<TREntityLikes> GetCottageLikedList(int userID) {
+			return mSqliteConnection.Table<TREntityLikes> ().Where (i => i.UserID == userID && i.LikeDislike == true).ToList ();
+		}
+
 		public void RemoveCottageLikeInfo(int userID, string propertyID) {
 			TREntityLikes cottageLike = GetCottageLikeInfo (userID, propertyID);
 			mSqliteConnection.Delete<TREntityLikes> (cottageLike.ID);

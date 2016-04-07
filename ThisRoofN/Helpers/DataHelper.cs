@@ -10,6 +10,7 @@ namespace ThisRoofN.Helpers
 	{
 		public static SearchFilters CurrentSearchFilter;
 
+		public static int TotalLoadedCount;	// we use this count because search results would be removed by dislike
 		public static List<TRCottageSimple> SearchResults;
 		public static List<IPosition> SearchMapRange;
 		public static TRCottageSimple SelectedCottage;

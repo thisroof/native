@@ -67,6 +67,11 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewDidLayoutSubviews ();
 		}
+
+		public void ReloadData()
+		{
+			cv_results.ReloadData ();
+		}
 			
 		[Export ("collectionView:didSelectItemAtIndexPath:")]
 		public void ItemSelected (UIKit.UICollectionView collectionView, Foundation.NSIndexPath indexPath)

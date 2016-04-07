@@ -6,20 +6,34 @@ using ThisRoofN.Helpers;
 using ThisRoofN.Models.App;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
+using ThisRoofN.Database.Entities;
+using ThisRoofN.Interfaces;
+using ThisRoofN.Database;
+using Acr.UserDialogs;
 
 namespace ThisRoofN.ViewModels
 {
 	public class SavedPropertiesViewModel : BaseViewModel
 	{
+		private IDevice deviceInfo;
 		private MvxCommand<int> _detailCommand;
-		private List<CottageDetail> savedProperties;
+		private MvxCommand _reloadDataCommand;
+		private List<TREntityLikes> savedProperties;
 
-		public SavedPropertiesViewModel ()
+		public SavedPropertiesViewModel (IDevice device)
 		{
+			deviceInfo = device;
 		}
 
-		public void Init (string data) {
-			savedProperties = JsonConvert.DeserializeObject<List<CottageDetail>> (data);	
+		public void Init () {
+			
+		}
+
+		public ICommand ReloadDataCommand {
+			get {
+				_reloadDataCommand = _reloadDataCommand ?? new MvxCommand (DoReloadData);
+				return _reloadDataCommand;
+			}
 		}
 
 		public ICommand DetailCommand {
@@ -29,20 +43,37 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private void GotoDetail (int index)
+		private void DoReloadData() {
+			SavedProperties = TRDatabase.Instance.GetCottageLikedList (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0));
+			if (SavedProperties.Count == 0) {
+				UserDialogs.Instance.Alert ("You have no saved property", "ThisRoof");
+			}
+		}
+
+		private async void GotoDetail (int index)
 		{
-			DataHelper.SelectedCottageDetail = new TRCottageDetail (savedProperties[index]);
+			string propertyID =  savedProperties[index].PropertyID;
+
+			this.IsLoading = true;
+			this.LoadingText = "Loading Detail";
+			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
+
+			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
+
+			this.IsLoading = false;
+
 			ShowViewModel<SearchResultDetailViewModel> ();
 		}
 
 
-		public List<CottageDetail> SavedProperties 
+		public List<TREntityLikes> SavedProperties 
 		{
 			get {
 				return savedProperties;
 			}
 			set {
 				savedProperties = value;
+				RaisePropertyChanged (() => SavedProperties);
 			}
 		}
 	}

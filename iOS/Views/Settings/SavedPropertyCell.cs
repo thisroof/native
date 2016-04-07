@@ -7,6 +7,7 @@ using UIKit;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
 using ThisRoofN.Models.Service;
+using ThisRoofN.Database.Entities;
 
 namespace ThisRoofN.iOS
 {
@@ -16,11 +17,11 @@ namespace ThisRoofN.iOS
 		public SavedPropertyCell (IntPtr handle) : base (handle)
 		{
 			this.DelayBind (() => {
-				var set = this.CreateBindingSet<SavedPropertyCell, CottageDetail>();
+				var set = this.CreateBindingSet<SavedPropertyCell, TREntityLikes>();
 				set.Bind(lbl_price).To(vm => vm.FormattedSalePrice);
 				set.Bind(lbl_address).To(vm => vm.Address);
 				set.Bind(lbl_cityStateZip).To(vm => vm.CityStateZip);
-				set.Bind(img_primary).For(i => i.ImageUrl).To(vm => vm.PrimaryPhotoUrl);
+				set.Bind(img_primary).For(i => i.ImageUrl).To(vm => vm.PrimaryPhotoURL);
 				set.Apply();
 			});
 		}

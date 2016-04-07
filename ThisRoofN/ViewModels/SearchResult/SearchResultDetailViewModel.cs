@@ -128,13 +128,6 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		public ICommand DescMoreCommand {
-			get {
-				_descMoreCommand = _descMoreCommand ?? new MvxCommand (DoDescMore);
-				return _descMoreCommand;
-			}
-		}
-
 		public ICommand FindAgentCommand {
 			get {
 				_findAgentCommand = _findAgentCommand ?? new MvxCommand (() => {
@@ -237,38 +230,20 @@ namespace ThisRoofN.ViewModels
 						UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 						PropertyID = info.PropertyID,
 						LikeDislike = true,
-						Latitude = itemDetail.Latitude,
-						Longitude = itemDetail.Longitude,
-						PrimaryImageLink = itemDetail.PrimaryPhotoLink
+						Price = itemDetail.Price,
+						PrimaryPhotoURL = itemDetail.PrimaryPhotoLink,
+						Address = itemDetail.Address.FullStreetAddress,
+						CityStateZip = itemDetail.FormattedCityStateZip
 					};
 
 					TRDatabase.Instance.SaveItem (likeData);
 				}
 
 				Liked = true;
+				Disliked = false;
 			}
 		}
 
-		private async void DoShowDislikeDialog (bool isShow)
-		{
-			if (isShow) {
-				if (_disliked) {
-					this.IsLoading = true;
-					this.LoadingText = "Clearing Dislike";
-					if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false, itemDetail.CottageID)) {
-						Disliked = false;
-						TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), itemDetail.CottageID);
-					} 
-
-					this.IsLoading = false;
-				} else {
-					IsDislikeShown = true;
-				}
-			} else {
-				IsDislikeShown = false;
-			}
-
-		}
 
 		private async void DoDislike ()
 		{
@@ -292,30 +267,50 @@ namespace ThisRoofN.ViewModels
 			});
 
 			this.IsLoading = false;
+
 			// set to database
 			if (likeInfo != null) {
 				TREntityLikes likeData = new TREntityLikes () {
 					UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 					PropertyID = likeInfo.PropertyID,
 					LikeDislike = false,
-					Latitude = itemDetail.Latitude,
-					Longitude = itemDetail.Longitude,
-					PrimaryImageLink = itemDetail.PrimaryPhotoLink
+					Price = itemDetail.Price,
+					PrimaryPhotoURL = itemDetail.PrimaryPhotoLink,
+					Address = itemDetail.Address.FullStreetAddress,
+					CityStateZip = itemDetail.FormattedCityStateZip
 				};
 
 				TRDatabase.Instance.SaveItem (likeData);
 			}
 
+			Liked = false;
 			Disliked = true;
 			this.IsDislikeShown = false;
+
+			DataHelper.SearchResults.Remove (DataHelper.SearchResults.Where (i => i.CottageID == itemDetail.CottageID).FirstOrDefault());
+
+			Close (this);
 		}
 
-		public void DoDescMore ()
+		private async void DoShowDislikeDialog (bool isShow)
 		{
-			// Full description should be displayed
+			if (isShow) {
+				if (_disliked) {
+					this.IsLoading = true;
+					this.LoadingText = "Clearing Dislike";
+					if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false, itemDetail.CottageID)) {
+						Disliked = false;
+						TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), itemDetail.CottageID);
+					} 
+
+					this.IsLoading = false;
+				} else {
+					IsDislikeShown = true;
+				}
+			} else {
+				IsDislikeShown = false;
+			}
 		}
-
-
 	}
 }
 

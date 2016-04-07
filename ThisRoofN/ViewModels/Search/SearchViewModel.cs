@@ -13,6 +13,8 @@ using ThisRoofN.RestService;
 using ThisRoofN.Models.App;
 using ThisRoofN.Helpers;
 using ThisRoofN.Extensions;
+using ThisRoofN.Database.Entities;
+using ThisRoofN.Database;
 
 namespace ThisRoofN.ViewModels
 {
@@ -165,17 +167,7 @@ namespace ThisRoofN.ViewModels
 				ShowViewModel<HomeDetailModalViewModel> ();
 				break;
 			case ModalType.SavedHome:
-				IsLoading = true;
-				List <CottageDetail> savedResults = await mTRService.GetLikes (deviceInfo.GetUniqueIdentifier ());
-				IsLoading = false;
-
-				if (savedResults.Count > 0) {
-					var serialized = JsonConvert.SerializeObject (savedResults);
-					ShowViewModel<SavedPropertiesViewModel> (new {data = serialized});
-				} else {
-					UserDialogs.Instance.Alert ("You do not have any saved properties.", "Saved Homes");
-				}
-
+				ShowViewModel<SavedPropertiesViewModel> ();
 				break;
 			}
 		}
@@ -200,7 +192,6 @@ namespace ThisRoofN.ViewModels
 			this.LoadingText = isSearch ? "Searching..." : "Saving...";
 
 
-
 			// Call Update User Search Property API
 			var res = await mTRService.UpdateUserSearchProperty (DataHelper.CurrentSearchFilter);
 			if (res != null) {
@@ -218,6 +209,7 @@ namespace ThisRoofN.ViewModels
 				}
 			} else {	
 				List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
+				DataHelper.TotalLoadedCount = searchResults.Count;
 				if (searchResults != null) {
 					DataHelper.SearchResults = searchResults.Select (i =>
 							new TRCottageSimple () {
@@ -238,14 +230,13 @@ namespace ThisRoofN.ViewModels
 					ShowViewModel<SearchResultHomeViewModel> ();
 				} else {
 					this.IsLoading = false;
-					bool confirm = await UserDialogs.Instance.ConfirmAsync(
-						"Failed to get results from server. Are you going to continue?",
-						"Error",
-						"Yes",
-						"No");
+					bool confirm = await UserDialogs.Instance.ConfirmAsync (
+						               "Failed to get results from server. Are you going to continue?",
+						               "Error",
+						               "Yes",
+						               "No");
 
-					if (confirm)
-					{
+					if (confirm) {
 						ShowViewModel<SearchResultHomeViewModel> ();
 					}
 				}

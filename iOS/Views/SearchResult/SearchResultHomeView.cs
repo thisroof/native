@@ -44,7 +44,7 @@ namespace ThisRoofN.iOS.Views
 							tileButton.SetTitleColor (UIColor.White.ColorWithAlpha (0.4f), UIControlState.Normal);
 							mapButton.SetTitleColor (UIColor.White.ColorWithAlpha (1.0f), UIControlState.Normal);
 
-							((SearchResultMapView)mapVC).AddAnnotation ();
+							((SearchResultMapView)mapVC).AddAnnotation (); // for the load more
 						}
 					}
 
@@ -89,6 +89,8 @@ namespace ThisRoofN.iOS.Views
 		{
 			base.ViewWillAppear (animated);
 
+			((SearchResultTileView)tileVC).ReloadData ();
+			((SearchResultMapView)mapVC).AddAnnotation ();
 
 			page_scroll.SetContentOffset (new CGPoint ((CurPage * UIScreen.MainScreen.Bounds.Width), 0), false);
 			this.NavigationController.SetNavigationBarHidden (false, true);

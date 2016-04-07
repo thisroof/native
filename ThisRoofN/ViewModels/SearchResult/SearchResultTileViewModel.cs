@@ -71,15 +71,17 @@ namespace ThisRoofN.ViewModels
 		}
 
 		private async void LoadMore() {
-			if (TileItems == null || TileItems.Count < 24) {
+			if (DataHelper.TotalLoadedCount < 24) {
 				return;
 			}
 
-			int page = TileItems.Count / 24 + 1;
+			int page = DataHelper.TotalLoadedCount / 24 + 1;
 
 			this.SpinnerLoading = true;
 
 			List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24, page);
+			DataHelper.TotalLoadedCount += searchResults.Count;
+
 			List<TRCottageSimple> appResults = searchResults.Select (i =>
 				new TRCottageSimple () {
 					CottageID = i.ID,

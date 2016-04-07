@@ -1,5 +1,6 @@
 ﻿using System;
 using ThisRoofN.Models.Service;
+using SQLite.Net.Attributes;
 
 namespace ThisRoofN.Database.Entities
 {
@@ -17,11 +18,20 @@ namespace ThisRoofN.Database.Entities
 
 		public bool LikeDislike {get;set;}	// true: Liked, false: Disliked
 
-		public double Latitude {get;set; }
+		public string PrimaryPhotoURL {get;set;}
 
-		public double Longitude { get; set; }
+		public double Price {get;set;}
 
-		public string PrimaryImageLink {get;set;}
+		public string Address { get; set; }
+
+		public string CityStateZip {get;set;}
+
+		[Ignore]
+		public string FormattedSalePrice {
+			get {
+				return string.Format ("Sales For {0:C0}", Price);
+			}
+		}
 	}
 }
 

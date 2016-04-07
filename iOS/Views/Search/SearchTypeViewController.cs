@@ -33,6 +33,8 @@ namespace ThisRoofN.iOS
 			var set = this.CreateBindingSet<SearchTypeViewController, SearchTypeViewModel> ();
 			set.Bind (btn_normalSearch).To (vm => vm.NormalSearchCommand);
 			set.Bind (btn_affordSearch).To (vm => vm.AffordSearchCommand);
+			set.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			set.Bind (loadingLabel).To (vm => vm.LoadingText);
 			set.Apply ();
 		}
 

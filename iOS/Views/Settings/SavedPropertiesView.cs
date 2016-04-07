@@ -43,7 +43,16 @@ namespace ThisRoofN.iOS
 			var bindingSet = this.CreateBindingSet<SavedPropertiesView, SavedPropertiesViewModel> ();
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			bindingSet.Bind (savedDataSource).To (vm => vm.SavedProperties);
+			bindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			bindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
 			bindingSet.Apply ();
+		}
+
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+
+			ViewModelInstance.ReloadDataCommand.Execute (null);
 		}
 
 		public class SavedPropertiesTableViewSource : MvxTableViewSource

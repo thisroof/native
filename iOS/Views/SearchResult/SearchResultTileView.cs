@@ -8,6 +8,7 @@ using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
 using ThisRoofN.ViewModels;
 using CoreGraphics;
+using ThisRoofN.Helpers;
 
 namespace ThisRoofN.iOS
 {
@@ -123,7 +124,10 @@ namespace ThisRoofN.iOS
 			{
 				Console.WriteLine (elementKind);
 				UICollectionReusableView footerview = collectionView.DequeueReusableSupplementaryView (UICollectionElementKindSection.Footer, "SRTileFooter", indexPath);
-				footerview.Add (masterViewInstance.spinner);
+				if (DataHelper.TotalLoadedCount >= 24) {
+					footerview.Add (masterViewInstance.spinner);
+				}
+
 				footerview.ClipsToBounds = false;
 				return footerview;
 			}

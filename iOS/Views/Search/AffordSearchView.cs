@@ -123,18 +123,20 @@ namespace ThisRoofN.iOS
 				activeView = view_hoaDues;
 			}
 
-			//get the keyboard size
-			CGRect r = UIKeyboard.BoundsFromNotification(notification);
-			UIEdgeInsets contentInsets = new UIEdgeInsets (0.0f, 0.0f, r.Height, 0.0f);
-			scroll_back.ContentInset = contentInsets;
-			scroll_back.ScrollIndicatorInsets = contentInsets;
+			if (activeView != null) {
+				//get the keyboard size
+				CGRect r = UIKeyboard.BoundsFromNotification(notification);
+				UIEdgeInsets contentInsets = new UIEdgeInsets (0.0f, 0.0f, r.Height, 0.0f);
+				scroll_back.ContentInset = contentInsets;
+				scroll_back.ScrollIndicatorInsets = contentInsets;
 
-			CGRect aRect = scroll_back.Frame;
-			aRect.Height -= r.Height;
+				CGRect aRect = scroll_back.Frame;
+				aRect.Height -= r.Height;
 
-			if (!aRect.Contains (new CGPoint (aRect.Left, aRect.Bottom))) {
-				CGPoint scrollPoint = new CGPoint (0, activeView.Frame.Bottom - r.Height);
-				scroll_back.SetContentOffset (scrollPoint, true);
+				if (!aRect.Contains (new CGPoint (aRect.Left, aRect.Bottom))) {
+					CGPoint scrollPoint = new CGPoint (0, activeView.Frame.Bottom - r.Height);
+					scroll_back.SetContentOffset (scrollPoint, true);
+				}
 			}
 		}
 

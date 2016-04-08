@@ -10,6 +10,7 @@ namespace ThisRoofN.iOS
 {
 	partial class SearchTypeViewController : BaseViewController
 	{
+		private bool playbackDurationSet;
 		private MPMoviePlayerController moviePlayer;
 
 		public SearchTypeViewController (IntPtr handle) : base (handle)
@@ -44,7 +45,8 @@ namespace ThisRoofN.iOS
 			this.NavigationController.SetNavigationBarHidden (true, true);
 			if (moviePlayer != null) {
 				moviePlayer.PrepareToPlay ();
-				moviePlayer.Play();
+				moviePlayer.Play ();
+
 			}
 		}
 
@@ -72,7 +74,23 @@ namespace ThisRoofN.iOS
 			moviePlayer.MovieControlMode = MPMovieControlMode.Hidden;
 			moviePlayer.RepeatMode = MPMovieRepeatMode.One;
 
+			MPMoviePlayerController.Notifications.ObservePlaybackStateDidChange (OnStateChanged);
+
 			this.video_view.Add (moviePlayer.View);
+		}
+
+		private void OnStateChanged(object sender, NSNotificationEventArgs e)
+		{
+			switch (moviePlayer.PlaybackState) {
+			case MPMoviePlaybackState.Playing:
+				if (!playbackDurationSet) {
+					moviePlayer.CurrentPlaybackTime = 20.0;
+					playbackDurationSet = true;
+				}
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }

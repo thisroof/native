@@ -29,7 +29,7 @@ namespace ThisRoofN.Database.Entities
 		[Ignore]
 		public string FormattedSalePrice {
 			get {
-				return string.Format ("Sales For {0:C0}", Price);
+				return string.Format ("For Sale: {0:C0}", Price);
 			}
 		}
 	}

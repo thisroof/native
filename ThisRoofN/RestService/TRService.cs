@@ -138,6 +138,21 @@ namespace ThisRoofN.RestService
 			}
 		}
 
+		public async Task<bool> ClearAllLikeDislike(string deviceID, int userID, bool likeDislike) {
+			var json = new {
+				user_id = userID.ToString(),
+				mobile_num = deviceID,
+				like_dislike = likeDislike ? "1" : "0"
+			};
+
+			TRStatusDataModel response = await CallRestAPI<TRStatusDataModel>(endpoint_clear, JsonConvert.SerializeObject(json));
+			if (response.status.Equals ("success")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		public async Task<List<IPosition>> GetPolygon(string deviceID)
 		{
 			var json = new {

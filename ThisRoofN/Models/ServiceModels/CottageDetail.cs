@@ -30,7 +30,7 @@ namespace ThisRoofN.Models.Service
 
 		public string FormattedSalePrice {
 			get {
-				return string.Format ("Sales For {0:C0}", this.Data.ListPrice);
+				return string.Format ("For Sale: {0:C0}", this.Data.ListPrice);
 			}
 		}
 

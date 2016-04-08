@@ -135,8 +135,13 @@ namespace ThisRoofN.ViewModels
 				               "No");
 
 			if (confirm) {
-				TRDatabase.Instance.ClearLiked (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), true);
-				UserDialogs.Instance.Alert ("Liked Properties were removed", "Confirm");
+				if (await mTRService.ClearAllLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), true)) {
+					TRDatabase.Instance.ClearLiked (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), true);
+					UserDialogs.Instance.Alert ("Liked Properties were removed", "Confirm");
+				} else {
+					UserDialogs.Instance.Alert ("Failed to clear like properties. Try again later", "Unexpected Error");
+				}
+
 			}
 		}
 
@@ -149,8 +154,12 @@ namespace ThisRoofN.ViewModels
 				               "No");
 
 			if (confirm) {
-				TRDatabase.Instance.ClearLiked (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false);
-				UserDialogs.Instance.Alert ("Thumbs down properties were removed", "Confirm");
+				if (await mTRService.ClearAllLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false)) {
+					TRDatabase.Instance.ClearLiked (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false);
+					UserDialogs.Instance.Alert ("Thumbs down properties were removed", "Confirm");
+				} else {
+					UserDialogs.Instance.Alert ("Failed to clear thumbs down properties. Try again later", "Unexpected Error");
+				}
 			}
 		}
 

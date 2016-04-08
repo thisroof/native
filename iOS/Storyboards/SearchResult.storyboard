@@ -236,7 +236,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_splash_back" translatesAutoresizingMaskIntoConstraints="NO" id="JQd-ie-d5z" customClass="MvxImageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="263"/>
+                                                    <rect key="frame" x="-20" y="-20" width="360" height="303"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFF-JJ-hjJ">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="263"/>
@@ -311,11 +311,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="iGa-Ih-7q3" secondAttribute="bottom" constant="4" id="3eL-Gf-Fbu"/>
                                                 <constraint firstItem="aFF-JJ-hjJ" firstAttribute="leading" secondItem="rSV-Z1-NoZ" secondAttribute="leading" id="ATu-bz-2dn"/>
                                                 <constraint firstAttribute="trailing" secondItem="aFF-JJ-hjJ" secondAttribute="trailing" id="Dof-aF-5Mq"/>
-                                                <constraint firstAttribute="trailing" secondItem="JQd-ie-d5z" secondAttribute="trailing" id="MhH-A5-9tq"/>
-                                                <constraint firstItem="JQd-ie-d5z" firstAttribute="top" secondItem="rSV-Z1-NoZ" secondAttribute="top" id="iOX-KP-wmh"/>
-                                                <constraint firstItem="JQd-ie-d5z" firstAttribute="leading" secondItem="rSV-Z1-NoZ" secondAttribute="leading" id="rPU-Hf-PA2"/>
+                                                <constraint firstAttribute="trailing" secondItem="JQd-ie-d5z" secondAttribute="trailing" constant="-20" id="MhH-A5-9tq"/>
+                                                <constraint firstItem="JQd-ie-d5z" firstAttribute="top" secondItem="rSV-Z1-NoZ" secondAttribute="top" constant="-20" id="iOX-KP-wmh"/>
+                                                <constraint firstItem="JQd-ie-d5z" firstAttribute="leading" secondItem="rSV-Z1-NoZ" secondAttribute="leading" constant="-20" id="rPU-Hf-PA2"/>
                                                 <constraint firstItem="HNB-by-UMZ" firstAttribute="leading" secondItem="rSV-Z1-NoZ" secondAttribute="leadingMargin" constant="16" id="teX-aw-js9"/>
-                                                <constraint firstAttribute="bottom" secondItem="JQd-ie-d5z" secondAttribute="bottom" id="umO-QL-sPg"/>
+                                                <constraint firstAttribute="bottom" secondItem="JQd-ie-d5z" secondAttribute="bottom" constant="-20" id="umO-QL-sPg"/>
                                                 <constraint firstItem="aFF-JJ-hjJ" firstAttribute="top" secondItem="rSV-Z1-NoZ" secondAttribute="top" id="yWp-S9-aso"/>
                                                 <constraint firstItem="iGa-Ih-7q3" firstAttribute="centerX" secondItem="JQd-ie-d5z" secondAttribute="centerX" id="ys9-jO-M5P"/>
                                             </constraints>

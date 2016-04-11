@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_viewResult"
-        android:background="@color/white">
+        android:layout_above="@+id/btn_layout">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -25,14 +25,30 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font16sp" />
                 <rangeslider.RangeSliderView
-                    android:id="@+id/rangeSlider1"
+                    android:id="@+id/price_rangeslider"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    min_value="0"
-                    max_value="100"
-                    left_value="20"
-                    right_value="80"
-                    android:layout_marginTop="@dimen/padding_8dp" />
+                    android:layout_marginTop="@dimen/padding_8dp"
+                    local:MvxBind="LeftValueChange MinBudget; RightValueChange MaxBudget" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$0"
+                        android:textColor="@color/TR_DARK_GRAY"
+                        android:textSize="@dimen/font14sp"
+                        local:MvxBind="Text MinBudgetString" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Any Price"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/TR_DARK_GRAY"
+                        android:textSize="@dimen/font14sp"
+                        local:MvxBind="Text MaxBudgetString" />
+                </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -50,22 +66,17 @@
                         android:text="SORT BY"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/font16sp"
-                        android:layout_weight="6" />
-                    <EditText
-                        android:id="@+id/txt_email"
+                        android:layout_weight="5" />
+                    <MvxSpinner
                         android:background="@drawable/edittext_gray"
-                        android:layout_weight="4"
+                        android:layout_weight="5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/font16sp"
-                        android:textColor="@color/TR_DARK_GRAY"
-                        android:imeOptions="actionDone"
-                        android:text="Lot Size"
-                        android:textAlignment="center"
-                        android:gravity="center"
                         android:paddingTop="@dimen/padding_4dp"
                         android:paddingBottom="@dimen/padding_4dp"
-                        local:MvxBind="Text EmailAddress;" />
+                        local:MvxBind="ItemsSource SortTypes;SelectedItem SelectedSortType"
+                        local:MvxDropDownItemTemplate="@layout/spinner_general_dropdown"
+                        local:MvxItemTemplate="@layout/spinner_general_item" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -283,6 +294,7 @@
         </LinearLayout>
     </ScrollView>
     <LinearLayout
+        android:id="@+id/btn_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -290,13 +302,12 @@
         android:layout_alignParentBottom="true">
         <Button
             android:id="@+id/btn_viewResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_48dp"
-            android:layout_marginRight="@dimen/padding_48dp"
-            android:textColor="@color/TR_LIGHT_GRAY"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:textColor="@color/TR_DARK_GRAY"
             android:text="View Results"
             android:textSize="@dimen/font16sp"
+            android:layout_gravity="center"
             android:background="@drawable/btn_viewResult"
             local:MvxBind="Click SignupCommand; Typeface Font('Bold_Cn')" />
     </LinearLayout>

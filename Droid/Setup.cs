@@ -12,6 +12,7 @@ using ThisRoofN.Droid.Helpers;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using Android.Widget;
 using ThisRoofN.Droid.CustomBinding;
+using RangeSlider;
 
 namespace ThisRoofN.Droid
 {
@@ -50,6 +51,8 @@ namespace ThisRoofN.Droid
 			base.FillTargetFactories (registry);
 
 			registry.RegisterCustomBindingFactory<ImageView> ("SourceResourceID", view => new ImageDrawableBinding (view));
+			registry.RegisterCustomBindingFactory<RangeSliderView> ("LeftValueChange", view => new RangeSliderLeftTargetBinding(view));
+			registry.RegisterCustomBindingFactory<RangeSliderView> ("RightValueChange", view => new RangeSliderRightTargetBinding(view));
 		}
 
 		protected override IEnumerable<Assembly> AndroidViewAssemblies {

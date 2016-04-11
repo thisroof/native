@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/icon_checkbox_tick"
+        android:layout_gravity="center"
+        local:MvxBind="SourceResourceID CheckImage(Selected)" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkbox Content"
+        android:textColor="@color/TR_DARK_GRAY"
+        android:textSize="@dimen/font14sp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/padding_16dp"
+        local:MvxBind="Text Title" />
+</LinearLayout>

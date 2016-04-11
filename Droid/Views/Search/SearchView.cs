@@ -46,6 +46,10 @@ namespace ThisRoofN.Droid
 			base.OnCreateView (inflater, container, savedInstanceState);
 			View view = this.BindingInflate (Resource.Layout.fragment_search_main, null);
 
+			RangeSliderView priceRangeSlider = view.FindViewById<RangeSliderView> (Resource.Id.price_rangeslider);
+			priceRangeSlider.MinValue = 0;
+			priceRangeSlider.MaxValue = TRConstant.PriceStringValues.Count - 1;
+
 			layout_location = view.FindViewById<SquareRelativeLayout> (Resource.Id.layout_location);
 			layout_lifestyle = view.FindViewById<SquareRelativeLayout> (Resource.Id.layout_lifeStyle);
 			layout_inArea = view.FindViewById<SquareRelativeLayout> (Resource.Id.layout_inArea);

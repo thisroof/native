@@ -44,4 +44,15 @@
                 local:MvxBind="Typeface Font('Bold')" />
         </LinearLayout>
     </RelativeLayout>
+    <ThisRoofN.Droid.CustomControls.TRSlidingTab.TRSlidingTabLayout
+        android:id="@+id/tab_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font12sp"
+        android:textColor="@color/TR_DARK_BLUE"
+        android:background="@color/TR_LIGHT_BLUE" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_location"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

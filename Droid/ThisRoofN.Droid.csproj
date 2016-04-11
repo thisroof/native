@@ -220,6 +220,15 @@
     <Compile Include="Views\Search\FilterModals\InHomeModalView.cs" />
     <Compile Include="Views\Search\FilterModals\HomeDetailModalView.cs" />
     <Compile Include="Views\Search\FilterModals\SearchAreaModalView.cs" />
+    <Compile Include="CustomControls\TRSlidingTab\TRSlidingTabLayout.cs" />
+    <Compile Include="CustomControls\TRSlidingTab\TRSlidingTabStrip.cs" />
+    <Compile Include="Views\Search\FilterModals\LocationDistanceTabItemView.cs" />
+    <Compile Include="Views\Search\FilterModals\LocationCommuteTabItemView.cs" />
+    <Compile Include="Views\Search\FilterModals\LocationNationTabItemView.cs" />
+    <Compile Include="Adapters\MvxViewPagerFragmentAdapter.cs" />
+    <Compile Include="Adapters\SearchLocationTabAdapter.cs" />
+    <Compile Include="CustomBinding\RangeSliderLeftTargetBinding.cs" />
+    <Compile Include="CustomBinding\RangeSliderRightTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -311,6 +320,14 @@
     <AndroidResource Include="Resources\layout\item_checkbox.axml" />
     <AndroidResource Include="Resources\drawable\icon_checkbox_tick.png" />
     <AndroidResource Include="Resources\drawable\icon_checkbox_emp.png" />
+    <AndroidResource Include="Resources\color\sliding_tab_selector.xml" />
+    <AndroidResource Include="Resources\layout\fragment_tab_location_commute.axml" />
+    <AndroidResource Include="Resources\layout\fragment_tab_location_distance.axml" />
+    <AndroidResource Include="Resources\layout\fragment_tab_location_nation.axml" />
+    <AndroidResource Include="Resources\drawable\icon_navigator.png" />
+    <AndroidResource Include="Resources\layout\item_grid_checkbox.axml" />
+    <AndroidResource Include="Resources\layout\spinner_general_dropdown.axml" />
+    <AndroidResource Include="Resources\layout\spinner_general_item.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -348,6 +365,9 @@
     <Folder Include="Views\Search\" />
     <Folder Include="Views\Search\FilterModals\" />
     <Folder Include="CustomBinding\" />
+    <Folder Include="CustomControls\TRSlidingTab\" />
+    <Folder Include="Resources\color\" />
+    <Folder Include="Adapters\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Videos\WelcomeVideo.mp4" />

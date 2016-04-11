@@ -12,5 +12,9 @@
 	<!--Defulat Colors-->
 	<color name="white">#ffffff</color>
 	<color name="black_40">#66000000</color>
+	<color name="white_50">#88ffffff</color>
+
+	<color name="TAB_GREEN">#008458</color>
+	<color name="TAB_GREEN_TRANS">#9dc2b1</color>
 </resources>
 

@@ -106,17 +106,17 @@
                     </LinearLayout>
                 </ThisRoofN.Droid.SquareRelativeLayout>
                 <ThisRoofN.Droid.SquareRelativeLayout
-                    android:id="@+id/layout_inHome"
+                    android:id="@+id/layout_lifeStyle"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="1dp"
                     android:background="@android:color/holo_blue_bright">
                     <ImageView
-                        android:id="@+id/iv_inHome"
+                        android:id="@+id/iv_lifeStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/img_inhome"
+                        android:src="@drawable/img_lifestyle"
                         android:scaleType="centerCrop" />
                     <LinearLayout
                         android:orientation="vertical"
@@ -131,7 +131,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="IN THE HOME"
+                            android:text="LIFESTYLE/\nACTIVITIES"
+                            android:lines="2"
+                            android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font16sp"
                             local:MvxBind="Typeface Font('Bold')" />
@@ -176,44 +178,6 @@
                     </LinearLayout>
                 </ThisRoofN.Droid.SquareRelativeLayout>
                 <ThisRoofN.Droid.SquareRelativeLayout
-                    android:id="@+id/layout_homeType"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="1dp"
-                    android:background="@android:color/holo_blue_bright">
-                    <ImageView
-                        android:id="@+id/iv_homeType"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/img_homeType"
-                        android:scaleType="centerCrop" />
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/black_40"
-                        android:layout_centerInParent="true"
-                        android:paddingLeft="@dimen/padding_8dp"
-                        android:paddingRight="@dimen/padding_8dp"
-                        android:paddingTop="@dimen/padding_4dp"
-                        android:paddingBottom="@dimen/padding_4dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="HOME TYPE"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font16sp"
-                            local:MvxBind="Typeface Font('Bold')" />
-                    </LinearLayout>
-                </ThisRoofN.Droid.SquareRelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-                <ThisRoofN.Droid.SquareRelativeLayout
                     android:id="@+id/layout_homeDetails"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
@@ -245,18 +209,24 @@
                             local:MvxBind="Typeface Font('Bold')" />
                     </LinearLayout>
                 </ThisRoofN.Droid.SquareRelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
                 <ThisRoofN.Droid.SquareRelativeLayout
-                    android:id="@+id/layout_lifeStyle"
+                    android:id="@+id/layout_inHome"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="1dp"
                     android:background="@android:color/holo_blue_bright">
                     <ImageView
-                        android:id="@+id/iv_lifeStyle"
+                        android:id="@+id/iv_inHome"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/img_lifestyle"
+                        android:src="@drawable/img_inhome"
                         android:scaleType="centerCrop" />
                     <LinearLayout
                         android:orientation="vertical"
@@ -271,9 +241,39 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="LIFESTYLE/\nACTIVITIES"
-                            android:lines="2"
-                            android:gravity="center"
+                            android:text="IN THE HOME"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            local:MvxBind="Typeface Font('Bold')" />
+                    </LinearLayout>
+                </ThisRoofN.Droid.SquareRelativeLayout>
+                <ThisRoofN.Droid.SquareRelativeLayout
+                    android:id="@+id/layout_savedHome"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="1dp"
+                    android:background="@android:color/holo_blue_bright">
+                    <ImageView
+                        android:id="@+id/iv_inHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_savedHomes"
+                        android:scaleType="centerCrop" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/black_40"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="@dimen/padding_8dp"
+                        android:paddingRight="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_4dp"
+                        android:paddingBottom="@dimen/padding_4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SAVED HOMES"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font16sp"
                             local:MvxBind="Typeface Font('Bold')" />
@@ -282,10 +282,22 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <Button
-        style="@style/ActionButtonStyle"
-        android:id="@+id/btn_viewResult"
-        android:text="View Results"
-        android:layout_alignParentBottom="true"
-        local:MvxBind="Click SignupCommand; Typeface Font('Black_Ex_Cn')" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_8dp"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/btn_viewResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_48dp"
+            android:layout_marginRight="@dimen/padding_48dp"
+            android:textColor="@color/TR_LIGHT_GRAY"
+            android:text="View Results"
+            android:textSize="@dimen/font16sp"
+            android:background="@drawable/btn_viewResult"
+            local:MvxBind="Click SignupCommand; Typeface Font('Bold_Cn')" />
+    </LinearLayout>
 </RelativeLayout>

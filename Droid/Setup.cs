@@ -9,6 +9,9 @@ using MvvmCross.Droid.Views;
 using System.Linq;
 using ThisRoofN.Interfaces;
 using ThisRoofN.Droid.Helpers;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using Android.Widget;
+using ThisRoofN.Droid.CustomBinding;
 
 namespace ThisRoofN.Droid
 {
@@ -45,6 +48,8 @@ namespace ThisRoofN.Droid
 		protected override void FillTargetFactories (MvvmCross.Binding.Bindings.Target.Construction.IMvxTargetBindingFactoryRegistry registry)
 		{
 			base.FillTargetFactories (registry);
+
+			registry.RegisterCustomBindingFactory<ImageView> ("SourceResourceID", view => new ImageDrawableBinding (view));
 		}
 
 		protected override IEnumerable<Assembly> AndroidViewAssemblies {

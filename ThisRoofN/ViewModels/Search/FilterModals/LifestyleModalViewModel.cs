@@ -37,6 +37,19 @@ namespace ThisRoofN
 			}
 		}
 
+		private MvxCommand<CheckboxItemModel> _itemClickCommand;
+
+		public ICommand ItemClickCommand {
+			get {
+				_itemClickCommand = _itemClickCommand ?? new MvxCommand<CheckboxItemModel> (DoItemSelect);
+				return _itemClickCommand;
+			}
+		}
+
+		private void DoItemSelect(CheckboxItemModel item) {
+			item.Selected = !item.Selected;
+		}
+
 		private void DoSaveAndClose ()
 		{
 			// Save edited values

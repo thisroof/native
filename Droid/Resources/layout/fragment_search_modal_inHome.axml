@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_modal_back"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:paddingLeft="@dimen/padding_64dp">
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_size">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_inhome"
+            android:scaleType="centerCrop" />
+        <ImageView
+            android:id="@+id/btn_back"
+            android:src="@drawable/ic_arrow_left_white_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_16dp"
+            android:layout_marginTop="@dimen/padding_16dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/black_40"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="@dimen/padding_16dp"
+            android:paddingRight="@dimen/padding_16dp"
+            android:paddingTop="@dimen/padding_4dp"
+            android:paddingBottom="@dimen/padding_4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IN HOME"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font30sp"
+                local:MvxBind="Typeface Font('Bold')" />
+        </LinearLayout>
+    </RelativeLayout>
+    <MvxListView
+        android:id="@+id/list_inHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="0px"
+        local:MvxBind="ItemsSource Items; ItemClick ItemClickCommand;"
+        local:MvxItemTemplate="@layout/item_checkbox" />
+</LinearLayout>

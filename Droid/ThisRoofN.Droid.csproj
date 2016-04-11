@@ -213,6 +213,13 @@
     <Compile Include="Views\LoginFlow\SignupView.cs" />
     <Compile Include="Views\Search\SearchTypeView.cs" />
     <Compile Include="Views\Search\SearchView.cs" />
+    <Compile Include="Views\Search\FilterModals\LifestyleModalView.cs" />
+    <Compile Include="CustomBinding\ImgeDrawableBinding.cs" />
+    <Compile Include="ValueConverters\CheckImageValueConverter.cs" />
+    <Compile Include="Views\Search\FilterModals\InAreaModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\InHomeModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\HomeDetailModalView.cs" />
+    <Compile Include="Views\Search\FilterModals\SearchAreaModalView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -265,18 +272,45 @@
     <AndroidResource Include="Resources\layout\fragment_search_type.axml" />
     <AndroidResource Include="Resources\drawable\btn_clear.xml" />
     <AndroidResource Include="Resources\layout\fragment_search_main.axml" />
-    <AndroidResource Include="Resources\drawable\edittext_gray.xml" />
-    <AndroidResource Include="Resources\drawable\img_homeDetails.png" />
-    <AndroidResource Include="Resources\drawable\img_homeType.png" />
-    <AndroidResource Include="Resources\drawable\img_inArea.png" />
-    <AndroidResource Include="Resources\drawable\img_inHome.png" />
-    <AndroidResource Include="Resources\drawable\img_lifestyle.png" />
-    <AndroidResource Include="Resources\drawable\img_location.png" />
     <AndroidResource Include="Resources\drawable\loading_back.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\icon_setting_white.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon_setting_white.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon_setting_white.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\icon_setting_white.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_homeDetails.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_inArea.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_inHome.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_lifestyle.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_location.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_homeDetails.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_inArea.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_inHome.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_lifestyle.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_location.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_homeDetails.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_inArea.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_inHome.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_lifestyle.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_location.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_homeDetails.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_inArea.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_inHome.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_lifestyle.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_location.png" />
+    <AndroidResource Include="Resources\drawable\btn_viewResult.xml" />
+    <AndroidResource Include="Resources\drawable\edittext_gray.xml" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_savedHomes.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_savedHomes.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_savedHomes.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_savedHomes.png" />
+    <AndroidResource Include="Resources\layout\fragment_search_modal_location.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_modal_lifestyle.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_modal_homedetail.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_modal_inarea.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_modal_inHome.axml" />
+    <AndroidResource Include="Resources\layout\item_checkbox.axml" />
+    <AndroidResource Include="Resources\drawable\icon_checkbox_tick.png" />
+    <AndroidResource Include="Resources\drawable\icon_checkbox_emp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -312,6 +346,8 @@
     <Folder Include="CustomControls\" />
     <Folder Include="Views\LoginFlow\" />
     <Folder Include="Views\Search\" />
+    <Folder Include="Views\Search\FilterModals\" />
+    <Folder Include="CustomBinding\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Videos\WelcomeVideo.mp4" />

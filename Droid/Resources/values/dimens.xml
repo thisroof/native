@@ -30,5 +30,10 @@
 
 	<dimen name="login_logo_size">65dp</dimen>
 	<dimen name="welcome_logo_size">80dp</dimen>
+
+<!--	ThisRoof Screen-->
+	<dimen name="header_size">160dp</dimen>
+
+	<dimen name="checkbox_size">20dp</dimen>
 </resources>
 

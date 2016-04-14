@@ -1,11 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.thisroof.nativeapp" android:versionCode="1" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.thisroof.app" android:versionCode="1" android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="16" />
-	<application android:icon="@mipmap/icon" android:theme="@style/AppTheme" android:label="ThisRoof"></application>
+	<application android:icon="@mipmap/icon" android:theme="@style/AppTheme" android:label="ThisRoof">
+		<activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/facebook_app_name" />
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyD8r-H8Mi8Vzt3gNc_xzGk7Ft1XMR-WD7g" />
+		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+    	<meta-data android:name="com.facebook.sdk.ApplicationName" android:value="@string/facebook_app_name" />
+	</application>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 </manifest>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ThisRoofN.Droid.CustomControls.KeyboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_modal_back"
     android:orientation="vertical"
@@ -55,4 +55,4 @@
         android:id="@+id/pager_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</LinearLayout>
+</ThisRoofN.Droid.CustomControls.KeyboardLayout>

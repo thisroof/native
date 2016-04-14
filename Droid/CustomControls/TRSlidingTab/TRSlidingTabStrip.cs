@@ -127,7 +127,5 @@ namespace ThisRoofN.Droid.CustomControls.TRSlidingTab
 			}
 		}
 	}
-
-
 }
 

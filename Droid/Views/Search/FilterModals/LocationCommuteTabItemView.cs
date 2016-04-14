@@ -12,6 +12,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.Droid.BindingContext;
+using Android.Graphics;
+using Android.Views.InputMethods;
 
 namespace ThisRoofN.Droid
 {
@@ -29,6 +31,16 @@ namespace ThisRoofN.Droid
 			base.OnCreateView (inflater, container, savedInstanceState);
 
 			View view = this.BindingInflate (Resource.Layout.fragment_tab_location_commute, container, false);
+
+			LinearLayout rootView = view.FindViewById<LinearLayout> (Resource.Id.rootView);
+			rootView.Click += (object sender, EventArgs e) => {
+				InputMethodManager imm = (InputMethodManager)Activity.GetSystemService (Context.InputMethodService);
+				imm.HideSoftInputFromWindow (rootView.WindowToken, 0);
+			};
+
+			SeekBar distanceBar = view.FindViewById<SeekBar> (Resource.Id.seekbar_distance);
+			distanceBar.Max = TRConstant.SearchMinutes.Count () - 1;
+
 			return view;
 		}
 	}

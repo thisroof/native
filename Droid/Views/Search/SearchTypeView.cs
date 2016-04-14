@@ -36,14 +36,6 @@ namespace ThisRoofN.Droid
 			ISurfaceHolder holder = videoView.Holder;
 			holder.AddCallback (this);
 
-			var descriptor = Activity.Assets.OpenFd ("Videos/WelcomeVideo.mp4");
-			mediaPlayer = new MediaPlayer ();
-			mediaPlayer.Looping = true;
-			mediaPlayer.SetDataSource (descriptor.FileDescriptor, descriptor.StartOffset, descriptor.Length);
-			mediaPlayer.SetVideoScalingMode (VideoScalingMode.ScaleToFitWithCropping);
-			mediaPlayer.SetOnPreparedListener (this);
-			mediaPlayer.Prepare ();
-
 			return view;
 		}
 
@@ -82,6 +74,13 @@ namespace ThisRoofN.Droid
 
 		public void SurfaceCreated (ISurfaceHolder holder)
 		{
+			var descriptor = Activity.Assets.OpenFd ("Videos/WelcomeVideo.mp4");
+			mediaPlayer = new MediaPlayer ();
+			mediaPlayer.Looping = true;
+			mediaPlayer.SetDataSource (descriptor.FileDescriptor, descriptor.StartOffset, descriptor.Length);
+			mediaPlayer.SetVideoScalingMode (VideoScalingMode.ScaleToFitWithCropping);
+			mediaPlayer.SetOnPreparedListener (this);
+			mediaPlayer.Prepare ();
 			mediaPlayer.SetDisplay (holder);	
 		}
 

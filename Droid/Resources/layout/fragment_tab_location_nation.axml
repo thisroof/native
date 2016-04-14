@@ -101,21 +101,21 @@
         android:layout_marginTop="@dimen/padding_8dp">
         <Button
             android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:textColor="@color/TR_LIGHT_GRAY"
+            android:layout_height="32dp"
+            android:textColor="@color/TR_DARK_GRAY"
             android:text="SELECT ALL"
             android:textSize="@dimen/font14sp"
             android:background="@drawable/btn_viewResult"
-            local:MvxBind="Click SignupCommand;" />
+            local:MvxBind="Click SelectAllStatesCommand, CommandParameter=false;" />
         <Button
             android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:textColor="@color/TR_LIGHT_GRAY"
+            android:layout_height="32dp"
+            android:textColor="@color/TR_DARK_GRAY"
             android:text="CLEAR ALL"
             android:textSize="@dimen/font14sp"
             android:background="@drawable/btn_viewResult"
             android:layout_marginLeft="@dimen/padding_8dp"
-            local:MvxBind="Click SignupCommand;" />
+            local:MvxBind="Click SelectAllStatesCommand, CommandParameter=true;" />
     </LinearLayout>
     <MvxGridView
         android:id="@+id/imageGridView"
@@ -127,6 +127,6 @@
         android:stretchMode="columnWidth"
         android:scrollbars="none"
         android:layout_marginTop="@dimen/padding_8dp"
-        local:MvxBind="ItemsSource States; ItemClick ItemClickCommand;"
+        local:MvxBind="ItemsSource States; ItemClick NationItemClickCommand;"
         local:MvxItemTemplate="@layout/item_grid_checkbox" />
 </LinearLayout>

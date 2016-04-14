@@ -51,6 +51,19 @@ namespace ThisRoofN.ViewModels
 		}
 
 
+		private MvxCommand<CheckboxItemModel> _nationItemSelectCommand;
+
+		public ICommand NationItemClickCommand {
+			get {
+				_nationItemSelectCommand = _nationItemSelectCommand ?? new MvxCommand<CheckboxItemModel> (DoNationItemSelect);
+				return _nationItemSelectCommand;
+			}
+		}
+
+		private void DoNationItemSelect(CheckboxItemModel item) {
+			item.Selected = !item.Selected;
+		}
+
 		private MvxCommand<bool> _selectAllStatesCommand;
 
 		public ICommand SelectAllStatesCommand {
@@ -95,19 +108,11 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-
-		private MvxCommand<string> _updateLocationsCommand;
-
-		public ICommand UpdateLocationsCommand {
-			get {
-				_updateLocationsCommand = _updateLocationsCommand ?? new MvxCommand<string> (DoUpdateLocations);
-				return _updateLocationsCommand;
-			}
-		}
-
 		public async void DoUpdateLocations (string hint)
 		{
-			AddressSuggestionItems = await mGeocodeService.GetAutoCompleteSuggestionsAsync (hint);
+			if (hint != null) {
+				AddressSuggestionItems = await mGeocodeService.GetAutoCompleteSuggestionsAsync (hint);	
+			}
 		}
 
 		private async void DoSaveAndClose ()
@@ -196,6 +201,8 @@ namespace ThisRoofN.ViewModels
 			} 
 			set {
 				_distanceType = (short)value;
+
+				Distance = 0;
 				RaisePropertyChanged (() => DistanceType);
 				RaisePropertyChanged (() => DistanceTypeSegValue);
 			}
@@ -328,6 +335,16 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+		private TRGoogleMapPlace _selectedSuggestion;
+		public TRGoogleMapPlace SelectedSuggestion {
+			get {
+				return _selectedSuggestion;
+			} set {
+				_selectedSuggestion = value;
+				Address = value.FullAddress;
+			}
+		}
+
 		private string _address;
 
 		public string Address {
@@ -337,31 +354,13 @@ namespace ThisRoofN.ViewModels
 			set {
 				_address = value;
 				RaisePropertyChanged (() => Address);
+				DoUpdateLocations (value);
 			}
 		}
 
 		private void InitAddress ()
 		{
 			Address = DataHelper.CurrentSearchFilter.Address;
-//			string addressStr = string.Empty;
-//
-//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Address)) {
-//				addressStr = DataHelper.CurrentSearchFilter.Address;
-//			}
-//
-//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.City)) {
-//				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.City;
-//			}
-//
-//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.State)) {
-//				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.State;
-//			}
-//
-//			if (!string.IsNullOrEmpty (DataHelper.CurrentSearchFilter.Country)) {
-//				addressStr = addressStr + ", " + DataHelper.CurrentSearchFilter.Country;
-//			}
-//
-//			Address = addressStr;
 		}
 
 		private void InitStates ()

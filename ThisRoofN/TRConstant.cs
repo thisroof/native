@@ -273,6 +273,24 @@ namespace ThisRoofN
 
 		};
 
+		public static readonly List<string> BedOptions = new List<string>{
+			"Any",
+			"1+",
+			"2+",
+			"3+",
+			"4+",
+			"5+"
+		};
+
+		public static readonly List<string> BathOptions = new List<string>{
+			"Any",
+			"1+",
+			"2+",
+			"3+",
+			"4+",
+			"5+"
+		};
+
 		public static readonly List<string> SquareFootageOptions = new List<string>{
 			"No Min",
 			"500",

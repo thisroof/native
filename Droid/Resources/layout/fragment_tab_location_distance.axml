@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:padding="@dimen/padding_16dp">
     <TextView
+        android:id="@+id/header_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Commute"
+        android:text="Distance"
         android:textColor="@color/TR_DARK_GRAY"
         android:textSize="@dimen/font16sp" />
     <SeekBar
@@ -16,15 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_8dp"
-        android:layout_marginBottom="@dimen/padding_4dp" />
+        android:layout_marginBottom="@dimen/padding_4dp"
+        local:MvxBind="Progress Distance" />
     <TextView
+        android:id="@+id/txt_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5 min"
+        android:text="5 mile"
         android:textColor="@color/TR_DARK_GRAY"
         android:textSize="@dimen/font14sp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        local:MvxBind="Text DistanceLabelText" />
     <TextView
+        android:id="@+id/txt_caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter an Address, a City or a Zip Code"
@@ -35,12 +44,20 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="@dimen/padding_4dp">
-        <EditText
+        <MvxAutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/edittext_gray"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font16sp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/font14sp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:inputType="textFilter"
+            android:selectAllOnFocus="true"
+            android:paddingRight="25dp"
+            local:MvxItemTemplate="@layout/item_location"
+            local:MvxBind="Text Address; ItemsSource AddressSuggestionItems; SelectedObject SelectedSuggestion" />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"

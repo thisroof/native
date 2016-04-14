@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/padding_16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BEDS"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font16sp" />
+    <SeekBar
+        android:id="@+id/seekbar_bed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_8dp"
+        android:layout_marginBottom="@dimen/padding_4dp"
+        local:MvxBind="Progress SelectedBed; Max BedOptionCount" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Any"
+        android:textColor="@color/TR_DARK_GRAY"
+        android:textSize="@dimen/font14sp"
+        android:layout_gravity="center"
+        local:MvxBind="Text BedsLabelText" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BATHS"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font16sp" />
+    <SeekBar
+        android:id="@+id/seekbar_bath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_8dp"
+        android:layout_marginBottom="@dimen/padding_4dp"
+        local:MvxBind="Progress SelectedBath; Max BathOptionCount" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Any"
+        android:textColor="@color/TR_DARK_GRAY"
+        android:textSize="@dimen/font14sp"
+        android:layout_gravity="center"
+        local:MvxBind="Text BathLabelText" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Square Footage"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font16sp"
+        android:layout_marginTop="@dimen/padding_8dp" />
+    <rangeslider.RangeSliderView
+        android:id="@+id/slider_squareFootage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_8dp"
+        local:MvxBind="LeftValueChange MinSquareFootage; RightValueChange MaxSquareFootage; MinValue MinSliderValue; MaxValue SquareFootageCount" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Min"
+            android:textColor="@color/TR_DARK_GRAY"
+            android:textSize="@dimen/font14sp"
+            local:MvxBind="Text MinSquareFootageString" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Max"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/TR_DARK_GRAY"
+            android:textSize="@dimen/font14sp"
+            local:MvxBind="Text MaxSquareFootageString" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home Age"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font16sp"
+        android:layout_marginTop="@dimen/padding_8dp" />
+    <rangeslider.RangeSliderView
+        android:id="@+id/slider_homeAge"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_8dp"
+        local:MvxBind="LeftValueChange MinAge; RightValueChange MaxAge; MinValue MinSliderValue; MaxValue HomeAgeCount" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Min"
+            android:textColor="@color/TR_DARK_GRAY"
+            android:textSize="@dimen/font14sp"
+            local:MvxBind="Text MinAgeString" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Max"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/TR_DARK_GRAY"
+            android:textSize="@dimen/font14sp"
+            local:MvxBind="Text MaxAgeString" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lot Size"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font16sp"
+        android:layout_marginTop="@dimen/padding_8dp" />
+    <rangeslider.RangeSliderView
+        android:id="@+id/slider_lotSize"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_8dp"
+        local:MvxBind="LeftValueChange MinLotSize; RightValueChange MaxLotSize; MinValue MinSliderValue; MaxValue LotSizeCount" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Min"
+            android:textColor="@color/TR_DARK_GRAY"
+            android:textSize="@dimen/font14sp"
+            local:MvxBind="Text MinLotSizeString" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Max"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/TR_DARK_GRAY"
+            android:textSize="@dimen/font14sp"
+            local:MvxBind="Text MaxLotSizeString" />
+    </RelativeLayout>
+</LinearLayout>

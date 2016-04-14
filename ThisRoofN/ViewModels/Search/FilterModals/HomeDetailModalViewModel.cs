@@ -9,6 +9,7 @@ namespace ThisRoofN
 	public class HomeDetailModalViewModel : BaseViewModel
 	{
 		private List<CheckboxItemModel> _items;
+
 		public HomeDetailModalViewModel ()
 		{
 			InitItems ();
@@ -25,7 +26,7 @@ namespace ThisRoofN
 			_minLotSize = 0;
 			_maxLotSize = TRConstant.LotSizeOptions.Count - 2;
 
-			_minAge = 2;
+			_minAge = 0;
 			_maxAge = TRConstant.HomeAgeOptions.Count - 1;
 
 			_items = new List<CheckboxItemModel> ();
@@ -48,6 +49,20 @@ namespace ThisRoofN
 			}
 		}
 
+		private MvxCommand<CheckboxItemModel> _itemClickCommand;
+
+		public ICommand ItemClickCommand {
+			get {
+				_itemClickCommand = _itemClickCommand ?? new MvxCommand<CheckboxItemModel> (DoItemSelect);
+				return _itemClickCommand;
+			}
+		}
+
+		private void DoItemSelect (CheckboxItemModel item)
+		{
+			item.Selected = !item.Selected;
+		}
+
 		private void DoSaveAndClose ()
 		{
 			// Save edited values
@@ -55,11 +70,68 @@ namespace ThisRoofN
 			Close (this);
 		}
 
+		public int MinSliderValue
+		{
+			get {
+				return 0;
+			}
+		}
+
+
+		private int _selectedBed;
+		public int SelectedBed {
+			get {
+				return _selectedBed;
+			} 
+			set {
+				_selectedBed = value;
+				RaisePropertyChanged (() => SelectedBed);
+				RaisePropertyChanged (() => BedsLabelText);
+			}
+		}
+
+		public int BedOptionCount {
+			get {
+				return TRConstant.BedOptions.Count - 1;
+			}
+		}
+
+		public string BedsLabelText {
+			get {
+				return TRConstant.BedOptions [SelectedBed];
+			}
+		}
+
+		private int _selectedBath;
+		public int SelectedBath {
+			get {
+				return _selectedBath;
+			} 
+			set {
+				_selectedBath = value;
+				RaisePropertyChanged (() => SelectedBath);
+				RaisePropertyChanged (() => BathLabelText);
+			}
+		}
+
+		public int BathOptionCount {
+			get {
+				return TRConstant.BathOptions.Count - 1;
+			}
+		}
+
+		public string BathLabelText {
+			get {
+				return TRConstant.BathOptions [SelectedBath];
+			}
+		}
+
 		private float _minSqareFootage;
 		public float MinSquareFootage {
 			get {
 				return _minSqareFootage;
-			} set {
+			}
+			set {
 				_minSqareFootage = value;
 				RaisePropertyChanged (() => MinSquareFootageString);
 				RaisePropertyChanged (() => MinSquareFootage);
@@ -70,22 +142,29 @@ namespace ThisRoofN
 		public float MaxSquareFootage {
 			get {
 				return _maxSquareFootage;
-			} set {
+			}
+			set {
 				_maxSquareFootage = value;
 				RaisePropertyChanged (() => MaxSquareFootageString);
 				RaisePropertyChanged (() => MaxSquareFootage);
 			}
 		}
 
+		public int SquareFootageCount {
+			get {
+				return TRConstant.SquareFootageOptions.Count - 1;
+			}
+		}
+
 		public string MinSquareFootageString {
 			get {
-				return TRConstant.SquareFootageOptions [(int)Math.Round(MinSquareFootage, MidpointRounding.AwayFromZero)];
+				return TRConstant.SquareFootageOptions [(int)Math.Round (MinSquareFootage, MidpointRounding.AwayFromZero)];
 			}
 		}
 
 		public string MaxSquareFootageString {
 			get {
-				return TRConstant.SquareFootageOptions [(int)Math.Round(MaxSquareFootage, MidpointRounding.AwayFromZero)];
+				return TRConstant.SquareFootageOptions [(int)Math.Round (MaxSquareFootage, MidpointRounding.AwayFromZero)];
 			}
 		}
 
@@ -93,7 +172,8 @@ namespace ThisRoofN
 		public float MinLotSize {
 			get {
 				return _minLotSize;
-			} set {
+			}
+			set {
 				_minLotSize = value;
 				RaisePropertyChanged (() => MinLotSizeString);
 				RaisePropertyChanged (() => MinLotSize);
@@ -102,7 +182,7 @@ namespace ThisRoofN
 
 		public string MinLotSizeString {
 			get {
-				return TRConstant.LotSizeOptions [(int)Math.Round(MinLotSize, MidpointRounding.AwayFromZero)];
+				return TRConstant.LotSizeOptions [(int)Math.Round (MinLotSize, MidpointRounding.AwayFromZero)];
 			}
 		}
 
@@ -110,16 +190,23 @@ namespace ThisRoofN
 		public float MaxLotSize {
 			get {
 				return _maxLotSize;
-			} set {
+			}
+			set {
 				_maxLotSize = value;
 				RaisePropertyChanged (() => MaxLotSizeString);
 				RaisePropertyChanged (() => MaxLotSize);
 			}
 		}
 
+		public int LotSizeCount {
+			get {
+				return TRConstant.LotSizeOptions.Count - 1;
+			}
+		}
+
 		public string MaxLotSizeString {
 			get {
-				return TRConstant.LotSizeOptions [(int)Math.Round(MaxLotSize, MidpointRounding.AwayFromZero)];
+				return TRConstant.LotSizeOptions [(int)Math.Round (MaxLotSize, MidpointRounding.AwayFromZero)];
 			}
 		}
 
@@ -127,7 +214,8 @@ namespace ThisRoofN
 		public float MinAge {
 			get {
 				return _minAge;
-			} set {
+			}
+			set {
 				_minAge = value;
 				RaisePropertyChanged (() => MinAgeString);
 				RaisePropertyChanged (() => MinAge);
@@ -135,10 +223,15 @@ namespace ThisRoofN
 			}
 		}
 
-		public string MinAgeString
-		{
+		public string MinAgeString {
 			get {
-				return TRConstant.HomeAgeOptions [(int)Math.Round(MinAge, MidpointRounding.AwayFromZero)];
+				return TRConstant.HomeAgeOptions [(int)Math.Round (MinAge, MidpointRounding.AwayFromZero)];
+			}
+		}
+
+		public int HomeAgeCount {
+			get {
+				return TRConstant.HomeAgeOptions.Count - 1;
 			}
 		}
 
@@ -146,7 +239,8 @@ namespace ThisRoofN
 		public float MaxAge {
 			get {
 				return _maxAge;
-			} set {
+			}
+			set {
 				_maxAge = value;
 				RaisePropertyChanged (() => MaxAgeString);
 				RaisePropertyChanged (() => MaxAge);
@@ -155,7 +249,7 @@ namespace ThisRoofN
 
 		public string MaxAgeString {
 			get {
-				return TRConstant.HomeAgeOptions [(int)Math.Round(MaxAge, MidpointRounding.AwayFromZero)];
+				return TRConstant.HomeAgeOptions [(int)Math.Round (MaxAge, MidpointRounding.AwayFromZero)];
 			}
 		}
 

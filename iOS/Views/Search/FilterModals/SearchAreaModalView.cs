@@ -263,9 +263,9 @@ namespace ThisRoofN.iOS
 				return true;
 			};
 
-			txt_address.EditingChanged += (object sender, EventArgs e) => {
-				ViewModelInstance.UpdateLocationsCommand.Execute (txt_address.Text);
-			};
+//			txt_address.EditingChanged += (object sender, EventArgs e) => {
+//				ViewModelInstance.UpdateLocationsCommand.Execute (txt_address.Text);
+//			};
 		}
 
 		private void KeyboardUpNotification (NSNotification notification)

@@ -14,6 +14,9 @@ using Android.Widget;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using Android.Graphics.Drawables;
+using MvvmCross.Binding.Droid.Views;
+using RangeSlider;
+using ThisRoofN.Droid.CustomControls;
 
 namespace ThisRoofN.Droid
 {
@@ -68,7 +71,6 @@ namespace ThisRoofN.Droid
 		{
 			base.OnResume ();
 			Dialog.Window.SetLayout (RelativeLayout.LayoutParams.MatchParent, RelativeLayout.LayoutParams.MatchParent);
-
 		}
 	}
 }

@@ -40,7 +40,6 @@ namespace ThisRoofN.ViewModels
 
 		private MvxCommand _saveCommand;
 		private MvxCommand _searchCommand;
-		private MvxCommand<string> _updateLocationsCommand;
 
 		public ICommand SaveCommand {
 			get {
@@ -53,13 +52,6 @@ namespace ThisRoofN.ViewModels
 			get {
 				_searchCommand = _searchCommand ?? new MvxCommand (DoSearch);
 				return _searchCommand;
-			}
-		}
-
-		public ICommand UpdateLocationsCommand {
-			get {
-				_updateLocationsCommand = _updateLocationsCommand ?? new MvxCommand<string> (DoUpdateLocations);
-				return _updateLocationsCommand;
 			}
 		}
 

@@ -44,11 +44,12 @@
                 local:MvxBind="Typeface Font('Bold')" />
         </LinearLayout>
     </RelativeLayout>
-    <MvxListView
+    <ThisRoofN.Droid.CustomControls.MvxListViewWithHeader
         android:id="@+id/list_homeDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="0px"
+        local:header="@layout/header_home_detail"
         local:MvxBind="ItemsSource Items; ItemClick ItemClickCommand;"
         local:MvxItemTemplate="@layout/item_checkbox" />
 </LinearLayout>

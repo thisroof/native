@@ -80,15 +80,6 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\monoandroid\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
-    </Reference>
-    <Reference Include="OkHttp">
-      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Plugins.DownloadCache">
       <HintPath>..\packages\MvvmCross.Plugin.DownloadCache.4.0.0\lib\MonoAndroid\MvvmCross.Plugins.DownloadCache.dll</HintPath>
     </Reference>
@@ -122,41 +113,17 @@
     <Reference Include="MvvmCross.Droid.Support.V7.Fragging">
       <HintPath>..\packages\MvvmCross.Droid.Support.V7.Fragging.4.0.1\lib\MonoAndroid403\MvvmCross.Droid.Support.V7.Fragging.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Droid.Support.V7.AppCompat">
       <HintPath>..\packages\MvvmCross.Droid.Support.V7.AppCompat.4.0.2\lib\MonoAndroid403\MvvmCross.Droid.Support.V7.AppCompat.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Insights">
       <HintPath>..\packages\Xamarin.Insights.1.11.4\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.CardView">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
-    </Reference>
     <Reference Include="Bolts.Tasks">
       <HintPath>..\packages\Bolts.1.3.0\lib\MonoAndroid403\Bolts.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Bolts.AppLinks">
       <HintPath>..\packages\Bolts.1.3.0\lib\MonoAndroid403\Bolts.AppLinks.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Facebook">
-      <HintPath>..\packages\Xamarin.Facebook.Android.4.10.0.0\lib\MonoAndroid403\Xamarin.Facebook.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.GooglePlayServices.Basement">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.Basement.27.0.0.0\lib\MonoAndroid41\Xamarin.GooglePlayServices.Basement.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.GooglePlayServices.AppIndexing">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.AppIndexing.27.0.0.0\lib\MonoAndroid41\Xamarin.GooglePlayServices.AppIndexing.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.GooglePlayServices.Ads">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.Ads.27.0.0.0\lib\MonoAndroid41\Xamarin.GooglePlayServices.Ads.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Facebook.AudienceNetwork">
-      <HintPath>..\packages\Xamarin.Facebook.AudienceNetwork.Android.4.10.0.0\lib\MonoAndroid41\Xamarin.Facebook.AudienceNetwork.dll</HintPath>
     </Reference>
     <Reference Include="MvxPlugins.Geocoder">
       <HintPath>..\packages\Mvx.Plugins.Geocoder.1.2.1\lib\MonoAndroid\MvxPlugins.Geocoder.dll</HintPath>
@@ -178,6 +145,51 @@
     </Reference>
     <Reference Include="Xamarin.Controls.RangeSlider.Android">
       <HintPath>..\Components\rangeslider-1.1.0.3\lib\android\Xamarin.Controls.RangeSlider.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Vector.Drawable">
+      <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable">
+      <HintPath>..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Basement">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.1\lib\MonoAndroid41\Xamarin.GooglePlayServices.Basement.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Base">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Base.29.0.0.1\lib\MonoAndroid41\Xamarin.GooglePlayServices.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Maps">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Maps.29.0.0.1\lib\MonoAndroid41\Xamarin.GooglePlayServices.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Location">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Location.29.0.0.1\lib\MonoAndroid41\Xamarin.GooglePlayServices.Location.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="OkHttp">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Facebook">
+      <HintPath>..\packages\Xamarin.Facebook.Android.4.10.0.0\lib\MonoAndroid403\Xamarin.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Facebook.AudienceNetwork">
+      <HintPath>..\packages\Xamarin.Facebook.AudienceNetwork.Android.4.10.0.0\lib\MonoAndroid41\Xamarin.Facebook.AudienceNetwork.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Ads">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Ads.29.0.0.1\lib\MonoAndroid41\Xamarin.GooglePlayServices.Ads.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +241,13 @@
     <Compile Include="Adapters\SearchLocationTabAdapter.cs" />
     <Compile Include="CustomBinding\RangeSliderLeftTargetBinding.cs" />
     <Compile Include="CustomBinding\RangeSliderRightTargetBinding.cs" />
+    <Compile Include="CustomBinding\SeekBarBinding.cs" />
+    <Compile Include="CustomControls\KeyboardLayout.cs" />
+    <Compile Include="CustomControls\MvxListViewWithHeader\MvxListViewWithHeaderAdapter.cs" />
+    <Compile Include="CustomControls\MvxListViewWithHeader\MvxListViewWithHeader.cs" />
+    <Compile Include="Views\SearchResult\SearchResultTileView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultHomeView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultMapView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -328,17 +347,33 @@
     <AndroidResource Include="Resources\layout\item_grid_checkbox.axml" />
     <AndroidResource Include="Resources\layout\spinner_general_dropdown.axml" />
     <AndroidResource Include="Resources\layout\spinner_general_item.axml" />
+    <AndroidResource Include="Resources\layout\item_location.axml" />
+    <AndroidResource Include="Resources\drawable\edittext_clear.xml" />
+    <AndroidResource Include="Resources\values\attrs.xml" />
+    <AndroidResource Include="Resources\layout\header_home_detail.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_result_home.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_result_tile.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_result_map.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <ItemGroup>
-    <XamarinComponentReference Include="facebookandroid">
-      <Version>4.10.0.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="rangeslider">
       <Version>1.1.0.3</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="googleplayservices-location">
+      <Version>29.0.0.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="googleplayservices-maps">
+      <Version>29.0.0.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="facebookandroid">
+      <Version>4.10.0.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
@@ -368,6 +403,8 @@
     <Folder Include="CustomControls\TRSlidingTab\" />
     <Folder Include="Resources\color\" />
     <Folder Include="Adapters\" />
+    <Folder Include="CustomControls\MvxListViewWithHeader\" />
+    <Folder Include="Views\SearchResult\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Videos\WelcomeVideo.mp4" />

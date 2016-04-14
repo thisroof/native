@@ -4,6 +4,8 @@ using Android.Views;
 using Android.Media;
 using Android.Widget;
 using ThisRoofN.Droid.Helpers;
+using Android.Webkit;
+using Android.Graphics;
 
 namespace ThisRoofN.Droid
 {
@@ -17,17 +19,16 @@ namespace ThisRoofN.Droid
 
 			View view = this.BindingInflate (Resource.Layout.fragment_home, null);
 
+			WebView gifWebView = view.FindViewById<WebView> (Resource.Id.gifWebView);
+			if (gifWebView != null) {
+				gifWebView.LoadUrl ("file:///android_res/raw/animator.html");
+				gifWebView.SetBackgroundColor (Color.Transparent);
+				gifWebView.SetLayerType (LayerType.Software, null);
+			}
+
 			var videoView = view.FindViewById<VideoView> (Resource.Id.view_video);
 			ISurfaceHolder holder = videoView.Holder;
 			holder.AddCallback (this);
-
-			var descriptor = Activity.Assets.OpenFd ("Videos/SplashVideo.mp4");
-			mediaPlayer = new MediaPlayer ();
-			mediaPlayer.Looping = true;
-			mediaPlayer.SetDataSource (descriptor.FileDescriptor, descriptor.StartOffset, descriptor.Length);
-			mediaPlayer.SetVideoScalingMode (VideoScalingMode.ScaleToFitWithCropping);
-			mediaPlayer.SetOnPreparedListener (this);
-			mediaPlayer.Prepare ();
 
 			return view;
 		}
@@ -40,9 +41,9 @@ namespace ThisRoofN.Droid
 			homeView.ToolbarManager.SetToolbarType (ToolbarHelper.ToolbarType.None);
 		}
 
-		public override void OnPause ()
+		public override void OnStop ()
 		{
-			base.OnPause ();
+			base.OnStop ();
 
 			if (mediaPlayer.IsPlaying == true) {
 				mediaPlayer.Stop ();
@@ -55,7 +56,7 @@ namespace ThisRoofN.Droid
 		public void OnPrepared (MediaPlayer player)
 		{
 			if (!mediaPlayer.IsPlaying) {
-				mediaPlayer.Start ();  
+				mediaPlayer.Start ();
 			}
 		}
 
@@ -65,6 +66,13 @@ namespace ThisRoofN.Droid
 
 		public void SurfaceCreated (ISurfaceHolder holder)
 		{
+			var descriptor = Activity.Assets.OpenFd ("Videos/SplashVideo.mp4");
+			mediaPlayer = new MediaPlayer ();
+			mediaPlayer.Looping = true;
+			mediaPlayer.SetDataSource (descriptor.FileDescriptor, descriptor.StartOffset, descriptor.Length);
+			mediaPlayer.SetVideoScalingMode (VideoScalingMode.ScaleToFitWithCropping);
+			mediaPlayer.SetOnPreparedListener (this);
+			mediaPlayer.Prepare ();
 			mediaPlayer.SetDisplay (holder);
 		}
 

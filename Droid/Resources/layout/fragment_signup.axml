@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@android:color/darker_gray">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,28 +35,42 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_back"
             android:layout_marginTop="@dimen/padding_32dp"
-            android:padding="@dimen/padding_16dp">
+            android:padding="@dimen/padding_32dp">
             <EditText
                 android:id="@+id/txt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edittext_clear"
                 android:hint="Email Address"
                 android:textSize="@dimen/font16sp"
                 android:textColor="@color/white"
                 android:textColorHint="@android:color/darker_gray"
+                android:inputType="textEmailAddress"
                 android:imeOptions="actionNext"
                 local:MvxBind="Text Email; Typeface StringToFont('Bold_Cn')" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/padding_4dp" />
             <EditText
                 android:id="@+id/txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:background="@drawable/edittext_clear"
                 android:password="true"
                 android:textSize="@dimen/font16sp"
                 android:textColor="@color/white"
                 android:textColorHint="@android:color/darker_gray"
                 android:imeOptions="actionGo"
+                android:layout_marginTop="@dimen/padding_8dp"
                 local:MvxBind="Text Password; Typeface StringToFont('Bold_Cn')" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/padding_4dp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

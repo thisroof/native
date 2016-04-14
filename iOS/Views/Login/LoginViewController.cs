@@ -90,8 +90,6 @@ namespace ThisRoofN.iOS
 		{ 
 			base.ViewWillDisappear (animated);
 
-
-
 			if (moviePlayer != null) {
 				moviePlayer.Pause ();
 			}

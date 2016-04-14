@@ -62,4 +62,7 @@
         android:text="SIGN UP"
         android:layout_alignParentBottom="true"
         local:MvxBind="Click SignupCommand; Typeface Font('Bold_Cn')" />
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
 </RelativeLayout>

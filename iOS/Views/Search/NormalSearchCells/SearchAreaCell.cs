@@ -162,9 +162,9 @@ namespace ThisRoofN.iOS
 				view_locations.Hidden = true;
 			};
 
-			txt_address.EditingChanged += (object sender, EventArgs e) => {
-				masterView.ViewModelInstance.UpdateLocationsCommand.Execute (txt_address.Text);
-			};
+//			txt_address.EditingChanged += (object sender, EventArgs e) => {
+//				masterView.ViewModelInstance.UpdateLocationsCommand.Execute (txt_address.Text);
+//			};
 
 			// Bind Locatin Suggesion Table
 			var source = new LocationSuggestionTableViewSource (tbl_locations);

@@ -9,33 +9,33 @@ using System.CodeDom.Compiler;
 
 namespace ThisRoofN.iOS
 {
-	[Register ("SRTileImageCell")]
-	partial class SRTileImageCell
+	[Register ("SearchResultListViewCell")]
+	partial class SearchResultListViewCell
 	{
 		[Outlet]
-		MvvmCross.Binding.iOS.Views.MvxImageView img_item { get; set; }
+		MvvmCross.Binding.iOS.Views.MvxImageView img_property { get; set; }
+
+		[Outlet]
+		UIKit.UILabel lbl_price { get; set; }
 
 		[Outlet]
 		UIKit.UILabel lbl_title { get; set; }
-
-		[Outlet]
-		UIKit.UIView view_titleBack { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (img_item != null) {
-				img_item.Dispose ();
-				img_item = null;
+			if (img_property != null) {
+				img_property.Dispose ();
+				img_property = null;
+			}
+
+			if (lbl_price != null) {
+				lbl_price.Dispose ();
+				lbl_price = null;
 			}
 
 			if (lbl_title != null) {
 				lbl_title.Dispose ();
 				lbl_title = null;
-			}
-
-			if (view_titleBack != null) {
-				view_titleBack.Dispose ();
-				view_titleBack = null;
 			}
 		}
 	}

@@ -16,6 +16,7 @@ namespace ThisRoofN.iOS.Views
 	public partial class SearchResultHomeView : BaseViewController
 	{
 		private UIViewController tileVC;
+		private UIViewController listVC;
 		private UIViewController mapVC;
 		private int _curPage;
 
@@ -72,12 +73,26 @@ namespace ThisRoofN.iOS.Views
 			page_scroll.PagingEnabled = true;
 
 			tileVC = CreatePage (ViewModelInstance.TileViewModel);
+			listVC = CreatePage (ViewModelInstance.ListViewModel);
 			mapVC = CreatePage (ViewModelInstance.MapViewModel);
 
 			page_scroll.AddSubview (tileVC.View);
+			page_scroll.AddSubview (listVC.View);
 			page_scroll.AddSubview (mapVC.View);
 
-			SetSearchResultToolbar ();
+			btn_tile.TouchUpInside += (object sender, EventArgs e) => {
+				CurPage = 0;
+			};
+
+			btn_list.TouchUpInside += (object sender, EventArgs e) => {
+				CurPage = 1;
+			};
+
+			btn_map.TouchUpInside += (object sender, EventArgs e) => {
+				CurPage = 2;
+			};
+
+//			SetSearchResultToolbar ();
 
 			var bindingSet = this.CreateBindingSet<SearchResultHomeView, SearchResultHomeViewModel> ();
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
@@ -94,22 +109,20 @@ namespace ThisRoofN.iOS.Views
 
 			page_scroll.SetContentOffset (new CGPoint ((CurPage * UIScreen.MainScreen.Bounds.Width), 0), false);
 			this.NavigationController.SetNavigationBarHidden (false, true);
-			this.NavigationController.SetToolbarHidden (false, true);
+//			this.NavigationController.SetToolbarHidden (false, true);
 		}
 
 		public override void ViewDidLayoutSubviews ()
 		{
 			base.ViewDidLayoutSubviews ();
 			tileVC.View.Frame = new CGRect (0, 0, page_scroll.Frame.Width, page_scroll.Frame.Height);
-			mapVC.View.Frame = new CGRect (page_scroll.Frame.Width, 0, page_scroll.Frame.Width, page_scroll.Frame.Height);
+			listVC.View.Frame = new CGRect (page_scroll.Frame.Width, 0, page_scroll.Frame.Width, page_scroll.Frame.Height);
+			mapVC.View.Frame = new CGRect (page_scroll.Frame.Width * 2, 0, page_scroll.Frame.Width, page_scroll.Frame.Height);
 		}
 
 		private UIViewController CreatePage (IMvxViewModel viewModel)
 		{
-//			var controller = new UINavigationController ();
 			var screen = this.CreateViewControllerFor (viewModel) as UIViewController;
-//			controller.PushViewController (screen, false);
-//			controller.NavigationBarHidden = true;
 			return screen;
 		}
 

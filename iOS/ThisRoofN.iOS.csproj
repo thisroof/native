@@ -236,10 +236,6 @@
     <ImageAsset Include="Resources\Images.xcassets\icon_like_did.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_dislike.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_dislike_did.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_like.imageset\thumbs_up_white.png" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_like_did.imageset\thumbs_up_green.png" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_dislike.imageset\thumbs_dwn_white.png" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_dislike_did.imageset\thumbs_dwn_red.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_map_unlocked.imageset\map_control_unlocked.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_commit.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_commit.imageset\air_plane.png" />
@@ -305,6 +301,18 @@
     <ImageAsset Include="Resources\Images.xcassets\img_placeholder_small.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_placeholder_small.imageset\img_placeholder_small%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_placeholder_small.imageset\img_placeholder_small%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_right.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_arrow_right.imageset\ic_arrow_right_white_24dp.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_like_did.imageset\icon_like_set.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_like.imageset\icon_like.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_dislike_did.imageset\icon_dislike_set.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_dislike.imageset\icon_dislike.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_tab_tile.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_tab_tile.imageset\icon_tile.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_tab_map.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_tab_list.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_tab_list.imageset\icon_list.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_tab_map.imageset\icon_map.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -579,6 +587,14 @@
     <Compile Include="Views\Settings\SavedPropertyCell.cs" />
     <Compile Include="Views\Settings\SavedPropertyCell.designer.cs">
       <DependentUpon>SavedPropertyCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultListView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultListView.designer.cs">
+      <DependentUpon>SearchResultListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResult\SearchResultListViewCell.cs" />
+    <Compile Include="Views\SearchResult\SearchResultListViewCell.designer.cs">
+      <DependentUpon>SearchResultListViewCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

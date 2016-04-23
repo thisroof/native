@@ -9,6 +9,7 @@ using MvvmCross.Binding.BindingContext;
 using ThisRoofN.ViewModels;
 using CoreGraphics;
 using ThisRoofN.Helpers;
+using CoreAnimation;
 
 namespace ThisRoofN.iOS
 {
@@ -16,6 +17,7 @@ namespace ThisRoofN.iOS
 	{
 		private bool _isLoading;
 		public UIActivityIndicatorView spinner;
+
 		public SearchResultTileView (IntPtr handle) : base (handle)
 		{
 		}
@@ -29,7 +31,8 @@ namespace ThisRoofN.iOS
 		public bool IsLoading {
 			get {
 				return _isLoading;
-			} set {
+			}
+			set {
 				_isLoading = value;
 				if (value) {
 					spinner.StartAnimating ();
@@ -52,14 +55,14 @@ namespace ThisRoofN.iOS
 			cv_results.AlwaysBounceVertical = true;
 
 			nfloat width = (UIScreen.MainScreen.Bounds.Width - 4) / 3;
-			((UICollectionViewFlowLayout) cv_results.CollectionViewLayout).MinimumInteritemSpacing = 2.0f;
-			((UICollectionViewFlowLayout) cv_results.CollectionViewLayout).MinimumLineSpacing = 2.0f;
-			((UICollectionViewFlowLayout) cv_results.CollectionViewLayout).ItemSize = new CGSize (width, width);
+			((UICollectionViewFlowLayout)cv_results.CollectionViewLayout).MinimumInteritemSpacing = 2.0f;
+			((UICollectionViewFlowLayout)cv_results.CollectionViewLayout).MinimumLineSpacing = 2.0f;
+			((UICollectionViewFlowLayout)cv_results.CollectionViewLayout).ItemSize = new CGSize (width, width);
 
 			var bindingSet = this.CreateBindingSet<SearchResultTileView, SearchResultTileViewModel> ();
 			bindingSet.Bind (propertyTypeSource).To (vm => vm.TileItems);
-			bindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
-			bindingSet.Bind (this).For(i => i.IsLoading).To (vm => vm.SpinnerLoading);
+			bindingSet.Bind (loadingView).For (i => i.Hidden).To (vm => vm.IsHideLoading);
+			bindingSet.Bind (this).For (i => i.IsLoading).To (vm => vm.SpinnerLoading);
 			bindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
 			bindingSet.Apply ();
 		}
@@ -69,11 +72,11 @@ namespace ThisRoofN.iOS
 			base.ViewDidLayoutSubviews ();
 		}
 
-		public void ReloadData()
+		public void ReloadData ()
 		{
 			cv_results.ReloadData ();
 		}
-			
+
 		[Export ("collectionView:didSelectItemAtIndexPath:")]
 		public void ItemSelected (UIKit.UICollectionView collectionView, Foundation.NSIndexPath indexPath)
 		{
@@ -111,6 +114,7 @@ namespace ThisRoofN.iOS
 		public class TileCollectionViewSource : MvxCollectionViewSource
 		{
 			private SearchResultTileView masterViewInstance;
+
 			public TileCollectionViewSource (SearchResultTileView masterView, UICollectionView cv, NSString reuseIdentifier) : base (cv, reuseIdentifier)
 			{
 				masterViewInstance = masterView;
@@ -137,6 +141,7 @@ namespace ThisRoofN.iOS
 				SRTileImageCell cell = (SRTileImageCell)base.GetOrCreateCellFor (collectionView, indexPath, item);
 				cell.IVItem.ContentMode = UIViewContentMode.ScaleAspectFill;
 				cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder_small", "png");
+
 				return cell;
 			}
 		}

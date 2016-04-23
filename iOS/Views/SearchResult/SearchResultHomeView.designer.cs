@@ -1,13 +1,11 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Xamarin Studio Business to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace ThisRoofN.iOS.Views
 {
@@ -15,13 +13,37 @@ namespace ThisRoofN.iOS.Views
 	partial class SearchResultHomeView
 	{
 		[Outlet]
-		UIKit.UIScrollView page_scroll { get; set; }
+		UIKit.UIButton btn_list { get; set; }
 
+		[Outlet]
+		UIKit.UIButton btn_map { get; set; }
+
+		[Outlet]
+		UIKit.UIButton btn_tile { get; set; }
+
+		[Outlet]
+		UIKit.UIScrollView page_scroll { get; set; }
+		
 		void ReleaseDesignerOutlets ()
 		{
 			if (page_scroll != null) {
 				page_scroll.Dispose ();
 				page_scroll = null;
+			}
+
+			if (btn_list != null) {
+				btn_list.Dispose ();
+				btn_list = null;
+			}
+
+			if (btn_tile != null) {
+				btn_tile.Dispose ();
+				btn_tile = null;
+			}
+
+			if (btn_map != null) {
+				btn_map.Dispose ();
+				btn_map = null;
 			}
 		}
 	}

@@ -7,6 +7,8 @@ using UIKit;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
 using ThisRoofN.Models.App;
+using CoreAnimation;
+using CoreGraphics;
 
 namespace ThisRoofN.iOS
 {
@@ -19,14 +21,51 @@ namespace ThisRoofN.iOS
 			this.DelayBind (() => {
 				var set = this.CreateBindingSet<SRTileImageCell, TRCottageSimple>();
 				set.Bind(img_item).For(i => i.ImageUrl).To(vm => vm.PrimaryPhotoLink);
+				set.Bind(lbl_title).To(vm => vm.Title);
 				set.Apply();
 			});
+		}
+
+		public UIView ViewTitleBack
+		{
+			get {
+				return view_titleBack;
+			}
 		}
 
 		public MvxImageView IVItem
 		{
 			get {
 				return img_item;
+			}
+		}
+
+		public override void Draw (CoreGraphics.CGRect rect)
+		{
+			base.Draw (rect);
+
+			if (view_titleBack != null) {
+				CAGradientLayer gradient = new CAGradientLayer ();
+				gradient.NeedsDisplayOnBoundsChange = true;
+				gradient.Frame = new CGRect(0, 0, view_titleBack.Frame.Width, view_titleBack.Frame.Height);
+				gradient.Colors = new CGColor[] { UIColor.Clear.CGColor, UIColor.Black.ColorWithAlpha(0.5f).CGColor };
+				gradient.StartPoint = CGPoint.Empty;
+				gradient.EndPoint = new CGPoint (1, 1);
+
+				if (view_titleBack.Layer.Sublayers.Length > 1) {
+					view_titleBack.Layer.Sublayers [0].RemoveFromSuperLayer ();
+				}
+
+				view_titleBack.Layer.InsertSublayer (gradient, 0);
+			}
+		}
+
+		public override CoreGraphics.CGRect Frame {
+			get {
+				return base.Frame;
+			}
+			set {
+				base.Frame = value;
 			}
 		}
 	}

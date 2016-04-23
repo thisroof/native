@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_calc">
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="@dimen/padding_16dp">
+            <LinearLayout
+                android:id="@+id/layout_annual"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_marginTop="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Annual Payment"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font16sp"
+                    android:layout_gravity="center" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="horizontal"
+                    android:background="@drawable/edittext_gray"
+                    android:padding="@dimen/padding_8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:gravity="center"
+                        android:textColor="@color/TR_LIGHT_GRAY"
+                        android:textSize="@dimen/font24sp" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font24sp"
+                        android:text="111111"
+                        android:textColor="@color/TR_THEME_BLUE"
+                        android:maxLines="1"
+                        android:background="@color/white"
+                        android:layout_marginLeft="@dimen/padding_8dp"
+                        local:MvxBind="Text AnnualIncome" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_month"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_below="@+id/layout_annual"
+                android:layout_marginTop="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Monthly Debts"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font16sp"
+                    android:layout_gravity="center" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="horizontal"
+                    android:background="@drawable/edittext_gray"
+                    android:padding="@dimen/padding_8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:gravity="center"
+                        android:textColor="@color/TR_LIGHT_GRAY"
+                        android:textSize="@dimen/font24sp" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font24sp"
+                        android:text="111111"
+                        android:textColor="@color/TR_THEME_BLUE"
+                        android:maxLines="1"
+                        android:background="@color/white"
+                        android:layout_marginLeft="@dimen/padding_8dp"
+                        local:MvxBind="Text MonthlyDebts" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_down"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_below="@+id/layout_month"
+                android:layout_marginTop="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="DOWN PAYMENT"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font16sp"
+                    android:layout_gravity="center" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="horizontal"
+                    android:background="@drawable/edittext_gray"
+                    android:padding="@dimen/padding_8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:gravity="center"
+                        android:textColor="@color/TR_LIGHT_GRAY"
+                        android:textSize="@dimen/font24sp" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font24sp"
+                        android:text="111111"
+                        android:textColor="@color/TR_THEME_BLUE"
+                        android:maxLines="1"
+                        android:background="@color/white"
+                        android:layout_marginLeft="@dimen/padding_8dp"
+                        local:MvxBind="Text DownPayment" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/loan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_down"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOAN TERM"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font16sp"
+                    android:layout_marginTop="@dimen/padding_16dp" />
+                <SeekBar
+                    android:id="@+id/seekbar_bath"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_8dp"
+                    android:layout_marginBottom="@dimen/padding_4dp"
+                    local:MvxBind="Progress SelectedLoan; Max LoanOptionCount" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Any"
+                    android:textColor="@color/TR_DARK_GRAY"
+                    android:textSize="@dimen/font14sp"
+                    android:layout_gravity="center"
+                    local:MvxBind="Text LoanLabelText" />
+                <LinearLayout
+                    android:id="@+id/layout_tax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/checkbox_size"
+                        android:layout_height="@dimen/checkbox_size"
+                        android:src="@drawable/icon_checkbox_tick"
+                        android:layout_gravity="center"
+                        local:MvxBind="SourceResourceID CheckImage(IncludeTax)" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="INCLUDE TAX/INS"
+                        android:textColor="@color/TR_DARK_GRAY"
+                        android:textSize="@dimen/font14sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/padding_16dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tax"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_below="@+id/loan"
+                android:layout_marginTop="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="PROPERTY TAX"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font16sp"
+                    android:layout_gravity="center" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:background="@drawable/edittext_gray"
+                    android:padding="@dimen/padding_8dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/txt_hoaDue"
+                        android:textSize="@dimen/font24sp"
+                        android:text="111111"
+                        android:textColor="@color/TR_THEME_BLUE"
+                        android:maxLines="1"
+                        android:background="@color/white"
+                        android:layout_marginLeft="@dimen/padding_8dp"
+                        local:MvxBind="Text PropertyTax" />
+                    <TextView
+                        android:id="@+id/txt_hoaDue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/TR_LIGHT_GRAY"
+                        android:textSize="@dimen/font24sp" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/insurance"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_below="@+id/tax"
+                android:layout_marginTop="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="PROPERTY INSURANCE"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font16sp"
+                    android:layout_gravity="center" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:background="@drawable/edittext_gray"
+                    android:padding="@dimen/padding_8dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/txt_hoaDue"
+                        android:textSize="@dimen/font24sp"
+                        android:text="111111"
+                        android:textColor="@color/TR_THEME_BLUE"
+                        android:maxLines="1"
+                        android:background="@color/white"
+                        android:layout_marginLeft="@dimen/padding_8dp"
+                        local:MvxBind="Text PropertyInsurance" />
+                    <TextView
+                        android:id="@+id/txt_hoaDue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/yr"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/TR_LIGHT_GRAY"
+                        android:textSize="@dimen/font24sp" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/hoa"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_below="@+id/insurance"
+                android:layout_marginTop="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="HOA DUES"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font16sp"
+                    android:layout_gravity="center" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:background="@drawable/edittext_gray"
+                    android:padding="@dimen/padding_8dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/txt_hoaDue"
+                        android:textSize="@dimen/font24sp"
+                        android:text="111111"
+                        android:textColor="@color/TR_THEME_BLUE"
+                        android:maxLines="1"
+                        android:background="@color/white"
+                        android:layout_marginLeft="@dimen/padding_8dp"
+                        local:MvxBind="Text HoaDues" />
+                    <TextView
+                        android:id="@+id/txt_hoaDue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/mo"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/TR_LIGHT_GRAY"
+                        android:textSize="@dimen/font24sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+    <Button
+        style="@style/ActionButtonStyle"
+        android:id="@+id/btn_calc"
+        android:text="CALCULATE"
+        android:layout_alignParentBottom="true"
+        local:MvxBind="Click CalcCommand; Typeface Font('Bold_Cn')" />
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
+</RelativeLayout>

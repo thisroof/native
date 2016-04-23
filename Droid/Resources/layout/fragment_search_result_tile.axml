@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-    <TextView
+    <MvxGridView
+        android:id="@+id/itemGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/black"
-        android:text="TILE"
-        android:gravity="center" />
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:scrollbars="none"
+        local:MvxBind="ItemsSource TileItems; ItemClick DetailItemCommand;"
+        local:MvxItemTemplate="@layout/item_tile_property" />
 </LinearLayout>

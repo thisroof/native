@@ -51,4 +51,7 @@
             android:layout_marginTop="@dimen/padding_8dp"
             local:MvxBind="Click NormalSearchCommand; Typeface Font('Bold_Cn')" />
     </LinearLayout>
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
 </RelativeLayout>

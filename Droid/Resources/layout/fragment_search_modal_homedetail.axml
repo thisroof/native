@@ -52,4 +52,19 @@
         local:header="@layout/header_home_detail"
         local:MvxBind="ItemsSource Items; ItemClick ItemClickCommand;"
         local:MvxItemTemplate="@layout/item_checkbox" />
+    <SeekBar
+        android:id="@+id/seekbar_bath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_8dp"
+        android:layout_marginBottom="@dimen/padding_4dp"
+        local:MvxBind="Progress SelectedBath; Max BathOptionCount" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Any"
+        android:textColor="@color/TR_DARK_GRAY"
+        android:textSize="@dimen/font14sp"
+        android:layout_gravity="center"
+        local:MvxBind="Text BathLabelText" />
 </LinearLayout>

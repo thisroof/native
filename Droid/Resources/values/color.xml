@@ -6,8 +6,12 @@
 	<color name="TR_LIGHT_BLUE">#00a1ff</color>
 	<color name="TR_THEME_BLUE">#01ace4</color>
 
-	<color name="TR_DARK_GRAY">#757575</color>
-	<color name="TR_LIGHT_GRAY">#e0e0e0</color>
+	<color name="TR_NAVBAR_BLUE">#009ad7</color>
+	<color name="TR_TOOLBAR_BLUE">#0074be</color>
+
+	<color name="TR_DARK_GRAY">#333333</color>
+	<color name="TR_NORMAL_GRAY">#666666</color>
+	<color name="TR_LIGHT_GRAY">#b2b2b2</color>
 
 	<!--Defulat Colors-->
 	<color name="white">#ffffff</color>

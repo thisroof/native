@@ -10,22 +10,26 @@ using ThisRoofN.Helpers;
 using ThisRoofN.Models.Service;
 using ThisRoofN.Database;
 using ThisRoofN.Database.Entities;
+using MvvmCross.Platform;
+using ThisRoofN.Interfaces;
 
 namespace ThisRoofN.ViewModels
 {
 	public class SearchResultDetailViewModel : BaseViewModel
 	{
-		private TRCottageDetail itemDetail;
+		private CottageDetail detail;
 
 		private MvxCommand _descMoreCommand;
 		private MvxCommand _likeCommand;
 		private MvxCommand<bool> _showDislikeCommand;
 		private MvxCommand _dislikeCommand;
 		private MvxCommand _findAgentCommand;
+		private MvxCommand _doGotoMapCommand;
 
 		private bool _liked;
 		private bool _disliked;
 		private bool _isDislikeShown;
+		private IDevice deviceInfo;
 
 		public bool _tooFar { get; set; }
 
@@ -45,9 +49,36 @@ namespace ThisRoofN.ViewModels
 
 		public SearchResultDetailViewModel ()
 		{
-			itemDetail = DataHelper.SelectedCottageDetail;
-			_liked = itemDetail.Liked;
-			_disliked = itemDetail.Disliked;
+			deviceInfo = Mvx.Resolve<IDevice> ();
+		}
+
+		public void Init(int index, bool savedProperty)
+		{
+			propertyIndex = index;
+
+			InitDetail (savedProperty);
+		}
+
+		private async void InitDetail(bool savedProperty) {
+			if (savedProperty) {
+				RaisePropertyChanged (() => ItemDetail);
+			} else {
+				this.IsLoading = true;
+				this.LoadingText = "Loading Detail";
+				CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), DataHelper.SearchResults[propertyIndex].CottageID);
+
+				DataHelper.SelectedCottage =  DataHelper.SearchResults[propertyIndex];
+				DataHelper.SelectedCottageDetail = new TRCottageDetail (detail,  DataHelper.SearchResults[propertyIndex]);
+
+				imageIndex = 0;
+
+				this.IsLoading = false;
+				RaisePropertyChanged (() => ItemDetail);
+			}
+
+			Liked = ItemDetail.Liked;
+			Disliked = ItemDetail.Disliked;
+
 		}
 
 		#region Reject Reason Properties
@@ -120,12 +151,8 @@ namespace ThisRoofN.ViewModels
 
 		public TRCottageDetail ItemDetail {
 			get {
-				return itemDetail;
+				return DataHelper.SelectedCottageDetail;
 			} 
-			set {
-				itemDetail = value;
-				RaisePropertyChanged (() => ItemDetail);
-			}
 		}
 
 		public ICommand FindAgentCommand {
@@ -157,6 +184,98 @@ namespace ThisRoofN.ViewModels
 				return _dislikeCommand;
 			}
 		}
+
+		public ICommand GotoMap {
+			get {
+				_doGotoMapCommand = _doGotoMapCommand ?? new MvxCommand (DoGotoMap);
+				return _doGotoMapCommand;
+			}
+		}
+
+		private MvxCommand<bool> _nextImageCommand;
+		public ICommand NextImageCommand {
+			get {
+				_nextImageCommand = _nextImageCommand ?? new MvxCommand<bool> (DoNextImage);
+				return _nextImageCommand;
+			}
+		}
+
+		private int imageIndex;
+		public int ImageIndex 
+		{
+			get {
+				return imageIndex;
+			} set {
+				imageIndex = value;
+				RaisePropertyChanged (() => ImageIndex);
+			}
+		}
+
+		private void DoNextImage(bool isNext)
+		{
+			if (isNext) {
+				if (ImageIndex < ItemDetail.Photos.Count - 1) {
+					ImageIndex++;
+				} else {
+					ImageIndex = 0;
+				}
+			} else {
+				if (ImageIndex == 0) {
+					ImageIndex = ItemDetail.Photos.Count - 1;
+				} else {
+					ImageIndex--;
+				}
+			}
+
+			RaisePropertyChanged (() => ImageLink);
+		}
+
+		private MvxCommand<bool> _nextPropertyCommand;
+		public ICommand NextPropertyCommand {
+			get {
+				_nextPropertyCommand = _nextPropertyCommand ?? new MvxCommand<bool> (DoNextProperty);
+				return _nextPropertyCommand;
+			}
+		}
+
+		private int propertyIndex;
+		public int PropertyIndex 
+		{
+			get {
+				return propertyIndex;
+			} set {
+				propertyIndex = value;
+				RaisePropertyChanged (() => PropertyIndex);
+			}
+		}
+
+		private void DoNextProperty(bool isNext)
+		{
+			if (isNext) {
+				if (PropertyIndex < DataHelper.SearchResults.Count - 1) {
+					PropertyIndex++;
+				} else {
+					PropertyIndex = 0;
+				}
+			} else {
+				if (PropertyIndex == 0) {
+					PropertyIndex = DataHelper.SearchResults.Count - 1;
+				} else {
+					PropertyIndex--;
+				}
+			}
+
+			InitDetail (false);
+			RaisePropertyChanged (() => ItemDetail);
+		}
+
+		public string ImageLink 
+		{
+			get {
+				return ItemDetail.Photos [ImageIndex].MediaURL;
+			}
+		}
+
 
 		public bool IsDislikeHidden {
 			get {
@@ -201,9 +320,9 @@ namespace ThisRoofN.ViewModels
 			if (_liked) {
 				this.IsLoading = true;
 				this.LoadingText = "Clearing Like";
-				if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), true, itemDetail.CottageID)) {
+				if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), true, ItemDetail.CottageID)) {
 					Liked = false;
-					TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), itemDetail.CottageID);
+					TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), ItemDetail.CottageID);
 				} 
 				this.IsLoading = false;
 			} else {
@@ -212,7 +331,7 @@ namespace ThisRoofN.ViewModels
 				CottageLikeRequest request = new CottageLikeRequest () {
 					UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 					DeviceID = mDeviceInfo.GetUniqueIdentifier (),
-					PropertyID = itemDetail.CottageID,
+					PropertyID = ItemDetail.CottageID,
 					Like = "1"
 				};
 
@@ -230,10 +349,10 @@ namespace ThisRoofN.ViewModels
 						UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 						PropertyID = info.PropertyID,
 						LikeDislike = true,
-						Price = itemDetail.Price,
-						PrimaryPhotoURL = itemDetail.PrimaryPhotoLink,
-						Address = itemDetail.Address.FullStreetAddress,
-						CityStateZip = itemDetail.FormattedCityStateZip
+						Price = ItemDetail.Price,
+						PrimaryPhotoURL = ItemDetail.PrimaryPhotoLink,
+						Address = ItemDetail.Address.FullStreetAddress,
+						CityStateZip = ItemDetail.FormattedCityStateZip
 					};
 
 					TRDatabase.Instance.SaveItem (likeData);
@@ -253,7 +372,7 @@ namespace ThisRoofN.ViewModels
 			CottageLikeInfo likeInfo = await mTRService.DislikeCottage (new CottageDislikeRequest () {
 				UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 				DeviceID = mDeviceInfo.GetUniqueIdentifier (),
-				PropertyID = itemDetail.CottageID,
+				PropertyID = ItemDetail.CottageID,
 				Like = "0",
 				RejectReason = "Rejected",
 				TooFar = this.TooFar,
@@ -274,10 +393,10 @@ namespace ThisRoofN.ViewModels
 					UserID = mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0),
 					PropertyID = likeInfo.PropertyID,
 					LikeDislike = false,
-					Price = itemDetail.Price,
-					PrimaryPhotoURL = itemDetail.PrimaryPhotoLink,
-					Address = itemDetail.Address.FullStreetAddress,
-					CityStateZip = itemDetail.FormattedCityStateZip
+					Price = ItemDetail.Price,
+					PrimaryPhotoURL = ItemDetail.PrimaryPhotoLink,
+					Address = ItemDetail.Address.FullStreetAddress,
+					CityStateZip = ItemDetail.FormattedCityStateZip
 				};
 
 				TRDatabase.Instance.SaveItem (likeData);
@@ -287,9 +406,9 @@ namespace ThisRoofN.ViewModels
 			Disliked = true;
 			this.IsDislikeShown = false;
 
-			DataHelper.SearchResults.Remove (DataHelper.SearchResults.Where (i => i.CottageID == itemDetail.CottageID).FirstOrDefault());
+			DataHelper.SearchResults.Remove (DataHelper.SearchResults.Where (i => i.CottageID == ItemDetail.CottageID).FirstOrDefault());
 
-			Close (this);
+//			Close (this);
 		}
 
 		private async void DoShowDislikeDialog (bool isShow)
@@ -298,9 +417,9 @@ namespace ThisRoofN.ViewModels
 				if (_disliked) {
 					this.IsLoading = true;
 					this.LoadingText = "Clearing Dislike";
-					if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false, itemDetail.CottageID)) {
+					if (await mTRService.ClearLikeDislike (mDeviceInfo.GetUniqueIdentifier (), mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), false, ItemDetail.CottageID)) {
 						Disliked = false;
-						TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), itemDetail.CottageID);
+						TRDatabase.Instance.RemoveCottageLikeInfo (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0), ItemDetail.CottageID);
 					} 
 
 					this.IsLoading = false;
@@ -310,6 +429,11 @@ namespace ThisRoofN.ViewModels
 			} else {
 				IsDislikeShown = false;
 			}
+		}
+
+		private void DoGotoMap()
+		{
+			ShowViewModel<SearchResultDetailMapViewModel> ();
 		}
 	}
 }

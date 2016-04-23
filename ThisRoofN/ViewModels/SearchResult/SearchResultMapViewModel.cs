@@ -45,16 +45,20 @@ namespace ThisRoofN.ViewModels
 
 		private async void GotoDetail (string propertyID)
 		{
-			this.IsLoading = true;
-			this.LoadingText = "Loading Detail";
-			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
+			int index = DataHelper.SearchResults.FindIndex (a => a.CottageID == propertyID);
 
-			DataHelper.SelectedCottage = DataHelper.SearchResults.Find (i => i.CottageID == propertyID);
-			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail,  DataHelper.SelectedCottage);
-
-			this.IsLoading = false;
-
-			ShowViewModel<SearchResultDetailViewModel> ();
+			ShowViewModel<SearchResultDetailViewModel> (new {index = index, propertyID = propertyID});
+//
+//			this.IsLoading = true;
+//			this.LoadingText = "Loading Detail";
+//			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
+//
+//			DataHelper.SelectedCottage = DataHelper.SearchResults.Find (i => i.CottageID == propertyID);
+//			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail,  DataHelper.SelectedCottage);
+//
+//			this.IsLoading = false;
+//
+//			ShowViewModel<SearchResultDetailViewModel> ();
 		}
 
 	}

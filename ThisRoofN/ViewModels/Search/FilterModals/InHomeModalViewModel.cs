@@ -49,6 +49,19 @@ namespace ThisRoofN
 				return _items;
 			}
 		}
+
+		private MvxCommand<CheckboxItemModel> _itemClickCommand;
+
+		public ICommand ItemClickCommand {
+			get {
+				_itemClickCommand = _itemClickCommand ?? new MvxCommand<CheckboxItemModel> (DoItemSelect);
+				return _itemClickCommand;
+			}
+		}
+
+		private void DoItemSelect(CheckboxItemModel item) {
+			item.Selected = !item.Selected;
+		}
 	}
 }
 

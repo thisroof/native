@@ -11,10 +11,11 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using MvvmCross.Binding.Droid.BindingContext;
 
 namespace ThisRoofN.Droid
 {
-	public class SearchResultTileView : Fragment
+	public class SearchResultTileView : BaseMvxFragment
 	{
 		public override void OnCreate (Bundle savedInstanceState)
 		{
@@ -28,7 +29,10 @@ namespace ThisRoofN.Droid
 			// Use this to return your custom view for this Fragment
 			// return inflater.Inflate(Resource.Layout.YourFragment, container, false);
 
-			return base.OnCreateView (inflater, container, savedInstanceState);
+			base.OnCreateView (inflater, container, savedInstanceState);
+
+			View view = this.BindingInflate (Resource.Layout.fragment_search_result_tile, null);
+			return view;
 		}
 	}
 }

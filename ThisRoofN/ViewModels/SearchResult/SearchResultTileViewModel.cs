@@ -15,6 +15,7 @@ namespace ThisRoofN.ViewModels
 	public class SearchResultTileViewModel : BaseViewModel
 	{
 		private MvxCommand<int> _detailCommand;
+		private MvxCommand<TRCottageSimple> _detailItemCommand;
 		private MvxCommand _loadMoreCommand;
 		private IDevice deviceInfo;
 
@@ -35,6 +36,13 @@ namespace ThisRoofN.ViewModels
 			get {
 				_detailCommand = _detailCommand ?? new MvxCommand<int> (GotoDetail);
 				return _detailCommand;
+			}
+		}
+
+		public ICommand DetailItemCommand {
+			get {
+				_detailItemCommand = _detailItemCommand ?? new MvxCommand<TRCottageSimple> (GotoDetailItem);
+				return _detailItemCommand;
 			}
 		}
 
@@ -70,6 +78,14 @@ namespace ThisRoofN.ViewModels
 			ShowViewModel<SearchResultDetailViewModel> ();
 		}
 
+		private async void GotoDetailItem (TRCottageSimple item)
+		{
+			string propertyID =  item.CottageID;
+			int index = DataHelper.SearchResults.FindIndex (a => a.CottageID == propertyID);
+
+			ShowViewModel<SearchResultDetailViewModel> (new {index = index, propertyID = propertyID});
+		}
+
 		private async void LoadMore() {
 			if (DataHelper.TotalLoadedCount < 24) {
 				return;
@@ -86,6 +102,8 @@ namespace ThisRoofN.ViewModels
 				new TRCottageSimple () {
 					CottageID = i.ID,
 					PrimaryPhotoLink = (i.Photos != null) ? i.Photos.FirstOrDefault ().MediaURL : string.Empty,
+					Title = i.Title,
+					Price = i.Price,
 					Latitude = i.Latitude,
 					Longitude = i.Longitude,
 				}).ToList ();

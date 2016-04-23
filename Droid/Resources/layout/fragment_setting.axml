@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_splash" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_16dp"
+            android:background="@color/TR_LIGHT_BLUE">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SETTINGS"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font24sp"
+                local:MvxBind="Typeface Font('Bold')" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_40">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MY ACCOUNT"
+                    android:textSize="@dimen/font16sp"
+                    android:textColor="@color/TR_LIGHT_BLUE" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/TR_LIGHT_BLUE" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Saved Properties"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click SavedPropertyCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MORE INFORMATION"
+                    android:textSize="@dimen/font16sp"
+                    android:textColor="@color/TR_LIGHT_BLUE"
+                    android:layout_marginTop="@dimen/padding_16dp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/TR_LIGHT_BLUE" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Support"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click SupportCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Privacy Policy"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click PrivacyCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Terms of Use"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click TermsCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Licenses"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click LicenseCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ACCOUNT ACTIONS"
+                    android:textSize="@dimen/font16sp"
+                    android:textColor="@color/TR_LIGHT_BLUE"
+                    android:layout_marginTop="@dimen/padding_16dp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/TR_LIGHT_BLUE" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Clear Like Properties"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click ClearLikeCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Clear Thumbs Down Properties"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click ClearDislikeCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Enable All Tutorials"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click EnableAllTutorialCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="@dimen/font16sp"
+                    android:gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Log out"
+                    android:textColor="@color/white"
+                    local:MvxBind="Click LogoutCommand" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
+</RelativeLayout>

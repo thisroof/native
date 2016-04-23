@@ -17,6 +17,7 @@ namespace ThisRoofN.ViewModels
 	{
 		private IDevice deviceInfo;
 		private MvxCommand<int> _detailCommand;
+		private MvxCommand<TREntityLikes> _detailItemCommand;
 		private MvxCommand _reloadDataCommand;
 		private List<TREntityLikes> savedProperties;
 
@@ -43,6 +44,13 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+		public ICommand DetailItemCommand {
+			get {
+				_detailItemCommand = _detailItemCommand ?? new MvxCommand<TREntityLikes> (GotoDetailItem);
+				return _detailItemCommand;
+			}
+		}
+
 		private void DoReloadData() {
 			SavedProperties = TRDatabase.Instance.GetCottageLikedList (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0));
 			if (SavedProperties.Count == 0) {
@@ -65,6 +73,20 @@ namespace ThisRoofN.ViewModels
 			ShowViewModel<SearchResultDetailViewModel> ();
 		}
 
+		private async void GotoDetailItem(TREntityLikes item)
+		{
+			string propertyID =  item.PropertyID;
+
+			this.IsLoading = true;
+			this.LoadingText = "Loading Detail";
+			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
+
+			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
+
+			this.IsLoading = false;
+
+			ShowViewModel<SearchResultDetailViewModel> (new {index = 0, savedProperty = true});
+		}
 
 		public List<TREntityLikes> SavedProperties 
 		{

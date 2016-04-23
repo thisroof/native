@@ -25,7 +25,7 @@ namespace ThisRoofN.Droid.CustomControls.TRSlidingTab
 		private int mSelectedPosition;
 		private float mSelectionOffset;
 
-		private TRSlidingTabLayout.TabColorizer mCustomTabColorizer;
+		private TabColorizer mCustomTabColorizer;
 		private SimpleTabColorizer mDefaultTabColorizer;
 
 		public TRSlidingTabStrip(Context context, IAttributeSet attrs) : base(context, attrs) {
@@ -48,7 +48,7 @@ namespace ThisRoofN.Droid.CustomControls.TRSlidingTab
 			mSelectedIndicatorPaint = new Paint ();
 		}
 
-		public void SetCustomTabColorizer(TRSlidingTabLayout.TabColorizer customTabColorizer) {
+		public void SetCustomTabColorizer(TabColorizer customTabColorizer) {
 			mCustomTabColorizer = customTabColorizer;
 			Invalidate ();
 		}
@@ -69,7 +69,7 @@ namespace ThisRoofN.Droid.CustomControls.TRSlidingTab
 		{
 			int height = Height;
 			int childCount = ChildCount;
-			TRSlidingTabLayout.TabColorizer tabColorizer = mCustomTabColorizer != null
+			TabColorizer tabColorizer = mCustomTabColorizer != null
 				? mCustomTabColorizer 
 				: mDefaultTabColorizer;
 
@@ -115,7 +115,7 @@ namespace ThisRoofN.Droid.CustomControls.TRSlidingTab
 			return Color.Rgb ((int)r, (int)g, (int)b);
 		}
 
-		public class SimpleTabColorizer : TRSlidingTabLayout.TabColorizer {
+		public class SimpleTabColorizer : TabColorizer {
 			private int[] mIndicatorColors;
 
 			public int GetIndicatorColor(int position) {

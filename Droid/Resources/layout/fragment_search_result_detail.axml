@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white">
+            <ThisRoofN.Droid.CustomControls.ScreenHeightRelativeLayout
+                android:id="@+id/mainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+                <MvxImageView
+                    android:src="@drawable/img_splash"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/layout_count"
+                    local:MvxBind="ImageUrl ImageLink" />
+                <LinearLayout
+                    android:id="@+id/layout_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_back_vice"
+                    android:padding="@dimen/padding_16dp"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/toolbar_top_padding">
+                        <ImageView
+                            android:id="@+id/img_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_left_white_24dp" />
+                        <ImageView
+                            android:id="@+id/img_share"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/img_like"
+                            android:src="@drawable/icon_share" />
+                        <ImageView
+                            android:id="@+id/img_like"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/img_dislike"
+                            android:src="@drawable/icon_like"
+                            android:layout_marginLeft="@dimen/padding_16dp"
+                            local:MvxBind="SourceResourceID LikeImage(Liked)" />
+                        <ImageView
+                            android:id="@+id/img_dislike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/icon_dislike"
+                            android:layout_marginLeft="@dimen/padding_16dp"
+                            local:MvxBind="SourceResourceID DislikeImage(Disliked)" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layout_top"
+                    android:layout_above="@+id/layout_price">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/padding_4dp"
+                        android:src="@drawable/ic_arrow_left_white_24dp" />
+                    <ImageView
+                        android:id="@+id/iv_nextImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/padding_4dp"
+                        android:src="@drawable/ic_arrow_right_white_24dp" />
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/layout_price"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_back"
+                    android:layout_above="@+id/layout_count"
+                    android:padding="@dimen/padding_16dp"
+                    android:weightSum="10">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font24sp"
+                            android:text="$1,184,654"
+                            local:MvxBind="Text ItemDetail.FormattedPrice; Typeface StringToFont('Bold_Cn')" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font16sp"
+                            android:text="20 Via Encantor, Rancho Sanata Magarita"
+                            android:layout_marginTop="@dimen/padding_8dp"
+                            local:MvxBind="Text ItemDetail.FormattedCityStateZip; Typeface StringToFont('Thin')" />
+                    </LinearLayout>
+                    <ThisRoofN.Droid.SquareRelativeLayout
+                        android:id="@+id/layout_smallMap"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="2"
+                        android:background="@android:color/background_light">
+                        <fragment
+                            android:id="@+id/small_map"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            class="com.google.android.gms.maps.SupportMapFragment" />
+                        <Button
+                            android:id="@+id/btn_map"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent" />
+                    </ThisRoofN.Droid.SquareRelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_count"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/layout_switch"
+                    android:background="@color/black"
+                    android:weightSum="10"
+                    android:padding="@dimen/padding_16dp">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_bed" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font20sp"
+                                android:text="4"
+                                android:layout_marginLeft="@dimen/padding_8dp"
+                                local:MvxBind="Text ItemDetail.Bedrooms;" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_bath" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font20sp"
+                                android:text="2"
+                                android:layout_marginLeft="@dimen/padding_8dp"
+                                local:MvxBind="Text ItemDetail.Bathrooms;" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_sqft" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font20sp"
+                                android:text="1001"
+                                android:layout_marginLeft="@dimen/padding_8dp"
+                                local:MvxBind="Text ItemDetail.LotSquareSize;" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TR_NORMAL_GRAY"
+                    android:padding="@dimen/padding_16dp"
+                    android:layout_above="@+id/btn_connectAgent">
+                    <ImageView
+                        android:id="@+id/img_previous"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_left_white_24dp" />
+                    <TextView
+                        android:id="@+id/txt_prevProperty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font14sp"
+                        android:text="PREVIOUS HOME"
+                        android:layout_toRightOf="@+id/img_previous"
+                        android:layout_marginLeft="@dimen/padding_8dp"
+                        android:layout_centerVertical="true" />
+                    <ImageView
+                        android:id="@+id/img_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_arrow_right_white_24dp" />
+                    <TextView
+                        android:id="@+id/txt_nextProperty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font14sp"
+                        android:text="NEXT HOME"
+                        android:layout_toLeftOf="@+id/img_next"
+                        android:layout_marginRight="@dimen/padding_8dp"
+                        android:layout_centerVertical="true" />
+                </RelativeLayout>
+                <Button
+                    style="@style/ActionButtonStyle"
+                    android:id="@+id/btn_connectAgent"
+                    android:text="BUY THIS PROPERTY"
+                    android:textSize="@dimen/font20sp"
+                    android:layout_alignParentBottom="true"
+                    local:MvxBind="Click LoginCommand; Typeface Font('Bold')" />
+            </ThisRoofN.Droid.CustomControls.ScreenHeightRelativeLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_16dp"
+                    android:background="@color/TR_LIGHT_GRAY">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="test description"
+                        android:textColor="@color/white"
+                        local:MvxBind="Text ItemDetail.Description;" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TR_LIGHT_GRAY"
+                    android:padding="@dimen/padding_16dp"
+                    android:layout_marginTop="@dimen/padding_8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="STATUS"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="FOR SALE"
+                        android:textSize="@dimen/font20sp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/padding_8dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TR_LIGHT_GRAY"
+                    android:padding="@dimen/padding_16dp"
+                    android:layout_marginTop="@dimen/padding_8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TYPE"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Condominimum"
+                        android:textSize="@dimen/font20sp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/padding_8dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TR_LIGHT_GRAY"
+                    android:padding="@dimen/padding_16dp"
+                    android:layout_marginTop="@dimen/padding_8dp"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="YEAR BUILT"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1994"
+                            android:textSize="@dimen/font20sp"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="@dimen/padding_8dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DAYS ON MARKET"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="21"
+                            android:textSize="@dimen/font20sp"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="@dimen/padding_8dp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TR_LIGHT_GRAY"
+                    android:padding="@dimen/padding_16dp"
+                    android:layout_marginTop="@dimen/padding_8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="LISTED BY"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Agent Name"
+                        android:textSize="@dimen/font20sp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/padding_8dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TR_LIGHT_GRAY"
+                    android:padding="@dimen/padding_16dp"
+                    android:layout_marginTop="@dimen/padding_8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="MLS NUMBER"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0123456789"
+                        android:textSize="@dimen/font20sp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/padding_8dp" />
+                </LinearLayout>
+                <Button
+                    style="@style/ActionButtonStyle"
+                    android:text="Agent Information"
+                    android:textSize="@dimen/font20sp"
+                    android:layout_marginTop="@dimen/padding_16dp"
+                    local:MvxBind="Click LoginCommand; Typeface Font('Bold')" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
+</RelativeLayout>

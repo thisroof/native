@@ -209,18 +209,63 @@ namespace ThisRoofN.ViewModels
 				}
 			} else {	
 				List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
+//				List<CottageSimple> searchResults = new List<CottageSimple> () {
+//					new CottageSimple() {
+//						ID = "3yd-NTREIS-13112793",
+//						Price = 11500,
+//						Title = "RES-Single Family - Bells, TX",
+//						Latitude = 33.6154,
+//						Longitude  = -96.4114573969704,
+//						Photos = new List<CottagePhoto>() {
+//							new CottagePhoto() {
+//								MediaURL = "http://photos.listhub.net/NTREIS/13112793/1?lm=20150321T002918",
+//								ModificationTime = "2015-03-21T00:29:18+00:00",
+//							},
+//							new CottagePhoto() {
+//								MediaURL = "http://photos.listhub.net/NTREIS/13112793/2?lm=20150321T002918",
+//								ModificationTime = "2015-03-21T00:29:18+00:00"
+//							},
+//						}
+//					},
+//					new CottageSimple() {
+//						ID = "3yd-TBROK-17401",
+//						Price = 138000,
+//						Title = "Residential - Kingston, OK",
+//						Latitude = 33.8514,
+//						Longitude  = -96.7498,
+//						Photos = new List<CottagePhoto>() {
+//							new CottagePhoto() {
+//								MediaURL = "http://photos.listhub.net/TBROK/17401/1?lm=20151003T051753",
+//								ModificationTime = "2015-03-21T00:29:18+00:00",
+//							},
+//							new CottagePhoto() {
+//								MediaURL = "http://photos.listhub.net/TBROK/17401/2?lm=20151003T051753",
+//								ModificationTime = "2015-03-21T00:29:18+00:00"
+//							},
+//							new CottagePhoto() {
+//								MediaURL = "http://photos.listhub.net/TBROK/17401/3?lm=20151003T051753",
+//								ModificationTime = "2015-03-21T00:29:18+00:00"
+//							},
+//						}
+//					}
+//				};
+
+
 				DataHelper.TotalLoadedCount = searchResults.Count;
 				if (searchResults != null) {
 					DataHelper.SearchResults = searchResults.Select (i =>
 							new TRCottageSimple () {
 						CottageID = i.ID,
 						PrimaryPhotoLink = (i.Photos != null) ? i.Photos.FirstOrDefault ().MediaURL : string.Empty,
+						Title = i.Title,
+						Price = i.Price,
 						Latitude = i.Latitude,
 						Longitude = i.Longitude,
 					}).ToList ();
 
 					if (DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.Commute) {
-						DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
+						DataHelper.SearchMapRange = null;
+//						DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
 					} else {
 						DataHelper.SearchMapRange = null;
 					}

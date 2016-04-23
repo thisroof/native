@@ -13,6 +13,8 @@ using Android.Widget;
 using MvvmCross.Binding.Droid.BindingContext;
 using Android.Media;
 using ThisRoofN.Droid.Helpers;
+using Android.Webkit;
+using Android.Graphics;
 
 namespace ThisRoofN.Droid
 {
@@ -32,6 +34,13 @@ namespace ThisRoofN.Droid
 
 			View view = this.BindingInflate (Resource.Layout.fragment_search_type, null);
 
+			WebView gifWebView = view.FindViewById<WebView> (Resource.Id.gifWebView);
+			if (gifWebView != null) {
+				gifWebView.LoadUrl ("file:///android_res/raw/animator.html");
+				gifWebView.SetBackgroundColor (Color.Transparent);
+				gifWebView.SetLayerType (LayerType.Software, null);
+			}
+
 			var videoView = view.FindViewById<VideoView> (Resource.Id.view_video);
 			ISurfaceHolder holder = videoView.Holder;
 			holder.AddCallback (this);
@@ -47,17 +56,20 @@ namespace ThisRoofN.Droid
 			homeView.ToolbarManager.SetToolbarType (ToolbarHelper.ToolbarType.None);
 		}
 
-		public override void OnPause ()
+		public override void OnStop ()
 		{
-			base.OnPause ();
+			base.OnStop ();
 
-			if (mediaPlayer.IsPlaying == true)
-			{
-				mediaPlayer.Stop();
+			if (mediaPlayer != null) {
+				if (mediaPlayer.IsPlaying == true)
+				{
+					mediaPlayer.Stop();
+				}
+
+				mediaPlayer.SetDisplay(null);
+				mediaPlayer.Release();
+				mediaPlayer = null;
 			}
-
-			mediaPlayer.SetDisplay(null);
-			mediaPlayer.Release();
 		}
 
 		public void OnPrepared(MediaPlayer player)

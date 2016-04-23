@@ -150,13 +150,16 @@ namespace ThisRoofN.Droid
 		public override void OnStop ()
 		{
 			base.OnStop ();
-			if (mediaPlayer.IsPlaying == true)
-			{
-				mediaPlayer.Stop();
-			}
+			if (mediaPlayer != null) {
+				if (mediaPlayer.IsPlaying == true)
+				{
+					mediaPlayer.Stop();
+				}
 
-			mediaPlayer.SetDisplay(null);
-			mediaPlayer.Release();
+				mediaPlayer.SetDisplay(null);
+				mediaPlayer.Release();
+				mediaPlayer = null;
+			}
 		}
 
 		#region Video Callbacks
@@ -201,7 +204,6 @@ namespace ThisRoofN.Droid
 			{
 				string email = response.JSONObject.GetString("email");
 				Console.Write (email);
-				UserDialogs.Instance.Alert ("Success");
 				FBUserInfo userInfo = new FBUserInfo () {
 					UserEmail = email,
 					UserID = AccessToken.CurrentAccessToken.UserId,

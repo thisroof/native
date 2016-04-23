@@ -15,6 +15,9 @@ using MvvmCross.Binding.Droid.BindingContext;
 using RangeSlider;
 using ThisRoofN.Droid.Helpers;
 using ThisRoofN.ViewModels;
+using Android.Webkit;
+using Android.Graphics;
+using ThisRoofN.Droid.CustomControls;
 
 namespace ThisRoofN.Droid
 {
@@ -45,6 +48,13 @@ namespace ThisRoofN.Droid
 		{
 			base.OnCreateView (inflater, container, savedInstanceState);
 			View view = this.BindingInflate (Resource.Layout.fragment_search_main, null);
+
+			WebView gifWebView = view.FindViewById<WebView> (Resource.Id.gifWebView);
+			if (gifWebView != null) {
+				gifWebView.LoadUrl ("file:///android_res/raw/animator.html");
+				gifWebView.SetBackgroundColor (Color.Transparent);
+				gifWebView.SetLayerType (LayerType.Software, null);
+			}
 
 			RangeSliderView priceRangeSlider = view.FindViewById<RangeSliderView> (Resource.Id.price_rangeslider);
 			priceRangeSlider.MinValue = 0;
@@ -90,6 +100,12 @@ namespace ThisRoofN.Droid
 
 			HomeView homeView = (HomeView)Activity;
 			homeView.ToolbarManager.SetToolbarType (ToolbarHelper.ToolbarType.Visible);
+			homeView.ToolbarManager.RightButtonAction = RightBarClicked;
+		}
+
+		private void RightBarClicked ()
+		{
+			ViewModelInstance.SettingCommand.Execute (null);
 		}
 	}
 }

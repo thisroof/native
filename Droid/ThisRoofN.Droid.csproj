@@ -36,42 +36,19 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="MvvmCross.Platform.Droid">
-      <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Platform.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Platform">
-      <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Droid">
-      <HintPath>..\packages\MvvmCross.Core.4.0.0\lib\MonoAndroid\MvvmCross.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Core">
-      <HintPath>..\packages\MvvmCross.Core.4.0.0\lib\MonoAndroid\MvvmCross.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Binding.Droid">
-      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Binding.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Binding">
-      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Binding.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Localization.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Android.Export" />
     <Reference Include="Splat">
       <HintPath>..\packages\Splat.1.6.2\lib\monoandroid\Splat.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="GeoJSON.Net">
-      <HintPath>..\packages\GeoJSON.Net.0.1.45\lib\portable-net40+sl5+wp80+win8+wpa81\GeoJSON.Net.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\monoandroid\System.Net.Http.Primitives.dll</HintPath>
@@ -115,9 +92,6 @@
     </Reference>
     <Reference Include="MvvmCross.Droid.Support.V7.AppCompat">
       <HintPath>..\packages\MvvmCross.Droid.Support.V7.AppCompat.4.0.2\lib\MonoAndroid403\MvvmCross.Droid.Support.V7.AppCompat.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\packages\Xamarin.Insights.1.11.4\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
     </Reference>
     <Reference Include="Bolts.Tasks">
       <HintPath>..\packages\Bolts.1.3.0\lib\MonoAndroid403\Bolts.Tasks.dll</HintPath>
@@ -176,12 +150,6 @@
     <Reference Include="Xamarin.GooglePlayServices.Location">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Location.29.0.0.1\lib\MonoAndroid41\Xamarin.GooglePlayServices.Location.dll</HintPath>
     </Reference>
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
-    </Reference>
-    <Reference Include="OkHttp">
-      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Facebook">
       <HintPath>..\packages\Xamarin.Facebook.Android.4.10.0.0\lib\MonoAndroid403\Xamarin.Facebook.dll</HintPath>
     </Reference>
@@ -190,6 +158,45 @@
     </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Ads">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Ads.29.0.0.1\lib\MonoAndroid41\Xamarin.GooglePlayServices.Ads.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="OkHttp">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="UrlImageViewHelper">
+      <HintPath>..\Components\urlimageviewhelper-1.0.4.1\lib\android\UrlImageViewHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform.Droid">
+      <HintPath>..\packages\MvvmCross.Platform.4.1.4\lib\MonoAndroid\MvvmCross.Platform.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform">
+      <HintPath>..\packages\MvvmCross.Platform.4.1.4\lib\MonoAndroid\MvvmCross.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Droid">
+      <HintPath>..\packages\MvvmCross.Core.4.1.4\lib\MonoAndroid\MvvmCross.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Core">
+      <HintPath>..\packages\MvvmCross.Core.4.1.4\lib\MonoAndroid\MvvmCross.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding.Droid">
+      <HintPath>..\packages\MvvmCross.Binding.4.1.4\lib\MonoAndroid\MvvmCross.Binding.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding">
+      <HintPath>..\packages\MvvmCross.Binding.4.1.4\lib\MonoAndroid\MvvmCross.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Localization">
+      <HintPath>..\packages\MvvmCross.Binding.4.1.4\lib\MonoAndroid\MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Droid.Shared">
+      <HintPath>..\packages\MvvmCross.Droid.Shared.4.1.4\lib\MonoAndroid\MvvmCross.Droid.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.12.3\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoJSON.Net">
+      <HintPath>..\packages\GeoJSON.Net.0.1.47\lib\portable-net40+sl5+wp80+win8+wpa81\GeoJSON.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +255,20 @@
     <Compile Include="Views\SearchResult\SearchResultTileView.cs" />
     <Compile Include="Views\SearchResult\SearchResultHomeView.cs" />
     <Compile Include="Views\SearchResult\SearchResultMapView.cs" />
+    <Compile Include="CustomControls\TRSlidingTab\TRIconSlidingTabLayout.cs" />
+    <Compile Include="CustomControls\TRSlidingTab\TabColorizer.cs" />
+    <Compile Include="Views\SearchResult\SearchResultListView.cs" />
+    <Compile Include="CustomControls\SquareImageView.cs" />
+    <Compile Include="Views\SearchResult\SearchResultDetailView.cs" />
+    <Compile Include="CustomControls\ScreenHeightRelativeLayout.cs" />
+    <Compile Include="Views\Settings\SettingsView.cs" />
+    <Compile Include="Views\Settings\SavedPropertiesView.cs" />
+    <Compile Include="Views\Settings\TRWebView.cs" />
+    <Compile Include="ValueConverters\LikeImageValueConverter.cs" />
+    <Compile Include="ValueConverters\DislikeImageValueConverter.cs" />
+    <Compile Include="Views\SearchResult\SearchResultDetailMapView.cs" />
+    <Compile Include="Views\Search\AffordSearchView.cs" />
+    <Compile Include="Views\Search\AffordResultView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -257,11 +278,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\activity_navigation_base.axml" />
     <AndroidResource Include="Resources\values\color.xml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
@@ -354,11 +370,64 @@
     <AndroidResource Include="Resources\layout\fragment_search_result_home.axml" />
     <AndroidResource Include="Resources\layout\fragment_search_result_tile.axml" />
     <AndroidResource Include="Resources\layout\fragment_search_result_map.axml" />
+    <AndroidResource Include="Resources\layout\item_search_main_tab.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_result_list.axml" />
+    <AndroidResource Include="Resources\layout\item_tile_property.axml" />
+    <AndroidResource Include="Resources\layout\item_list_property.axml" />
+    <AndroidResource Include="Resources\layout\fragment_search_result_detail.axml" />
+    <AndroidResource Include="Resources\drawable\gradient_back.xml" />
+    <AndroidResource Include="Resources\drawable\gradient_back_vice.xml" />
+    <AndroidResource Include="Resources\drawable\img_placeholder_small.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\img_placeholder_small.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\img_placeholder_small.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\img_placeholder_small.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\img_placeholder_small.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\img_placeholder_small.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_list.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_map.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_tile.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_list.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_map.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_tile.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_bath.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_bed.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_dislike.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_like.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_share.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_sqft.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_bath.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_bed.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_dislike.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_like.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_share.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_sqft.png" />
+    <AndroidResource Include="Resources\layout\fragment_setting.axml" />
+    <AndroidResource Include="Resources\layout\fragment_savedProperties.axml" />
+    <AndroidResource Include="Resources\layout\fragment_webview.axml" />
+    <AndroidResource Include="Resources\layout\item_list_savedproperty.axml" />
+    <AndroidResource Include="Resources\layout\fragment_financial.axml" />
+    <AndroidResource Include="Resources\drawable\edittext_blue.xml" />
+    <AndroidResource Include="Resources\layout\item_marker_window.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_dislike_set.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon_like_set.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_dislike_set.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_like_set.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_arrow_right_white_24dp.png" />
+    <AndroidResource Include="Resources\layout\fragment_search_result_detail_map.axml" />
+    <AndroidResource Include="Resources\layout\fragment_financial_result.axml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Import Project="..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
+  <Import Project="..\packages\Xamarin.Insights.1.12.3\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.12.3\build\MonoAndroid10\Xamarin.Insights.targets')" />
   <ItemGroup>
     <XamarinComponentReference Include="rangeslider">
       <Version>1.1.0.3</Version>
@@ -374,6 +443,10 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="facebookandroid">
       <Version>4.10.0.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="urlimageviewhelper">
+      <Version>1.0.4.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
@@ -405,6 +478,7 @@
     <Folder Include="Adapters\" />
     <Folder Include="CustomControls\MvxListViewWithHeader\" />
     <Folder Include="Views\SearchResult\" />
+    <Folder Include="Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Videos\WelcomeVideo.mp4" />

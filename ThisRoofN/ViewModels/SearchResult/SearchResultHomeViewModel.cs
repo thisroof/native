@@ -10,10 +10,12 @@ namespace ThisRoofN.ViewModels
 		private int defaultPosition;
 		private SearchResultTileViewModel tileViewModel;
 		private SearchResultMapViewModel mapViewModel;
+		private SearchResultListViewModel listViewModel;
 
 		public SearchResultHomeViewModel ()
 		{
 			this.tileViewModel = new SearchResultTileViewModel ();
+			this.listViewModel = new SearchResultListViewModel ();
 			this.mapViewModel = new SearchResultMapViewModel ();
 		}
 
@@ -37,6 +39,14 @@ namespace ThisRoofN.ViewModels
 			get
 			{
 				return tileViewModel;
+			}
+		}
+
+		public SearchResultListViewModel ListViewModel
+		{
+			get
+			{
+				return listViewModel;
 			}
 		}
 

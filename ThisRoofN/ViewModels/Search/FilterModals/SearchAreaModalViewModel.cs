@@ -341,7 +341,10 @@ namespace ThisRoofN.ViewModels
 				return _selectedSuggestion;
 			} set {
 				_selectedSuggestion = value;
-				Address = value.FullAddress;
+
+				if (value != null) {
+					Address = value.FullAddress;
+				}
 			}
 		}
 

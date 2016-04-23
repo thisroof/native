@@ -56,6 +56,23 @@ namespace ThisRoofN
 		public static readonly int MaxValidDownPayment = 5000000;
 		public static readonly int OneAcreToSquareFoot = 43560;
 
+
+		public static readonly List<string> LoanTermOptions = new List<string>{
+			"15 YR",
+			"20 YR",
+			"25 YR",
+			"30 YR",
+			"40 YR",
+		};
+
+		public static readonly List<int> LoanTermIntOptions = new List<int>{
+			15,
+			20,
+			25,
+			30,
+			40
+		};
+
 		#region Header consts
 		public static readonly List<string> PriceStringValues = new List<string> {
 			"$0", 
@@ -159,6 +176,7 @@ namespace ThisRoofN
 
 		#region IN THE HOME consts
 		public static readonly List<string> InHomeItems = new List<string>() {
+			"Guest Quarters",
 			"Garage",
 			"Swimming Pool",
 			"Spa/Hot Tub",
@@ -172,13 +190,13 @@ namespace ThisRoofN
 			"Basement",
 			"Attic",
 			"Green House",
-			"Boat Doc",
 			"Disabled Access",
 			"Deck/Patio",
 			"Bright & Airy",
 			"RV Parking",
 			"Tennis Court",
-			"Basketball Court"
+			"Basketball Court",
+			"Boat Dock"
 		};
 		#endregion
 
@@ -245,7 +263,6 @@ namespace ThisRoofN
 		public static readonly int MaxHomeAge = 2016;
 
 		public static readonly List<string> HomeDetailItems = new List<string>() {
-			"Guest Quarters",
 			"Forclosure/Bank Owned",
 			"New construction",
 			"Rennovated",
@@ -290,6 +307,7 @@ namespace ThisRoofN
 			"4+",
 			"5+"
 		};
+
 
 		public static readonly List<string> SquareFootageOptions = new List<string>{
 			"No Min",

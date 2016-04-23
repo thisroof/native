@@ -63,6 +63,7 @@ namespace ThisRoofN.RestService
 				try
 				{
 					httpClient.BaseAddress = new Uri (baseURL);
+					httpClient.Timeout = TimeSpan.FromSeconds(200);
 					httpClient.DefaultRequestHeaders.Accept.Clear ();
 					httpClient.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
 					if (!string.IsNullOrEmpty (Token)) {

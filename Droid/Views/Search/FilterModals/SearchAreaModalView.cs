@@ -51,6 +51,14 @@ namespace ThisRoofN.Droid
 		{
 			base.OnCreate (savedInstanceState);
 
+			if (string.IsNullOrEmpty (ViewModelInstance.Address)) {
+				ConnectGoogleServiceForLocation ();
+			}
+
+		}
+
+		public void ConnectGoogleServiceForLocation()
+		{
 			googleApiClient = new GoogleApiClient.Builder (Activity)
 				.AddApi (Android.Gms.Location.LocationServices.API)
 				.AddConnectionCallbacks (this)
@@ -153,6 +161,18 @@ namespace ThisRoofN.Droid
 
 			tabs.SetDistributeEvenly (true);
 			tabs.SetViewPager (locationPager);
+
+			switch (ViewModelInstance.DistanceType) {
+			case 0:
+				locationPager.SetCurrentItem (1, false);
+				break;
+			case 1:
+				locationPager.SetCurrentItem (0, false);
+				break;
+			case 2:
+				locationPager.SetCurrentItem (2, false);
+				break;
+			}
 		}
 
 		public override void OnResume ()
@@ -226,7 +246,12 @@ namespace ThisRoofN.Droid
 			// If false, we might be able to resolve it by showing the location settings 
 			// to the user and allowing them to change the settings
 			if (!locationSettingsResult.Status.IsSuccess) {
-				UserDialogs.Instance.Alert ("Location Services Not Available!", "GooglePlayServices");
+				if (locationSettingsResult.Status.StatusCode == LocationSettingsStatusCodes.ResolutionRequired) {
+					locationSettingsResult.Status.StartResolutionForResult (Activity, 101);
+				} else {
+					UserDialogs.Instance.Alert ("Location Services Not Available for the given Request.", "GooglePlayServices");
+				}
+
 				return false;
 			}
 

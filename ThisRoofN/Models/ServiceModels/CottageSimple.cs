@@ -11,7 +11,10 @@ namespace ThisRoofN.Models.Service
 		public string ID {get;set;}
 
 		[DataMember(Name="list_price")]
-		public string Price {get;set;}
+		public double Price {get;set;}
+
+		[DataMember(Name="title")]
+		public string Title {get;set;}
 
 		[DataMember(Name="latitude")]
 		public double Latitude {get;set;}

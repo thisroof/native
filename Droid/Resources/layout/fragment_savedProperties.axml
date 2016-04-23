@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_splash" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_16dp"
+            android:background="@color/TR_LIGHT_BLUE">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAVED PROPERTIES"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font24sp"
+                local:MvxBind="Typeface Font('Bold')" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_40">
+            <MvxListView
+                android:id="@+id/list_lifestyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="1dp"
+                android:divider="@color/TR_LIGHT_BLUE"
+                local:MvxBind="ItemsSource SavedProperties; ItemClick DetailItemCommand;"
+                local:MvxItemTemplate="@layout/item_list_savedproperty" />
+        </LinearLayout>
+    </LinearLayout>
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
+</RelativeLayout>

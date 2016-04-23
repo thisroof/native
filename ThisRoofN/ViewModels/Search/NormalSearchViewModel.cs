@@ -26,7 +26,7 @@ namespace ThisRoofN.ViewModels
 		public NormalSearchViewModel (IDevice device)
 		{
 			deviceInfo = device;
-			searchProperty = SearchFilters.FetchLatestFromDatabase();
+			searchProperty = SearchFilters.FetchLatestFromDatabase ();
 			mGeocodeService = new GeocodeService ();
 
 			MaxLotSize = MaxLotSizeOptions [0];
@@ -137,10 +137,12 @@ namespace ThisRoofN.ViewModels
 					if (searchResults != null) {
 						DataHelper.SearchResults = searchResults.Select (i =>
 							new TRCottageSimple () {
-							CottageID = i.ID,
-							PrimaryPhotoLink = i.Photos.FirstOrDefault ().MediaURL,
-							Latitude = i.Latitude,
-							Longitude = i.Longitude,
+								CottageID = i.ID,
+								PrimaryPhotoLink = i.Photos.FirstOrDefault ().MediaURL,
+								Title = i.Title,
+								Price = i.Price,
+								Latitude = i.Latitude,
+								Longitude = i.Longitude,
 						}).ToList ();
 
 						this.IsLoading = false;

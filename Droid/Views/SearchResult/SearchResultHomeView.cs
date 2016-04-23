@@ -17,13 +17,14 @@ using ThisRoofN.Droid.CustomControls.TRSlidingTab;
 using Android.Views.InputMethods;
 using ThisRoofN.Droid.Adapters;
 using ThisRoofN.ViewModels;
+using ThisRoofN.Droid.Helpers;
 
 namespace ThisRoofN.Droid
 {
 	public class SearchResultHomeView : BaseMvxFragment
 	{
 		ViewPager type_pager;
-		TRSlidingTabLayout type_tab;
+		TRIconSlidingTabLayout type_tab;
 
 		public SearchResultHomeViewModel ViewModelInstance {
 			get {
@@ -49,25 +50,25 @@ namespace ThisRoofN.Droid
 
 			// Set Location Type tab and pager
 			type_pager = view.FindViewById<ViewPager> (Resource.Id.pager_location);
-			type_tab = view.FindViewById<TRSlidingTabLayout> (Resource.Id.tab_location);
-
 			type_pager.PageSelected += (object sender, ViewPager.PageSelectedEventArgs e) => {
-//				switch (e.Position) {
-//				case 0:
-//					ViewModelInstance.DistanceType = (int)TRSearchType.Commute;
-//					break;
-//				case 1:
-//					ViewModelInstance.DistanceType = (int)TRSearchType.Distance;
-//					break;
-//				case 2:
-//					ViewModelInstance.DistanceType = (int)TRSearchType.State;
-//					break;
-//				default:
-//					break;
-//				}
+				//				switch (e.Position) {
+				//				case 0:
+				//					ViewModelInstance.DistanceType = (int)TRSearchType.Commute;
+				//					break;
+				//				case 1:
+				//					ViewModelInstance.DistanceType = (int)TRSearchType.Distance;
+				//					break;
+				//				case 2:
+				//					ViewModelInstance.DistanceType = (int)TRSearchType.State;
+				//					break;
+				//				default:
+				//					break;
+				//				}
 			};
 
-			type_tab = view.FindViewById<TRSlidingTabLayout> (Resource.Id.tab_location);
+			type_tab = view.FindViewById<TRIconSlidingTabLayout> (Resource.Id.tab_type);
+			type_tab.IconResourceArray = new int[] { Resource.Drawable.icon_tile, Resource.Drawable.icon_list, Resource.Drawable.icon_map };
+
 			type_tab.TabViewTextSizeSp = 12;
 			type_tab.TabViewPaddingDips = 8;
 			type_tab.TabTitleTextSize = 12;
@@ -86,6 +87,11 @@ namespace ThisRoofN.Droid
 					ViewModel = ViewModelInstance.TileViewModel
 				},
 				new MvxViewPagerFragmentAdapter.FragmentInfo {
+					FragmentType = typeof(SearchResultListView),
+					Title = "LIST",
+					ViewModel = ViewModelInstance.ListViewModel
+				},
+				new MvxViewPagerFragmentAdapter.FragmentInfo {
 					FragmentType = typeof(SearchResultMapView),
 					Title = "MAP",
 					ViewModel = ViewModelInstance.MapViewModel
@@ -98,6 +104,14 @@ namespace ThisRoofN.Droid
 
 			type_tab.SetDistributeEvenly (true);
 			type_tab.SetViewPager (type_pager);
+		}
+
+		public override void OnResume ()
+		{
+			base.OnResume ();
+
+			HomeView homeView = (HomeView)Activity;
+			homeView.ToolbarManager.SetToolbarType (ToolbarHelper.ToolbarType.Visible);
 		}
 	}
 }

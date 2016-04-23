@@ -86,6 +86,31 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+
+		private int _selectedLoan;
+		public int SelectedLoan {
+			get {
+				return _selectedLoan;
+			} 
+			set {
+				_selectedLoan = value;
+				RaisePropertyChanged (() => SelectedLoan);
+				RaisePropertyChanged (() => LoanLabelText);
+			}
+		}
+
+		public int LoanOptionCount {
+			get {
+				return TRConstant.LoanTermOptions.Count - 1;
+			}
+		}
+
+		public string LoanLabelText {
+			get {
+				return TRConstant.LoanTermOptions [SelectedLoan];
+			}
+		}
+
 		public bool IncludeTax {
 			get {
 				return this._includeTax;

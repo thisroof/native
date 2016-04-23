@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ThisRoofN.Droid.CustomControls.SquareImageView
+        android:id="@+id/discountImage"
+        android:src="@drawable/img_placeholder_small"
+        android:background="@android:color/holo_blue_dark"
+        android:scaleType="centerCrop"
+        android:cropToPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="ImageUrl PrimaryPhotoLink;DefaultImagePath 'res:img_placeholder_small'" />
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="$1180102"
+        android:textSize="@dimen/font12sp"
+        android:textColor="@color/white"
+        android:paddingLeft="@dimen/padding_8dp"
+        android:paddingRight="@dimen/padding_8dp"
+        android:paddingBottom="@dimen/padding_8dp"
+        android:layout_alignParentBottom="true"
+        local:MvxBind="Text Title;" />
+</RelativeLayout>

@@ -2,6 +2,7 @@
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using Xamarin.Facebook;
 using Java.Interop;
+using Android.OS;
 
 namespace ThisRoofN.Droid
 {

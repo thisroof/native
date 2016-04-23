@@ -53,12 +53,13 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:imeOptions="actionDone"
-            android:inputType="textFilter"
+            android:inputType="textNoSuggestions"
             android:selectAllOnFocus="true"
             android:paddingRight="25dp"
             local:MvxItemTemplate="@layout/item_location"
             local:MvxBind="Text Address; ItemsSource AddressSuggestionItems; SelectedObject SelectedSuggestion" />
         <ImageView
+            android:id="@+id/img_nav"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"

@@ -84,8 +84,8 @@ namespace ThisRoofN.Droid
 				ViewModelInstance.CloseCommand.Execute(null);
 			};
 
-			ImageView fbLogin = view.FindViewById<ImageView> (Resource.Id.img_fbLogin);
-			fbLogin.Click += (object sender, EventArgs e) => {
+			ImageView fbSignup = view.FindViewById<ImageView> (Resource.Id.img_fbSignup);
+			fbSignup.Click += (object sender, EventArgs e) => {
 				LoginManager.Instance.LogInWithReadPermissions(this, readPermissions);
 			};
 
@@ -130,6 +130,12 @@ namespace ThisRoofN.Droid
 			return view;
 		}
 
+		public override void OnActivityResult (int requestCode, int resultCode, Intent data)
+		{
+			base.OnActivityResult (requestCode, resultCode, data);
+			callbackManager.OnActivityResult (requestCode, (int)resultCode, data);
+		}
+
 		public override void OnResume ()
 		{
 			base.OnResume ();
@@ -142,13 +148,16 @@ namespace ThisRoofN.Droid
 		{
 			base.OnStop ();
 
-			if (mediaPlayer.IsPlaying == true)
-			{
-				mediaPlayer.Stop();
-			}
+			if (mediaPlayer != null) {
+				if (mediaPlayer.IsPlaying == true)
+				{
+					mediaPlayer.Stop();
+				}
 
-			mediaPlayer.SetDisplay(null);
-			mediaPlayer.Release();
+				mediaPlayer.SetDisplay(null);
+				mediaPlayer.Release();
+				mediaPlayer = null;
+			}
 		}
 
 		#region Video Callback
@@ -192,7 +201,6 @@ namespace ThisRoofN.Droid
 			{
 				string email = response.JSONObject.GetString("email");
 				Console.Write (email);
-				UserDialogs.Instance.Alert ("Success");
 				FBUserInfo userInfo = new FBUserInfo () {
 					UserEmail = email,
 					UserID = AccessToken.CurrentAccessToken.UserId,

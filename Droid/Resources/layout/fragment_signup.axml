@@ -115,4 +115,7 @@
         android:src="@drawable/img_fb_signup"
         android:scaleType="centerCrop"
         android:layout_alignParentBottom="true" />
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
 </RelativeLayout>

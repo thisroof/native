@@ -311,6 +311,9 @@
             android:textSize="@dimen/font16sp"
             android:layout_gravity="center"
             android:background="@drawable/btn_viewResult"
-            local:MvxBind="Click SignupCommand; Typeface Font('Bold_Cn')" />
+            local:MvxBind="Click SearchCommand; Typeface Font('Bold_Cn')" />
     </LinearLayout>
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/tr_loading_indicator" />
 </RelativeLayout>

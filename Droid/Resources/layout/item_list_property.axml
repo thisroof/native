@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:weightSum="10">
+    <MvxImageView
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="3"
+        android:src="@drawable/img_placeholder_small"
+        android:background="@android:color/holo_blue_dark"
+        android:scaleType="centerCrop"
+        local:MvxBind="ImageUrl PrimaryPhotoLink;DefaultImagePath 'res:img_placeholder_small'" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="7"
+        android:layout_height="80dp"
+        android:padding="@dimen/padding_8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$980,654"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                local:MvxBind="Text FormattedPrice;" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$980,654"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/padding_4dp"
+                local:MvxBind="Text Title;" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -38,6 +38,14 @@ namespace ThisRoofN.Droid
 				imm.HideSoftInputFromWindow (rootView.WindowToken, 0);
 			};
 
+			ImageView img_nav = (ImageView)view.FindViewById (Resource.Id.img_nav);
+			img_nav.Click += (object sender, EventArgs e) => {
+				if(ParentFragment != null) {
+					SearchAreaModalView parent = (SearchAreaModalView) ParentFragment;
+					parent.ConnectGoogleServiceForLocation();
+				}
+			};
+
 			SeekBar distanceBar = view.FindViewById<SeekBar> (Resource.Id.seekbar_distance);
 			distanceBar.Max = TRConstant.SearchMinutes.Count () - 1;
 

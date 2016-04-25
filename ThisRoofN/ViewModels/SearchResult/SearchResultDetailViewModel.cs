@@ -17,35 +17,8 @@ namespace ThisRoofN.ViewModels
 {
 	public class SearchResultDetailViewModel : BaseViewModel
 	{
-		private CottageDetail detail;
-
-		private MvxCommand _descMoreCommand;
-		private MvxCommand _likeCommand;
-		private MvxCommand<bool> _showDislikeCommand;
-		private MvxCommand _dislikeCommand;
-		private MvxCommand _findAgentCommand;
-		private MvxCommand _doGotoMapCommand;
-
-		private bool _liked;
-		private bool _disliked;
-		private bool _isDislikeShown;
 		private IDevice deviceInfo;
 
-		public bool _tooFar { get; set; }
-
-		public bool _tooClose { get; set; }
-
-		public bool _badArea { get; set; }
-
-		public bool _tooSmall { get; set; }
-
-		public bool _tooBig { get; set; }
-
-		public bool _lotTooBig { get; set; }
-
-		public bool _lotTooSmall { get; set; }
-
-		public bool _ugly { get; set; }
 
 		public SearchResultDetailViewModel ()
 		{
@@ -59,7 +32,8 @@ namespace ThisRoofN.ViewModels
 			InitDetail (savedProperty);
 		}
 
-		private async void InitDetail(bool savedProperty) {
+		private async void InitDetail(bool savedProperty)
+		{
 			if (savedProperty) {
 				RaisePropertyChanged (() => ItemDetail);
 			} else {
@@ -68,18 +42,135 @@ namespace ThisRoofN.ViewModels
 				CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), DataHelper.SearchResults[propertyIndex].CottageID);
 
 				DataHelper.SelectedCottage =  DataHelper.SearchResults[propertyIndex];
-				DataHelper.SelectedCottageDetail = new TRCottageDetail (detail,  DataHelper.SearchResults[propertyIndex]);
-
-				imageIndex = 0;
+				DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
 
 				this.IsLoading = false;
 				RaisePropertyChanged (() => ItemDetail);
 			}
 
+			ImageIndex = 0;
 			Liked = ItemDetail.Liked;
 			Disliked = ItemDetail.Disliked;
-
 		}
+
+		public TRCottageDetail ItemDetail {
+			get {
+				return DataHelper.SelectedCottageDetail;
+			} 
+		}
+
+		public string ImageLink 
+		{
+			get {
+				return ItemDetail.Photos [ImageIndex].MediaURL;
+			}
+		}
+
+		#region Next/Prev Image/Property
+		private int imageIndex;
+		public int ImageIndex 
+		{
+			get {
+				return imageIndex;
+			} set {
+				imageIndex = value;
+				RaisePropertyChanged (() => ImageIndex);
+				RaisePropertyChanged (() => ImageLink);
+			}
+		}
+
+		private MvxCommand<bool> _nextImageCommand;
+		public ICommand NextImageCommand {
+			get {
+				_nextImageCommand = _nextImageCommand ?? new MvxCommand<bool> (DoNextImage);
+				return _nextImageCommand;
+			}
+		}
+
+		private void DoNextImage(bool isNext)
+		{
+			if (ItemDetail.Photos == null) {
+				return;
+			}
+
+			if (isNext) {
+				if (ImageIndex < ItemDetail.Photos.Count - 1) {
+					ImageIndex++;
+				} else {
+					ImageIndex = 0;
+				}
+			} else {
+				if (ImageIndex == 0) {
+					ImageIndex = ItemDetail.Photos.Count - 1;
+				} else {
+					ImageIndex--;
+				}
+			}
+		}
+
+		private int propertyIndex;
+		public int PropertyIndex 
+		{
+			get {
+				return propertyIndex;
+			} set {
+				propertyIndex = value;
+				RaisePropertyChanged (() => PropertyIndex);
+				RaisePropertyChanged (() => ItemDetail);
+			}
+		}
+
+		private MvxCommand<bool> _nextPropertyCommand;
+		public ICommand NextPropertyCommand {
+			get {
+				_nextPropertyCommand = _nextPropertyCommand ?? new MvxCommand<bool> (DoNextProperty);
+				return _nextPropertyCommand;
+			}
+		}
+
+		private void DoNextProperty(bool isNext)
+		{
+			if (isNext) {
+				if (PropertyIndex < DataHelper.SearchResults.Count - 1) {
+					PropertyIndex++;
+				} else {
+					PropertyIndex = 0;
+				}
+			} else {
+				if (PropertyIndex == 0) {
+					PropertyIndex = DataHelper.SearchResults.Count - 1;
+				} else {
+					PropertyIndex--;
+				}
+			}
+
+			InitDetail (false);
+		}
+		#endregion
+
+
+		private MvxCommand _goMapCommand;
+		public ICommand GoMapCommand {
+			get {
+				_goMapCommand = _goMapCommand ?? new MvxCommand (DoGoMap);
+				return _goMapCommand;
+			}
+		}
+
+		private void DoGoMap()
+		{
+			ShowViewModel<SearchResultDetailMapViewModel> ();
+		}
+
+		#region Like/Dislike Part
+		private bool _tooFar;
+		private bool _tooClose;
+		private bool _badArea;
+		private bool _tooSmall;
+		private bool _tooBig;
+		private bool _lotTooBig;
+		private bool _lotTooSmall;
+		private bool _ugly;
 
 		#region Reject Reason Properties
 
@@ -146,143 +237,9 @@ namespace ThisRoofN.ViewModels
 				RaisePropertyChanged (() => Ugly);
 			}
 		}
-
 		#endregion
 
-		public TRCottageDetail ItemDetail {
-			get {
-				return DataHelper.SelectedCottageDetail;
-			} 
-		}
-
-		public ICommand FindAgentCommand {
-			get {
-				_findAgentCommand = _findAgentCommand ?? new MvxCommand (() => {
-					ShowViewModel<TRWebViewModel>(new {link = TRConstant.BuyersAgentLink});
-				});
-				return _findAgentCommand;
-			}
-		}
-
-		public ICommand LikeCommand {
-			get {
-				_likeCommand = _likeCommand ?? new MvxCommand (DoLike);
-				return _likeCommand;
-			}
-		}
-
-		public ICommand ShowDislikeViewCommand {
-			get {
-				_showDislikeCommand = _showDislikeCommand ?? new MvxCommand<bool> (DoShowDislikeDialog);
-				return _showDislikeCommand;
-			}
-		}
-
-		public ICommand DisLikeCommand {
-			get {
-				_dislikeCommand = _dislikeCommand ?? new MvxCommand (DoDislike);
-				return _dislikeCommand;
-			}
-		}
-
-		public ICommand GotoMap {
-			get {
-				_doGotoMapCommand = _doGotoMapCommand ?? new MvxCommand (DoGotoMap);
-				return _doGotoMapCommand;
-			}
-		}
-
-		private MvxCommand<bool> _nextImageCommand;
-		public ICommand NextImageCommand {
-			get {
-				_nextImageCommand = _nextImageCommand ?? new MvxCommand<bool> (DoNextImage);
-				return _nextImageCommand;
-			}
-		}
-
-		private int imageIndex;
-		public int ImageIndex 
-		{
-			get {
-				return imageIndex;
-			} set {
-				imageIndex = value;
-				RaisePropertyChanged (() => ImageIndex);
-			}
-		}
-
-		private void DoNextImage(bool isNext)
-		{
-			if (isNext) {
-				if (ImageIndex < ItemDetail.Photos.Count - 1) {
-					ImageIndex++;
-				} else {
-					ImageIndex = 0;
-				}
-			} else {
-				if (ImageIndex == 0) {
-					ImageIndex = ItemDetail.Photos.Count - 1;
-				} else {
-					ImageIndex--;
-				}
-			}
-
-			RaisePropertyChanged (() => ImageLink);
-		}
-
-		private MvxCommand<bool> _nextPropertyCommand;
-		public ICommand NextPropertyCommand {
-			get {
-				_nextPropertyCommand = _nextPropertyCommand ?? new MvxCommand<bool> (DoNextProperty);
-				return _nextPropertyCommand;
-			}
-		}
-
-		private int propertyIndex;
-		public int PropertyIndex 
-		{
-			get {
-				return propertyIndex;
-			} set {
-				propertyIndex = value;
-				RaisePropertyChanged (() => PropertyIndex);
-			}
-		}
-
-		private void DoNextProperty(bool isNext)
-		{
-			if (isNext) {
-				if (PropertyIndex < DataHelper.SearchResults.Count - 1) {
-					PropertyIndex++;
-				} else {
-					PropertyIndex = 0;
-				}
-			} else {
-				if (PropertyIndex == 0) {
-					PropertyIndex = DataHelper.SearchResults.Count - 1;
-				} else {
-					PropertyIndex--;
-				}
-			}
-
-			InitDetail (false);
-			RaisePropertyChanged (() => ItemDetail);
-		}
-
-		public string ImageLink 
-		{
-			get {
-				return ItemDetail.Photos [ImageIndex].MediaURL;
-			}
-		}
-
-
-		public bool IsDislikeHidden {
-			get {
-				return !IsDislikeShown;
-			}
-		}
-
+		private bool _isDislikeShown;
 		public bool IsDislikeShown {
 			get {
 				return this._isDislikeShown;
@@ -294,6 +251,13 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+		public bool IsDislikeHidden {
+			get {
+				return !IsDislikeShown;
+			}
+		}
+
+		private bool _liked;
 		public bool Liked {
 			get {
 				return _liked;
@@ -304,6 +268,7 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
+		private bool _disliked;
 		public bool Disliked {
 			get {
 				return _disliked;
@@ -311,6 +276,30 @@ namespace ThisRoofN.ViewModels
 			set {
 				_disliked = value;
 				RaisePropertyChanged (() => Disliked);
+			}
+		}
+
+		private MvxCommand _likeCommand;
+		public ICommand LikeCommand {
+			get {
+				_likeCommand = _likeCommand ?? new MvxCommand (DoLike);
+				return _likeCommand;
+			}
+		}
+
+		private MvxCommand _dislikeCommand;
+		public ICommand DisLikeCommand {
+			get {
+				_dislikeCommand = _dislikeCommand ?? new MvxCommand (DoDislike);
+				return _dislikeCommand;
+			}
+		}
+
+		private MvxCommand<bool> _showDislikeCommand;
+		public ICommand ShowDislikeViewCommand {
+			get {
+				_showDislikeCommand = _showDislikeCommand ?? new MvxCommand<bool> (DoShowDislikeDialog);
+				return _showDislikeCommand;
 			}
 		}
 
@@ -352,7 +341,7 @@ namespace ThisRoofN.ViewModels
 						Price = ItemDetail.Price,
 						PrimaryPhotoURL = ItemDetail.PrimaryPhotoLink,
 						Address = ItemDetail.Address.FullStreetAddress,
-						CityStateZip = ItemDetail.FormattedCityStateZip
+						CityStateZip = ItemDetail.FormattedAddress
 					};
 
 					TRDatabase.Instance.SaveItem (likeData);
@@ -396,7 +385,7 @@ namespace ThisRoofN.ViewModels
 					Price = ItemDetail.Price,
 					PrimaryPhotoURL = ItemDetail.PrimaryPhotoLink,
 					Address = ItemDetail.Address.FullStreetAddress,
-					CityStateZip = ItemDetail.FormattedCityStateZip
+					CityStateZip = ItemDetail.FormattedAddress
 				};
 
 				TRDatabase.Instance.SaveItem (likeData);
@@ -407,8 +396,6 @@ namespace ThisRoofN.ViewModels
 			this.IsDislikeShown = false;
 
 			DataHelper.SearchResults.Remove (DataHelper.SearchResults.Where (i => i.CottageID == ItemDetail.CottageID).FirstOrDefault());
-
-//			Close (this);
 		}
 
 		private async void DoShowDislikeDialog (bool isShow)
@@ -430,11 +417,7 @@ namespace ThisRoofN.ViewModels
 				IsDislikeShown = false;
 			}
 		}
-
-		private void DoGotoMap()
-		{
-			ShowViewModel<SearchResultDetailMapViewModel> ();
-		}
+		#endregion
 	}
 }
 

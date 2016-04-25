@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
+// This file has been generated automatically by Xamarin Studio Business to store outlets and
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
@@ -13,16 +13,10 @@ namespace ThisRoofN.iOS
 	partial class SearchAreaModalView
 	{
 		[Outlet]
-		UIKit.UIButton btn_clearAll { get; set; }
-
-		[Outlet]
 		UIKit.UIButton btn_getOwnLocation { get; set; }
 
 		[Outlet]
 		UIKit.UIButton btn_modalBack { get; set; }
-
-		[Outlet]
-		UIKit.UIButton btn_selectAll { get; set; }
 
 		[Outlet]
 		UIKit.UICollectionView cv_nations { get; set; }
@@ -41,18 +35,6 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UISlider slider_distance { get; set; }
-
-		[Outlet]
-		UIKit.UISwitch switch_city { get; set; }
-
-		[Outlet]
-		UIKit.UISwitch switch_metro { get; set; }
-
-		[Outlet]
-		UIKit.UISwitch switch_rural { get; set; }
-
-		[Outlet]
-		UIKit.UISwitch switch_suburb { get; set; }
 
 		[Outlet]
 		UIKit.UITableView tbl_commuteItems { get; set; }
@@ -83,11 +65,6 @@ namespace ThisRoofN.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btn_clearAll != null) {
-				btn_clearAll.Dispose ();
-				btn_clearAll = null;
-			}
-
 			if (btn_getOwnLocation != null) {
 				btn_getOwnLocation.Dispose ();
 				btn_getOwnLocation = null;
@@ -96,31 +73,6 @@ namespace ThisRoofN.iOS
 			if (btn_modalBack != null) {
 				btn_modalBack.Dispose ();
 				btn_modalBack = null;
-			}
-
-			if (btn_selectAll != null) {
-				btn_selectAll.Dispose ();
-				btn_selectAll = null;
-			}
-
-			if (switch_city != null) {
-				switch_city.Dispose ();
-				switch_city = null;
-			}
-
-			if (switch_suburb != null) {
-				switch_suburb.Dispose ();
-				switch_suburb = null;
-			}
-
-			if (switch_metro != null) {
-				switch_metro.Dispose ();
-				switch_metro = null;
-			}
-
-			if (switch_rural != null) {
-				switch_rural.Dispose ();
-				switch_rural = null;
 			}
 
 			if (cv_nations != null) {

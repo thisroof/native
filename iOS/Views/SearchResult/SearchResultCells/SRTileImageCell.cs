@@ -45,18 +45,7 @@ namespace ThisRoofN.iOS
 			base.Draw (rect);
 
 			if (view_titleBack != null) {
-				CAGradientLayer gradient = new CAGradientLayer ();
-				gradient.NeedsDisplayOnBoundsChange = true;
-				gradient.Frame = new CGRect(0, 0, view_titleBack.Frame.Width, view_titleBack.Frame.Height);
-				gradient.Colors = new CGColor[] { UIColor.Clear.CGColor, UIColor.Black.ColorWithAlpha(0.5f).CGColor };
-				gradient.StartPoint = CGPoint.Empty;
-				gradient.EndPoint = new CGPoint (1, 1);
-
-				if (view_titleBack.Layer.Sublayers.Length > 1) {
-					view_titleBack.Layer.Sublayers [0].RemoveFromSuperLayer ();
-				}
-
-				view_titleBack.Layer.InsertSublayer (gradient, 0);
+				view_titleBack.Layer.Sublayers[0].Frame = view_titleBack.Bounds;
 			}
 		}
 

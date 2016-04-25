@@ -14,9 +14,6 @@ namespace ThisRoofN.iOS
 {
 	public partial class HomeDetailModalView : BaseModalView
 	{
-		//		private RangeSliderView squareSlider;
-		//		private RangeSliderView homeAgeSlider;
-		//		private RangeSliderView lotSizeSlider;
 		private TRMovingLabelRangeSlider mSquareSlider;
 		private TRMovingLabelRangeSlider mHomeAgeSlider;
 		private TRMovingLabelRangeSlider mLotSizeSlider;
@@ -81,11 +78,6 @@ namespace ThisRoofN.iOS
 
 		private void InitRangeSlider ()
 		{
-//			squareSlider = new RangeSliderView (new CGRect (0, 0, this.view_rangeSliderSquare.Frame.Width, this.view_rangeSliderSquare.Frame.Height));
-//			squareSlider.MinValue = 0;
-//			squareSlider.MaxValue = TRConstant.SquareFootageOptions.Count - 1;
-//			this.view_rangeSliderSquare.AddSubview (squareSlider);
-
 			mSquareSlider = new TRMovingLabelRangeSlider (
 				new CGRect (0, 0, this.view_rangeSliderSquare.Frame.Width, this.view_rangeSliderSquare.Frame.Height), 
 				0, 

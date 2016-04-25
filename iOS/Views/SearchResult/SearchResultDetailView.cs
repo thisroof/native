@@ -12,14 +12,15 @@ using MvvmCross.Binding.BindingContext;
 using ThisRoofN.Models.App;
 using ThisRoofN.Models.Service;
 using ThisRoofN.iOS.ValueConverters;
+using CoreAnimation;
+using MapKit;
+using CoreLocation;
+using ThisRoofN.Helpers;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchResultDetailView : BaseViewController
+	public partial class SearchResultDetailView : BaseViewController, IMKMapViewDelegate
 	{
-		public MvxFluentBindingDescriptionSet<SearchResultDetailView, SearchResultDetailViewModel> BindingSet;
-		private SearchResultDetailTableViewSource source;
-
 		public SearchResultDetailView (IntPtr handle) : base (handle)
 		{
 		}
@@ -30,47 +31,66 @@ namespace ThisRoofN.iOS
 			}
 		}
 
-		public UITableView MasterTableView {
-			get {
-				return tbl_detail;
-			}
-		}
-
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 
-			SetupNavigationBar ();
+			InitPropertyMap ();
 
+			view_btn_back.Layer.CornerRadius = view_btn_back.Frame.Width / 2;
+			view_btn_share.Layer.CornerRadius = view_btn_back.Frame.Width / 2;
+			view_btn_like.Layer.CornerRadius = view_btn_back.Frame.Width / 2;
+			view_btn_dislike.Layer.CornerRadius = view_btn_back.Frame.Width / 2;
 			view_dislikeSetting.Layer.CornerRadius = 5.0f;
-			tbl_detail.BackgroundColor = UIColor.Black;
 
-			BindingSet = this.CreateBindingSet<SearchResultDetailView, SearchResultDetailViewModel> ();
-			BindingSet.Bind (backButton).To (vm => vm.CloseCommand);
-			BindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
-			BindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
-			BindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
+			img_property.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
 
-			BindingSet.Bind (view_dislikeSetting).For (i => i.Hidden).To (vm => vm.IsDislikeHidden);
-			BindingSet.Bind (btn_commit).To (vm => vm.DisLikeCommand);
-			BindingSet.Bind (btn_cancel).To (vm => vm.ShowDislikeViewCommand).CommandParameter (false);
+			CAGradientLayer gradLayer = GradientHelper.WhiteGradient;
+			gradLayer.Frame = view_infoBack.Bounds;
+			view_infoBack.Layer.InsertSublayer (gradLayer, 0);
 
-			BindingSet.Bind (icon_tooFar).To (vm => vm.TooFar).WithConversion(new CheckmarkConverter());
-			BindingSet.Bind (icon_tooClose).To (vm => vm.TooClose).WithConversion(new CheckmarkConverter());
-			BindingSet.Bind (icon_tooSmall).To (vm => vm.TooSmall).WithConversion(new CheckmarkConverter());
-			BindingSet.Bind (icon_lotTooSmall).To (vm => vm.LotTooSmall).WithConversion(new CheckmarkConverter());
-			BindingSet.Bind (icon_tooBig).To (vm => vm.LotTooBig).WithConversion(new CheckmarkConverter());
-			BindingSet.Bind (icon_ugly).To (vm => vm.Ugly).WithConversion(new CheckmarkConverter());
+			// Bind Values
+			var bindingSet = this.CreateBindingSet<SearchResultDetailView, SearchResultDetailViewModel> ();
+			bindingSet.Bind (btn_back).To (vm => vm.CloseCommand);
+			bindingSet.Bind (btn_like).To (vm => vm.LikeCommand);
+			bindingSet.Bind (btn_dislike).To (vm => vm.DisLikeCommand);
+			bindingSet.Bind (iv_btn_like).To (vm => vm.Liked).WithConversion(new LikemarkConverter());
+			bindingSet.Bind (iv_btn_dislike).To (vm => vm.Disliked).WithConversion(new DislikemarkConverter());
+			bindingSet.Bind (btn_prevProperty).To (vm => vm.NextPropertyCommand).CommandParameter(false);
+			bindingSet.Bind (btn_nextProperty).To (vm => vm.NextPropertyCommand).CommandParameter(true);
+			bindingSet.Bind (btn_prevImage).To (vm => vm.NextImageCommand).CommandParameter(false);
+			bindingSet.Bind (btn_nextImage).To (vm => vm.NextImageCommand).CommandParameter(true);
+			bindingSet.Bind (btn_goMap).To (vm => vm.GoMapCommand);
+			bindingSet.Bind (img_property).To (vm => vm.ImageLink);
 
-			source = new SearchResultDetailTableViewSource (tbl_detail, this);
-			tbl_detail.Source = source;
-			tbl_detail.RowHeight = UITableView.AutomaticDimension;
-			tbl_detail.AllowsSelection = false;
-			tbl_detail.TableFooterView = new UITableView (CGRect.Empty);
+			bindingSet.Bind (lbl_price).To (vm => vm.ItemDetail.FormattedPrice);
+			bindingSet.Bind (lbl_address).To (vm => vm.ItemDetail.FormattedAddress);
+			bindingSet.Bind (lbl_beds).To (vm => vm.ItemDetail.Bedrooms);
+			bindingSet.Bind (lbl_baths).To (vm => vm.ItemDetail.Bathrooms);
+			bindingSet.Bind (lbl_sqft).To (vm => vm.ItemDetail.LotSquareSize);
+			bindingSet.Bind (lbl_description).To (vm => vm.ItemDetail.Description);
 
-			BindingSet.Bind (source).To (vm => vm.ItemDetail.Photos);
-			BindingSet.Apply ();
-			tbl_detail.ReloadData ();
+			bindingSet.Bind (lbl_status).To (vm => vm.ItemDetail.Sataus);
+			bindingSet.Bind (lbl_type).To (vm => vm.ItemDetail.PropertyType);
+			bindingSet.Bind (lbl_yearBuilt).To (vm => vm.ItemDetail.YearBuilt);
+			bindingSet.Bind (lbl_daysOnMarket).To (vm => vm.ItemDetail.DaysOnMarket);
+			bindingSet.Bind (lbl_listedBy).To (vm => vm.ItemDetail.ListedBy);
+			bindingSet.Bind (lbl_mlsNumber).To (vm => vm.ItemDetail.MlsNumber);
+
+			bindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
+			bindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
+
+			bindingSet.Bind (view_dislikeSetting).For (i => i.Hidden).To (vm => vm.IsDislikeHidden);
+			bindingSet.Bind (btn_commit).To (vm => vm.DisLikeCommand);
+			bindingSet.Bind (btn_cancel).To (vm => vm.ShowDislikeViewCommand).CommandParameter (false);
+
+			bindingSet.Bind (icon_tooFar).To (vm => vm.TooFar).WithConversion(new CheckmarkConverter());
+			bindingSet.Bind (icon_tooClose).To (vm => vm.TooClose).WithConversion(new CheckmarkConverter());
+			bindingSet.Bind (icon_tooSmall).To (vm => vm.TooSmall).WithConversion(new CheckmarkConverter());
+			bindingSet.Bind (icon_lotTooSmall).To (vm => vm.LotTooSmall).WithConversion(new CheckmarkConverter());
+			bindingSet.Bind (icon_tooBig).To (vm => vm.LotTooBig).WithConversion(new CheckmarkConverter());
+			bindingSet.Bind (icon_ugly).To (vm => vm.Ugly).WithConversion(new CheckmarkConverter());
+			bindingSet.Apply ();
 
 			icon_tooFar.UserInteractionEnabled = true;
 			icon_tooClose.UserInteractionEnabled = true;
@@ -103,101 +123,52 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewWillAppear (animated);
 
-			this.NavigationController.SetNavigationBarHidden (false, true);
-			this.NavigationController.SetToolbarHidden (true, true);
+			this.NavigationController.SetNavigationBarHidden (true, true);
+		}
+
+		public override void ViewWillLayoutSubviews ()
+		{
+			base.ViewWillLayoutSubviews ();
+			view_infoBack.Layer.Sublayers [0].Frame = new CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, view_infoBack.Frame.Height);
 		}
 
 		public override void ViewDidLayoutSubviews ()
 		{
 			base.ViewDidLayoutSubviews ();
+
+
 		}
 
-		public class SearchResultDetailTableViewSource : MvxTableViewSource
+		private void InitPropertyMap()
 		{
-			SearchResultDetailView masterView;
-			SRDetailMapCell mapCell;
-			SRDetailTitleCell titleCell;
-			SRDetailValueCell valueCell;
-			SRDetailDescCell descCell;
+			map_prop.Layer.CornerRadius = 10.0f;
+			map_prop.ZoomEnabled = false;
+			map_prop.UserInteractionEnabled = false;
+			map_prop.Delegate = this;
+			map_prop.SetRegion(new MKCoordinateRegion(
+				new CLLocationCoordinate2D(36.7783, -119.4179),
+				new MKCoordinateSpan(
+					LocationHelper.KilometersToLatitudeDegrees(20),
+					LocationHelper.KilometersToLongitudeDegrees(20, 36.7783)
+				)), false);
+			map_prop.AddAnnotation (new TRMapAnnotation(null, null, null, new CLLocationCoordinate2D(36.7783, -119.4179)));
+		}
 
-			public SearchResultDetailTableViewSource (UITableView tableView, SearchResultDetailView vc) : base (tableView)
-			{
-				this.masterView = vc;
+		[Export ("mapView:viewForAnnotation:")]
+		public MapKit.MKAnnotationView GetViewForAnnotation (MapKit.MKMapView mapView, MapKit.IMKAnnotation annotation)
+		{
+			MKAnnotationView annotationView = mapView.DequeueReusableAnnotation (TRMapAnnotation.Identifier);
 
-				mapCell = (SRDetailMapCell)tableView.DequeueReusableCell (SRDetailMapCell.Identifier);
-				titleCell = (SRDetailTitleCell)tableView.DequeueReusableCell (SRDetailTitleCell.Identifier);
-				valueCell = (SRDetailValueCell)tableView.DequeueReusableCell (SRDetailValueCell.Identifier);
-				descCell = (SRDetailDescCell)tableView.DequeueReusableCell (SRDetailDescCell.Identifier);
-
-				mapCell.BindData (masterView);
-				titleCell.BindData (masterView);
-				valueCell.BindData (masterView);
-				descCell.BindData (masterView);
+			if (annotationView == null) {
+				annotationView = new MKAnnotationView (annotation, TRMapAnnotation.Identifier);
+				annotationView.Image = UIImage.FromBundle ("icon_custom_pin.png");
+			} else {
+				annotationView.Annotation = annotation;
 			}
 
-			public override nint RowsInSection (UITableView tableview, nint section)
-			{
-				if (ItemsSource == null) {
-					return 4;
-				} else {
-					return ItemsSource.Cast<CottagePhoto> ().Count () + 4;
-				}
-			}
+			annotationView.CanShowCallout = false;
 
-			public override nint NumberOfSections (UITableView tableView)
-			{
-				return 1;
-			}
-
-			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
-			{
-				switch (indexPath.Row) {
-				case 0:
-					return mapCell;
-				case 1:
-					return titleCell;
-				case 2:
-					return valueCell;
-				case 3:
-					return descCell;
-				default:
-					SRDetailImageCell cell = (SRDetailImageCell)tableView.DequeueReusableCell (SRDetailImageCell.Identifier);
-					cell.IVItem.ClipsToBounds = true;
-					cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");
-					cell.IVItem.ImageUrl = ItemsSource.Cast<CottagePhoto> ().ToList () [indexPath.Row - 4].MediaURL;
-					return cell;
-
-				}
-			}
-
-			protected override object GetItemAt (NSIndexPath indexPath)
-			{
-				if (indexPath.Row > 3) {
-					CottagePhoto photo = ItemsSource.Cast<CottagePhoto> ().ToList () [indexPath.Row - 4];
-					return photo;
-				} else {
-					return null;
-				}
-			}
-
-			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
-			{
-				switch (indexPath.Row) {
-				case 0:
-					return mapCell.CellHeight;
-				case 1:
-					return titleCell.CellHeight;
-				case 2:
-					return valueCell.CellHeight;
-				case 3:
-					return descCell.CellHeight;
-				default:
-					return UIScreen.MainScreen.Bounds.Width * 9 / 16;
-					break;
-				}
-
-				return 0;
-			}
+			return annotationView;
 		}
 	}
 }

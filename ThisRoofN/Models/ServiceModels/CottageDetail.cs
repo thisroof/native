@@ -119,6 +119,21 @@ namespace ThisRoofN.Models.Service
 
 		[DataMember(Name="listing_participants")]
 		public List<CottageParticipant> Participants {get;set;}
+
+		[DataMember(Name="listing_status")]
+		public string Status {get;set;}
+
+		[DataMember(Name="property_type")]
+		public string PropertyType { get; set; }
+
+		[DataMember(Name="year_built")]
+		public string YearBuilt {get;set;}
+
+		[DataMember(Name="listing_date")]
+		public DateTime ListingDate{get;set;}
+
+		[DataMember(Name="mls_number")]
+		public string MlsNumber { get; set; }
 	}
 
 	[DataContract]

@@ -62,23 +62,12 @@ namespace ThisRoofN.ViewModels
 			}
 		}
 
-		private async void GotoDetail (int index)
+		private void GotoDetail (int index)
 		{
-			string propertyID =  DataHelper.SearchResults [index].CottageID;
-
-			this.IsLoading = true;
-			this.LoadingText = "Loading Detail";
-			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
-
-			DataHelper.SelectedCottage =  DataHelper.SearchResults [index];
-			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail,  DataHelper.SearchResults[index]);
-
-			this.IsLoading = false;
-
-			ShowViewModel<SearchResultDetailViewModel> ();
+			GotoDetailItem(TileItems[index]);
 		}
 
-		private async void GotoDetailItem (TRCottageSimple item)
+		private void GotoDetailItem (TRCottageSimple item)
 		{
 			string propertyID =  item.CottageID;
 			int index = DataHelper.SearchResults.FindIndex (a => a.CottageID == propertyID);

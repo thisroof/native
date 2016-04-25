@@ -83,7 +83,7 @@ namespace ThisRoofN.iOS
 		public override void ViewWillLayoutSubviews ()
 		{
 			base.ViewWillLayoutSubviews ();
-			moviePlayer.View.Frame = this.view_video.Frame;
+			moviePlayer.View.Frame = UIScreen.MainScreen.Bounds;
 		}
 
 		public override void ViewWillDisappear (bool animated)
@@ -98,7 +98,7 @@ namespace ThisRoofN.iOS
 		private void InitVideoView()
 		{
 			moviePlayer	= new MPMoviePlayerController (NSUrl.FromFilename ("Videos/SplashVideo.mp4"));
-			moviePlayer.View.Frame = this.view_video.Frame;
+			moviePlayer.View.Frame = UIScreen.MainScreen.Bounds;
 			moviePlayer.ScalingMode = MPMovieScalingMode.AspectFill;
 			moviePlayer.ControlStyle = MPMovieControlStyle.None;
 			moviePlayer.MovieControlMode = MPMovieControlMode.Hidden;

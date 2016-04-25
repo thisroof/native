@@ -42,7 +42,7 @@ namespace ThisRoofN.iOS
 			InitUserLocations ();
 
 			// Init the State Collection View
-			var nationsSource = new MvxCollectionViewSource (cv_nations, new NSString ("SearchAreaCheckboxCVCell"));
+			var nationsSource = new StateCollectionViewSource (this, cv_nations, new NSString ("SearchAreaCheckboxCVCell"));
 			cv_nations.AllowsSelection = true;
 			cv_nations.Source = nationsSource;
 			cv_nations.Delegate = this;
@@ -71,8 +71,6 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (locationSuggestionSource).To (vm => vm.AddressSuggestionItems);
 			bindingSet.Bind (txt_address).To (vm => vm.Address);
 			bindingSet.Bind (commuteSource).To (vm => vm.CommuteItems);
-			bindingSet.Bind (btn_selectAll).To (vm => vm.SelectAllStatesCommand).CommandParameter (false);
-			bindingSet.Bind (btn_clearAll).To (vm => vm.SelectAllStatesCommand).CommandParameter (true);
 
 			bindingSet.Apply ();
 
@@ -88,18 +86,19 @@ namespace ThisRoofN.iOS
 			}));
 
 			btn_getOwnLocation.TouchUpInside += (object sender, EventArgs e) => {
-				if(CLLocationManager.Status == CLAuthorizationStatus.Authorized || 
-					CLLocationManager.Status == CLAuthorizationStatus.AuthorizedAlways || 
-					CLLocationManager.Status == CLAuthorizationStatus.AuthorizedWhenInUse) {
-					UserDialogs.Instance.ShowLoading();
-					locationManager.StartUpdatingLocation();
+				if (CLLocationManager.Status == CLAuthorizationStatus.Authorized ||
+				   CLLocationManager.Status == CLAuthorizationStatus.AuthorizedAlways ||
+				   CLLocationManager.Status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+					UserDialogs.Instance.ShowLoading ();
+					locationManager.StartUpdatingLocation ();
 				} else {
 					UserDialogs.Instance.Alert ("Please turn on location service in settings.", "Location Service OFF");
 				}
 			};
 		}
 
-		private void InitUserLocations() {
+		private void InitUserLocations ()
+		{
 
 			locationManager = new CLLocationManager ();
 			locationManager.DesiredAccuracy = CLLocation.AccuracyBest;
@@ -123,16 +122,16 @@ namespace ThisRoofN.iOS
 			}
 
 			locationManager.AuthorizationChanged += (object sender, CLAuthorizationChangedEventArgs e) => {
-				if(e.Status == CLAuthorizationStatus.Authorized || 
-					e.Status == CLAuthorizationStatus.AuthorizedAlways || 
-					e.Status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+				if (e.Status == CLAuthorizationStatus.Authorized ||
+				   e.Status == CLAuthorizationStatus.AuthorizedAlways ||
+				   e.Status == CLAuthorizationStatus.AuthorizedWhenInUse) {
 					this.locationManager.RequestWhenInUseAuthorization ();
-					if(string.IsNullOrEmpty(ViewModelInstance.Address)) {
-						UserDialogs.Instance.ShowLoading();
-						locationManager.StartUpdatingLocation();
+					if (string.IsNullOrEmpty (ViewModelInstance.Address)) {
+						UserDialogs.Instance.ShowLoading ();
+						locationManager.StartUpdatingLocation ();
 					}
 
-				} else if(e.Status == CLAuthorizationStatus.NotDetermined) {
+				} else if (e.Status == CLAuthorizationStatus.NotDetermined) {
 					this.locationManager.RequestWhenInUseAuthorization ();
 				} else {
 					UserDialogs.Instance.Alert ("Please turn on location service in settings.", "Location Service OFF");
@@ -141,13 +140,14 @@ namespace ThisRoofN.iOS
 				
 			locationManager.LocationsUpdated += LocationUpdated;
 			locationManager.LocationUpdatesPaused += (object sender, EventArgs e) => {
-				UserDialogs.Instance.HideLoading();
+				UserDialogs.Instance.HideLoading ();
 			};
 		}
 
-		private async void LocationUpdated(object sender, CLLocationsUpdatedEventArgs e) {
-			locationManager.StopUpdatingLocation();	
-			UserDialogs.Instance.HideLoading();
+		private async void LocationUpdated (object sender, CLLocationsUpdatedEventArgs e)
+		{
+			locationManager.StopUpdatingLocation ();	
+			UserDialogs.Instance.HideLoading ();
 
 			if (e.Locations.Length > 0) {
 				ViewModelInstance.GetCurrentAddressCommand.Execute (new Location () {
@@ -181,24 +181,9 @@ namespace ThisRoofN.iOS
 
 		private void InitUI ()
 		{
-			switch_city.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
-			switch_metro.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
-			switch_rural.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
-			switch_suburb.Transform = CGAffineTransform.MakeScale(0.75f, 0.75f);
-
-			switch_rural.On = false;
-
 			view_addressBack.Layer.BorderWidth = 1.0f;
 			view_addressBack.Layer.BorderColor = UIColor.LightGray.CGColor;
 			view_addressBack.Layer.CornerRadius = 3.0f;
-
-			btn_selectAll.Layer.BorderWidth = 1.0f;
-			btn_selectAll.Layer.BorderColor = UIColor.LightGray.CGColor;
-			btn_selectAll.Layer.CornerRadius = 3.0f;
-
-			btn_clearAll.Layer.BorderWidth = 1.0f;
-			btn_clearAll.Layer.BorderColor = UIColor.LightGray.CGColor;
-			btn_clearAll.Layer.CornerRadius = 3.0f;
 
 			slider_distance.MinValue = 0;
 
@@ -232,13 +217,14 @@ namespace ThisRoofN.iOS
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
 					tbl_commuteItems.Hidden = false;
+					tbl_commuteItems.ReloadData();
 					break;
 				case 1: // Distnace Selected
 					lbl_distanceMark.Text = "Distance";
 					slider_distance.MaxValue = TRConstant.SearchDistances.Count () - 1;
 					view_distance.Hidden = false;
 					view_nationWide.Hidden = true;
-					tbl_commuteItems.Hidden = true;
+					tbl_commuteItems.ReloadData();
 					break;
 				case 2: // Nation Wide Selected
 					view_distance.Hidden = true;
@@ -351,6 +337,15 @@ namespace ThisRoofN.iOS
 				masterView = _masterView;
 			}
 
+			public override nint RowsInSection (UITableView tableview, nint section)
+			{
+				if (masterView.seg_areaType.SelectedSegment == 0) {
+					return base.RowsInSection (tableview, section);
+				} else {
+					return 0;
+				}
+			}
+
 			public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
 			{
 				return 50.0f;
@@ -365,7 +360,31 @@ namespace ThisRoofN.iOS
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
 				tableView.DeselectRow (indexPath, true);
-//				masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected = !masterView.ViewModelInstance.CommuteItems [indexPath.Row].Selected;
+			}
+		}
+
+		public class StateCollectionViewSource : MvxCollectionViewSource
+		{
+			public SearchAreaModalView masterInstance;
+
+			public StateCollectionViewSource (SearchAreaModalView masterView, UICollectionView cv, NSString reuseIdentifier) : base (cv, reuseIdentifier)
+			{
+				this.masterInstance = masterView;
+			}
+
+			public override UICollectionReusableView GetViewForSupplementaryElement (UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
+			{
+				SearchAreaLocationHeaderView headerView = (SearchAreaLocationHeaderView)collectionView.DequeueReusableSupplementaryView (UICollectionElementKindSection.Header, "SearchAreaLocationHeaderView", indexPath);
+				headerView.SelectAllButton.TouchUpInside += (object sender, EventArgs e) => {
+					masterInstance.ViewModelInstance.SelectAllStatesCommand.Execute (false);
+				};
+
+				headerView.ClearAllButton.TouchUpInside += (object sender, EventArgs e) => {
+					masterInstance.ViewModelInstance.SelectAllStatesCommand.Execute (true);
+				};
+				headerView.InitView ();
+
+				return headerView;
 			}
 		}
 	}

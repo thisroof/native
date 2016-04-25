@@ -93,7 +93,7 @@ namespace ThisRoofN.iOS
 
 			if (ViewModelInstance.MapItems != null && ViewModelInstance.MapItems.Count > 0) {
 				foreach (TRCottageSimple item in ViewModelInstance.MapItems) {
-					TRMapAnnotation annotation = new TRMapAnnotation (item);
+					TRMapAnnotation annotation = new TRMapAnnotation (item.CottageID, item.Title, item.FormattedPrice, new CLLocationCoordinate2D(item.Latitude, item.Longitude));
 					topLeftCoord.Longitude = Math.Min (topLeftCoord.Longitude, annotation.Coordinate.Longitude);
 					topLeftCoord.Latitude = Math.Max (topLeftCoord.Latitude, annotation.Coordinate.Latitude);
 
@@ -130,12 +130,10 @@ namespace ThisRoofN.iOS
 
 			UIButton detailButton = UIButton.FromType (UIButtonType.DetailDisclosure);
 			detailButton.TouchUpInside += (object sender, EventArgs e) => {
-				ViewModelInstance.DetailCommand.Execute(annotation.GetTitle());
+				ViewModelInstance.DetailCommand.Execute(((TRMapAnnotation)annotation).PropertyID);
 			};
 
 			annotationView.RightCalloutAccessoryView = detailButton;
-
-
 			return annotationView;
 		}
 
@@ -150,28 +148,6 @@ namespace ThisRoofN.iOS
 			polygonView.StrokeColor = UIColor.FromRGB (0, 253, 2);
 
 			return polygonView;
-		}
-
-		public class TRMapAnnotation : MKAnnotation
-		{
-			public static string Identifier = "TRMapAnnotation";
-			private TRCottageSimple item;
-			public TRMapAnnotation(TRCottageSimple itemData)
-			{
-				item = itemData;
-			}
-
-			public override CLLocationCoordinate2D Coordinate {
-				get {
-					return new CLLocationCoordinate2D (item.Latitude, item.Longitude);
-				}
-			}
-
-			public override string Title {
-				get {
-					return item.CottageID;
-				}
-			}
 		}
 	}
 }

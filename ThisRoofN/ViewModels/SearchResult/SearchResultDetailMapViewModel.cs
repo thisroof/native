@@ -13,7 +13,7 @@ namespace ThisRoofN
 
 		public string Address {
 			get {
-				return DataHelper.SelectedCottageDetail.FormattedCityStateZip;
+				return DataHelper.SelectedCottageDetail.FormattedAddress;
 			}
 		}
 

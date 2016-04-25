@@ -119,6 +119,16 @@ namespace ThisRoofN.iOS
 			loadingView.Hidden = true;
 		}
 
+		public override void ViewWillLayoutSubviews ()
+		{
+			base.ViewWillLayoutSubviews ();
+			loadingView.Frame = UIScreen.MainScreen.Bounds;
+			loadingView.Subviews [0].Frame = new CGRect (
+				(UIScreen.MainScreen.Bounds.Width - (LOADING_GIF_WIDTH + 16)) / 2, 
+				(UIScreen.MainScreen.Bounds.Height - (LOADING_GIF_HEIGHT + 20)) / 2 - 30,
+				LOADING_GIF_WIDTH + 16,
+				LOADING_GIF_HEIGHT + 20);
+		}
 
 		#region Keyboard Notification Part
 		protected void KeyBoardDownNotification(NSNotification notification)

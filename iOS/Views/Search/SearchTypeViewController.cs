@@ -23,11 +23,6 @@ namespace ThisRoofN.iOS
 
 			InitVideoView ();
 
-//			btn_affordSearch.TitleLabel.Lines = 0;
-//			btn_affordSearch.TitleLabel.TextAlignment = UITextAlignment.Center;
-//			btn_affordSearch.SetTitle("FIND OUT HOW MUCH\nYOU CAN AFFORD...", UIControlState.Normal);
-//			btn_affordSearch.LineBreakMode = UILineBreakMode.WordWrap;
-
 			btn_affordSearch.Layer.BorderColor = UIColor.White.CGColor;
 			btn_affordSearch.Layer.BorderWidth = 1;
 
@@ -53,7 +48,7 @@ namespace ThisRoofN.iOS
 		public override void ViewWillLayoutSubviews ()
 		{
 			base.ViewWillLayoutSubviews ();
-			moviePlayer.View.Frame = this.video_view.Frame;
+			moviePlayer.View.Frame = UIScreen.MainScreen.Bounds;
 		}
 
 		public override void ViewWillDisappear (bool animated)
@@ -68,7 +63,7 @@ namespace ThisRoofN.iOS
 		private void InitVideoView()
 		{
 			moviePlayer	= new MPMoviePlayerController (NSUrl.FromFilename ("Videos/WelcomeVideo.mp4"));
-			moviePlayer.View.Frame = this.video_view.Frame;
+			moviePlayer.View.Frame = UIScreen.MainScreen.Bounds;
 			moviePlayer.ScalingMode = MPMovieScalingMode.AspectFill;
 			moviePlayer.ControlStyle = MPMovieControlStyle.None;
 			moviePlayer.MovieControlMode = MPMovieControlMode.Hidden;

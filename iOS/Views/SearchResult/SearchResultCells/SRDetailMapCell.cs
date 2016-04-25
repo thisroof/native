@@ -36,8 +36,8 @@ namespace ThisRoofN.iOS
 		{
 			this.masterView = _masterView;
 
-			masterView.BindingSet.Bind (img_like).To (vm => vm.Liked).WithConversion(new LikemarkConverter());
-			masterView.BindingSet.Bind (img_dislike).To (vm => vm.Disliked).WithConversion(new DislikemarkConverter());
+//			masterView.BindingSet.Bind (img_like).To (vm => vm.Liked).WithConversion(new LikemarkConverter());
+//			masterView.BindingSet.Bind (img_dislike).To (vm => vm.Disliked).WithConversion(new DislikemarkConverter());
 
 			InitUI ();
 		}
@@ -46,11 +46,11 @@ namespace ThisRoofN.iOS
 		{
 			cellHeight = (UIScreen.MainScreen.Bounds.Height - 60) / 2;
 
-			TRDetailItemAnnotation annotation = new TRDetailItemAnnotation (
-				masterView.ViewModelInstace.ItemDetail.Latitude, 
-				masterView.ViewModelInstace.ItemDetail.Longitude, 
-				masterView.ViewModelInstace.ItemDetail.Address.FullStreetAddress);
-			map_result.AddAnnotation (annotation);
+//			TRDetailItemAnnotation annotation = new TRDetailItemAnnotation (
+//				masterView.ViewModelInstace.ItemDetail.Latitude, 
+//				masterView.ViewModelInstace.ItemDetail.Longitude, 
+//				masterView.ViewModelInstace.ItemDetail.Address.FullStreetAddress);
+//			map_result.AddAnnotation (annotation);
 
 			map_result.ZoomEnabled = true;
 			map_result.UserInteractionEnabled = false;
@@ -94,33 +94,6 @@ namespace ThisRoofN.iOS
 
 			img_dislike.UserInteractionEnabled = true;
 			img_dislike.AddGestureRecognizer (dislikeGesture);
-		}
-
-		public class TRDetailItemAnnotation : MKAnnotation
-		{
-			public static string Identifier = "TRMapAnnotation";
-			double latitude;
-			double longitude;
-			string title;
-
-			public TRDetailItemAnnotation(double _latitude, double _longitude, string _title)
-			{
-				this.latitude = _latitude;
-				this.longitude = _longitude;
-				this.title = _title;
-			}
-
-			public override CLLocationCoordinate2D Coordinate {
-				get {
-					return new CLLocationCoordinate2D (latitude, longitude);
-				}
-			}
-
-			public override string Title {
-				get {
-					return title;
-				}
-			}
 		}
 	}
 }

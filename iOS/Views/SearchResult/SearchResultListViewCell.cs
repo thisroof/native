@@ -19,7 +19,7 @@ namespace ThisRoofN.iOS
 			this.DelayBind (() => {
 				var set = this.CreateBindingSet<SearchResultListViewCell, TRCottageSimple>();
 				set.Bind(lbl_title).To(vm => vm.Title);
-				set.Bind(lbl_price).To(vm => vm.Price);
+				set.Bind(lbl_price).To(vm => vm.FormattedPrice);
 				set.Bind(img_property).For(i => i.ImageUrl).To(vm => vm.PrimaryPhotoLink);
 				set.Apply();
 			});

@@ -16,6 +16,7 @@ namespace ThisRoofN.iOS
 	public partial class SearchResultTileView : BaseViewController,  IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
 		private bool _isLoading;
+//		private NSObject orientationObserver;
 		public UIActivityIndicatorView spinner;
 
 		public SearchResultTileView (IntPtr handle) : base (handle)
@@ -54,7 +55,17 @@ namespace ThisRoofN.iOS
 			cv_results.Delegate = this;
 			cv_results.AlwaysBounceVertical = true;
 
-			nfloat width = (UIScreen.MainScreen.Bounds.Width - 4) / 3;
+			nfloat width = 0.0f;
+			if (UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeLeft || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeRight) {
+				width = (UIScreen.MainScreen.Bounds.Width - 8) / 5;
+			} else {
+				if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
+					width = (UIScreen.MainScreen.Bounds.Width - 4) / 3;
+				} else {
+					width = (UIScreen.MainScreen.Bounds.Width - 6) / 3;
+				}
+			}
+			 
 			((UICollectionViewFlowLayout)cv_results.CollectionViewLayout).MinimumInteritemSpacing = 2.0f;
 			((UICollectionViewFlowLayout)cv_results.CollectionViewLayout).MinimumLineSpacing = 2.0f;
 			((UICollectionViewFlowLayout)cv_results.CollectionViewLayout).ItemSize = new CGSize (width, width);
@@ -65,11 +76,44 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (this).For (i => i.IsLoading).To (vm => vm.SpinnerLoading);
 			bindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
 			bindingSet.Apply ();
+
+//			UIDevice.CurrentDevice.BeginGeneratingDeviceOrientationNotifications ();
+//			this.orientationObserver = UIDevice.Notifications.ObserveOrientationDidChange ((s, e) => {
+//				
+//			});
 		}
 
-		public override void ViewDidLayoutSubviews ()
+		public override void ViewWillDisappear (bool animated)
 		{
-			base.ViewDidLayoutSubviews ();
+			base.ViewWillDisappear (animated);
+
+//			if (this.orientationObserver != null) {
+//				NSNotificationCenter.DefaultCenter.RemoveObserver (this.orientationObserver);
+//			}
+//
+//			UIDevice.CurrentDevice.EndGeneratingDeviceOrientationNotifications ();
+		}
+
+		public override void ViewWillLayoutSubviews ()
+		{
+			base.ViewWillLayoutSubviews ();
+
+			nfloat width = 0.0f;
+			if (UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeLeft || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeRight) {
+				width = (UIScreen.MainScreen.Bounds.Width - 8) / 5;
+			} else if(UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.Portrait || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.PortraitUpsideDown){
+				if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
+					width = (UIScreen.MainScreen.Bounds.Width - 4) / 3;
+				} else {
+					width = (UIScreen.MainScreen.Bounds.Width - 6) / 3;
+				}
+			}
+
+			((UICollectionViewFlowLayout)cv_results.CollectionViewLayout).ItemSize = new CGSize (width, width);
+
+			if (spinner != null) {
+				spinner.Frame = new CGRect (0, 0, UIScreen.MainScreen.Bounds.Width, 44);
+			}
 		}
 
 		public void ReloadData ()
@@ -141,6 +185,14 @@ namespace ThisRoofN.iOS
 				SRTileImageCell cell = (SRTileImageCell)base.GetOrCreateCellFor (collectionView, indexPath, item);
 				cell.IVItem.ContentMode = UIViewContentMode.ScaleAspectFill;
 				cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder_small", "png");
+
+				CAGradientLayer gradLayer = GradientHelper.TileCellGradient;
+				gradLayer.Frame = cell.ViewTitleBack.Bounds;
+
+				if (cell.ViewTitleBack.Layer.Sublayers.Length > 1) {
+					cell.ViewTitleBack.Layer.Sublayers [0].RemoveFromSuperLayer ();
+				}
+				cell.ViewTitleBack.Layer.InsertSublayer (gradLayer, 0);
 
 				return cell;
 			}

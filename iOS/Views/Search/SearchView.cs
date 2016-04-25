@@ -100,7 +100,7 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewDidLayoutSubviews ();
 			if (mPriceRangeSlider != null) {
-				mPriceRangeSlider.Frame = new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height);
+				mPriceRangeSlider.Frame = new CGRect (0, 0, UIScreen.MainScreen.Bounds.Width - 32, this.view_rangeSlider.Frame.Height);
 			}
 		}
 	}

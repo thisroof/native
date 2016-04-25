@@ -53,7 +53,7 @@ namespace ThisRoofN.Droid
 
 			Button btn_map = view.FindViewById<Button> (Resource.Id.btn_map);
 			btn_map.Click += (object sender, EventArgs e) => {
-				ViewModelInstance.GotoMap.Execute(null);
+				ViewModelInstance.GoMapCommand.Execute(null);
 			};
 
 			ImageView iv_nextImage = (ImageView)view.FindViewById<ImageView> (Resource.Id.iv_nextImage);

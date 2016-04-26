@@ -57,6 +57,22 @@ namespace ThisRoofN.ViewModels
 			}
 
 			SelectedSortType = SortTypes [0];
+
+			_searchItems = new List<ModalType> {
+				ModalType.SearchArea,
+				ModalType.Lifestyle,
+				ModalType.InArea,
+				ModalType.HomeDetails,
+				ModalType.InHome,
+				ModalType.SavedHome
+			};
+		}
+
+		private List<ModalType> _searchItems;
+		public List<ModalType> SearchItems {
+			get {
+				return _searchItems;
+			}
 		}
 
 		public ICommand GotoModalCommand {

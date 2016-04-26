@@ -41,7 +41,7 @@
     <MtouchUseSGen>true</MtouchUseSGen>
     <CodesignKey>iPhone Distribution: This Roof, LLC (3V52WRLNDD)</CodesignKey>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
-    <CodesignProvision>9c9c021d-91d6-4112-8394-8630a5be6e3a</CodesignProvision>
+    <CodesignProvision>d0a3c1d0-4e43-44fd-a02e-2056a913832d</CodesignProvision>
     <IpaPackageName>ThisRoof.ipa</IpaPackageName>
     <BuildIpa>true</BuildIpa>
   </PropertyGroup>
@@ -231,18 +231,12 @@
     <ImageAsset Include="Resources\Images.xcassets\img_google_logo.imageset\powered_by_google_on_white%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_emp.imageset\icon_tick_emp.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_checkbox_tick.imageset\icon_checkbox_tick.png" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_architecture.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_homeDetails.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_homeStructure.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_location.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_area.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_inArea.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_inHome.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_lifeStyle.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_architecture.imageset\img_architecture.png" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_area.imageset\img_searchArea.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_homeDetails.imageset\img_homedetails.png" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_homeStructure.imageset\img_homestructure.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_inArea.imageset\img_inArea.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_inHome.imageset\img_inhome.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_lifeStyle.imageset\img_lifestyle.png" />
@@ -251,10 +245,7 @@
     <ImageAsset Include="Resources\Images.xcassets\img_search_location.imageset\img_location copy.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_lifeStyle.imageset\img_lifestyle copy.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_inHome.imageset\img_inhome copy.png" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_homeStructure.imageset\img_homestructure copy.png" />
     <ImageAsset Include="Resources\Images.xcassets\img_search_homeDetails.imageset\img_homedetails copy.png" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_area.imageset\img_searchArea copy.png" />
-    <ImageAsset Include="Resources\Images.xcassets\img_search_architecture.imageset\img_architecture copy.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\.DS_Store" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Icon-40-1%402x.png" />
@@ -625,6 +616,14 @@
     <Compile Include="Views\Search\FilterModals\SearchAreaLocationHeaderView.cs" />
     <Compile Include="Views\Search\FilterModals\SearchAreaLocationHeaderView.designer.cs">
       <DependentUpon>SearchAreaLocationHeaderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\SearchCVHeader.cs" />
+    <Compile Include="Storyboards\SearchCVHeader.designer.cs">
+      <DependentUpon>SearchCVHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Storyboards\SearchCVCell.cs" />
+    <Compile Include="Storyboards\SearchCVCell.designer.cs">
+      <DependentUpon>SearchCVCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

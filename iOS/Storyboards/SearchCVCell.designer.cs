@@ -9,25 +9,25 @@ using System.CodeDom.Compiler;
 
 namespace ThisRoofN.iOS
 {
-	[Register ("SearchView")]
-	partial class SearchView
+	[Register ("SearchCVCell")]
+	partial class SearchCVCell
 	{
 		[Outlet]
-		UIKit.UIButton btn_viewResult { get; set; }
+		UIKit.UIImageView iv_item { get; set; }
 
 		[Outlet]
-		UIKit.UICollectionView cv_search { get; set; }
+		UIKit.UILabel lbl_title { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btn_viewResult != null) {
-				btn_viewResult.Dispose ();
-				btn_viewResult = null;
+			if (iv_item != null) {
+				iv_item.Dispose ();
+				iv_item = null;
 			}
 
-			if (cv_search != null) {
-				cv_search.Dispose ();
-				cv_search = null;
+			if (lbl_title != null) {
+				lbl_title.Dispose ();
+				lbl_title = null;
 			}
 		}
 	}

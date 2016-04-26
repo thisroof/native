@@ -87,10 +87,10 @@
 		</dict>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1</string>
+	<string>0.2</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location service is required.</string>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>0</string>
 </dict>
 </plist>

@@ -10,12 +10,14 @@ using CoreGraphics;
 using MvvmCross.Binding.BindingContext;
 using AllianceCustomPicker;
 using System.Linq;
+using MvvmCross.Binding.iOS.Views;
 
 namespace ThisRoofN.iOS
 {
-	public partial class SearchView : BaseViewController
+	public partial class SearchView : BaseViewController, IUICollectionViewDelegateFlowLayout, IUICollectionViewDelegate
 	{
-		private TRMovingLabelRangeSlider mPriceRangeSlider;
+		public SearchCVHeader cvHeader;
+		public MvxFluentBindingDescriptionSet<SearchView, SearchViewModel> BindingSet;
 
 		public SearchView (IntPtr handle) : base (handle)
 		{
@@ -33,59 +35,25 @@ namespace ThisRoofN.iOS
 
 			SetupNavigationBar ();
 
-			InitRangeSlider ();
-
-			btn_lifeStyle.TitleLabel.Lines = 0;
-			btn_homeDetails.TitleLabel.Lines = 0;
 			btn_viewResult.Layer.BorderWidth = 1.0f;
 			btn_viewResult.Layer.BorderColor = UIColor.LightGray.CGColor;
 
+			var searchItemSource = new SearchItemSource (this, cv_search, new NSString ("SearchCVCell"));
+			cv_search.AllowsSelection = true;
+			cv_search.Source = searchItemSource;
+			cv_search.Delegate = this;
+			((UICollectionViewFlowLayout)cv_search.CollectionViewLayout).MinimumInteritemSpacing = 2.0f;
+			((UICollectionViewFlowLayout)cv_search.CollectionViewLayout).MinimumLineSpacing = 2.0f;
+
+			BindingSet = this.CreateBindingSet<SearchView, SearchViewModel> ();
 			var bindingSet = this.CreateBindingSet<SearchView, SearchViewModel> ();
 			bindingSet.Bind (loadingView).For(i => i.Hidden).To (vm => vm.IsHideLoading);
 			bindingSet.Bind (loadingLabel).To (vm => vm.LoadingText);
-
-			bindingSet.Bind(mPriceRangeSlider.minLabel).To (vm => vm.MinBudgetString);
-			bindingSet.Bind(mPriceRangeSlider.maxLabel).To (vm => vm.MaxBudgetString);
-			bindingSet.Bind(mPriceRangeSlider.rangeSlider).For ("LeftValueChange").To (vm => vm.MinBudget);
-			bindingSet.Bind(mPriceRangeSlider.rangeSlider).For ("RightValueChange").To (vm => vm.MaxBudget);
-
 			bindingSet.Bind (backButton).To (vm => vm.CloseCommand);
 			bindingSet.Bind (settingButton).To (vm => vm.SettingCommand);
 			bindingSet.Bind (btn_viewResult).To (vm => vm.SearchCommand);
-
-			bindingSet.Bind (btn_propertyTypes).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.PropertyTypes);
-			bindingSet.Bind (btn_searchArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.SearchArea);
-			bindingSet.Bind (btn_inHome).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InHome);
-			bindingSet.Bind (btn_inArea).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.InArea);
-//			bindingSet.Bind (btn_homeType).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeType);
-			bindingSet.Bind (btn_homeDetails).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.HomeDetails);
-			bindingSet.Bind (btn_lifeStyle).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.Lifestyle);
-			bindingSet.Bind (btn_savedHome).To (vm => vm.GotoModalCommand).CommandParameter (ThisRoofN.ViewModels.SearchViewModel.ModalType.SavedHome);
-
-			bindingSet.Bind (txt_sortBy).To (vm => vm.SelectedSortType);
+			bindingSet.Bind (searchItemSource).To (vm => vm.SearchItems);
 			bindingSet.Apply ();
-
-
-			AlliancePicker picker = new AlliancePicker(this);
-			picker.PlainPickerItems = TRConstant.SortTypes.Values.ToList();
-			picker.SourceField = txt_sortBy;
-			picker.Type = PickerType.List;
-			picker.HeaderTitle = "Choose Sort By";
-			picker.View.Layer.CornerRadius = 5.0f;
-
-			btn_selectSortBy.TouchUpInside += (object sender, EventArgs e) => {
-				picker.Show();
-			};
-		}
-
-		private void InitRangeSlider ()
-		{
-			mPriceRangeSlider = new TRMovingLabelRangeSlider (
-				new CGRect (0, 0, this.view_rangeSlider.Frame.Width, this.view_rangeSlider.Frame.Height), 
-				0, 
-				TRConstant.PriceStringValues.Count - 1);
-
-			this.view_rangeSlider.AddSubview (mPriceRangeSlider);
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -96,11 +64,58 @@ namespace ThisRoofN.iOS
 			this.NavigationController.SetToolbarHidden (true, true);
 		}
 
-		public override void ViewDidLayoutSubviews ()
+		public override void ViewWillLayoutSubviews ()
 		{
-			base.ViewDidLayoutSubviews ();
-			if (mPriceRangeSlider != null) {
-				mPriceRangeSlider.Frame = new CGRect (0, 0, UIScreen.MainScreen.Bounds.Width - 32, this.view_rangeSlider.Frame.Height);
+			base.ViewWillLayoutSubviews ();
+
+			if (cv_search != null) {
+				nfloat width = 0.0f;
+
+				if (UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeLeft || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeRight) {
+					width = (UIScreen.MainScreen.Bounds.Width - 4) / 3;
+				} else if(UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.Portrait || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.PortraitUpsideDown){
+					if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
+						width = (UIScreen.MainScreen.Bounds.Width - 2) / 2;
+					} else {
+						width = (UIScreen.MainScreen.Bounds.Width - 6) / 3;
+					}
+				}
+
+				((UICollectionViewFlowLayout)cv_search.CollectionViewLayout).ItemSize = new CGSize (width, width);
+
+				if (cvHeader != null) {
+					cvHeader.PriceRangeSlider.Frame = new CGRect (0, 0, UIScreen.MainScreen.Bounds.Width - 32, cvHeader.PriceRangeView.Frame.Height);
+				}
+			}
+		}
+
+		[Export ("collectionView:didSelectItemAtIndexPath:")]
+		public void ItemSelected (UIKit.UICollectionView collectionView, Foundation.NSIndexPath indexPath)
+		{
+			ViewModelInstance.GotoModalCommand.Execute (ViewModelInstance.SearchItems[indexPath.Row]);
+		}
+
+		public class SearchItemSource : MvxCollectionViewSource
+		{
+			public SearchView masterInstance;
+
+			public SearchItemSource (SearchView masterView, UICollectionView cv, NSString reuseIdentifier) : base (cv, reuseIdentifier)
+			{
+				this.masterInstance = masterView;
+			}
+
+			public override UICollectionReusableView GetViewForSupplementaryElement (UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
+			{
+				masterInstance.cvHeader = (SearchCVHeader)collectionView.DequeueReusableSupplementaryView (UICollectionElementKindSection.Header, "SearchCVHeader", indexPath);
+				masterInstance.cvHeader.InitView (masterInstance);
+				return masterInstance.cvHeader;
+			}
+
+			protected override UICollectionViewCell GetOrCreateCellFor (UICollectionView collectionView, NSIndexPath indexPath, object item)
+			{
+				SearchCVCell cell = (SearchCVCell)base.GetOrCreateCellFor (collectionView, indexPath, item);
+				cell.InitCell ((ThisRoofN.ViewModels.SearchViewModel.ModalType)item);
+				return cell;
 			}
 		}
 	}

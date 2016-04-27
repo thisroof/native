@@ -36,7 +36,7 @@ namespace ThisRoofN.iOS
 
 			// Set Naivgation bar colors
 			UINavigationBar.Appearance.BarTintColor = TRColorHelper.NavBarBlue;
-			UINavigationBar.Appearance.SetTitleTextAttributes (new UITextAttributes () { TextColor = UIColor.White });
+			UINavigationBar.Appearance.SetTitleTextAttributes (new UITextAttributes () {Font= UIFont.BoldSystemFontOfSize(24.0f), TextColor = TRColorHelper.LightBlue });
 
 			UIToolbar.Appearance.BarTintColor = TRColorHelper.LightBlue;
 			UIToolbar.Appearance.SetShadowImage (new UIImage (), UIToolbarPosition.Any);

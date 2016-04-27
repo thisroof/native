@@ -280,8 +280,7 @@ namespace ThisRoofN.ViewModels
 					}).ToList ();
 
 					if (DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.Commute) {
-						DataHelper.SearchMapRange = null;
-//						DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
+						DataHelper.SearchMapRange = await mTRService.GetPolygon (deviceInfo.GetUniqueIdentifier ());
 					} else {
 						DataHelper.SearchMapRange = null;
 					}

@@ -41,6 +41,8 @@ namespace ThisRoofN.iOS
 			view_btn_share.Layer.CornerRadius = view_btn_back.Frame.Width / 2;
 			view_btn_like.Layer.CornerRadius = view_btn_back.Frame.Width / 2;
 			view_btn_dislike.Layer.CornerRadius = view_btn_back.Frame.Width / 2;
+			view_prevImgBack.Layer.CornerRadius = view_prevImgBack.Frame.Width / 2;
+			view_nextImgBack.Layer.CornerRadius = view_nextImgBack.Frame.Width / 2;
 			view_dislikeSetting.Layer.CornerRadius = 5.0f;
 
 			img_property.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder", "png");

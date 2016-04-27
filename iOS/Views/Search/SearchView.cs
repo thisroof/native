@@ -77,7 +77,7 @@ namespace ThisRoofN.iOS
 					if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
 						width = (UIScreen.MainScreen.Bounds.Width - 2) / 2;
 					} else {
-						width = (UIScreen.MainScreen.Bounds.Width - 6) / 3;
+						width = (UIScreen.MainScreen.Bounds.Width - 4) / 2;
 					}
 				}
 

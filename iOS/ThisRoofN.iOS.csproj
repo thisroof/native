@@ -287,8 +287,6 @@
     <ImageAsset Include="Resources\Images.xcassets\icon_sqft.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_next.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_prev.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_next.imageset\icon_next.png" />
-    <ImageAsset Include="Resources\Images.xcassets\icon_prev.imageset\icon_prev.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_custom_pin.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\icon_custom_pin.imageset\icon_custom_pin%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_custom_pin.imageset\icon_custom_pin%403x.png" />
@@ -340,6 +338,11 @@
     <ImageAsset Include="Resources\Images.xcassets\icon_tab_map.imageset\MapView%401x.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_tab_map.imageset\MapView%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\icon_tab_map.imageset\MapView%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_next.imageset\icon_next%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_next.imageset\icon_next%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_prev.imageset\icon_prev%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\icon_prev.imageset\icon_prev%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\img_nav_title.imageset\thisroof-txt-only.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -617,13 +620,13 @@
     <Compile Include="Views\Search\FilterModals\SearchAreaLocationHeaderView.designer.cs">
       <DependentUpon>SearchAreaLocationHeaderView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Storyboards\SearchCVHeader.cs" />
-    <Compile Include="Storyboards\SearchCVHeader.designer.cs">
-      <DependentUpon>SearchCVHeader.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Storyboards\SearchCVCell.cs" />
-    <Compile Include="Storyboards\SearchCVCell.designer.cs">
+    <Compile Include="Views\Search\SearchCVCell.cs" />
+    <Compile Include="Views\Search\SearchCVCell.designer.cs">
       <DependentUpon>SearchCVCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchCVHeader.cs" />
+    <Compile Include="Views\Search\SearchCVHeader.designer.cs">
+      <DependentUpon>SearchCVHeader.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

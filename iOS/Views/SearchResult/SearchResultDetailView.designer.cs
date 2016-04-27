@@ -134,6 +134,12 @@ namespace ThisRoofN.iOS
 
 		[Outlet]
 		UIKit.UIView view_infoBack { get; set; }
+
+		[Outlet]
+		UIKit.UIView view_nextImgBack { get; set; }
+
+		[Outlet]
+		UIKit.UIView view_prevImgBack { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -340,6 +346,16 @@ namespace ThisRoofN.iOS
 			if (view_infoBack != null) {
 				view_infoBack.Dispose ();
 				view_infoBack = null;
+			}
+
+			if (view_prevImgBack != null) {
+				view_prevImgBack.Dispose ();
+				view_prevImgBack = null;
+			}
+
+			if (view_nextImgBack != null) {
+				view_nextImgBack.Dispose ();
+				view_nextImgBack = null;
 			}
 		}
 	}

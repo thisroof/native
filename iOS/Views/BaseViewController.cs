@@ -62,6 +62,7 @@ namespace ThisRoofN.iOS
 			titleImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
 			titleImageView.Image = logoImage;
 			this.NavigationItem.TitleView = titleImageView;
+//			this.Title = "THISROOF";
 
 			backButton = new UIButton (new CGRect (0, 0, 20, 20));
 			backButton.SetImage (UIImage.FromBundle ("icon_arrow_back"), UIControlState.Normal);

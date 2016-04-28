@@ -41,7 +41,6 @@
     <Compile Include="ViewModels\Search\SearchTypeViewModel.cs" />
     <Compile Include="Interfaces\IUserPreference.cs" />
     <Compile Include="Interfaces\IDevice.cs" />
-    <Compile Include="ViewModels\Search\NormalSearchViewModel.cs" />
     <Compile Include="Helpers\DeviceHelper.cs" />
     <Compile Include="Database\TRDatabase.cs" />
     <Compile Include="ViewModels\Other\CheckboxItemModel.cs" />

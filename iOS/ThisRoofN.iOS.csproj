@@ -41,7 +41,7 @@
     <MtouchUseSGen>true</MtouchUseSGen>
     <CodesignKey>iPhone Distribution: This Roof, LLC (3V52WRLNDD)</CodesignKey>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
-    <CodesignProvision>d0a3c1d0-4e43-44fd-a02e-2056a913832d</CodesignProvision>
+    <CodesignProvision>e6a9afb4-e7b5-4173-a2c3-825bccc7afcd</CodesignProvision>
     <IpaPackageName>ThisRoof.ipa</IpaPackageName>
     <BuildIpa>true</BuildIpa>
   </PropertyGroup>
@@ -388,51 +388,6 @@
     <Compile Include="Helpers\UserPreferenceHelper.cs" />
     <Compile Include="Helpers\DeviceHelper.cs" />
     <Compile Include="Helpers\Reachability.cs" />
-    <Compile Include="Views\Search\NormalSearchViewController.cs" />
-    <Compile Include="Views\Search\NormalSearchViewController.designer.cs">
-      <DependentUpon>NormalSearchViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchAreaCell.designer.cs">
-      <DependentUpon>SearchAreaCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchBathsCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchBathsCell.designer.cs">
-      <DependentUpon>SearchBathsCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchBudgetCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchBudgetCell.designer.cs">
-      <DependentUpon>SearchBudgetCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchButtonCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchButtonCell.designer.cs">
-      <DependentUpon>SearchButtonCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchFilterCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchFilterCell.designer.cs">
-      <DependentUpon>SearchFilterCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchSoryByCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchSoryByCell.designer.cs">
-      <DependentUpon>SearchSoryByCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchBedsCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchBedsCell.designer.cs">
-      <DependentUpon>SearchBedsCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchExcludedAreaCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchExcludedAreaCell.designer.cs">
-      <DependentUpon>SearchExcludedAreaCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchForeclosureCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchForeclosureCell.designer.cs">
-      <DependentUpon>SearchForeclosureCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\SearchPropertyTypeCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchPropertyTypeCell.designer.cs">
-      <DependentUpon>SearchPropertyTypeCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\NormalSearchCells\ISearchCell.cs" />
     <Compile Include="Views\Search\NormalSearchCells\CheckboxCVCell.cs" />
     <Compile Include="Views\Search\NormalSearchCells\CheckboxCVCell.designer.cs">
       <DependentUpon>CheckboxCVCell.cs</DependentUpon>
@@ -479,10 +434,6 @@
     <Compile Include="ValueConverters\StringFormatConverter.cs" />
     <Compile Include="ValueConverters\LikemarkConverter.cs" />
     <Compile Include="ValueConverters\DislikemarkConverter.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchDetailFilterCell.cs" />
-    <Compile Include="Views\Search\NormalSearchCells\SearchDetailFilterCell.designer.cs">
-      <DependentUpon>SearchDetailFilterCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Search\AffordSearchView.cs" />
     <Compile Include="Views\Search\AffordSearchView.designer.cs">
       <DependentUpon>AffordSearchView.cs</DependentUpon>

@@ -26,6 +26,7 @@ namespace ThisRoofN.Models.App
 			Bathrooms = (int)serverData.Data.Bathrooms;
 			Description = serverData.Data.PropertyDescription;
 			LotSquareSize = serverData.LotSquareSize;
+			Sqft = (int)serverData.Sqft;
 
 			Sataus = serverData.Data.Status;
 			PropertyType = serverData.Data.PropertyType;
@@ -46,6 +47,7 @@ namespace ThisRoofN.Models.App
 		public int 						Bedrooms { get; set; }
 		public int						Bathrooms { get; set; }
 		public int						LotSquareSize {get;set;}
+		public int 						Sqft { get; set; }
 
 		public string 					Sataus { get; set; }
 		public string 					PropertyType {get;set;}
@@ -92,8 +94,12 @@ namespace ThisRoofN.Models.App
 
 		public int DaysOnMarket {
 			get {
-				TimeSpan difference = DateTime.Now - serverDetailData.Data.ListingDate;
-				return (int)difference.TotalDays;
+				if (serverDetailData.Data.ListingDate.Year < 1900) {
+					return 0;
+				} else {
+					TimeSpan difference = DateTime.Now - serverDetailData.Data.ListingDate;
+					return (int)difference.TotalDays;
+				}
 			}
 		}
 

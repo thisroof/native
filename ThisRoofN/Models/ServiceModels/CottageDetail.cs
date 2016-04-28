@@ -63,6 +63,14 @@ namespace ThisRoofN.Models.Service
 			}
 		}
 
+		public int Sqft {
+			get {
+				double value = 0;
+				double.TryParse(this.Data.SquareFootageStructure, out value);
+				return (int)value;
+			}
+		}
+
 		public string LicenseNumber
 		{
 			get

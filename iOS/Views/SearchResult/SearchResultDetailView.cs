@@ -16,6 +16,7 @@ using CoreAnimation;
 using MapKit;
 using CoreLocation;
 using ThisRoofN.Helpers;
+using Acr.UserDialogs;
 
 namespace ThisRoofN.iOS
 {
@@ -51,6 +52,16 @@ namespace ThisRoofN.iOS
 			gradLayer.Frame = view_infoBack.Bounds;
 			view_infoBack.Layer.InsertSublayer (gradLayer, 0);
 
+			btn_buy.TouchUpInside += (object sender, EventArgs e) => {
+				string phoneNo = "9496828082";
+				NSUrl phoneURL = new NSUrl(string.Format("telprompt://{0}", phoneNo));
+				if(UIApplication.SharedApplication.CanOpenUrl(phoneURL)) {
+					UIApplication.SharedApplication.OpenUrl(phoneURL);
+				} else {
+					UserDialogs.Instance.Alert("Call facility is not available!", "ThisRoof");
+				}
+			};
+
 			// Bind Values
 			var bindingSet = this.CreateBindingSet<SearchResultDetailView, SearchResultDetailViewModel> ();
 			bindingSet.Bind (btn_back).To (vm => vm.CloseCommand);
@@ -69,7 +80,7 @@ namespace ThisRoofN.iOS
 			bindingSet.Bind (lbl_address).To (vm => vm.ItemDetail.FormattedAddress);
 			bindingSet.Bind (lbl_beds).To (vm => vm.ItemDetail.Bedrooms);
 			bindingSet.Bind (lbl_baths).To (vm => vm.ItemDetail.Bathrooms);
-			bindingSet.Bind (lbl_sqft).To (vm => vm.ItemDetail.LotSquareSize);
+			bindingSet.Bind (lbl_sqft).To (vm => vm.ItemDetail.Sqft);
 			bindingSet.Bind (lbl_description).To (vm => vm.ItemDetail.Description);
 
 			bindingSet.Bind (lbl_status).To (vm => vm.ItemDetail.Sataus);

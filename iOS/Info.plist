@@ -91,6 +91,6 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location service is required.</string>
 	<key>CFBundleVersion</key>
-	<string>0</string>
+	<string>3</string>
 </dict>
 </plist>

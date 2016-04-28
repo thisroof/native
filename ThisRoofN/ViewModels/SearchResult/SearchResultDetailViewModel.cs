@@ -12,13 +12,14 @@ using ThisRoofN.Database;
 using ThisRoofN.Database.Entities;
 using MvvmCross.Platform;
 using ThisRoofN.Interfaces;
+using Acr.UserDialogs;
 
 namespace ThisRoofN.ViewModels
 {
 	public class SearchResultDetailViewModel : BaseViewModel
 	{
 		private IDevice deviceInfo;
-
+		private bool savedDetail;
 
 		public SearchResultDetailViewModel ()
 		{
@@ -28,6 +29,7 @@ namespace ThisRoofN.ViewModels
 		public void Init(int index, bool savedProperty)
 		{
 			propertyIndex = index;
+			savedDetail = savedProperty;
 
 			InitDetail (savedProperty);
 		}
@@ -41,8 +43,12 @@ namespace ThisRoofN.ViewModels
 				this.LoadingText = "Loading Detail";
 				CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), DataHelper.SearchResults[propertyIndex].CottageID);
 
-				DataHelper.SelectedCottage =  DataHelper.SearchResults[propertyIndex];
-				DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
+				if (detail != null) {
+					DataHelper.SelectedCottage = DataHelper.SearchResults [propertyIndex];
+					DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
+				} else {
+					UserDialogs.Instance.Alert ("Please check your network connection and try again later", "Server Not Responding");
+				}
 
 				this.IsLoading = false;
 				RaisePropertyChanged (() => ItemDetail);
@@ -57,6 +63,12 @@ namespace ThisRoofN.ViewModels
 			get {
 				return DataHelper.SelectedCottageDetail;
 			} 
+		}
+
+		public bool SavedDetail {
+			get { 
+				return savedDetail;
+			}
 		}
 
 		public string ImageLink 

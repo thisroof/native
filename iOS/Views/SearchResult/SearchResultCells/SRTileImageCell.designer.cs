@@ -16,6 +16,9 @@ namespace ThisRoofN.iOS
 		MvvmCross.Binding.iOS.Views.MvxImageView img_item { get; set; }
 
 		[Outlet]
+		UIKit.UILabel lbl_itemPrice { get; set; }
+
+		[Outlet]
 		UIKit.UILabel lbl_title { get; set; }
 
 		[Outlet]
@@ -31,6 +34,11 @@ namespace ThisRoofN.iOS
 			if (lbl_title != null) {
 				lbl_title.Dispose ();
 				lbl_title = null;
+			}
+
+			if (lbl_itemPrice != null) {
+				lbl_itemPrice.Dispose ();
+				lbl_itemPrice = null;
 			}
 
 			if (view_titleBack != null) {

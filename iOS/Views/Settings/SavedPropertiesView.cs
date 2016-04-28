@@ -52,6 +52,7 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewWillAppear (animated);
 
+			this.NavigationController.SetNavigationBarHidden (false, true);
 			ViewModelInstance.ReloadDataCommand.Execute (null);
 		}
 

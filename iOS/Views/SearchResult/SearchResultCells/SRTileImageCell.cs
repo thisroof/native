@@ -20,8 +20,10 @@ namespace ThisRoofN.iOS
 		{
 			this.DelayBind (() => {
 				var set = this.CreateBindingSet<SRTileImageCell, TRCottageSimple>();
+
 				set.Bind(img_item).For(i => i.ImageUrl).To(vm => vm.PrimaryPhotoLink);
 				set.Bind(lbl_title).To(vm => vm.Title);
+				set.Bind(lbl_itemPrice).To(vm => vm.FormattedPrice);
 				set.Apply();
 			});
 		}

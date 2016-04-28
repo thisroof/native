@@ -189,7 +189,7 @@ namespace ThisRoofN.iOS
 				CAGradientLayer gradLayer = GradientHelper.TileCellGradient;
 				gradLayer.Frame = cell.ViewTitleBack.Bounds;
 
-				if (cell.ViewTitleBack.Layer.Sublayers.Length > 1) {
+				if (cell.ViewTitleBack.Layer.Sublayers.Length > 2) {
 					cell.ViewTitleBack.Layer.Sublayers [0].RemoveFromSuperLayer ();
 				}
 				cell.ViewTitleBack.Layer.InsertSublayer (gradLayer, 0);

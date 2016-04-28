@@ -190,7 +190,7 @@ namespace ThisRoofN.ViewModels
 					ShowViewModel<AffordResultViewModel> (new {amount=result.data.Amount} );
 				} else {
 					if (result == null) {
-						UserDialogs.Instance.Alert ("Request Failed");
+						UserDialogs.Instance.Alert ("Please check your network connection and try again later", "Server Not Responding");
 					} else {
 						UserDialogs.Instance.Alert (result.message);
 					}

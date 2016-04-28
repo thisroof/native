@@ -73,7 +73,7 @@ namespace ThisRoofN.iOS
 
 				if (UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeLeft || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.LandscapeRight) {
 					width = (UIScreen.MainScreen.Bounds.Width - 4) / 3;
-				} else if(UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.Portrait || UIDevice.CurrentDevice.Orientation == UIDeviceOrientation.PortraitUpsideDown){
+				} else {
 					if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
 						width = (UIScreen.MainScreen.Bounds.Width - 2) / 2;
 					} else {

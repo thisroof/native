@@ -85,10 +85,14 @@ namespace ThisRoofN.ViewModels
 			this.SpinnerLoading = true;
 
 			List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24, page);
-			DataHelper.TotalLoadedCount += searchResults.Count;
 
-			List<TRCottageSimple> appResults = searchResults.Select (i =>
-				new TRCottageSimple () {
+			this.SpinnerLoading = false;
+
+			if (searchResults != null) {
+				DataHelper.TotalLoadedCount += searchResults.Count;
+
+				List<TRCottageSimple> appResults = searchResults.Select (i =>
+					new TRCottageSimple () {
 					CottageID = i.ID,
 					PrimaryPhotoLink = (i.Photos != null) ? i.Photos.FirstOrDefault ().MediaURL : string.Empty,
 					Title = i.Title,
@@ -97,10 +101,12 @@ namespace ThisRoofN.ViewModels
 					Longitude = i.Longitude,
 				}).ToList ();
 
-			DataHelper.SearchResults.AddRange (appResults);
-			this.SpinnerLoading = false;
+				DataHelper.SearchResults.AddRange (appResults);
 
-			RaisePropertyChanged (() => ListItems);
+				RaisePropertyChanged (() => ListItems);
+			} else {
+				UserDialogs.Instance.Alert ("Please check your network connection and try again later", "Server Not Responding");
+			}
 		}
 	}
 }

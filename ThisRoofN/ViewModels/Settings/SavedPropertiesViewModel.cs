@@ -10,6 +10,7 @@ using ThisRoofN.Database.Entities;
 using ThisRoofN.Interfaces;
 using ThisRoofN.Database;
 using Acr.UserDialogs;
+using System.Linq;
 
 namespace ThisRoofN.ViewModels
 {
@@ -53,6 +54,9 @@ namespace ThisRoofN.ViewModels
 
 		private void DoReloadData() {
 			SavedProperties = TRDatabase.Instance.GetCottageLikedList (mUserPref.GetValue (TRConstant.UserPrefUserIDKey, 0));
+			DataHelper.SearchResults = SavedProperties.Select (i => new TRCottageSimple() {
+				CottageID = i.PropertyID
+			}).ToList();
 			if (SavedProperties.Count == 0) {
 				UserDialogs.Instance.Alert ("You have no saved property", "ThisRoof");
 			}
@@ -65,12 +69,13 @@ namespace ThisRoofN.ViewModels
 			this.IsLoading = true;
 			this.LoadingText = "Loading Detail";
 			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
-
-			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
-
-			this.IsLoading = false;
-
-			ShowViewModel<SearchResultDetailViewModel> ();
+			if (detail != null) {
+				DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
+				this.IsLoading = false;
+				ShowViewModel<SearchResultDetailViewModel> (new {index = 0, savedProperty = true});
+			} else {
+				UserDialogs.Instance.Alert ("Please check your network connection and try again later", "Server Not Responding");
+			}
 		}
 
 		private async void GotoDetailItem(TREntityLikes item)
@@ -80,12 +85,13 @@ namespace ThisRoofN.ViewModels
 			this.IsLoading = true;
 			this.LoadingText = "Loading Detail";
 			CottageDetail detail = await mTRService.GetCottageDetail (deviceInfo.GetUniqueIdentifier (), propertyID);
-
-			DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
-
-			this.IsLoading = false;
-
-			ShowViewModel<SearchResultDetailViewModel> (new {index = 0, savedProperty = true});
+			if (detail != null) {
+				DataHelper.SelectedCottageDetail = new TRCottageDetail (detail);
+				this.IsLoading = false;
+				ShowViewModel<SearchResultDetailViewModel> (new {index = 0, savedProperty = true});
+			} else {
+				UserDialogs.Instance.Alert ("Please check your network connection and try again later", "Server Not Responding");
+			}
 		}
 
 		public List<TREntityLikes> SavedProperties 

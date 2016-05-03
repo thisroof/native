@@ -37,7 +37,7 @@ namespace ThisRoofN.Droid
 
 			WebView gifWebView = view.FindViewById<WebView> (Resource.Id.gifWebView);
 			if (gifWebView != null) {
-				gifWebView.LoadUrl ("file:///android_res/raw/animator.html");
+				gifWebView.LoadUrl ("file:///android_res/raw/loading_animator.gif");
 				gifWebView.SetBackgroundColor (Color.Transparent);
 				gifWebView.SetLayerType (LayerType.Software, null);
 			}

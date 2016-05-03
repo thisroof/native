@@ -22,6 +22,7 @@ namespace ThisRoofN.ViewModels
 
 		public BaseViewModel ()
 		{
+			IsLoading = false;
 			mTRService = new TRService ();
 			mUserPref = Mvx.Resolve<IUserPreference> ();
 			mDeviceInfo = Mvx.Resolve<IDevice> ();

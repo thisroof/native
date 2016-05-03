@@ -13,6 +13,8 @@ namespace ThisRoofN.ViewModels
 
 		public HomeViewModel ()
 		{
+
+
 			CheckAutoLogin ();
 		}
 

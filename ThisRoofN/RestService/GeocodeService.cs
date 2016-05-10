@@ -27,7 +27,7 @@ namespace ThisRoofN.RestService
 		{			
 			var stringBuilder = new StringBuilder ();
 			stringBuilder.Append("place/autocomplete/json?input=")
-				.Append(hint).Append("&types=address&language=en&components=country:us&key=").Append(GoogleApiKey);
+				.Append(hint).Append("&types=geocode&language=en&components=country:us&key=").Append(GoogleApiKey);
 			var requestUri = stringBuilder.ToString();
 			var places = new List<TRGoogleMapPlace>();
 

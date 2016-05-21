@@ -16,6 +16,22 @@ namespace ThisRoofN.Models.App
 
 		public double Longitude { get; set; }
 
+		public string Address { get; set; }
+
+		public string City { get; set; }
+
+		public string State { get; set; }
+
+		public bool IsForState { get; set; }
+
+		public bool IsForCity { get; set; }
+
+		public string TitleForTile {
+			get { 
+				return IsForState ? City : (IsForCity ? Address : Title);
+			}
+		}
+
 		public string FormattedPrice {
 			get {
 				return string.Format ("{0:C0}", this.Price);

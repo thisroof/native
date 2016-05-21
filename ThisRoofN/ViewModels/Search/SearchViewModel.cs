@@ -224,18 +224,22 @@ namespace ThisRoofN.ViewModels
 					UserDialogs.Instance.Alert ("Failed to save, try again lager.", "Failure");
 				}
 			} else {	
-				List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (), 24);
+				List<CottageSimple> searchResults = await mTRService.GetSearchResults (deviceInfo.GetUniqueIdentifier (),  DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.State ? 5 : 24);
 				if (searchResults != null) {
 					DataHelper.TotalLoadedCount = searchResults.Count;
 					if (searchResults != null) {
 						DataHelper.SearchResults = searchResults.Select (i =>
 							new TRCottageSimple () {
 							CottageID = i.ID,
-							PrimaryPhotoLink = (i.Photos != null) ? i.Photos.FirstOrDefault ().MediaURL : string.Empty,
+							PrimaryPhotoLink = i.Photo != null ? i.Photo : string.Empty,
 							Title = i.Title,
 							Price = i.Price,
 							Latitude = i.Latitude,
 							Longitude = i.Longitude,
+							Address = i.Address,
+							City = i.City,
+							State = i.State,
+							IsForState = DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.State
 						}).ToList ();
 
 						if (DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.Commute) {
@@ -246,7 +250,13 @@ namespace ThisRoofN.ViewModels
 
 						this.IsLoading = false;
 
-						ShowViewModel<SearchResultHomeViewModel> ();
+						if (DataHelper.CurrentSearchFilter.SearchType == (int)TRSearchType.State) {
+							DataHelper.StateSearchResults = DataHelper.SearchResults.GroupBy( i => i.State ).Select(g => (NWSearchResult) new TRStateResult() { State = g.Key, StateName = TRConstant.StatesDict[g.Key], Cottages = g.ToList()}).ToList();
+							DataHelper.TotalLoadedStatesCount = DataHelper.StateSearchResults.Count;
+							ShowViewModel<SearchResultStatesViewModel> ();
+						} else {
+							ShowViewModel<SearchResultHomeViewModel> ();
+						}
 					} else {
 						this.IsLoading = false;
 						bool confirm = await UserDialogs.Instance.ConfirmAsync (

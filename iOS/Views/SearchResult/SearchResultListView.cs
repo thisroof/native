@@ -67,6 +67,7 @@ namespace ThisRoofN.iOS
 			protected override UITableViewCell GetOrCreateCellFor (UITableView tableView, NSIndexPath indexPath, object item)
 			{
 				SearchResultListViewCell cell = (SearchResultListViewCell)tableView.DequeueReusableCell (SearchResultListViewCell.Identifier);
+
 				cell.IVItem.ContentMode = UIViewContentMode.ScaleAspectFill;
 				cell.IVItem.DefaultImagePath = NSBundle.MainBundle.PathForResource ("img_placeholder_small", "png");
 				return cell;

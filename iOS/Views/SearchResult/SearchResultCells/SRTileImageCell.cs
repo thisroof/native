@@ -14,15 +14,22 @@ namespace ThisRoofN.iOS
 {
 	public partial class SRTileImageCell : MvxCollectionViewCell
 	{
-		public static string Identifier = "SRDetailValueCell";
+		public static readonly NSString Key = new NSString ("SRTileImageCell");
+		public static readonly UINib Nib;
+
+		static SRTileImageCell ()
+		{
+			Nib = UINib.FromName ("SRTileImageCell", NSBundle.MainBundle);
+		}
 
 		public SRTileImageCell (IntPtr handle) : base (handle)
 		{
 			this.DelayBind (() => {
+
 				var set = this.CreateBindingSet<SRTileImageCell, TRCottageSimple>();
 
 				set.Bind(img_item).For(i => i.ImageUrl).To(vm => vm.PrimaryPhotoLink);
-				set.Bind(lbl_title).To(vm => vm.Title);
+				set.Bind(lbl_title).To(vm => vm.TitleForTile);
 				set.Bind(lbl_itemPrice).To(vm => vm.FormattedPrice);
 				set.Apply();
 			});
@@ -39,6 +46,13 @@ namespace ThisRoofN.iOS
 		{
 			get {
 				return img_item;
+			}
+		}
+
+		public UILabel LbTitle
+		{
+			get {
+				return lbl_title;
 			}
 		}
 

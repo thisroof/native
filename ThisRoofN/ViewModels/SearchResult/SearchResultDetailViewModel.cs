@@ -352,7 +352,7 @@ namespace ThisRoofN.ViewModels
 						LikeDislike = true,
 						Price = ItemDetail.Price,
 						PrimaryPhotoURL = ItemDetail.PrimaryPhotoLink,
-						Address = ItemDetail.Address.FullStreetAddress,
+						Address = ItemDetail.AddressData.FullStreetAddress,
 						CityStateZip = ItemDetail.FormattedAddress
 					};
 
@@ -396,7 +396,7 @@ namespace ThisRoofN.ViewModels
 					LikeDislike = false,
 					Price = ItemDetail.Price,
 					PrimaryPhotoURL = ItemDetail.PrimaryPhotoLink,
-					Address = ItemDetail.Address.FullStreetAddress,
+					Address = ItemDetail.AddressData.FullStreetAddress,
 					CityStateZip = ItemDetail.FormattedAddress
 				};
 

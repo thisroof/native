@@ -70,9 +70,7 @@ namespace ThisRoofN.ViewModels
 		public ICommand CloseCommand
 		{
 			get {
-				_closeCommand = _closeCommand ?? new MvxCommand (() => {
-					Close (this);
-				});
+				_closeCommand = _closeCommand ?? new MvxCommand (CloseView);
 				return _closeCommand;
 			}
 		}
@@ -101,6 +99,10 @@ namespace ThisRoofN.ViewModels
 				UserDialogs.Instance.Alert("Password should be more than 8 characters.");
 			}
 			return result;
+		}
+
+		protected virtual void CloseView() {
+			Close (this);
 		}
 	}
 }

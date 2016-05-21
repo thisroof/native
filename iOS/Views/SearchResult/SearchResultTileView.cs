@@ -48,9 +48,10 @@ namespace ThisRoofN.iOS
 		{
 			base.ViewDidLoad ();
 
-			var propertyTypeSource = new TileCollectionViewSource (this, cv_results, new NSString ("SRTileImageCell"));
+			var propertyTypeSource = new TileCollectionViewSource (this, cv_results, SRTileImageCell.Key);
 
 			cv_results.AllowsSelection = true;
+			cv_results.RegisterNibForCell (SRTileImageCell.Nib, SRTileImageCell.Key);
 			cv_results.Source = propertyTypeSource;
 			cv_results.Delegate = this;
 			cv_results.AlwaysBounceVertical = true;

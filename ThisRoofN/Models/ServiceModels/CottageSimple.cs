@@ -22,8 +22,17 @@ namespace ThisRoofN.Models.Service
 		[DataMember(Name="longitude")]
 		public double Longitude {get;set;}
 
-		[DataMember(Name="photos")]
-		public List<CottagePhoto> Photos {get;set;}
+		[DataMember(Name="photo")]
+		public string Photo {get;set;}
+
+		[DataMember(Name="address")]
+		public string Address {get;set;}
+
+		[DataMember(Name="city")]
+		public string City {get;set;}
+
+		[DataMember(Name="state")]
+		public string State {get;set;}
 	}
 
 	[DataContract]

@@ -14,6 +14,7 @@ using ThisRoofN.Models.Service;
 using ThisRoofN.Extensions;
 using ThisRoofN.Models.App;
 using ThisRoofN.Database;
+using ThisRoofN.Helpers;
 
 namespace ThisRoofN.RestService
 {
@@ -93,6 +94,8 @@ namespace ThisRoofN.RestService
 				mobile_num = deviceID,
 				page = page.ToString (),
 				query_count = resultsPerRequest.ToString (),
+				state = DataHelper.SelectedState ?? null,
+				city = DataHelper.SelectedCity ?? null,
 				mode = isAutoSearch ? "1" : "0" };
 
 			return await CallRestAPI<List<CottageSimple>> (endpoint_search, JsonConvert.SerializeObject (json));

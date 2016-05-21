@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using ThisRoofN.Interfaces;
+using ThisRoofN.Helpers;
+using System.Linq;
 
 namespace ThisRoofN.ViewModels
 {
@@ -12,6 +14,8 @@ namespace ThisRoofN.ViewModels
 		private SearchResultMapViewModel mapViewModel;
 		private SearchResultListViewModel listViewModel;
 
+		public bool IsNationWideSearch { get; set; }
+
 		public SearchResultHomeViewModel ()
 		{
 			this.tileViewModel = new SearchResultTileViewModel ();
@@ -19,7 +23,8 @@ namespace ThisRoofN.ViewModels
 			this.mapViewModel = new SearchResultMapViewModel ();
 		}
 
-		public void Init() {
+		public void Init(bool isNationWideSearch) {
+			IsNationWideSearch = isNationWideSearch;
 		}
 
 		public int DefaultPosition
@@ -55,6 +60,16 @@ namespace ThisRoofN.ViewModels
 			get
 			{
 				return mapViewModel;
+			}
+		}
+
+		protected override void CloseView ()
+		{
+			base.CloseView ();
+			if (IsNationWideSearch) {
+				DataHelper.SelectedCity = null;
+				DataHelper.SearchResults = DataHelper.CitySearchResults.Select (i => i.Cottages).SelectMany(j => j).ToList();
+				DataHelper.TotalLoadedCount = DataHelper.CitySearchResults.Count;
 			}
 		}
 	}

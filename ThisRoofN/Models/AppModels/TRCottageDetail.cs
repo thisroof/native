@@ -34,7 +34,7 @@ namespace ThisRoofN.Models.App
 			YearBuilt = serverData.Data.YearBuilt;
 
 			Photos = serverData.Data.Photos;
-			Address = serverData.Data.AddressData;
+			AddressData = serverData.Data.AddressData;
 
 			if (serverData.Data.Participants != null && serverData.Data.Participants.Count > 0) {
 				Participant = serverData.Data.Participants [0];
@@ -57,7 +57,7 @@ namespace ThisRoofN.Models.App
 
 
 		public List<CottagePhoto> 		Photos { get; set; }
-		public CottageAddress			Address { get; set; }
+		public CottageAddress			AddressData { get; set; }
 		public CottageParticipant 		Participant {get;set;}
 
 		public bool Liked
@@ -88,7 +88,7 @@ namespace ThisRoofN.Models.App
 
 		public string FormattedAddress {
 			get {
-				return string.Format ("{0}\n{1}, {2} {3}", Address.FullStreetAddress, Address.City, Address.State, Address.ZipCode) ;
+				return string.Format ("{0}\n{1}, {2} {3}", AddressData.FullStreetAddress, AddressData.City, AddressData.State, AddressData.ZipCode) ;
 			}
 		}
 

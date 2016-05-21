@@ -91,11 +91,14 @@ namespace ThisRoofN.ViewModels
 				List<TRCottageSimple> appResults = searchResults.Select (i =>
 					new TRCottageSimple () {
 					CottageID = i.ID,
-					PrimaryPhotoLink = (i.Photos != null) ? i.Photos.FirstOrDefault ().MediaURL : string.Empty,
+					PrimaryPhotoLink = i.Photo != null ? i.Photo : string.Empty,
 					Title = i.Title,
 					Price = i.Price,
 					Latitude = i.Latitude,
 					Longitude = i.Longitude,
+					Address = i.Address,
+					City = i.City,
+					State = i.State,
 				}).ToList ();
 
 				DataHelper.SearchResults.AddRange (appResults);
